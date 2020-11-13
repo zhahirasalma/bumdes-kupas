@@ -16,3 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 });
+
+Route::get('/warga', function () {
+    return view('warga.index');
+});
+
+Route::get('/bankSampah', function () {
+    return view('bankSampah.index');
+});
