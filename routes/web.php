@@ -24,3 +24,11 @@ Route::get('/warga', function () {
 Route::get('/bankSampah', function () {
     return view('bankSampah.index');
 });
+
+Route::get('/registerwarga', function () {
+    return view('warga.register');
+});
+
+Route::get('/registerBankSampah', function () {
+    return view('bankSampah.register');
+});

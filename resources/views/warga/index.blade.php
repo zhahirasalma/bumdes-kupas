@@ -38,6 +38,7 @@ Warga
                                 class="fas fa-plus fa-3x"></i></div>
                     </div>
                     <img class="img-fluid" src="{{asset('template/assets/img/portfolio/cabin.png')}}" alt="" />
+                    
                 </div>
             </div>
             <!-- Portfolio Item 2-->
@@ -48,6 +49,7 @@ Warga
                                 class="fas fa-plus fa-3x"></i></div>
                     </div>
                     <img class="img-fluid" src="{{asset('template/assets/img/portfolio/cake.png')}}" alt="" />
+                    
                 </div>
             </div>
         </div>
@@ -96,7 +98,7 @@ Warga
                                                             <th>6</th>
                                                             <th>7</th>
                                                             <th>8</th>
-                                                            <th>Aksi</th>
+                                                            
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -110,15 +112,7 @@ Warga
                                                             <td>7</td>
                                                             <td>8</td>
                                                             <td>9</td>
-                                                            <td>
-                                                                <a class="text-success" data-toggle="tooltip"
-                                                                    data-placement="top" data-original-title="Edit"><i
-                                                                        class="far fa-edit"></i></a>
-                                                                <a @click="deleteData(item.id)" class="text-danger"
-                                                                    data-toggle="tooltip" data-placement="top"
-                                                                    data-original-title="Delete"><i
-                                                                        class="far fa-trash-alt"></i></a>
-                                                            </td>
+                                                            
                                                         </tr>
                                                     </tbody>
                                                 </table>

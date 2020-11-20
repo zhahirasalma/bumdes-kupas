@@ -9978,11 +9978,16 @@ h3 {
   }
 }
 .page-section {
-  padding: 6rem 0;
+  padding: 6rem;
 }
 .page-section .page-section-heading {
   font-size: 2.25rem;
-  line-height: 2rem;
+  line-height: rem;
+}
+
+.page-section .page-section-sub-heading {
+  font-size: 1.25rem;
+  line-height: rem;
 }
 @media (min-width: 992px) {
   .page-section .page-section-heading {
