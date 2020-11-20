@@ -17,11 +17,11 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/warga', function () {
+Route::get('/homewarga', function () {
     return view('warga.index');
 });
 
-Route::get('/bankSampah', function () {
+Route::get('/homebankSampah', function () {
     return view('bankSampah.index');
 });
 
@@ -31,4 +31,36 @@ Route::get('/registerwarga', function () {
 
 Route::get('/registerBankSampah', function () {
     return view('bankSampah.register');
+});
+
+Route::get('/admin', function () {
+    return view('dashboard');
+});
+
+Route::get('/admin/warga', function () {
+    return view('backend.warga.index');
+});
+
+Route::get('/admin/retribusi', function () {
+    return view('backend.warga.retribusi');
+});
+
+Route::get('/admin/bank_sampah', function () {
+    return view('backend.bank_sampah.index');
+});
+
+Route::get('/admin/transaksi-bankSampah', function () {
+    return view('backend.bank_sampah.transaksi');
+});
+
+Route::get('/admin/konversi', function () {
+    return view('backend.konversi.index');
+});
+
+Route::get('/admin/kategori_sampah', function () {
+    return view('backend.kategori_sampah.index');
+});
+
+Route::get('/admin/pengambilan', function () {
+    return view('backend.pengambilan.index');
 });

@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('frontend.layout.master')
 @section('title')
 Bank Sampah
 @endsection
