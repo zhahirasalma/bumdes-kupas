@@ -14,8 +14,21 @@ class CreateTransaksiBankSampahTable extends Migration
     public function up()
     {
         Schema::create('transaksi_bank_sampah', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('id_bank_sampah')->nullable();
+            $table->date('tanggal_transaksi')->nullable();
+            $table->string('keterangan');
+            $table->unsignedBigInteger('id_admin')->nullable();
+            $table->unsignedBigInteger('id_konversi')->nullable();
+            $table->string('berat');
+            $table->integer('harga_total');
+            $table->string('unduh_transaksi');
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('id_admin')->references('id')->on('admin')->onDelete('cascade');
+            $table->foreign('id_bank_sampah')->references('id')->on('bank_sampah')->onDelete('cascade');
+            $table->foreign('id_konversi')->references('id')->on('konversi')->onDelete('cascade');
         });
     }
 

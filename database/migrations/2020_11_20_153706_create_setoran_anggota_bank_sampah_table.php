@@ -14,8 +14,14 @@ class CreateSetoranAnggotaBankSampahTable extends Migration
     public function up()
     {
         Schema::create('setoran_anggota_bank_sampah', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->string('nama');
+            $table->date('tanggal_transaksi')->nullable();
+            $table->unsignedBigInteger('id_bank_sampah')->nullable();
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('id_bank_sampah')->references('id')->on('bank_sampah')->onDelete('cascade');
         });
     }
 

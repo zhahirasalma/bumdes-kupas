@@ -14,8 +14,16 @@ class CreatePengambilanSampahTable extends Migration
     public function up()
     {
         Schema::create('pengambilan_sampah', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('id_admin')->nullable();
+            $table->unsignedBigInteger('id_warga')->nullable();
+            $table->date('waktu_pengambilan')->nullable();
+            $table->string('status');
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('id_admin')->references('id')->on('admin')->onDelete('cascade');
+            $table->foreign('id_warga')->references('id')->on('warga')->onDelete('cascade'); 
         });
     }
 

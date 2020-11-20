@@ -14,8 +14,20 @@ class CreateBankSampahTable extends Migration
     public function up()
     {
         Schema::create('bank_sampah', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->string('no_telp');
+            $table->string('kota');
+            $table->string('kecamatan');
+            $table->string('desa');
+            $table->string('dukuh');
+            $table->string('RT');
+            $table->string('RW');
+            $table->string('detail_alamat');
+            $table->unsignedBigInteger('id_users')->nullable();
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('id_users')->references('id')->on('users')->onDelete('cascade'); 
         });
     }
 

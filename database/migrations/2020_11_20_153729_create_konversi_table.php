@@ -14,8 +14,11 @@ class CreateKonversiTable extends Migration
     public function up()
     {
         Schema::create('konversi', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->string('jenis_sampah');
+            $table->integer('harga_konversi');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

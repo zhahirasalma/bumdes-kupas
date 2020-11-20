@@ -14,8 +14,13 @@ class CreateAdminTable extends Migration
     public function up()
     {
         Schema::create('admin', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->enum('tipe_admin', ['educator', 'pengurus']);
+            $table->unsignedBigInteger('id_users')->nullable();
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('id_users')->references('id')->on('users')->onDelete('cascade'); 
         });
     }
 

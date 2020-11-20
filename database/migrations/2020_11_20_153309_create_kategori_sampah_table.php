@@ -14,8 +14,11 @@ class CreateKategoriSampahTable extends Migration
     public function up()
     {
         Schema::create('kategori_sampah', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->string('jenis_sampah');
+            $table->integer('harga_retribusi');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
