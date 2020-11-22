@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Auth::routes();
+// Route::get('/', 'HomeController@index')->name('home');
 Route::get('/', function () {
     return view('home');
 });
@@ -64,3 +66,6 @@ Route::get('/admin/kategori_sampah', function () {
 Route::get('/admin/pengambilan', function () {
     return view('backend.pengambilan.index');
 });
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
