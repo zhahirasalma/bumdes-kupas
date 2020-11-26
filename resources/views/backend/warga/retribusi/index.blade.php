@@ -1,6 +1,6 @@
 @extends('backend.layout.master')
 @section('title')
-Daftar Transaksi Bank Sampah
+Daftar Transaksi Retribusi
 @endsection
 
 
@@ -14,7 +14,7 @@ Daftar Transaksi Bank Sampah
                     <h3 class="mb-0">@yield('title')</h3>
                 </div>
                 <div class="col text-right">
-                    <a href="#!" class="btn btn-sm btn-primary">See all</a>
+                    <a href="{{URL::to('admin/retribusi/create')}}" class="btn btn-primary">Tambah</a>
                 </div>
             </div>
         </div>
@@ -24,11 +24,12 @@ Daftar Transaksi Bank Sampah
                 <thead class="thead-light">
                     <tr>
                         <th scope="col">No</th>
-                        <th scope="col">Nama Bank Sampah</th>
+                        <th scope="col">Nama Kolektor</th>
+                        <th scope="col">Jumlah Tagihan</th>
+                        <th scope="col">Bulan Tagihan</th>
+                        <th scope="col">Alamat</th>
                         <th scope="col">Tanggal Transaksi</th>
-                        <th scope="col">Jenis Sampah</th>
                         <th scope="col">Keterangan</th>
-                        <th scope="col">Unduh Transaksi</th>
                         <th scope="col">Aksi</th>
                     </tr>
                 </thead>
@@ -37,6 +38,9 @@ Daftar Transaksi Bank Sampah
                         <th scope="row">
                             1
                         </th>
+                        <td>
+                            Cek
+                        </td>
                         <td>
                             Cek
                         </td>

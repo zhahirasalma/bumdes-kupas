@@ -18,6 +18,8 @@ Auth::routes();
 Route::group(['prefix'=>'admin'], function(){
     Route::resource('bank_sampah', App\Http\Controllers\Admin\BankSampahController::class);
     Route::resource('warga', App\Http\Controllers\Admin\WargaController::class);
+    Route::resource('transaksi', App\Http\Controllers\Admin\TransaksiBankSampahController::class);
+    Route::resource('retribusi', App\Http\Controllers\Admin\TransaksiRetribusiController::class);
 });
 
 
@@ -46,14 +48,6 @@ Route::get('/admin', function () {
 });
 
 
-Route::get('/admin/retribusi', function () {
-    return view('backend.warga.retribusi');
-});
-
-
-Route::get('/admin/transaksi-bankSampah', function () {
-    return view('backend.bank_sampah.transaksi');
-});
 
 Route::get('/admin/konversi', function () {
     return view('backend.konversi.index');

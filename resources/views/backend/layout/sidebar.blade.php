@@ -105,12 +105,12 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="/admin/warga">
+                <a class="nav-link " href="{{URL::to('/admin/warga')}}">
                     <i class="ni ni-planet text-blue"></i> Daftar Warga
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="/admin/retribusi">
+                <a class="nav-link " href="{{URL::to('/admin/retribusi')}}">
                     <i class="ni ni-pin-3 text-orange"></i> Transaksi Retribusi
                 </a>
             </li>
@@ -120,7 +120,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="/admin/transaksi-bankSampah">
+                <a class="nav-link " href="{{URL::to('admin/transaksi')}}">
                     <i class="ni ni-single-02 text-yellow"></i> Transaksi Bank Sampah
                 </a>
             </li>
