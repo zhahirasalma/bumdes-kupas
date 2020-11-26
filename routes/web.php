@@ -14,7 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
-// Route::get('/', 'HomeController@index')->name('home');
+
+Route::group(['prefix'=>'admin'], function(){
+    Route::resource('bank_sampah', App\Http\Controllers\Admin\BankSampahController::class);
+    Route::resource('warga', App\Http\Controllers\Admin\WargaController::class);
+});
+
+
 Route::get('/', function () {
     return view('home');
 });
@@ -39,17 +45,11 @@ Route::get('/admin', function () {
     return view('dashboard');
 });
 
-Route::get('/admin/warga', function () {
-    return view('backend.warga.index');
-});
 
 Route::get('/admin/retribusi', function () {
     return view('backend.warga.retribusi');
 });
 
-Route::get('/admin/bank_sampah', function () {
-    return view('backend.bank_sampah.index');
-});
 
 Route::get('/admin/transaksi-bankSampah', function () {
     return view('backend.bank_sampah.transaksi');

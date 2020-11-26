@@ -115,7 +115,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="/admin/bank_sampah">
+                <a class="nav-link " href="{{URL::to('admin/bank_sampah')}}">
                     <i class="ni ni-pin-3 text-orange"></i> Daftar Bank Sampah
                 </a>
             </li>
