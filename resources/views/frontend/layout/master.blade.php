@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -45,7 +44,7 @@
         <script src="{{asset('template/assets/mail/jqBootstrapValidation.js')}}"></script>
         <script src="{{asset('template/assets/mail/contact_me.js')}}"></script>
         <!-- Core theme JS-->
-        <script src="/js/scripts.js"></script>
+        <script src="{{('/js/scripts.js')}}"></script>
     </body>
 
 </html>

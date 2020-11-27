@@ -9978,7 +9978,7 @@ h3 {
   }
 }
 .page-section {
-  padding: 6rem;
+  padding: 6rem 0;
 }
 .page-section .page-section-heading {
   font-size: 2.25rem;
@@ -10168,6 +10168,10 @@ h3 {
 
 .portfolio-modal .portfolio-modal-title {
   font-size: 2.25rem;
+  line-height: 2rem;
+}
+.portfolio-modal .portfolio-modal-subtitle {
+  font-size: 1rem;
   line-height: 2rem;
 }
 @media (min-width: 992px) {

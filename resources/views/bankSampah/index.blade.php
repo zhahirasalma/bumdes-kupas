@@ -39,8 +39,8 @@ Bank Sampah
                                 </div>
                     </div>
                     <img class="img-fluid" src="{{asset('template/assets/img/portfolio/cabin.png')}}" alt="" />
-                    <h3 class="portfolio-modal-title text-secondary text-uppercase mb-0"
-                                id="portfolioModal1Label">History Transaksi</h3>
+                    <h3 class="portfolio-modal-subtitle text-center text-secondary text-uppercase mb-0"
+                                >History Transaksi</h3>
                     
                 </div>
             </div>
@@ -52,6 +52,8 @@ Bank Sampah
                                 class="fas fa-plus fa-3x"></i></div>
                     </div>
                     <img class="img-fluid" src="{{asset('template/assets/img/portfolio/cake.png')}}" alt="" />
+                    <h3 class="portfolio-modal-subtitle text-center text-secondary text-uppercase mb-0"
+                                >Daftar Setoran Anggota</h3>
                 </div>
             </div>
         </div>
@@ -93,14 +95,9 @@ Bank Sampah
                                                         <tr>
                                                             <th>No</th>
                                                             <th>Tanggal Transaksi</th>
-                                                            <th>Jumlah Transaksi</th>
+                                                            <th>Berat Total Sampah</th>
+                                                            <th>Harga Total</th>
                                                             <th>Keterangan</th>
-                                                            <th>4</th>
-                                                            <th>5</th>
-                                                            <th>6</th>
-                                                            <th>7</th>
-                                                            <th>8</th>
-                                                            <th>Aksi</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -110,10 +107,6 @@ Bank Sampah
                                                             <td>3</td>
                                                             <td>4</td>
                                                             <td>5</td>
-                                                            <td>6</td>
-                                                            <td>7</td>
-                                                            <td>8</td>
-                                                            <td>9</td>
                                                             <td>
                                                                 <a class="text-success" data-toggle="tooltip"
                                                                     data-placement="top" data-original-title="Edit"><i
@@ -132,10 +125,8 @@ Bank Sampah
                                 </div>
                             </div>
                             <!-- Portfolio Modal - Text-->
-                            <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque
-                                assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam
-                                velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.
-                            </p>
+                            <p class="mb-5">History transaksi adalah data transaksi pengumpulan sampah oleh bank sampah
+                                yang telah dilaksanakan selama menjadi anggota bank sampah KUPAS
                             <button class="btn btn-primary" data-dismiss="modal">
                                 <i class="fas fa-times fa-fw"></i>
                                 Tutup Halaman

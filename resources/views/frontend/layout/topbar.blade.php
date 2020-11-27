@@ -29,9 +29,9 @@
                                     ></i>
                                 DAFTAR SEBAGAI BANK SAMPAH</a>
                             <div class="dropdown-divider"></div>
-                            <div class="pl-8 p-3"><a href="/warga" class="btn btn-sm btn-info">MASUK SEBAGAI WARGA</a>
+                            <div class="pl-8 p-3"><a href="/homewarga" class="btn btn-sm btn-info">MASUK SEBAGAI WARGA</a>
                             <div class="dropdown-divider"></div>
-                            <div class="pl-8 p-6"><a href="/bankSampah" class="btn btn-sm btn-info">MASUK SEBAGAI BANK SAMPAH</a>
+                            <div class="pl-8 p-6"><a href="/homebankSampah" class="btn btn-sm btn-info">MASUK SEBAGAI BANK SAMPAH</a>
                                 <!-- <div class="pl-4 p-3"><a href="javascript:void(0)" class="btn btn-sm btn-danger">KELUAR</a> -->
                             </div>
                         </div>

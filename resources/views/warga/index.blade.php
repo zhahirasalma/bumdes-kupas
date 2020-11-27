@@ -70,8 +70,8 @@ Warga
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
                             <!-- Portfolio Modal - Title-->
-                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0"
-                                id="portfolioModal1Label">History Transaksi</h2>
+                            <h4 class="portfolio-modal-title text-secondary text-uppercase mb-0"
+                                id="portfolioModal1Label">History Transaksi</h4>
                             <!-- Icon Divider-->
                             <div class="divider-custom">
                                 <div class="divider-custom-line"></div>
