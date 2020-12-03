@@ -38,7 +38,7 @@ Bank Sampah
                                 class="fas fa-plus fa-3x"></i>
                                 </div>
                     </div>
-                    <img class="img-fluid" src="{{asset('template/assets/img/portfolio/cabin.png')}}" alt="" />
+                    <img class="img-fluid" src="{{asset('template/assets/img/portfolio/history-transaksi.png')}}" alt="" />
                     <h3 class="portfolio-modal-subtitle text-center text-secondary text-uppercase mb-0"
                                 >History Transaksi</h3>
                     
@@ -51,7 +51,7 @@ Bank Sampah
                         <div class="portfolio-item-caption-content text-center text-white"><i
                                 class="fas fa-plus fa-3x"></i></div>
                     </div>
-                    <img class="img-fluid" src="{{asset('template/assets/img/portfolio/cake.png')}}" alt="" />
+                    <img class="img-fluid" src="{{asset('template/assets/img/portfolio/setoran-anggota.png')}}" alt="" />
                     <h3 class="portfolio-modal-subtitle text-center text-secondary text-uppercase mb-0"
                                 >Daftar Setoran Anggota</h3>
                 </div>
@@ -107,15 +107,6 @@ Bank Sampah
                                                             <td>3</td>
                                                             <td>4</td>
                                                             <td>5</td>
-                                                            <td>
-                                                                <a class="text-success" data-toggle="tooltip"
-                                                                    data-placement="top" data-original-title="Edit"><i
-                                                                        class="far fa-edit"></i></a>
-                                                                <a @click="deleteData(item.id)" class="text-danger"
-                                                                    data-toggle="tooltip" data-placement="top"
-                                                                    data-original-title="Delete"><i
-                                                                        class="far fa-trash-alt"></i></a>
-                                                            </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -126,7 +117,7 @@ Bank Sampah
                             </div>
                             <!-- Portfolio Modal - Text-->
                             <p class="mb-5">History transaksi adalah data transaksi pengumpulan sampah oleh bank sampah
-                                yang telah dilaksanakan selama menjadi anggota bank sampah KUPAS
+                                yang telah dilaksanakan selama menjadi anggota bank sampah KUPAS</p>
                             <button class="btn btn-primary" data-dismiss="modal">
                                 <i class="fas fa-times fa-fw"></i>
                                 Tutup Halaman
@@ -174,11 +165,6 @@ Bank Sampah
                                                             <th>Nama Anggota</th>
                                                             <th>Tanggal Setor</th>
                                                             <th>Uraian</th>
-                                                            <th>4</th>
-                                                            <th>5</th>
-                                                            <th>6</th>
-                                                            <th>7</th>
-                                                            <th>8</th>
                                                             <th>Aksi</th>
                                                         </tr>
                                                     </thead>
@@ -188,11 +174,6 @@ Bank Sampah
                                                             <td>2</td>
                                                             <td>3</td>
                                                             <td>4</td>
-                                                            <td>5</td>
-                                                            <td>6</td>
-                                                            <td>7</td>
-                                                            <td>8</td>
-                                                            <td>9</td>
                                                             <td>
                                                                 <a class="text-success" data-toggle="tooltip"
                                                                     data-placement="top" data-original-title="Edit"><i
@@ -211,9 +192,7 @@ Bank Sampah
                                 </div>
                             </div>
                             <!-- Portfolio Modal - Text-->
-                            <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque
-                                assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam
-                                velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.
+                            <p class="mb-5">Catatan setoran sampah anggota bank sampah ke bank sampah
                             </p>
                             <button class="btn btn-primary" data-dismiss="modal">
                                 <i class="fas fa-times fa-fw"></i>

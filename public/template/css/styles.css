@@ -553,6 +553,15 @@ pre code {
   margin-left: auto;
 }
 
+.container-color{
+  background-color: #f7f7fe;
+  width: 100%;
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 @media (min-width: 576px) {
   .container-sm, .container {
     max-width: 540px;
@@ -9985,6 +9994,11 @@ h3 {
   line-height: rem;
 }
 
+.page-section .page-section-heading2 {
+  font-size: 1.75rem;
+  line-height: rem;
+}
+
 .page-section .page-section-sub-heading {
   font-size: 1.25rem;
   line-height: rem;
@@ -10247,4 +10261,5 @@ form .row:first-child .floating-label-form-group {
 .copyright {
   background-color: #1a252f;
 }
+
 

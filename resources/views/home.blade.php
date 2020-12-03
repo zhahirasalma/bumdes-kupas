@@ -23,4 +23,56 @@ Home
         </p>
     </div>
 </header>
+<section class="page-section portfolio" id="portfolio">
+    <div class="container-color">
+        <!-- Portfolio Section Heading-->
+        <h2 class="page-section-heading2 text-center text-uppercase text-secondary mb-0">MASUK</h2>
+        <h2 class="page-section-sub-heading text-center font-weight-light mb-0">Untuk yang telah memiliki akun</h2>
+        <!-- Icon Divider-->
+        <div class="divider-custom"></div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8 mx-auto">
+                <form id="contactForm" name="sentMessage" novalidate="novalidate">
+                    <div class="col-lg-16">
+                        <div class="form-group">
+                            <!-- <label>Name</label> -->
+                            <input class="form-control" id="email" type="email" placeholder="Email" required="required"
+                                data-validation-required-message="Masukkan Email" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                    <div class="col-lg-16">
+                        <div class="form-group">
+                            <!-- <label>Name</label> -->
+                            <input class="form-control" id="password" type="password" placeholder="Kata Sandi"
+                                required="required" data-validation-required-message="Masukkan Kata Sandi" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                    <div class="form-group justify-content-center"><button class="btn btn-primary"
+                            id="sendMessageButton" type="submit">Masuk</button></div>
+                </form>
+            </div>
+        </div>
+
+        <h2 class="page-section-heading2 text-center text-uppercase text-secondary mb-0">REGISTRASI</h2>
+        <h2 class="page-section-sub-heading text-center font-weight-light mb-0">Untuk yang belum memiliki akun</h2>
+        <!-- Icon Divider-->
+        <div class="divider-custom"></div>
+
+        <div class="form-row justify-content-center">
+            <div class="form-group col-md-2.5">
+                <!-- <label>Name</label> -->
+                <a href="/registerwarga" class="btn btn-primary text-uppercase" id="sendMessageButton" type="submit">Daftar Sebagai
+                    Warga</a>
+            </div>
+            <div class="form-group col-md-2.5">
+                <!-- <label>Name</label> -->
+                <a href="/registerBankSampah" class="btn btn-primary text-uppercase" id="sendMessageButton" type="submit">Daftar Sebagai Bank Sampah</a>
+            </div>
+        </div>
+
+    </div>
+</section>
 @endsection

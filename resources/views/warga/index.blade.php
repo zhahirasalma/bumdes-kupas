@@ -33,26 +33,39 @@ Warga
             <!-- Portfolio Item 1-->
             <div class="col-md-6 col-lg-4 mb-5">
                 <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal1">
-                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                    <div
+                        class="card portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                         <div class="portfolio-item-caption-content text-center text-white"><i
                                 class="fas fa-plus fa-3x"></i></div>
                     </div>
-                    <img class="img-fluid" src="{{asset('template/assets/img/portfolio/cabin.png')}}" alt="" />
-                    
+                    <img class="img-fluid" src="{{asset('template/assets/img/portfolio/retribusi.png')}}" alt="" />
+                    <h3 class="portfolio-modal-subtitle text-center text-secondary text-uppercase mb-0">Jumlah Tagihan
+                    </h3>
+                    <h3 class="portfolio-modal-subtitle text-center text-secondary mb-0">Rp 20.000
+                    </h3>
+
                 </div>
             </div>
             <!-- Portfolio Item 2-->
             <div class="col-md-6 col-lg-4 mb-5">
                 <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal2">
-                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                        <div class="portfolio-item-caption-content text-center text-white"><i
-                                class="fas fa-plus fa-3x"></i></div>
+                    <!-- <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100"> -->
+                    <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i>
                     </div>
-                    <img class="img-fluid" src="{{asset('template/assets/img/portfolio/cake.png')}}" alt="" />
-                    
                 </div>
+                <!-- <img class="img-fluid" src="{{asset('template/assets/img/portfolio/cake.png')}}" alt="" /> -->
+                <!-- Default switch -->
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="customSwitches">
+                    <label class="custom-control-label" for="customSwitches">Geser ke kanan bila hari ini sampah belum
+                        terambil.</label>
+                </div>
+                <h3 class="portfolio-modal-subtitle text-center text-secondary text-uppercase mb-0">Tombol Pengambilan
+                </h3>
+
             </div>
         </div>
+    </div>
     </div>
 </section>
 
@@ -71,7 +84,7 @@ Warga
                         <div class="col-lg-8">
                             <!-- Portfolio Modal - Title-->
                             <h4 class="portfolio-modal-title text-secondary text-uppercase mb-0"
-                                id="portfolioModal1Label">History Transaksi</h4>
+                                id="portfolioModal1Label">Jumlah Tagihan</h4>
                             <!-- Icon Divider-->
                             <div class="divider-custom">
                                 <div class="divider-custom-line"></div>
@@ -98,7 +111,7 @@ Warga
                                                             <th>6</th>
                                                             <th>7</th>
                                                             <th>8</th>
-                                                            
+
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -112,7 +125,7 @@ Warga
                                                             <td>7</td>
                                                             <td>8</td>
                                                             <td>9</td>
-                                                            
+
                                                         </tr>
                                                     </tbody>
                                                 </table>
