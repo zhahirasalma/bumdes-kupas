@@ -16,7 +16,7 @@ class BankSampahController extends Controller
     public function index()
     {
         $data = BankSampah::all();
-        return view('backend.bank_sampah.index', compact($data));
+        return view('backend.bank_sampah.index')->with('bank_sampah', $data);
     }
 
     /**

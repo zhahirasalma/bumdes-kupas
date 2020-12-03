@@ -30,18 +30,19 @@ Daftar Bank Sampah
                         <th scope="col">Kota</th>
                         <th scope="col">Kecamatan</th>
                         <th scope="col">Desa</th>
-                        <th scope="col">Dusun</th>
+                        <th scope="col">Dukuh</th>
                         <th scope="col">Alamat Detail</th>
                         <th scope="col">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($bank_sampah as $value)
                     <tr>
                         <th scope="row">
                             1
                         </th>
                         <td>
-                            Cek
+                            {{$value->no_telp}}
                         </td>
                         <td>
                             Cek
@@ -50,19 +51,19 @@ Daftar Bank Sampah
                             Cek
                         </td>
                         <td>
-                            Cek
+                            {{$value->kota}}
                         </td>
                         <td>
-                            Cek
+                            {{$value->kecamatan}}
                         </td>
                         <td>
-                            Cek
+                            {{$value->desa}}
                         </td>
                         <td>
-                            Cek
+                            {{$value->dukuh}}
                         </td>
                         <td>
-                            Cek
+                            {{$value->detail_alamat}}
                         </td>
                         <td>
                             <a href="{{URL::to('admin/bank_sampah/edit')}}" class="text-success" data-toggle="tooltip" data-placement="top"
@@ -72,6 +73,7 @@ Daftar Bank Sampah
                         </td>
                     </tr>
                 </tbody>
+                @endforeach
             </table>
         </div>
     </div>
