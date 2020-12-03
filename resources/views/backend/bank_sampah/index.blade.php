@@ -24,7 +24,6 @@ Daftar Bank Sampah
                 <thead class="thead-light">
                     <tr>
                         <th scope="col">No</th>
-                        <th scope="col">Nama</th>
                         <th scope="col">No Telp</th>
                         <th scope="col">Email</th>
                         <th scope="col">Password</th>
@@ -41,9 +40,6 @@ Daftar Bank Sampah
                         <th scope="row">
                             1
                         </th>
-                        <td>
-                            Cek
-                        </td>
                         <td>
                             Cek
                         </td>

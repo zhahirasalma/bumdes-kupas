@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use app\Models\BankSampah;
 
 class BankSampahController extends Controller
 {
@@ -14,7 +15,8 @@ class BankSampahController extends Controller
      */
     public function index()
     {
-        return view('backend.bank_sampah.index');
+        $data = BankSampah::all();
+        return view('backend.bank_sampah.index', compact($data));
     }
 
     /**
