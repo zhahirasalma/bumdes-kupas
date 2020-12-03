@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use app\Models\BankSampah;
+use App\Models\BankSampah;
 
 class BankSampahController extends Controller
 {
