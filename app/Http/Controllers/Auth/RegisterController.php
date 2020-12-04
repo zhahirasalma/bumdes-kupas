@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\BankSampah;
+use App\Models\Warga;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -50,9 +52,22 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'nama' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:5', 'confirmed'],
+            'nama_cp' => ['required', 'string', 'min:5', 'max:255'],
+            'NIK' => ['required'],
+            'no_telp' => ['required','min:10', 'max:13', 'unique:users'],
+            'no_telp_cp' => ['required', 'min:10', 'max:13', 'unique:users'],
+            'kota' => ['required'],
+            'kecamatan' => ['required'],
+            'desa' => ['required'],
+            'dukuh' => ['required'],
+            'RT' => ['required'],
+            'RW' => ['required'],
+            'detail_alamat',
+            'lokasi' => ['required'],
+            'id_kategori_sampah' => ['required'],
         ]);
     }
 
@@ -65,7 +80,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'nama' => $data['nama'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);

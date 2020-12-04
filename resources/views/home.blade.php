@@ -23,7 +23,7 @@ Home
         </p>
     </div>
 </header>
-<section class="page-section portfolio" id="portfolio">
+<section class=" container-color page-section portfolio" id="portfolio">
     <div class="container-color">
         <!-- Portfolio Section Heading-->
         <h2 class="page-section-heading2 text-center text-uppercase text-secondary mb-0">MASUK</h2>
@@ -34,7 +34,7 @@ Home
         <div class="row justify-content-center">
             <div class="col-lg-8 mx-auto">
                 <form id="contactForm" name="sentMessage" novalidate="novalidate">
-                    <div class="col-lg-16">
+                    <div class="col-lg-8">
                         <div class="form-group">
                             <!-- <label>Name</label> -->
                             <input class="form-control" id="email" type="email" placeholder="Email" required="required"
@@ -42,7 +42,7 @@ Home
                             <p class="help-block text-danger"></p>
                         </div>
                     </div>
-                    <div class="col-lg-16">
+                    <div class="col-lg-8 justify-content-center">
                         <div class="form-group">
                             <!-- <label>Name</label> -->
                             <input class="form-control" id="password" type="password" placeholder="Kata Sandi"
@@ -50,8 +50,8 @@ Home
                             <p class="help-block text-danger"></p>
                         </div>
                     </div>
-                    <div class="form-group justify-content-center"><button class="btn btn-primary"
-                            id="sendMessageButton" type="submit">Masuk</button></div>
+                    <div class="form-group justify-content-center"><a href="/homebankSampah" class="btn btn-primary"
+                            id="sendMessageButton" type="submit">Masuk</a></div>
                 </form>
             </div>
         </div>

@@ -13,7 +13,7 @@
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
                         href="#portfolio">Layanan</a></li>
                 <!-- <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a></li> -->
-                <li class="nav-item mx-0 mx-lg-1">
+                <!-- <li class="nav-item mx-0 mx-lg-1">
                     <div class="nav-item dropdown">
                         <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger dropdown-toggle"
                             href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -31,11 +31,11 @@
                                 <div class="dropdown-divider"></div>
                                 <div class="pl-8 p-6"><a href="/homebankSampah" class="btn btn-sm btn-info">MASUK
                                         SEBAGAI BANK SAMPAH</a>
-                                    <!-- <div class="pl-4 p-3"><a href="javascript:void(0)" class="btn btn-sm btn-danger">KELUAR</a> -->
-                                </div>
+                                    <div class="pl-4 p-3"><a href="javascript:void(0)" class="btn btn-sm btn-danger">KELUAR</a> -->
+                                <!-- </div>
                             </div>
                             <div>
-                </li>
+                </li> -->
             </ul>
         </div>
     </div>
