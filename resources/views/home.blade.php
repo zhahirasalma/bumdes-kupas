@@ -29,7 +29,7 @@ Home
         <h2 class="page-section-heading2 text-center text-uppercase text-secondary mb-0">MASUK</h2>
         <h2 class="page-section-sub-heading text-center font-weight-light mb-0">Untuk yang telah memiliki akun</h2>
         <!-- Icon Divider-->
-        <div class="divider-custom"></div>
+        <br>
 
         <div class="row justify-content-center">
             <div class="col-lg-8 mx-auto">
@@ -49,7 +49,7 @@ Home
                                 required="required" data-validation-required-message="Masukkan Kata Sandi" />
                             <p class="help-block text-danger"></p>
                         </div>
-                        <div class="form-group ">
+                        <div class="form-group text-center">
                             <a href="/homebankSampah" class="btn btn-primary" id="sendMessageButton"
                                 type="submit">Masuk</a>
                         </div>
@@ -59,11 +59,12 @@ Home
         </div>
 
         <div class="divider-custom"></div>
+        <div class="divider-custom"></div>
 
         <h2 class="page-section-heading2 text-center text-uppercase text-secondary mb-0">REGISTRASI</h2>
         <h2 class="page-section-sub-heading text-center font-weight-light mb-0">Untuk yang belum memiliki akun</h2>
         <!-- Icon Divider-->
-        <div class="divider-custom"></div>
+        <br>
 
         <div class="form-row justify-content-center">
             <div class="form-group col-md-2.5">

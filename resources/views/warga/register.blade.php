@@ -145,6 +145,31 @@ Registrasi Bank Sampah
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4 sol-sm-8">
+                                <!-- <label>Name</label> -->
+                                <input class="form-control" id="rt" type="text"
+                                    placeholder="Lokasi" required="required"
+                                    data-validation-required-message="Pilih lokasi di maps" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="form-group col-md-8 sol-sm-16">
+                                <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: max">
+                                    <iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
+                                    style="border:0" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Google map-->
+                        <!-- <div class="col-lg-16">
+                            <div class="form-group"> 
+                                <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: relative">
+                                <iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
+                                    style="border:0" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        </div> -->
+                        <!--Google Maps-->
                         <br />
                         <div id="success"></div>
                         <div class="form-group"><button class="btn btn-primary btn-xl" id="sendMessageButton"

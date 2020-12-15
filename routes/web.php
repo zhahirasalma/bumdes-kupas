@@ -45,6 +45,22 @@ Route::get('/registerBankSampah', function () {
     return view('bankSampah.register');
 });
 
+Route::get('/historyTransaksi', function () {
+    return view('bankSampah.layanan.history_transaksi');
+});
+
+Route::get('/daftarSetorBankSampah', function () {
+    return view('bankSampah.layanan.daftar_setor.index');
+});
+
+Route::get('/tambahSetorBankSampah', function () {
+    return view('bankSampah.layanan.daftar_setor.tambah');
+});
+
+Route::get('/registerBankSampah', function () {
+    return view('bankSampah.register');
+});
+
 Route::get('/admin', function () {
     return view('dashboard');
 });

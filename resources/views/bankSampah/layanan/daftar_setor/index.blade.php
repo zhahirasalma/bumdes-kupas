@@ -1,0 +1,75 @@
+@extends('frontend.layout.master')
+@section('title')
+Setor Anggota Bank Sampah
+@endsection
+@section('content')
+
+<header class="masthead bg-primary text-secondary text-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-12">
+                <!-- Portfolio Modal - Title-->
+                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0" id="portfolioModal1Label">Daftar Setoran
+                    Anggota</h2>
+                <!-- Icon Divider-->
+                <div class="divider-custom">
+                    <div class="divider-custom-line"></div>
+                </div>
+                <!-- Portfolio Modal - Table-->
+                <!-- <img class="img-fluid rounded mb-5"
+                    src="{{asset('template/assets/img/portfolio/cabin.png')}}" alt="" /> -->
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card shadow">
+                            <div class="card-body">
+                                <div class="col text-right">
+                                    <a href="/tambahSetorBankSampah" class="btn btn-sm btn-primary">Tambah Data</a>
+                                </div>
+                                <br>
+                                <div class="table-responsive">
+                                    <table id="default_table" class="table table-striped table-bordered no-wrap">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Nama Anggota</th>
+                                                <th>Tanggal Setor</th>
+                                                <th>Uraian</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>2</td>
+                                                <td>3</td>
+                                                <td>4</td>
+                                                <td>
+                                                    <a class="text-success" data-toggle="tooltip"
+                                                        data-placement="top" data-original-title="Edit"><i
+                                                            class="far fa-edit"></i></a>
+                                                    <a @click="deleteData(item.id)" class="text-danger"
+                                                        data-toggle="tooltip" data-placement="top"
+                                                        data-original-title="Delete"><i
+                                                            class="far fa-trash-alt"></i></a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="divider-custom"></div>
+                <!-- Portfolio Modal - Text-->
+                <p class="mb-5">Catatan setoran sampah anggota bank sampah ke bank sampah</p>
+                <a class="btn btn-primary" href="/homebankSampah">
+                    <i class="fas fa-times fa-fw"></i>
+                    Tutup Halaman
+                </a>
+            </div>
+            <div class="divider-custom"></div>
+        </div>
+    </div>
+    </header>
+@endsection
