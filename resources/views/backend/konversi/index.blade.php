@@ -15,6 +15,7 @@ Konversi Harga Sampah
                 </div>
                 <div class="col text-right">
                     <a href="{{URL::to('admin/konversi/create')}}" class="btn btn-primary">Tambah</a>
+                    <a href="" class="btn btn-primary">Tambah dari Excel</a>
                 </div>
             </div>
         </div>

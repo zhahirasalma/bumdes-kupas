@@ -46,12 +46,6 @@ Tambah Data Transaksi Bank Sampah
                                         placeholder="Keterangan" value="">
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="input-first-name">Unduh Transaksi</label>
-                                    <button class="btn btn-primary" type="button"> Unduh </button>
-                                </div>
-                            </div>
                         </div>
                         <button class="btn btn-primary" type="button">Tambah</button>
                     </div>

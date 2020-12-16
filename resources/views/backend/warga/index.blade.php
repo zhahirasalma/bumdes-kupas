@@ -15,6 +15,7 @@ Daftar Warga
                 </div>
                 <div class="col text-right">
                     <a href="{{URL::to('admin/warga/create')}}" class="btn btn-primary">Tambah</a>
+                    <a href="" class="btn btn-primary">Tambah dari Excel</a>
                 </div>
             </div>
         </div>
