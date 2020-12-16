@@ -10275,4 +10275,13 @@ form .row:first-child .floating-label-form-group {
   position:absolute;
   }
 
+  .toggle-on.btn{
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .toggle-off.btn{
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 

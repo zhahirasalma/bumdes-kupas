@@ -47,19 +47,27 @@ Warga
                 </div>
             </div>
             <!-- Portfolio Item 2-->
-            <div class="col-md-6 col-lg-4 mb-5">
-                <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal2">
-                    <!-- <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100"> -->
-                    <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i>
+            <div class="col-md-6 col-lg-4 mb-5 align-items-center justify-content-center h-100 w-100">
+                <!-- <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal2"> -->
+                <!-- <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100"> -->
+                <!-- <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i>
                     </div>
-                </div>
+                </div> -->
                 <!-- <img class="img-fluid" src="{{asset('template/assets/img/portfolio/cake.png')}}" alt="" /> -->
                 <!-- Default switch -->
-                <div class="custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input" id="customSwitches">
-                    <label class="custom-control-label" for="customSwitches">Geser ke kanan bila hari ini sampah belum
+                <!-- <input class="toggle-class d-flex align-items-center justify-content-center" type="checkbox"
+                    data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Terambil"
+                    data-off="Belum"> -->
+                <!-- <div class="custom-control custom-switch"> -->
+                <div class="text-center align-items-center justify-content-center">
+                    <input type="checkbox" class="custom-control-input text-center" id="customSwitches"
+                        data-onstyle="primary" data-offstyle="danger" data-toggle="toggle" data-on="Terambil"
+                        data-off="Belum"></input>
+                    <label class="text-center">Geser ke kanan bila hari ini sampah belum
                         terambil.</label>
                 </div>
+                
+                <!-- </div> -->
                 <h3 class="portfolio-modal-subtitle text-center text-secondary text-uppercase mb-0">Tombol Pengambilan
                 </h3>
 
