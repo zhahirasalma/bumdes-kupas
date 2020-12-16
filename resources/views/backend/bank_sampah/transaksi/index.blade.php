@@ -50,7 +50,7 @@ Daftar Transaksi Bank Sampah
                             Cek
                         </td>
                         <td>
-                            Cek
+                            <button class="btn btn-primary" type="button"> Unduh </button>
                         </td>
                         <td>
                             <a class="text-success" data-toggle="tooltip" data-placement="top"

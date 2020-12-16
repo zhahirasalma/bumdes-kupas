@@ -14,7 +14,7 @@ Konversi Harga Sampah
                     <h3 class="mb-0">@yield('title')</h3>
                 </div>
                 <div class="col text-right">
-                    <a href="#!" class="btn btn-sm btn-primary">See all</a>
+                    <a href="{{URL::to('admin/konversi/create')}}" class="btn btn-primary">Tambah</a>
                 </div>
             </div>
         </div>

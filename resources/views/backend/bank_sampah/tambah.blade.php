@@ -42,42 +42,42 @@ Tambah Bank Sampah
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-city">Kota</label>
                                     <input type="text" id="input-city" class="form-control form-control-alternative"
-                                        placeholder="City" value="New York">
+                                        placeholder="Kota" >
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-country">Kecamatan</label>
                                     <input type="text" id="input-country" class="form-control form-control-alternative"
-                                        placeholder="Country" value="United States">
+                                        placeholder="Kecamatan">
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-country">Desa</label>
                                     <input type="number" id="input-postal-code"
-                                        class="form-control form-control-alternative" placeholder="Postal code">
+                                        class="form-control form-control-alternative" placeholder="Desa">
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-city">Dusun</label>
                                     <input type="text" id="input-city" class="form-control form-control-alternative"
-                                        placeholder="City" value="New York">
+                                        placeholder="Dusun">
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-country">RT</label>
                                     <input type="text" id="input-country" class="form-control form-control-alternative"
-                                        placeholder="Country" value="United States">
+                                        placeholder="RT">
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-country">RW</label>
                                     <input type="number" id="input-postal-code"
-                                        class="form-control form-control-alternative" placeholder="Postal code">
+                                        class="form-control form-control-alternative" placeholder="RW">
                                 </div>
                             </div>
                         </div>
@@ -86,7 +86,7 @@ Tambah Bank Sampah
                         <div class="form-group">
                             <label>Detail Alamat</label>
                             <textarea rows="4" class="form-control form-control-alternative"
-                                placeholder="A few words about you ...">A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</textarea>
+                                placeholder="Detail Alamat"></textarea>
                         </div>
                         <button class="btn btn-primary" type="button">Tambah</button>
                     </div>

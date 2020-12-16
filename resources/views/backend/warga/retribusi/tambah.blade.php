@@ -20,7 +20,7 @@ Tambah Data Transaksi Retribusi
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-nama">Nama Kolektor</label>
                                     <input type="text" id="nama" class="form-control form-control-alternative"
-                                        placeholder="NIK" value="">
+                                        placeholder="Nama Kolektor" value="">
                                 </div>
                             </div>
 
@@ -28,28 +28,28 @@ Tambah Data Transaksi Retribusi
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-nama">Jumlah Tagihan</label>
                                     <input type="text" id="nama" class="form-control form-control-alternative"
-                                        placeholder="Nama" value="">
+                                        placeholder="Jumlah Tagihan" value="">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-first-name">Bulan Tagihan</label>
                                     <input type="text" id="input-first-name"
-                                        class="form-control form-control-alternative" placeholder="No Telepon" value="">
+                                        class="form-control form-control-alternative" placeholder="Bulan Tagihan" value="">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-first-name">Tanggal Transaksi</label>
                                     <input type="text" id="input-first-name"
-                                        class="form-control form-control-alternative" placeholder="No Telepon" value="">
+                                        class="form-control form-control-alternative" placeholder="Tanggal Transaksi" value="">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-first-name">Keterangan</label>
                                     <input type="text" id="input-first-name"
-                                        class="form-control form-control-alternative" placeholder="No Telepon" value="">
+                                        class="form-control form-control-alternative" placeholder="Keterangan" value="">
                                 </div>
                             </div>
                         </div>
@@ -58,7 +58,7 @@ Tambah Data Transaksi Retribusi
                         <div class="form-group">
                             <label>Alamat</label>
                             <textarea rows="4" class="form-control form-control-alternative"
-                                placeholder="A few words about you ..."></textarea>
+                                placeholder="Alamat"></textarea>
                         </div>
                     </div>
                     <button class="btn btn-primary" type="button">Tambah</button>

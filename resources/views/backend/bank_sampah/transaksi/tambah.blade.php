@@ -19,9 +19,9 @@ Tambah Data Transaksi Bank Sampah
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="input-nama">Nama Bank Sampah</label>
+                                    <label class="form-control-label" for="input-nama">Bank Sampah</label>
                                     <input type="text" id="nama" class="form-control form-control-alternative"
-                                        placeholder="NIK" value="">
+                                        placeholder="Bank Sampah" value="">
                                 </div>
                             </div>
 
@@ -29,28 +29,27 @@ Tambah Data Transaksi Bank Sampah
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-nama">Tanggal Transaksi</label>
                                     <input type="text" id="nama" class="form-control form-control-alternative"
-                                        placeholder="Nama" value="">
+                                        placeholder="Tanggal Transaksi" value="">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-first-name">Jenis Sampah</label>
                                     <input type="text" id="input-first-name"
-                                        class="form-control form-control-alternative" placeholder="No Telepon" value="">
+                                        class="form-control form-control-alternative" placeholder="Jenis Sampah" value="">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-nama">Keterangan</label>
                                     <input type="text" id="nama" class="form-control form-control-alternative"
-                                        placeholder="Nama" value="">
+                                        placeholder="Keterangan" value="">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-first-name">Unduh Transaksi</label>
-                                    <input type="text" id="input-first-name"
-                                        class="form-control form-control-alternative" placeholder="No Telepon" value="">
+                                    <button class="btn btn-primary" type="button"> Unduh </button>
                                 </div>
                             </div>
                         </div>
