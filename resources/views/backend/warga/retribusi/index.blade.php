@@ -39,22 +39,22 @@ Daftar Transaksi Retribusi
                             1
                         </th>
                         <td>
-                            Cek
+                            Bu Yanti
                         </td>
                         <td>
-                            Cek
+                            Rp. 500.000
                         </td>
                         <td>
-                            Cek
+                            Desember
                         </td>
                         <td>
-                            Cek
+                            Panggungharjo
                         </td>
                         <td>
-                            Cek
+                            12 Desember 2020
                         </td>
                         <td>
-                            Cek
+                            sudah bayar
                         </td>
                         <td>
                             <a class="text-success" data-toggle="tooltip" data-placement="top"

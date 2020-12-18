@@ -15,7 +15,7 @@ Kategori Sampah
                 </div>
                 <div class="col text-right">
                     <a href="{{URL::to('admin/kategori_sampah/create')}}" class="btn btn-primary">Tambah</a>
-                    <a href="" class="btn btn-primary">Tambah dari Excel</a>
+                    <a href="" class="btn btn-primary">Import dari Excel</a>
                 </div>
             </div>
         </div>
@@ -36,10 +36,10 @@ Kategori Sampah
                             1
                         </th>
                         <td>
-                            Cek
+                            Sampah Rumah Tangga
                         </td>
                         <td>
-                            Cek
+                            Rp. 30.000
                         </td>
                         <td>
                             <a class="text-success" data-toggle="tooltip" data-placement="top"

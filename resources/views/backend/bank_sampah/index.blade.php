@@ -15,7 +15,7 @@ Daftar Bank Sampah
                 </div>
                 <div class="col text-right">
                     <a href="{{URL::to('admin/bank_sampah/create')}}" class="btn btn-primary">Tambah</a>
-                    <a href="" class="btn btn-primary">Tambah dari Excel</a>
+                    <a href="" class="btn btn-primary">Import dari Excel</a>
                 </div>
             </div>
         </div>
@@ -46,10 +46,10 @@ Daftar Bank Sampah
                             {{$value->no_telp}}
                         </td>
                         <td>
-                            Cek
+                            banksampah@gmail.com
                         </td>
                         <td>
-                            Cek
+                            banksampah
                         </td>
                         <td>
                             {{$value->kota}}

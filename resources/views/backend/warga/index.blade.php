@@ -46,40 +46,40 @@ Daftar Warga
                             1
                         </th>
                         <td>
-                            Cek
+                            08987978790
                         </td>
                         <td>
-                            Cek
+                            Salma
                         </td>
                         <td>
-                            Cek
+                            085776668888
                         </td>
                         <td>
-                            Cek
+                            Zhahira
                         </td>
                         <td>
-                            Cek
+                            085776668889
                         </td>
                         <td>
-                            Cek
+                            salma@gmail.com
                         </td>
                         <td>
-                            Cek
+                            salma
                         </td>
                         <td>
-                            Cek
+                            Bantul
                         </td>
                         <td>
-                            Cek
+                            Sewon
                         </td>
                         <td>
-                            Cek
+                            null
                         </td>
                         <td>
-                            Cek
+                            null
                         </td>
                         <td>
-                            Cek
+                            null
                         </td>
                         <td>
                             <a class="text-success" data-toggle="tooltip" data-placement="top"

@@ -27,6 +27,8 @@ Daftar Transaksi Bank Sampah
                         <th scope="col">Nama Bank Sampah</th>
                         <th scope="col">Tanggal Transaksi</th>
                         <th scope="col">Jenis Sampah</th>
+                        <th scope="col">Berat Sampah</th>
+                        <th scope="col">Harga Total</th>
                         <th scope="col">Keterangan</th>
                         <th scope="col">Unduh Transaksi</th>
                         <th scope="col">Aksi</th>
@@ -38,16 +40,22 @@ Daftar Transaksi Bank Sampah
                             1
                         </th>
                         <td>
-                            Cek
+                            Bank sampah panggung harjo
                         </td>
                         <td>
-                            Cek
+                            12 Desember 2020
                         </td>
                         <td>
-                            Cek
+                            Sampah an-organik
                         </td>
                         <td>
-                            Cek
+                            20 kg
+                        </td>
+                        <td>
+                            Rp. 120.000
+                        </td>
+                        <td>
+                            null
                         </td>
                         <td>
                             <button class="btn btn-primary" type="button"> Unduh </button>

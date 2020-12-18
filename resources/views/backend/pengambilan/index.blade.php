@@ -33,13 +33,13 @@ Daftar Pengambilan Sampah
                             1
                         </th>
                         <td>
-                            Cek
+                            Salma
                         </td>
                         <td>
-                            Cek
+                            Solihin
                         </td>
                         <td>
-                            Cek
+                            12 Desember 2020
                         </td>
                         <td>
                             <label class="custom-toggle">
