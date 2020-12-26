@@ -16,6 +16,8 @@ class CreateWargaTable extends Migration
         Schema::create('warga', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('NIK');
+            $table->unsignedBigInteger('id_users')->nullable();
+            $table->unsignedBigInteger('id_kategori_sampah')->nullable();
             $table->string('nama_cp');
             $table->string('no_telp');
             $table->string('no_telp_cp');
@@ -27,8 +29,6 @@ class CreateWargaTable extends Migration
             $table->string('RW');
             $table->string('detail_alamat');
             $table->string('lokasi');
-            $table->unsignedBigInteger('id_users')->nullable();
-            $table->unsignedBigInteger('id_kategori_sampah')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

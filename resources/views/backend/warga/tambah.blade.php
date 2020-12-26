@@ -24,13 +24,20 @@ Tambah Data Warga
                                         placeholder="NIK" value="">
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-nama">Nama</label>
                                     <input type="text" id="nama" class="form-control form-control-alternative"
                                         placeholder="Nama" value="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-nama">Kategori</label>
+                                    <input type="text" id="nama" class="form-control form-control-alternative"
+                                        placeholder="Keterangan" value="">
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -89,10 +96,42 @@ Tambah Data Warga
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-city">Desa</label>
+                                    <input type="text" id="input-city" class="form-control form-control-alternative"
+                                        placeholder="Kota">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-country">Dukuh</label>
+                                    <input type="text" id="input-country" class="form-control form-control-alternative"
+                                        placeholder="Kecamatan">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-city">RT</label>
+                                    <input type="text" id="input-city" class="form-control form-control-alternative"
+                                        placeholder="Kota">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-country">RW</label>
+                                    <input type="text" id="input-country" class="form-control form-control-alternative"
+                                        placeholder="Kecamatan">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="pl-lg-4">
                         <div class="form-group">
-                            <label>Detail Alamat</label>
+                            <label class="form-control-label">Detail Alamat</label>
                             <textarea rows="4" class="form-control form-control-alternative"
                                 placeholder="Detail Alamat"></textarea>
                         </div>
@@ -102,15 +141,6 @@ Tambah Data Warga
                                     <label class="form-control-label" for="input-nama">Lokasi</label>
                                     <input type="text" id="nama" class="form-control form-control-alternative"
                                         placeholder="Lokasi" value="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="input-nama">Keterangan</label>
-                                    <input type="text" id="nama" class="form-control form-control-alternative"
-                                        placeholder="Keterangan" value="">
                                 </div>
                             </div>
                         </div>

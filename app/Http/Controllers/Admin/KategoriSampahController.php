@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\KategoriSampah;
 
 class KategoriSampahController extends Controller
 {
@@ -14,7 +15,9 @@ class KategoriSampahController extends Controller
      */
     public function index()
     {
-        //
+        echo "test";
+        //$kategori = KategoriSampah::all();
+        //return view('backend.kategori_sampah.index', $kategori);
     }
 
     /**

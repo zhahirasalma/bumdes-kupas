@@ -27,6 +27,7 @@ Daftar Warga
                         <th scope="col">No</th>
                         <th scope="col">NIK</th>
                         <th scope="col">Nama</th>
+                        <th scope="col">Kategori</th>
                         <th scope="col">Nama Contact Person</th>
                         <th scope="col">No Telp</th>
                         <th scope="col">No Telp Contact Person</th>
@@ -34,9 +35,12 @@ Daftar Warga
                         <th scope="col">Password</th>
                         <th scope="col">Kota</th>
                         <th scope="col">Kecamatan</th>
+                        <th scope="col">Desa</th>
+                        <th scope="col">Dukuh</th>
+                        <th scope="col">RT</th>
+                        <th scope="col">RW</th>
                         <th scope="col">Detail Alamat</th>
                         <th scope="col">Lokasi</th>
-                        <th scope="col">Keterangan</th>
                         <th scope="col">Aksi</th>
                     </tr>
                 </thead>
@@ -71,6 +75,18 @@ Daftar Warga
                         </td>
                         <td>
                             Sewon
+                        </td>
+                        <td>
+                            null
+                        </td>
+                        <td>
+                            null
+                        </td>
+                        <td>
+                            null
+                        </td>
+                        <td>
+                            null
                         </td>
                         <td>
                             null

@@ -20,7 +20,7 @@ Tambah Kategori Sampah
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-nama">Jenis Sampah</label>
-                                    <input type="text" id="nama" class="form-control form-control-alternative"
+                                    <input type="text" id="jenis_sampah" class="form-control form-control-alternative"
                                         placeholder="Jenis Sampah" value="">
                                 </div>
                             </div>
@@ -29,7 +29,7 @@ Tambah Kategori Sampah
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-first-name">Harga Retribusi</label>
-                                    <input type="text" id="input-first-name"
+                                    <input type="text" id="harga_retribusi"
                                         class="form-control form-control-alternative" placeholder="Harga Retribusi" value="">
                                 </div>
                             </div>

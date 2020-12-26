@@ -31,23 +31,7 @@ Kategori Sampah
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">
-                            1
-                        </th>
-                        <td>
-                            Sampah Rumah Tangga
-                        </td>
-                        <td>
-                            Rp. 30.000
-                        </td>
-                        <td>
-                            <a class="text-success" data-toggle="tooltip" data-placement="top"
-                                data-original-title="Edit"><i class="far fa-edit"></i></a>
-                            <a class="text-danger" data-toggle="tooltip" data-placement="top"
-                                data-original-title="Delete"><i class="far fa-trash-alt"></i></a>
-                        </td>
-                    </tr>
+                
                 </tbody>
             </table>
         </div>

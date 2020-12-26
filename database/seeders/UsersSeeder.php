@@ -23,9 +23,9 @@ class UsersSeeder extends Seeder
             'password' => bcrypt('admin'),
             'role' => 'admin',
             'remember_token' => "1234567890",
-            // 'created_at' => Carbon::now(),
-            // 'updated_at' => Carbon::now(),
-            // 'deleted_at' => Carbon::now(),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            'deleted_at' => Carbon::now(),
         ]);
     }
 }

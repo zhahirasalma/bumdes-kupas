@@ -125,12 +125,12 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="/admin/konversi">
+                <a class="nav-link " href="{{URL::to('admin/konversi')}}">
                     <i class="ni ni-single-02 text-yellow"></i> Konversi sampah
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="/admin/kategori_sampah">
+                <a class="nav-link " href="{{URL::to('admin/kategori_sampah')}}">
                     <i class="ni ni-single-02 text-yellow"></i> Kategori sampah
                 </a>
             </li>
