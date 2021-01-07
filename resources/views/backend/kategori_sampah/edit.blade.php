@@ -1,6 +1,6 @@
 @extends('backend.layout.master')
 @section('title')
-Tambah Kategori Sampah
+Edit Kategori Sampah
 @endsection
 
 
@@ -9,20 +9,21 @@ Tambah Kategori Sampah
     <div class="card bg-secondary shadow">
         <div class="card-header bg-white border-0">
             <div class="col-8">
-                <h3 class="mb-0">Form Tambah</h3>
+                <h3 class="mb-0">Form Edit</h3>
             </div>
         </div>
         <div class="row align-items-center">
             <div class="card-body">
-                <form action="{{route('kategori_sampah.store')}}" method="POST">
+                <form action="{{route('kategori_sampah.update', $kategori->id)}}" method="POST">
                     @csrf
+                    @method('PUT')
                     <div class="pl-lg-4">
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-nama">Jenis Sampah</label>
                                     <input type="text" name="jenis_sampah" class="form-control form-control-alternative"
-                                        placeholder="Jenis Sampah" value="">
+                                        placeholder="Jenis Sampah" value="{{$kategori->jenis_sampah}}">
                                 </div>
                             </div>
                         </div>
@@ -31,13 +32,13 @@ Tambah Kategori Sampah
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-first-name">Harga Retribusi</label>
                                     <input type="text" name="harga_retribusi"
-                                        class="form-control form-control-alternative" placeholder="Harga Retribusi" value="">
+                                        class="form-control form-control-alternative" placeholder="Harga Retribusi"
+                                        value="{{$kategori->harga_retribusi}}">
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-primary" type="submit">Tambah</button>
+                            <button class=" btn btn-primary" type="submit">Ubah</button>
                     </div>
-                    
                 </form>
             </div>
         </div>

@@ -15,17 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::group(['prefix'=>'admin'], function(){
-    Route::resources([
-        'bank_sampah' => App\Http\Controllers\Admin\BankSampahController::class,
-        'warga' => App\Http\Controllers\Admin\WargaController::class,
-        'transaksi' => App\Http\Controllers\Admin\TransaksiBankSampahController::class,
-        'retribusi' => App\Http\Controllers\Admin\TransaksiRetribusiController::class,
-        'konversi' => App\Http\Controllers\Admin\KonversiController::class,
-        'kategori_sampah' => App\Http\Controllers\Admin\KategoriSampahController::class
-        ]);
-});
-
 
 Route::get('/', function () {
     return view('home');
@@ -83,3 +72,14 @@ Route::get('/admin/pengambilan', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::group(['prefix'=>'admin'], function(){
+    Route::resources([
+        'bank_sampah' => App\Http\Controllers\Admin\BankSampahController::class,
+        'warga' => App\Http\Controllers\Admin\WargaController::class,
+        'transaksi' => App\Http\Controllers\Admin\TransaksiBankSampahController::class,
+        'retribusi' => App\Http\Controllers\Admin\TransaksiRetribusiController::class,
+        'konversi' => App\Http\Controllers\Admin\KonversiController::class,
+        'kategori_sampah' => App\Http\Controllers\Admin\KategoriSampahController::class
+        ]);
+});

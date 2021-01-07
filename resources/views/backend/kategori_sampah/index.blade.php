@@ -14,7 +14,7 @@ Kategori Sampah
                     <h3 class="mb-0">@yield('title')</h3>
                 </div>
                 <div class="col text-right">
-                    <a href="{{URL::to('admin/kategori_sampah/create')}}" class="btn btn-primary">Tambah</a>
+                    <a href="{{route('kategori_sampah.create')}}" class="btn btn-primary">Tambah</a>
                     <a href="" class="btn btn-primary">Import dari Excel</a>
                 </div>
             </div>
@@ -31,7 +31,30 @@ Kategori Sampah
                     </tr>
                 </thead>
                 <tbody>
-                
+                    @foreach($kategori as $kategori)
+                    <tr>
+                        <th scope="row">
+                            {{$kategori->id}}
+                        </th>
+                        <td>
+                            {{$kategori->jenis_sampah}}
+                        </td>
+                        <td>
+                            Rp. {{$kategori->harga_retribusi}}
+                        </td>
+                        <td>
+                            <form action="{{ route('kategori_sampah.destroy', $kategori->id) }}" method="POST">
+                                <a href="{{ route('kategori_sampah.edit', $kategori->id) }}"
+                                    class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top"
+                                    data-original-title="Edit"><i class="far fa-edit"></i></a>
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
+                                    data-original-title="Delete" type="submit"><i class="far fa-trash-alt"></i></button>
+                        </td>
+                        </form>
+                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

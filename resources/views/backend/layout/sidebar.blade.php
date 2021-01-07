@@ -130,7 +130,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="{{URL::to('admin/kategori_sampah')}}">
+                <a class="nav-link " href="{{route('kategori_sampah.index')}}">
                     <i class="ni ni-single-02 text-yellow"></i> Kategori sampah
                 </a>
             </li>

@@ -15,9 +15,8 @@ class KategoriSampahController extends Controller
      */
     public function index()
     {
-        echo "test";
-        //$kategori = KategoriSampah::all();
-        //return view('backend.kategori_sampah.index', $kategori);
+        $kategori = KategoriSampah::all();
+        return view('backend.kategori_sampah.index', compact('kategori'));
     }
 
     /**
@@ -38,7 +37,14 @@ class KategoriSampahController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'jenis_sampah' => 'required',
+            'harga_retribusi' => 'required',
+        ]);
+
+        KategoriSampah::create($request->all());
+        return redirect()->route('kategori_sampah.index')
+                        ->with('success','Data berhasil ditambahkan');
     }
 
     /**
@@ -60,7 +66,8 @@ class KategoriSampahController extends Controller
      */
     public function edit($id)
     {
-        //
+        $kategori = KategoriSampah::find($id);
+        return view('backend.kategori_sampah.edit', compact('kategori'));
     }
 
     /**
@@ -72,7 +79,15 @@ class KategoriSampahController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'jenis_sampah' => 'required',
+            'harga_retribusi' => 'required',
+        ]);
+        
+        $kategori = KategoriSampah::find($id);
+        $kategori->update($request->all());
+        return redirect()->route('kategori_sampah.index')
+                        ->with('success','Data berhasil diubah');
     }
 
     /**
@@ -83,6 +98,9 @@ class KategoriSampahController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $kategori = KategoriSampah::find($id);
+        $kategori->delete();       
+        return redirect()->route('kategori_sampah.index')
+                        ->with('success','Data berhasil dihapus'); 
     }
 }
