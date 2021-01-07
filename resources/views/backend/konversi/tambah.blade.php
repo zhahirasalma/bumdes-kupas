@@ -35,7 +35,7 @@ Tambah Konversi Sampah
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-primary" type="submit">Tambah</button>
+                        <button class="btn btn-success" type="submit">Tambah</button>
                     </div>
                 </form>
             </div>

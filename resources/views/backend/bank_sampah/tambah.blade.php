@@ -88,7 +88,7 @@ Tambah Bank Sampah
                             <textarea rows="4" class="form-control form-control-alternative"
                                 placeholder="Detail Alamat"></textarea>
                         </div>
-                        <button class="btn btn-primary" type="button">Tambah</button>
+                        <button class="btn btn-success" type="submit">Tambah</button>
                     </div>
                     
                 </form>

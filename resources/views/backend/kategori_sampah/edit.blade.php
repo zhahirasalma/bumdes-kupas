@@ -37,7 +37,7 @@ Edit Kategori Sampah
                                 </div>
                             </div>
                         </div>
-                            <button class=" btn btn-primary" type="submit">Ubah</button>
+                            <button class=" btn btn-success" type="submit">Ubah</button>
                     </div>
                 </form>
             </div>

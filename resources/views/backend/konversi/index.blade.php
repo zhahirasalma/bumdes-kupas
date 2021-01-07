@@ -14,8 +14,8 @@ Konversi Harga Sampah
                     <h3 class="mb-0">@yield('title')</h3>
                 </div>
                 <div class="col text-right">
-                    <a href="{{route('konversi.create')}}" class="btn btn-primary">Tambah</a>
-                    <a href="" class="btn btn-primary">Import dari Excel</a>
+                    <a href="{{route('konversi.create')}}" class="btn btn-success">Tambah</a>
+                    <a href="" class="btn btn-success">Import dari Excel</a>
                 </div>
             </div>
         </div>

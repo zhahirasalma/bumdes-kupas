@@ -8,7 +8,7 @@
             @yield('title') | BUMDES - KUPAS
         </title>
         <!-- Favicon -->
-        <link href="{{asset('assets/img/brand/favicon.png')}}" rel="icon" type="image/png">
+        <link href="{{asset('assets/img/brand/logo_kupas.png')}}" rel="icon" type="image/png">
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
         <!-- Icons -->

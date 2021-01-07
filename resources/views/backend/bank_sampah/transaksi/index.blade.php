@@ -14,7 +14,7 @@ Daftar Transaksi Bank Sampah
                     <h3 class="mb-0">@yield('title')</h3>
                 </div>
                 <div class="col text-right">
-                    <a href="{{URL::to('admin/transaksi/create')}}" class="btn btn-primary">Tambah</a>
+                    <a href="{{URL::to('admin/transaksi/create')}}" class="btn btn-success">Tambah</a>
                 </div>
             </div>
         </div>
@@ -58,7 +58,7 @@ Daftar Transaksi Bank Sampah
                             null
                         </td>
                         <td>
-                            <button class="btn btn-primary" type="button"> Unduh </button>
+                            <button class="btn btn-outline-success btn-sm" type="button"> Unduh </button>
                         </td>
                         <td>
                             <a class="text-success" data-toggle="tooltip" data-placement="top"

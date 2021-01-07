@@ -88,6 +88,7 @@ Edit Data Bank Sampah
                             <textarea rows="4" class="form-control form-control-alternative"
                                 placeholder="A few words about you ...">A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</textarea>
                         </div>
+                        <button class=" btn btn-success" type="submit">Ubah</button>
                     </div>
                 </form>
             </div>

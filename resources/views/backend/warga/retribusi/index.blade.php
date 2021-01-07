@@ -14,7 +14,7 @@ Daftar Transaksi Retribusi
                     <h3 class="mb-0">@yield('title')</h3>
                 </div>
                 <div class="col text-right">
-                    <a href="{{URL::to('admin/retribusi/create')}}" class="btn btn-primary">Tambah</a>
+                    <a href="{{URL::to('admin/retribusi/create')}}" class="btn btn-success">Tambah</a>
                 </div>
             </div>
         </div>

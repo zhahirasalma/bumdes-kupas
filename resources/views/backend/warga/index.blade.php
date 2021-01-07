@@ -14,8 +14,8 @@ Daftar Warga
                     <h3 class="mb-0">@yield('title')</h3>
                 </div>
                 <div class="col text-right">
-                    <a href="{{URL::to('admin/warga/create')}}" class="btn btn-primary">Tambah</a>
-                    <a href="" class="btn btn-primary">Tambah dari Excel</a>
+                    <a href="{{URL::to('admin/warga/create')}}" class="btn btn-success">Tambah</a>
+                    <a href="" class="btn btn-success">Tambah dari Excel</a>
                 </div>
             </div>
         </div>

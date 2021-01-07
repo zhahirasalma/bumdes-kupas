@@ -47,7 +47,7 @@ Tambah Data Transaksi Bank Sampah
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-primary" type="button">Tambah</button>
+                        <button class="btn btn-success" type="button">Tambah</button>
                     </div>
 
                 </form>
