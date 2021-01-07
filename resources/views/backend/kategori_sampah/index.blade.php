@@ -40,7 +40,7 @@ Kategori Sampah
                             {{$kategori->jenis_sampah}}
                         </td>
                         <td>
-                            Rp. {{$kategori->harga_retribusi}}
+                            @currency($kategori->harga_retribusi)
                         </td>
                         <td>
                             <form action="{{ route('kategori_sampah.destroy', $kategori->id) }}" method="POST">

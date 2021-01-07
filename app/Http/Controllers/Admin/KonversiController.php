@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\KonversiSampah;
 
 class KonversiController extends Controller
 {
@@ -14,7 +15,8 @@ class KonversiController extends Controller
      */
     public function index()
     {
-        //
+        $konversi = KonversiSampah::all();
+        return view('backend.konversi.index', compact('konversi'));
     }
 
     /**
@@ -35,7 +37,14 @@ class KonversiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'jenis_sampah' => 'required',
+            'harga_konversi' => 'required',
+        ]);
+
+        KonversiSampah::create($request->all());
+        return redirect()->route('konversi.index')
+                        ->with('success','Data berhasil ditambahkan');
     }
 
     /**
@@ -57,7 +66,8 @@ class KonversiController extends Controller
      */
     public function edit($id)
     {
-        //
+        $konversi = KonversiSampah::find($id);
+        return view('backend.konversi.edit', compact('konversi'));
     }
 
     /**
@@ -69,7 +79,15 @@ class KonversiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'jenis_sampah' => 'required',
+            'harga_konversi' => 'required',
+        ]);
+
+        $konversi = KonversiSampah::find($id);
+        $konversi->update($request->all());
+        return redirect()->route('konversi.index')
+                        ->with('success','Data berhasil diubah');
     }
 
     /**
@@ -80,6 +98,9 @@ class KonversiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $konversi = KonversiSampah::find($id);
+        $konversi->delete();       
+        return redirect()->route('konversi.index')
+                        ->with('success','Data berhasil dihapus'); 
     }
 }

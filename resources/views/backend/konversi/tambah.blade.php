@@ -14,13 +14,14 @@ Tambah Konversi Sampah
         </div>
         <div class="row align-items-center">
             <div class="card-body">
-                <form>
+                <form action="{{route('konversi.store')}}" method="POST">
+                    @csrf
                     <div class="pl-lg-4">
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="input-nama">Jenis Sampah</label>
-                                    <input type="text" id="nama" class="form-control form-control-alternative"
+                                    <label class="form-control-label">Jenis Sampah</label>
+                                    <input type="text" name="jenis_sampah" class="form-control form-control-alternative"
                                         placeholder="Jenis Sampah" value="">
                                 </div>
                             </div>
@@ -28,15 +29,14 @@ Tambah Konversi Sampah
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="input-first-name">Harga Sampah</label>
-                                    <input type="text" id="input-first-name"
-                                        class="form-control form-control-alternative" placeholder="Harga Sampah" value="">
+                                    <label class="form-control-label" >Harga Sampah</label>
+                                    <input type="text" name="harga_konversi"
+                                    class="form-control form-control-alternative" placeholder="Harga Sampah" value="">
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-primary" type="button">Tambah</button>
+                        <button class="btn btn-primary" type="submit">Tambah</button>
                     </div>
-                    
                 </form>
             </div>
         </div>

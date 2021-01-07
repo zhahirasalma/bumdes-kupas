@@ -14,7 +14,7 @@ Konversi Harga Sampah
                     <h3 class="mb-0">@yield('title')</h3>
                 </div>
                 <div class="col text-right">
-                    <a href="{{URL::to('admin/konversi/create')}}" class="btn btn-primary">Tambah</a>
+                    <a href="{{route('konversi.create')}}" class="btn btn-primary">Tambah</a>
                     <a href="" class="btn btn-primary">Import dari Excel</a>
                 </div>
             </div>
@@ -31,23 +31,30 @@ Konversi Harga Sampah
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($konversi as $konversi)
                     <tr>
                         <th scope="row">
-                            1
+                            {{$konversi->id}}
                         </th>
                         <td>
-                            Sampah an-organik
+                            {{$konversi->jenis_sampah}}
                         </td>
                         <td>
-                            Rp. 10.000 / kg
+                            @currency($konversi->harga_konversi)
                         </td>
                         <td>
-                            <a class="text-success" data-toggle="tooltip" data-placement="top"
-                                data-original-title="Edit"><i class="far fa-edit"></i></a>
-                            <a class="text-danger" data-toggle="tooltip" data-placement="top"
-                                data-original-title="Delete"><i class="far fa-trash-alt"></i></a>
+                            <form action="{{ route('konversi.destroy', $konversi->id) }}" method="POST">
+                                <a href="{{ route('konversi.edit', $konversi->id) }}"
+                                    class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top"
+                                    data-original-title="Edit"><i class="far fa-edit"></i></a>
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
+                                    data-original-title="Delete" type="submit"><i class="far fa-trash-alt"></i></button>
                         </td>
+                        </form>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
