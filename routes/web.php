@@ -75,6 +75,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['prefix'=>'admin'], function(){
     Route::resources([
+        'users' => App\Http\Controllers\Admin\UsersController::class,
         'bank_sampah' => App\Http\Controllers\Admin\BankSampahController::class,
         'warga' => App\Http\Controllers\Admin\WargaController::class,
         'transaksi' => App\Http\Controllers\Admin\TransaksiBankSampahController::class,

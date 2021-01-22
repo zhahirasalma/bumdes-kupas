@@ -19,27 +19,32 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="{{URL::to('/admin/warga')}}">
-                    <i class="ni ni-single-02 text-blue"></i> Daftar Warga
+                <a class="nav-link " href="{{route('users.index')}}">
+                    <i class="ni ni-single-02 text-orange"></i> Users
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="{{URL::to('/admin/retribusi')}}">
+                <a class="nav-link " href="{{route('warga.index')}}">
+                    <i class="ni ni-single-copy-04 text-blue"></i> Daftar Warga
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="{{route('retribusi.index')}}">
                     <i class="ni ni-money-coins text-blue"></i> Transaksi Retribusi
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="{{URL::to('admin/bank_sampah')}}">
+                <a class="nav-link " href="{{route('bank_sampah.index')}}">
                     <i class="ni ni-building text-yellow"></i> Daftar Bank Sampah
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="{{URL::to('admin/transaksi')}}">
+                <a class="nav-link " href="{{route('transaksi.index')}}">
                     <i class="ni ni-money-coins text-yellow"></i> Transaksi Bank Sampah
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="{{URL::to('admin/konversi')}}">
+                <a class="nav-link " href="{{route('konversi.index')}}">
                     <i class="ni ni-tag text-green"></i> Konversi sampah
                 </a>
             </li>
