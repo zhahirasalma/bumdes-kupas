@@ -18,8 +18,8 @@ class CreateWargaTable extends Migration
             $table->string('NIK');
             $table->unsignedBigInteger('id_users')->nullable();
             $table->unsignedBigInteger('id_kategori_sampah')->nullable();
-            $table->string('nama_cp');
             $table->string('no_telp');
+            $table->string('nama_cp');
             $table->string('no_telp_cp');
             $table->string('kota');
             $table->string('kecamatan');
