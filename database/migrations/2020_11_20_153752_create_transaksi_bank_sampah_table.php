@@ -22,7 +22,6 @@ class CreateTransaksiBankSampahTable extends Migration
             $table->unsignedBigInteger('id_konversi')->nullable();
             $table->string('berat');
             $table->integer('harga_total');
-            $table->string('unduh_transaksi');
             $table->timestamps();
             $table->softDeletes();
 

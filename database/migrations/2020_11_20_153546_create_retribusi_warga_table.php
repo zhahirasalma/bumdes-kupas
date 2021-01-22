@@ -15,6 +15,7 @@ class CreateRetribusiWargaTable extends Migration
     {
         Schema::create('retribusi_warga', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('id_warga')->nullable();
             $table->string('nama_kolektor');
             $table->integer('jumlah_tagihan');
             $table->string('bulan_tagihan');
@@ -22,7 +23,6 @@ class CreateRetribusiWargaTable extends Migration
             $table->enum('keterangan', ['sudah bayar', 'belum bayar']);
             $table->date('tanggal_transaksi')->nullable();
             $table->unsignedBigInteger('id_users')->nullable();
-            $table->unsignedBigInteger('id_warga')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
