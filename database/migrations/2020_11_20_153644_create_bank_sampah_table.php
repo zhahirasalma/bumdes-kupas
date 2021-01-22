@@ -15,6 +15,7 @@ class CreateBankSampahTable extends Migration
     {
         Schema::create('bank_sampah', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('id_users')->nullable();
             $table->string('no_telp');
             $table->string('kota');
             $table->string('kecamatan');
@@ -23,7 +24,6 @@ class CreateBankSampahTable extends Migration
             $table->string('RT');
             $table->string('RW');
             $table->string('detail_alamat');
-            $table->unsignedBigInteger('id_users')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
