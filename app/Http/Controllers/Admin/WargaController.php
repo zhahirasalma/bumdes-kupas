@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Warga;
+use App\Models\KategoriSampah;
+use App\Models\User;
+
 
 class WargaController extends Controller
 {
@@ -14,7 +18,8 @@ class WargaController extends Controller
      */
     public function index()
     {
-        return view('backend.warga.index');
+        $warga = Warga::with('kategori', 'user')->get();
+        return view('backend.warga.index', compact('warga'));
     }
 
     /**
@@ -35,7 +40,26 @@ class WargaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'NIK' => 'required',
+            'id_users' => 'required',
+            'id_kategori_sampah' => 'required',
+            'no_telp' => 'required',
+            'nama_cp' => 'required',
+            'no_telp_cp' => 'required',
+            'kota' => 'required',
+            'kecamatan' => 'required',
+            'desa' => 'required',
+            'dukuh' => 'required',
+            'RT' => 'required',
+            'RW' => 'required',
+            'detail_alamat' => 'required',
+            'lokasi' => 'required',
+        ]);
+
+        Warga::create($request->all());
+        return redirect()->route('warga.index')
+                        ->with('success','Data berhasil ditambahkan');
     }
 
     /**
@@ -57,7 +81,8 @@ class WargaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $w = Warga::find($id);
+        return view('backend.warga.edit', compact('w'));
     }
 
     /**
@@ -69,7 +94,27 @@ class WargaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'NIK' => 'required',
+            'id_users' => 'required',
+            'id_kategori_sampah' => 'required',
+            'no_telp' => 'required',
+            'nama_cp' => 'required',
+            'no_telp_cp' => 'required',
+            'kota' => 'required',
+            'kecamatan' => 'required',
+            'desa' => 'required',
+            'dukuh' => 'required',
+            'RT' => 'required',
+            'RW' => 'required',
+            'detail_alamat' => 'required',
+            'lokasi' => 'required',
+        ]);
+
+        $w = Warga::find($id);
+        $w->update($request->all());
+        return redirect()->route('warga.index')
+                        ->with('success','Data berhasil diubah');
     }
 
     /**
@@ -80,6 +125,18 @@ class WargaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $w = Warga::find($id);
+        $w->delete();       
+        return redirect()->route('warga.index')
+                        ->with('success','Data berhasil dihapus'); 
+    }
+
+    public function searchKategori(Request $request)
+    {
+    	if ($request->has('q')) {
+    		$cari = $request->q;
+    		$data = DB::table('kategori_sampah')->select('id', 'jenis_sampah')->where('jenis_sampah', 'LIKE', '%$cari%')->get();
+    		return response()->json($data);
+    	}
     }
 }

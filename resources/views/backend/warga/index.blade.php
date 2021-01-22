@@ -14,7 +14,7 @@ Daftar Warga
                     <h3 class="mb-0">@yield('title')</h3>
                 </div>
                 <div class="col text-right">
-                    <a href="{{URL::to('admin/warga/create')}}" class="btn btn-success">Tambah</a>
+                    <a href="{{route('warga.create')}}" class="btn btn-success">Tambah</a>
                     <a href="" class="btn btn-success">Tambah dari Excel</a>
                 </div>
             </div>
@@ -28,11 +28,9 @@ Daftar Warga
                         <th scope="col">NIK</th>
                         <th scope="col">Nama</th>
                         <th scope="col">Kategori</th>
-                        <th scope="col">Nama Contact Person</th>
                         <th scope="col">No Telp</th>
+                        <th scope="col">Nama Contact Person</th>
                         <th scope="col">No Telp Contact Person</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Password</th>
                         <th scope="col">Kota</th>
                         <th scope="col">Kecamatan</th>
                         <th scope="col">Desa</th>
@@ -45,65 +43,66 @@ Daftar Warga
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($warga as $w)
                     <tr>
                         <th scope="row">
-                            1
+                            {{$w->id}}
                         </th>
                         <td>
-                            08987978790
+                            {{$w->NIK}}
                         </td>
                         <td>
-                            Salma
+                            {{$w->user->nama}}
                         </td>
                         <td>
-                            085776668888
+                            {{$w->kategori->jenis_sampah}}
                         </td>
                         <td>
-                            Zhahira
+                            {{$w->no_telp}}
                         </td>
                         <td>
-                            085776668889
+                            {{$w->nama_cp}}
                         </td>
                         <td>
-                            salma@gmail.com
+                            {{$w->no_telp_cp}}
                         </td>
                         <td>
-                            salma
+                            {{$w->kota}}
                         </td>
                         <td>
-                            Bantul
+                            {{$w->kecamatan}}
                         </td>
                         <td>
-                            Sewon
+                            {{$w->desa}}
                         </td>
                         <td>
-                            null
+                            {{$w->dukuh}}
                         </td>
                         <td>
-                            null
+                            {{$w->RT}}
                         </td>
                         <td>
-                            null
+                            {{$w->RW}}
                         </td>
                         <td>
-                            null
+                            {{$w->detail_alamat}}
                         </td>
                         <td>
-                            null
+                            {{$w->lokasi}}
                         </td>
                         <td>
-                            null
+                            <form action="{{ route('warga.destroy', $w->id) }}" method="POST">
+                                <a href="{{ route('warga.edit', $w->id) }}"
+                                    class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top"
+                                    data-original-title="Edit"><i class="far fa-edit"></i></a>
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
+                                    data-original-title="Delete" type="submit"><i class="far fa-trash-alt"></i></button>
                         </td>
-                        <td>
-                            null
-                        </td>
-                        <td>
-                            <a class="text-success" data-toggle="tooltip" data-placement="top"
-                                data-original-title="Edit"><i class="far fa-edit"></i></a>
-                            <a class="text-danger" data-toggle="tooltip" data-placement="top"
-                                data-original-title="Delete"><i class="far fa-trash-alt"></i></a>
-                        </td>
+                        </form>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

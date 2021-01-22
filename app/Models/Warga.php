@@ -28,10 +28,9 @@ class Warga extends Model
         'RW',
         'detail_alamat',
         'lokasi',
-        
     ];
     
-    public function warga(){
+    public function user(){
         return $this->belongsTo('App\Models\User', 'id_users');
     }
     public function kategori(){
