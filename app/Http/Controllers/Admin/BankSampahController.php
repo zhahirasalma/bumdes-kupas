@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\BankSampah;
+use App\Models\User;
 
 class BankSampahController extends Controller
 {
@@ -15,8 +16,8 @@ class BankSampahController extends Controller
      */
     public function index()
     {
-        $data = BankSampah::all();
-        return view('backend.bank_sampah.index')->with('bank_sampah', $data);
+        $data = BankSampah::with('user')->get();
+        return view('backend.bank_sampah.index', compact('data'));
     }
 
     /**
@@ -37,7 +38,21 @@ class BankSampahController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'id_users' => 'required',
+            'no_telp' => 'required',
+            'kota' => 'required',
+            'kecamatan' => 'required',
+            'desa' => 'required',
+            'dukuh' => 'required',
+            'RT' => 'required',
+            'RW' => 'required',
+            'detail_alamat' => 'required',
+        ]);
+
+        BankSampah::create($request->all());
+        return redirect()->route('bank_sampah.index')
+                        ->with('success','Data berhasil ditambahkan');
     }
 
     /**
@@ -59,7 +74,8 @@ class BankSampahController extends Controller
      */
     public function edit($id)
     {
-        return view('backend.bank_sampah.edit');
+        $data = BankSampah::find($id);
+        return view('backend.bank_sampah.edit', compact('data'));
     }
 
     /**
@@ -71,7 +87,22 @@ class BankSampahController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'id_users' => 'required',
+            'no_telp' => 'required',
+            'kota' => 'required',
+            'kecamatan' => 'required',
+            'desa' => 'required',
+            'dukuh' => 'required',
+            'RT' => 'required',
+            'RW' => 'required',
+            'detail_alamat' => 'required',
+        ]);
+
+        $data = BankSampah::find($id);
+        $data->update($request->all());
+        return redirect()->route('bank_sampah.index')
+                        ->with('success','Data berhasil diubah');
     }
 
     /**
@@ -82,6 +113,9 @@ class BankSampahController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = BankSampah::find($id);
+        $data->delete();       
+        return redirect()->route('bank_sampah.index')
+                        ->with('success','Data berhasil dihapus');
     }
 }

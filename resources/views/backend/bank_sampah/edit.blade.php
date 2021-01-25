@@ -14,14 +14,16 @@ Edit Data Bank Sampah
         </div>
         <div class="row align-items-center">
             <div class="card-body">
-                <form>
+                <form action="{{route('bank_sampah.update', $data->id)}}" method="POST">
+                    @csrf
+                    @method('PUT')
                     <div class="pl-lg-4">
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="input-nama">Nama</label>
-                                    <input type="text" id="nama" class="form-control form-control-alternative"
-                                        placeholder="Nama" value="">
+                                    <label class="form-control-label" for="input-nama">Email</label>
+                                    <input type="text" name="id_users" class="form-control form-control-alternative"
+                                        placeholder="Nama" value="{{$data->user->email}}">
                                 </div>
                             </div>
                         </div>
@@ -29,55 +31,56 @@ Edit Data Bank Sampah
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-first-name">No Telepon</label>
-                                    <input type="text" id="input-first-name"
-                                        class="form-control form-control-alternative" placeholder="No Telepon" value="">
+                                    <input type="text" name="no_telp"
+                                        class="form-control form-control-alternative" placeholder="No Telepon" value="{{$data->no_telp}}">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="pl-lg-4">
-
                         <div class="row">
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-city">Kota</label>
-                                    <input type="text" id="input-city" class="form-control form-control-alternative"
-                                        placeholder="City" value="New York">
+                                    <input type="text" name="kota" class="form-control form-control-alternative"
+                                        placeholder="City" value="{{$data->kota}}">
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-country">Kecamatan</label>
-                                    <input type="text" id="input-country" class="form-control form-control-alternative"
-                                        placeholder="Country" value="United States">
+                                    <input type="text" name="kecamatan" class="form-control form-control-alternative"
+                                        placeholder="Country" value="{{$data->kecamatan}}">
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-country">Desa</label>
-                                    <input type="number" id="input-postal-code"
-                                        class="form-control form-control-alternative" placeholder="Postal code">
+                                    <input type="text" name="desa"
+                                        class="form-control form-control-alternative" placeholder="Desa"
+                                        value ="{{$data->desa}}">
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="input-city">Dusun</label>
-                                    <input type="text" id="input-city" class="form-control form-control-alternative"
-                                        placeholder="City" value="New York">
+                                    <label class="form-control-label" for="input-city">Dukuh</label>
+                                    <input type="text" name="dukuh" class="form-control form-control-alternative"
+                                        placeholder="City" value="{{$data->dukuh}}">
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-country">RT</label>
-                                    <input type="text" id="input-country" class="form-control form-control-alternative"
-                                        placeholder="Country" value="United States">
+                                    <input type="number" name="RT" class="form-control form-control-alternative"
+                                        placeholder="Country" value="{{$data->RT}}">
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-country">RW</label>
-                                    <input type="number" id="input-postal-code"
-                                        class="form-control form-control-alternative" placeholder="Postal code">
+                                    <input type="number" name="RW"
+                                        class="form-control form-control-alternative" placeholder="Postal code"
+                                        value="{{$data->RW}}">
                                 </div>
                             </div>
                         </div>
@@ -85,8 +88,8 @@ Edit Data Bank Sampah
                     <div class="pl-lg-4">
                         <div class="form-group">
                             <label>Detail Alamat</label>
-                            <textarea rows="4" class="form-control form-control-alternative"
-                                placeholder="A few words about you ...">A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</textarea>
+                            <textarea rows="4" name="detail_alamat" class="form-control form-control-alternative"
+                                placeholder="A few words about you ...">{{$data->detail_alamat}}</textarea>
                         </div>
                         <button class=" btn btn-success" type="submit">Ubah</button>
                     </div>

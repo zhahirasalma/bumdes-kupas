@@ -14,7 +14,7 @@ Daftar Bank Sampah
                     <h3 class="mb-0">@yield('title')</h3>
                 </div>
                 <div class="col text-right">
-                    <a href="{{URL::to('admin/bank_sampah/create')}}" class="btn btn-success">Tambah</a>
+                    <a href="{{route('bank_sampah.create')}}" class="btn btn-success">Tambah</a>
                     <a href="" class="btn btn-success">Import dari Excel</a>
                 </div>
             </div>
@@ -25,9 +25,8 @@ Daftar Bank Sampah
                 <thead class="thead-light">
                     <tr>
                         <th scope="col">No</th>
+                        <th scope="col">Nama</th>
                         <th scope="col">No Telp</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Password</th>
                         <th scope="col">Kota</th>
                         <th scope="col">Kecamatan</th>
                         <th scope="col">Desa</th>
@@ -37,41 +36,43 @@ Daftar Bank Sampah
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($bank_sampah as $value)
+                    @foreach($data as $data)
                     <tr>
                         <th scope="row">
-                            1
+                            {{$data->id}}
                         </th>
                         <td>
-                            {{$value->no_telp}}
+                            {{$data->user->nama}}
                         </td>
                         <td>
-                            banksampah@gmail.com
+                            {{$data->no_telp}}
                         </td>
                         <td>
-                            banksampah
+                            {{$data->kota}}
                         </td>
                         <td>
-                            {{$value->kota}}
+                            {{$data->kecamatan}}
                         </td>
                         <td>
-                            {{$value->kecamatan}}
+                            {{$data->desa}}
                         </td>
                         <td>
-                            {{$value->desa}}
+                            {{$data->dukuh}}
                         </td>
                         <td>
-                            {{$value->dukuh}}
+                            {{$data->detail_alamat}}
                         </td>
                         <td>
-                            {{$value->detail_alamat}}
+                            <form action="{{ route('bank_sampah.destroy', $data->id) }}" method="POST">
+                                <a href="{{ route('bank_sampah.edit', $data->id) }}"
+                                    class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top"
+                                    data-original-title="Edit"><i class="far fa-edit"></i></a>
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
+                                    data-original-title="Delete" type="submit"><i class="far fa-trash-alt"></i></button>
                         </td>
-                        <td>
-                            <a href="{{URL::to('admin/bank_sampah/edit')}}" class="text-success" data-toggle="tooltip" data-placement="top"
-                                data-original-title="Edit"><i class="far fa-edit"></i></a>
-                            <a class="text-danger" data-toggle="tooltip" data-placement="top"
-                                data-original-title="Delete"><i class="far fa-trash-alt"></i></a>
-                        </td>
+                        </form>
                     </tr>
                 </tbody>
                 @endforeach
