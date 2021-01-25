@@ -14,7 +14,7 @@ Daftar Transaksi Retribusi
                     <h3 class="mb-0">@yield('title')</h3>
                 </div>
                 <div class="col text-right">
-                    <a href="{{URL::to('admin/retribusi/create')}}" class="btn btn-success">Tambah</a>
+                    <a href="{{route('retribusi.create')}}" class="btn btn-success">Tambah</a>
                 </div>
             </div>
         </div>
@@ -24,6 +24,7 @@ Daftar Transaksi Retribusi
                 <thead class="thead-light">
                     <tr>
                         <th scope="col">No</th>
+                        <th scope="col">Nama Warga</th>
                         <th scope="col">Nama Kolektor</th>
                         <th scope="col">Jumlah Tagihan</th>
                         <th scope="col">Bulan Tagihan</th>
@@ -34,35 +35,45 @@ Daftar Transaksi Retribusi
                     </tr>
                 </thead>
                 <tbody>
+                @foreach($retribusi as $r)
                     <tr>
                         <th scope="row">
-                            1
+                            {{$r->id}}
                         </th>
                         <td>
-                            Bu Yanti
+                            {{$r->user->nama}}
                         </td>
                         <td>
-                            Rp. 500.000
+                            {{$r->nama_kolektor}}
                         </td>
                         <td>
-                            Desember
+                            {{$r->jumlah_tagihan}}
                         </td>
                         <td>
-                            Panggungharjo
+                            {{$r->bulan_tagihan}}
                         </td>
                         <td>
-                            12 Desember 2020
+                            {{$r->alamat}}
                         </td>
                         <td>
-                            sudah bayar
+                            {{$r->tanggal_transaksi}}
                         </td>
                         <td>
-                            <a class="text-success" data-toggle="tooltip" data-placement="top"
-                                data-original-title="Edit"><i class="far fa-edit"></i></a>
-                            <a class="text-danger" data-toggle="tooltip" data-placement="top"
-                                data-original-title="Delete"><i class="far fa-trash-alt"></i></a>
+                            {{$r->keterangan}}
                         </td>
+                        <td>
+                            <form action="{{ route('retribusi.destroy', $r->id) }}" method="POST">
+                                <a href="{{ route('retribusi.edit', $r->id) }}"
+                                    class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top"
+                                    data-original-title="Edit"><i class="far fa-edit"></i></a>
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
+                                    data-original-title="Delete" type="submit"><i class="far fa-trash-alt"></i></button>
+                        </td>
+                        </form>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

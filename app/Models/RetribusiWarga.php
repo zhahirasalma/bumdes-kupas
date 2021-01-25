@@ -14,6 +14,7 @@ class RetribusiWarga extends Model
     protected $table ='retribusi_warga';
 
     protected $fillable=[
+        'id_warga',
         'nama_kolektor',
         'jumlah_tagihan',
         'bulan_tagihan',
@@ -21,7 +22,6 @@ class RetribusiWarga extends Model
         'keterangan',
         'tanggal_transaksi',
         'id_users',
-        'id_warga',
     ];
     
     public function user(){

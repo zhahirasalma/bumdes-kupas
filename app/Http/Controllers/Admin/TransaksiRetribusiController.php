@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\RetribusiWarga;
+use App\Models\User;
+use App\Models\Warga;
 
 class TransaksiRetribusiController extends Controller
 {
@@ -14,7 +17,8 @@ class TransaksiRetribusiController extends Controller
      */
     public function index()
     {
-        return view('backend.warga.retribusi.index');
+        $retribusi = RetribusiWarga::with('warga', 'user')->get();
+        return view('backend.warga.retribusi.index', compact('retribusi'));
     }
 
     /**
@@ -35,7 +39,21 @@ class TransaksiRetribusiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_kolektor' => 'required',
+            'jumlah_tagihan' => 'required',
+            'bulan_tagihan' => 'required',
+            'alamat' => 'required',
+            'keterangan' => 'required',
+            'tanggal_transaksi' => 'required',
+            'id_users' => 'required'
+        ]);
+        
+        $input = $request->all();
+        $input['id_warga'] = Warga::WHERE('id_users', $request['id_users'])->value('id');
+        RetribusiWarga::create($input);
+        return redirect()->route('retribusi.index')
+                        ->with('success','Data berhasil ditambahkan');
     }
 
     /**
@@ -57,7 +75,8 @@ class TransaksiRetribusiController extends Controller
      */
     public function edit($id)
     {
-        //
+        $retribusi = RetribusiWarga::find($id);
+        return view('backend.warga.retribusi.edit', compact('retribusi'));
     }
 
     /**
@@ -69,7 +88,22 @@ class TransaksiRetribusiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nama_kolektor' => 'required',
+            'jumlah_tagihan' => 'required',
+            'bulan_tagihan' => 'required',
+            'alamat' => 'required',
+            'keterangan' => 'required',
+            'tanggal_transaksi' => 'required',
+            'id_users' => 'required'
+        ]);
+
+        $retribusi = RetribusiWarga::find($id);
+        $input = $request->all();
+        $input['id_warga'] = Warga::WHERE('id_users', $request['id_users'])->value('id');
+        $retribusi->update($input);
+        return redirect()->route('retribusi.index')
+                        ->with('success','Data berhasil ditambahkan');
     }
 
     /**
@@ -80,6 +114,9 @@ class TransaksiRetribusiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $retribusi = RetribusiWarga::find($id);
+        $retribusi->delete();
+        return redirect()->route('retribusi.index')
+                        ->with('success','Data berhasil ditambahkan');
     }
 }
