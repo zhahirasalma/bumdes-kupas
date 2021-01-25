@@ -1,6 +1,6 @@
 @extends('backend.layout.master')
 @section('title')
-Tambah Kategori Sampah
+Tambah Users
 @endsection
 
 

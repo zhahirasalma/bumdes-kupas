@@ -43,8 +43,10 @@ class UsersController extends Controller
             'password' => 'required',
             'role' => 'required',
         ]);
-
-        User::create($request->all());
+        
+        $input = $request->all();
+        $input['password'] = bcrypt($input['password']);
+        User::create($input);
         return redirect()->route('users.index')
                         ->with('success','Data berhasil ditambahkan');
     }
@@ -89,7 +91,9 @@ class UsersController extends Controller
         ]);
         
         $users = User::find($id);
-        $users->update($request->all());
+        $input = $request->all();
+        $input['password'] = bcrypt($input['password']);
+        $users->update($input);
         return redirect()->route('users.index')
                         ->with('success','Data berhasil diubah');
     }
