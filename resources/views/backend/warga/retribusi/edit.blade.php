@@ -72,8 +72,8 @@ Edit Data Transaksi Retribusi
                             <textarea name="alamat" rows="4" class="form-control form-control-alternative"
                                 placeholder="Alamat">{{$retribusi->alamat}}</textarea>
                         </div>
+                        <button class="btn btn-success" type="submit">Ubah</button>
                     </div>
-                    <button class="btn btn-success" type="submit">Edit</button>
             </div>
             </form>
         </div>
