@@ -14,7 +14,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="/admin/pengambilan">
+                <a class="nav-link " href="{{route('pengambilan.index')}}">
                     <i class="ni ni-delivery-fast text-orange"></i> Pengambilan Sampah
                 </a>
             </li>

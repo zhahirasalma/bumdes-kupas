@@ -1,8 +1,7 @@
 @extends('backend.layout.master')
 @section('title')
-Edit Kategori Sampah
+Edit Pengambilan
 @endsection
-
 
 @section('content')
 <div class="col-xl-12">
@@ -14,30 +13,30 @@ Edit Kategori Sampah
         </div>
         <div class="row align-items-center">
             <div class="card-body">
-                <form action="{{route('kategori_sampah.update', $kategori->id)}}" method="POST">
+                <form action="{{route('pengambilan.update', $pengambilan->id)}}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="pl-lg-4">
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="input-nama">Jenis Sampah</label>
-                                    <input type="text" name="jenis_sampah" class="form-control form-control-alternative"
-                                        placeholder="Jenis Sampah" value="{{$kategori->jenis_sampah}}">
+                                    <label class="form-control-label">Nama Warga</label>
+                                    <input type="text" name="id_users" class="form-control form-control-alternative"
+                                        placeholder="Nama Warga" value="{{$pengambilan->id_users}}">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="input-first-name">Harga Retribusi</label>
-                                    <input type="text" name="harga_retribusi"
-                                        class="form-control form-control-alternative" placeholder="Harga Retribusi"
-                                        value="{{$kategori->harga_retribusi}}">
+                                    <label class="form-control-label">Waktu Pengambilan</label>
+                                    <input type="date" name="waktu_pengambilan"
+                                        class="form-control form-control-alternative" placeholder="Waktu Pengambilan"
+                                        value="{{$pengambilan->waktu_pengambilan}}">
                                 </div>
                             </div>
                         </div>
-                        <button class=" btn btn-success" type="submit">Ubah</button>
+                        <button class="btn btn-success" type="submit">Ubah</button>
                     </div>
                 </form>
             </div>

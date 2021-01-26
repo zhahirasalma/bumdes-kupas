@@ -13,6 +13,9 @@ Daftar Pengambilan Sampah
                 <div class="col">
                     <h3 class="mb-0">@yield('title')</h3>
                 </div>
+                <div class="col text-right">
+                    <a href="{{route('pengambilan.create')}}" class="btn btn-success">Tambah</a>
+                </div>
             </div>
         </div>
         <div class="table-responsive">
@@ -22,24 +25,26 @@ Daftar Pengambilan Sampah
                     <tr>
                         <th scope="col">No</th>
                         <th scope="col">Nama Warga</th>
-                        <th scope="col">Nama Educator</th>
+                        <th scope="col">Alamat</th>
                         <th scope="col">Waktu Pengambilan</th>
                         <th scope="col">Status</th>
+                        <th scope="col">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($pengambilan as $p)
                     <tr>
                         <th scope="row">
-                            1
+                            {{$p->id}}
                         </th>
                         <td>
-                            Salma
+                            {{$p->user->nama}}
                         </td>
                         <td>
-                            Solihin
+                            
                         </td>
                         <td>
-                            12 Desember 2020
+                            {{$p->waktu_pengambilan}}
                         </td>
                         <td>
                             <label class="custom-toggle">
@@ -47,7 +52,19 @@ Daftar Pengambilan Sampah
                                 <span class="custom-toggle-slider rounded-circle"></span>
                             </label>
                         </td>
+                        <td>
+                            <form action="{{ route('pengambilan.destroy', $p->id) }}" method="POST">
+                                <a href="{{ route('pengambilan.edit', $p->id) }}"
+                                    class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top"
+                                    data-original-title="Edit"><i class="far fa-edit"></i></a>
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
+                                    data-original-title="Delete" type="submit"><i class="far fa-trash-alt"></i></button>
+                        </td>
+                        </form>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
