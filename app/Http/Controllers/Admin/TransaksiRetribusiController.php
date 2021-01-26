@@ -103,7 +103,7 @@ class TransaksiRetribusiController extends Controller
         $input['id_warga'] = Warga::WHERE('id_users', $request['id_users'])->value('id');
         $retribusi->update($input);
         return redirect()->route('retribusi.index')
-                        ->with('success','Data berhasil ditambahkan');
+                        ->with('success','Data berhasil diubah');
     }
 
     /**
@@ -117,6 +117,6 @@ class TransaksiRetribusiController extends Controller
         $retribusi = RetribusiWarga::find($id);
         $retribusi->delete();
         return redirect()->route('retribusi.index')
-                        ->with('success','Data berhasil ditambahkan');
+                        ->with('success','Data berhasil dihapus');
     }
 }
