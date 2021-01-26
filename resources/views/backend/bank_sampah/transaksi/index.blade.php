@@ -14,7 +14,7 @@ Daftar Transaksi Bank Sampah
                     <h3 class="mb-0">@yield('title')</h3>
                 </div>
                 <div class="col text-right">
-                    <a href="{{URL::to('admin/transaksi/create')}}" class="btn btn-success">Tambah</a>
+                    <a href="{{route('transaksi.create')}}" class="btn btn-success">Tambah</a>
                 </div>
             </div>
         </div>
@@ -35,38 +35,45 @@ Daftar Transaksi Bank Sampah
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($transaksi as $tr)
                     <tr>
                         <th scope="row">
-                            1
+                            {{$tr->id}}
                         </th>
                         <td>
-                            Bank sampah panggung harjo
+                            {{$tr->user->nama}}
                         </td>
                         <td>
-                            12 Desember 2020
+                            {{$tr->tanggal_transaksi}}
                         </td>
                         <td>
-                            Sampah an-organik
+                            {{$tr->konversi->jenis_sampah}}
                         </td>
                         <td>
-                            20 kg
+                            {{$tr->berat}}
                         </td>
                         <td>
-                            Rp. 120.000
+                            {{$tr->harga_total}}
                         </td>
                         <td>
-                            null
+                            {{$tr->keterangan}}
                         </td>
                         <td>
                             <button class="btn btn-outline-success btn-sm" type="button"> Unduh </button>
                         </td>
                         <td>
-                            <a class="text-success" data-toggle="tooltip" data-placement="top"
-                                data-original-title="Edit"><i class="far fa-edit"></i></a>
-                            <a class="text-danger" data-toggle="tooltip" data-placement="top"
-                                data-original-title="Delete"><i class="far fa-trash-alt"></i></a>
+                            <form action="{{ route('transaksi.destroy', $tr->id) }}" method="POST">
+                                <a href="{{ route('transaksi.edit', $tr->id) }}" class="btn btn-success btn-sm"
+                                    data-toggle="tooltip" data-placement="top" data-original-title="Edit"><i
+                                        class="far fa-edit"></i></a>
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
+                                    data-original-title="Delete" type="submit"><i class="far fa-trash-alt"></i></button>
                         </td>
+                        </form>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

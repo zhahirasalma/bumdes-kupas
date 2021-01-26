@@ -17,11 +17,10 @@ class TransaksiBankSampah extends Model
         'id_bank_sampah',
         'tanggal_transaksi',
         'keterangan',
-        'id_users',
         'id_konversi',
+        'id_users',
         'berat',
         'harga_total',
-        'unduh_transaksi'
     ];
     
     public function bankSampah(){
