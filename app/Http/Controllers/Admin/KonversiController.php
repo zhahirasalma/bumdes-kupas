@@ -37,10 +37,16 @@ class KonversiController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $messages = [
+            'jenis_sampah.required' => 'Jenis sampah wajib diisi.',
+            'harga_konversi.required' => 'Harga Konversi wajib diisi.',
+            'harga_konversi.numeric' => 'Harga Konversi harus berupa angka.',
+        ];
+
+        $validator = $request->validate([
             'jenis_sampah' => 'required',
-            'harga_konversi' => 'required',
-        ]);
+            'harga_konversi' => 'required|numeric',
+        ], $messages);
 
         KonversiSampah::create($request->all());
         return redirect()->route('konversi.index')
@@ -79,10 +85,16 @@ class KonversiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $messages = [
+            'jenis_sampah.required' => 'Jenis sampah wajib diisi.',
+            'harga_konversi.required' => 'Harga Konversi wajib diisi.',
+            'harga_konversi.numeric' => 'Harga Konversi harus berupa angka.',
+        ];
+
+        $validator = $request->validate([
             'jenis_sampah' => 'required',
-            'harga_konversi' => 'required',
-        ]);
+            'harga_konversi' => 'required|numeric',
+        ], $messages);
 
         $konversi = KonversiSampah::find($id);
         $konversi->update($request->all());

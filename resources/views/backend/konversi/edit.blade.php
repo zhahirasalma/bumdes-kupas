@@ -24,6 +24,9 @@ Edit Konversi Sampah
                                     <label class="form-control-label">Jenis Sampah</label>
                                     <input type="text" name="jenis_sampah" class="form-control form-control-alternative"
                                         placeholder="Jenis Sampah" value="{{$konversi->jenis_sampah}}">
+                                    @if ($errors->has('jenis_sampah'))
+                                    <span class="text-danger">{{ $errors->first('jenis_sampah') }}</span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -34,6 +37,9 @@ Edit Konversi Sampah
                                     <input type="text" name="harga_konversi"
                                         class="form-control form-control-alternative" placeholder="Harga Sampah"
                                         value="{{$konversi->harga_konversi}}">
+                                    @if ($errors->has('harga_konversi'))
+                                    <span class="text-danger">{{ $errors->first('harga_konversi') }}</span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
