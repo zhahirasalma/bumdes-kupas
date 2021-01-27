@@ -38,7 +38,7 @@ Daftar Transaksi Bank Sampah
                     @foreach($transaksi as $tr)
                     <tr>
                         <th scope="row">
-                            {{$tr->id}}
+                            {{$loop->iteration}}
                         </th>
                         <td>
                             {{$tr->user->nama}}

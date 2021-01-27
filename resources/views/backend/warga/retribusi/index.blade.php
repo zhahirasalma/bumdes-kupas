@@ -38,7 +38,7 @@ Daftar Transaksi Retribusi
                 @foreach($retribusi as $r)
                     <tr>
                         <th scope="row">
-                            {{$r->id}}
+                            {{$loop->iteration}}
                         </th>
                         <td>
                             {{$r->user->nama}}

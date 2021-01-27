@@ -46,7 +46,7 @@ Daftar Warga
                     @foreach($warga as $w)
                     <tr>
                         <th scope="row">
-                            {{$w->id}}
+                            {{$loop->iteration}}
                         </th>
                         <td>
                             {{$w->NIK}}

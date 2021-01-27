@@ -39,7 +39,7 @@ Daftar Bank Sampah
                     @foreach($data as $data)
                     <tr>
                         <th scope="row">
-                            {{$data->id}}
+                            {{$loop->iteration}}
                         </th>
                         <td>
                             {{$data->user->nama}}

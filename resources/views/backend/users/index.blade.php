@@ -35,7 +35,7 @@ Users
                     @foreach($users as $user)
                     <tr>
                         <th scope="row">
-                            {{$user->id}}
+                            {{$loop->iteration}}
                         </th>
                         <td>
                             {{$user->nama}}

@@ -35,7 +35,7 @@ Daftar Pengambilan Sampah
                     @foreach($pengambilan as $p)
                     <tr>
                         <th scope="row">
-                            {{$p->id}}
+                            {{$loop->iteration}}
                         </th>
                         <td>
                             {{$p->user->nama}}
