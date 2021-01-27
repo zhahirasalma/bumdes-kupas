@@ -34,7 +34,7 @@ Kategori Sampah
                     @foreach($kategori as $kategori)
                     <tr>
                         <th scope="row">
-                            {{$kategori->id}}
+                            {{$loop->iteration}}
                         </th>
                         <td>
                             {{$kategori->jenis_sampah}}

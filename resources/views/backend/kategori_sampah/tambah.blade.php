@@ -22,7 +22,10 @@ Tambah Kategori Sampah
                                 <div class="form-group">
                                     <label class="form-control-label">Jenis Sampah</label>
                                     <input type="text" name="jenis_sampah" class="form-control form-control-alternative"
-                                        placeholder="Jenis Sampah" value="">
+                                        placeholder="Jenis Sampah" value="{{old('jenis_sampah')}}">
+                                    @if ($errors->has('jenis_sampah'))
+                                    <span class="text-danger">{{ $errors->first('jenis_sampah') }}</span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -32,7 +35,10 @@ Tambah Kategori Sampah
                                     <label class="form-control-label">Harga Retribusi</label>
                                     <input type="text" name="harga_retribusi"
                                         class="form-control form-control-alternative" placeholder="Harga Retribusi"
-                                        value="">
+                                        value="{{old('harga_retribusi')}}">
+                                    @if ($errors->has('harga_retribusi'))
+                                    <span class="text-danger">{{ $errors->first('harga_retribusi') }}</span>
+                                    @endif
                                 </div>
                             </div>
                         </div>

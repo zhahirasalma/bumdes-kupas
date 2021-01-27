@@ -37,10 +37,16 @@ class KategoriSampahController extends Controller
      */
     public function store(Request $request)
     {
+        $messages = [
+            'jenis_sampah.required' => 'Jenis sampah wajib diisi.',
+            'harga_retribusi.required' => 'Harga retribusi wajib diisi.',
+            'harga_retribusi.numeric' => 'Harga retribusi harus berupa angka.',
+        ];
+
         $request->validate([
             'jenis_sampah' => 'required',
-            'harga_retribusi' => 'required',
-        ]);
+            'harga_retribusi' => 'required|numeric',
+        ], $messages);
 
         KategoriSampah::create($request->all());
         return redirect()->route('kategori_sampah.index')
@@ -79,10 +85,16 @@ class KategoriSampahController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $messages = [
+            'jenis_sampah.required' => 'Jenis sampah wajib diisi.',
+            'harga_retribusi.required' => 'Harga retribusi wajib diisi.',
+            'harga_retribusi.numeric' => 'Harga retribusi harus berupa angka.',
+        ];
+
         $request->validate([
             'jenis_sampah' => 'required',
-            'harga_retribusi' => 'required',
-        ]);
+            'harga_retribusi' => 'required|numeric',
+        ], $messages);
         
         $kategori = KategoriSampah::find($id);
         $kategori->update($request->all());
