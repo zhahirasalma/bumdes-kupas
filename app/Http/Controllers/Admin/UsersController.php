@@ -56,10 +56,6 @@ class UsersController extends Controller
             'password' => 'required|min:5',
             'role' => 'required|not_in:0',
         ], $messages);
-
-        if($validator->fails()){
-            return redirect()->back()->withErrors($validator)->withInput($request->all());
-        }
     
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
@@ -119,10 +115,6 @@ class UsersController extends Controller
             'password' => 'required|min:5',
             'role' => 'required|not_in:0',
         ], $messages);
-
-        if($validator->fails()){
-            return redirect()->back()->withErrors($validator)->withInput($request->all());
-        }
         
         $users = User::find($id);
         $input = $request->all();
