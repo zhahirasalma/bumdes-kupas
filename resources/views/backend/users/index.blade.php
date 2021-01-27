@@ -44,7 +44,7 @@ Users
                             {{$user->email}}
                         </td>
                         <td>
-                            {{$user->password}}
+                            
                         </td>
                         <td>
                             {{$user->role}}

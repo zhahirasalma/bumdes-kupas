@@ -37,13 +37,30 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nama' => 'required',
-            'email' => 'required',
-            'password' => 'required',
-            'role' => 'required',
-        ]);
-        
+        $messages = [
+            'nama.required' => 'Nama wajib diisi.',
+            'nama.min' => 'Nama harus lebih dari 5 karakter.',
+            'nama.unique' => 'Nama sudah terdaftar.',
+            'email.required' => 'Email wajib diisi.',
+            'email.email' => 'Email tidak valid.',
+            'email.unique' => 'Email sudah terdaftar.',
+            'password.required' => 'Password wajib diisi.',
+            'password.min' => 'Password harus lebih dari 5 karakter.',
+            'role.required' => 'Role wajib diisi.',
+            'role.not_in' => 'Pilih role sesuai daftar.',
+        ];
+
+        $validator = $request->validate([
+            'nama' => 'required|min:5|unique:users,nama',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:5',
+            'role' => 'required|not_in:0',
+        ], $messages);
+
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
+        }
+    
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         User::create($input);
@@ -83,12 +100,29 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'nama' => 'required',
-            'email' => 'required',
-            'password' => 'required',
-            'role' => 'required',
-        ]);
+        $messages = [
+            'nama.required' => 'Nama wajib diisi.',
+            'nama.min' => 'Nama harus lebih dari 5 karakter.',
+            'nama.unique' => 'Nama sudah terdaftar.',
+            'email.required' => 'Email wajib diisi.',
+            'email.email' => 'Email tidak valid.',
+            'email.unique' => 'Email sudah terdaftar.',
+            'password.required' => 'Password wajib diisi.',
+            'password.min' => 'Password harus lebih dari 5 karakter.',
+            'role.required' => 'Role wajib diisi.',
+            'role.not_in' => 'Pilih role sesuai daftar.',
+        ];
+
+        $validator = $request->validate([
+            'nama' => 'required|min:5|unique:users,nama',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:5',
+            'role' => 'required|not_in:0',
+        ], $messages);
+
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
+        }
         
         $users = User::find($id);
         $input = $request->all();

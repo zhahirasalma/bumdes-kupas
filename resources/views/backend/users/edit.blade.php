@@ -24,6 +24,9 @@ Edit Users
                                     <label class="form-control-label" for="input-nama">Nama</label>
                                     <input type="text" name="nama" class="form-control form-control-alternative"
                                         placeholder="Nama" value="{{$users->nama}}">
+                                    @if ($errors->has('nama'))
+                                    <span class="text-danger">{{ $errors->first('nama') }}</span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -33,6 +36,9 @@ Edit Users
                                     <label class="form-control-label" for="input-first-name">Email</label>
                                     <input type="email" name="email" class="form-control form-control-alternative"
                                         placeholder="Email" value="{{$users->email}}">
+                                    @if ($errors->has('email'))
+                                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -41,7 +47,10 @@ Edit Users
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-first-name">Password</label>
                                     <input type="password" name="password" class="form-control form-control-alternative"
-                                        placeholder="Password" value="{{$users->password}}">
+                                        placeholder="Password" value="">
+                                    @if ($errors->has('password'))
+                                    <span class="text-danger">{{ $errors->first('password') }}</span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -51,11 +60,19 @@ Edit Users
                                     <label class="form-control-label" for="input-first-name">Role</label>
                                     <select name="role" class="form-control form-control-alternative"
                                         placeholder="Role">
-                                        <option value="admin">admin</option>
-                                        <option value="educator">educator</option>
-                                        <option value="warga">warga</option>
-                                        <option value="bank_sampah">bank_sampah</option>
+                                        <option value="">Pilih...</option>
+                                        <option value="admin" {{ $users->role == 'admin' ? 'selected' : '' }}>
+                                            admin</option>
+                                        <option value="educator" {{ $users->role == 'educator' ? 'selected' : '' }}>
+                                            educator</option>
+                                        <option value="warga" {{ $users->role == 'warga' ? 'selected' : '' }}>
+                                            warga</option>
+                                        <option value="bank_sampah"
+                                            {{ $users->role == 'bank_sampah' ? 'selected' : '' }}>bank_sampah</option>
                                     </select>
+                                    @if ($errors->has('role'))
+                                    <span class="text-danger">{{ $errors->first('role') }}</span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
