@@ -34,7 +34,7 @@ Konversi Harga Sampah
                     @foreach($konversi as $konversi)
                     <tr>
                         <th scope="row">
-                            {{$konversi->id}}
+                            {{$loop->iteration}}
                         </th>
                         <td>
                             {{$konversi->jenis_sampah}}
