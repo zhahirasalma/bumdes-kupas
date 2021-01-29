@@ -30,7 +30,7 @@ class WargaController extends Controller
     public function create()
     {
         $kategori = KategoriSampah::select('id', 'jenis_sampah')->get();
-        $user = User::select('id', 'nama')->get();
+        $user = User::select('id', 'nama')->where('role', 'warga')->get();
         return view('backend.warga.tambah', compact('kategori', 'user'));
     }
 
@@ -102,7 +102,7 @@ class WargaController extends Controller
     {
         $w = Warga::find($id);
         $kategori = KategoriSampah::select('id', 'jenis_sampah')->get();
-        $user = User::select('id', 'nama')->get();
+        $user = User::select('id', 'nama')->where('role', 'warga')->get();
         return view('backend.warga.edit', compact('w', 'kategori', 'user'));
     }
 

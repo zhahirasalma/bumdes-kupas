@@ -27,7 +27,7 @@ class BankSampahController extends Controller
      */
     public function create()
     {
-        $user = User::select('id', 'nama')->get();
+        $user = User::select('id', 'nama')->where('role', 'bank_sampah')->get();
         return view('backend.bank_sampah.tambah', compact('user'));
     }
 
@@ -88,7 +88,7 @@ class BankSampahController extends Controller
     public function edit($id)
     {
         $data = BankSampah::find($id);
-        $user = User::select('id', 'nama')->get();
+        $user = User::select('id', 'nama')->where('role', 'bank_sampah')->get();
         return view('backend.bank_sampah.edit', compact('data', 'user'));
     }
 

@@ -28,7 +28,7 @@ class TransaksiRetribusiController extends Controller
      */
     public function create()
     {
-        $user = User::select('id', 'nama')->get();
+        $user = User::select('id', 'nama')->where('role', 'warga')->get();
         return view('backend.warga.retribusi.tambah', compact('user'));
     }
 
@@ -87,7 +87,7 @@ class TransaksiRetribusiController extends Controller
     public function edit($id)
     {
         $retribusi = RetribusiWarga::find($id);
-        $user = User::select('id', 'nama')->get();
+        $user = User::select('id', 'nama')->where('role', 'warga')->get();
         return view('backend.warga.retribusi.edit', compact('retribusi', 'user'));
     }
 
