@@ -21,8 +21,17 @@ Edit Data Transaksi Retribusi
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-nama">Nama Warga</label>
-                                    <input type="text" name="id_users" class="form-control form-control-alternative"
-                                        placeholder="Nama Warga" value="{{$retribusi->id_users}}">
+                                    <select name="id_users" class="form-control">
+                                        <option value="">Pilih nama warga...</option>
+                                        @foreach($user as $u)
+                                        <option value="{{$u->id}}"
+                                            {{ $u->id == $retribusi->id_users ? 'selected' : '' }}>
+                                            {{$u->nama}}</option>
+                                        @endforeach
+                                    </select>
+                                    @if ($errors->has('id_users'))
+                                    <span class="text-danger">{{ $errors->first('id_users') }}</span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -31,6 +40,9 @@ Edit Data Transaksi Retribusi
                                     <input type="text" name="nama_kolektor"
                                         class="form-control form-control-alternative" placeholder="Nama Kolektor"
                                         value="{{$retribusi->nama_kolektor}}">
+                                    @if ($errors->has('nama_kolektor'))
+                                    <span class="text-danger">{{ $errors->first('nama_kolektor') }}</span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -39,6 +51,9 @@ Edit Data Transaksi Retribusi
                                     <input type="text" name="jumlah_tagihan"
                                         class="form-control form-control-alternative" placeholder="Jumlah Tagihan"
                                         value="{{$retribusi->jumlah_tagihan}}">
+                                    @if ($errors->has('jumlah_tagihan'))
+                                    <span class="text-danger">{{ $errors->first('jumlah_tagihan') }}</span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -47,6 +62,9 @@ Edit Data Transaksi Retribusi
                                     <input type="text" name="bulan_tagihan"
                                         class="form-control form-control-alternative" placeholder="Bulan Tagihan"
                                         value="{{$retribusi->bulan_tagihan}}">
+                                    @if ($errors->has('bulan_tagihan'))
+                                    <span class="text-danger">{{ $errors->first('bulan_tagihan') }}</span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -55,13 +73,27 @@ Edit Data Transaksi Retribusi
                                     <input type="date" name="tanggal_transaksi"
                                         class="form-control form-control-alternative" placeholder="Tanggal Transaksi"
                                         value="{{$retribusi->tanggal_transaksi}}">
+                                    @if ($errors->has('tanggal_transaksi'))
+                                    <span class="text-danger">{{ $errors->first('tanggal_transaksi') }}</span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-first-name">Keterangan</label>
-                                    <input type="text" name="keterangan" class="form-control form-control-alternative"
-                                        placeholder="Keterangan" value="{{$retribusi->keterangan}}">
+                                    <select name="keterangan" class="form-control form-control-alternative"
+                                        placeholder="Keterangan pembayaran">
+                                        <option value="">Pilih...</option>
+                                        <option value="sudah_bayar"
+                                            {{ $retribusi->keterangan == 'sudah_bayar' ? 'selected' : '' }}>
+                                            sudah bayar</option>
+                                        <option value="belum_bayar"
+                                            {{ $retribusi->keterangan == 'belum_bayar' ? 'selected' : '' }}>belum bayar
+                                        </option>
+                                    </select>
+                                    @if ($errors->has('keterangan'))
+                                    <span class="text-danger">{{ $errors->first('keterangan') }}</span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -71,6 +103,9 @@ Edit Data Transaksi Retribusi
                             <label>Alamat</label>
                             <textarea name="alamat" rows="4" class="form-control form-control-alternative"
                                 placeholder="Alamat">{{$retribusi->alamat}}</textarea>
+                            @if ($errors->has('alamat'))
+                            <span class="text-danger">{{ $errors->first('alamat') }}</span>
+                            @endif
                         </div>
                         <button class="btn btn-success" type="submit">Ubah</button>
                     </div>

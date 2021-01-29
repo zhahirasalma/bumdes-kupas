@@ -28,7 +28,8 @@ class TransaksiRetribusiController extends Controller
      */
     public function create()
     {
-        return view('backend.warga.retribusi.tambah');
+        $user = User::select('id', 'nama')->get();
+        return view('backend.warga.retribusi.tambah', compact('user'));
     }
 
     /**
@@ -39,6 +40,16 @@ class TransaksiRetribusiController extends Controller
      */
     public function store(Request $request)
     {
+        $messages = [
+            'id_users.required' => 'Nama wajib diisi.',
+            'nama_kolektor.required' => 'Nama kolektor wajib diisi.',
+            'jumlah_tagihan.required' => 'Jumlah Tagihan wajib diisi.',
+            'bulan_tagihan.required' => 'Bulan Tagihan wajib diisi.',
+            'alamat.required' => 'Alamat wajib diisi.',
+            'keterangan.required' => 'Keterangan wajib diisi.',
+            'tanggal_transaksi.required' => 'Tanggal transaksi wajib diisi.',
+        ];
+        
         $request->validate([
             'nama_kolektor' => 'required',
             'jumlah_tagihan' => 'required',
@@ -47,7 +58,7 @@ class TransaksiRetribusiController extends Controller
             'keterangan' => 'required',
             'tanggal_transaksi' => 'required',
             'id_users' => 'required'
-        ]);
+        ], $messages);
         
         $input = $request->all();
         $input['id_warga'] = Warga::WHERE('id_users', $request['id_users'])->value('id');
@@ -76,7 +87,8 @@ class TransaksiRetribusiController extends Controller
     public function edit($id)
     {
         $retribusi = RetribusiWarga::find($id);
-        return view('backend.warga.retribusi.edit', compact('retribusi'));
+        $user = User::select('id', 'nama')->get();
+        return view('backend.warga.retribusi.edit', compact('retribusi', 'user'));
     }
 
     /**
@@ -88,6 +100,16 @@ class TransaksiRetribusiController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $messages = [
+            'id_users.required' => 'Nama wajib diisi.',
+            'nama_kolektor.required' => 'Nama kolektor wajib diisi.',
+            'jumlah_tagihan.required' => 'Jumlah Tagihan wajib diisi.',
+            'bulan_tagihan.required' => 'Bulan Tagihan wajib diisi.',
+            'alamat.required' => 'Alamat wajib diisi.',
+            'keterangan.required' => 'Keterangan wajib diisi.',
+            'tanggal_transaksi.required' => 'Tanggal transaksi wajib diisi.',
+        ];
+        
         $request->validate([
             'nama_kolektor' => 'required',
             'jumlah_tagihan' => 'required',
@@ -96,7 +118,7 @@ class TransaksiRetribusiController extends Controller
             'keterangan' => 'required',
             'tanggal_transaksi' => 'required',
             'id_users' => 'required'
-        ]);
+        ], $messages);
 
         $retribusi = RetribusiWarga::find($id);
         $input = $request->all();
