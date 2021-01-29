@@ -20,7 +20,7 @@ class CreateRetribusiWargaTable extends Migration
             $table->integer('jumlah_tagihan');
             $table->string('bulan_tagihan');
             $table->string('alamat');
-            $table->enum('keterangan', ['sudah bayar', 'belum bayar']);
+            $table->enum('keterangan', ['sudah_bayar', 'belum_bayar']);
             $table->date('tanggal_transaksi')->nullable();
             $table->unsignedBigInteger('id_users')->nullable();
             $table->timestamps();
