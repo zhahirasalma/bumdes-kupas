@@ -14,15 +14,24 @@ Edit Data Transaksi Bank Sampah
         <div class="row align-items-center">
             <div class="card-body">
                 <form action="{{route('transaksi.update', $transaksi->id)}}" method="POST">
-                @csrf
-                @method('PUT')
+                    @csrf
+                    @method('PUT')
                     <div class="pl-lg-4">
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-nama">Bank Sampah</label>
-                                    <input type="text" name="id_users" class="form-control form-control-alternative"
-                                        placeholder="Bank Sampah" value="{{$transaksi->id_users}}">
+                                    <select name="id_users" class="form-control">
+                                        <option value="">Pilih nama bank sampah...</option>
+                                        @foreach($user as $u)
+                                        <option value="{{$u->id}}"
+                                            {{ $u->id == $transaksi->id_users ? 'selected' : '' }}>
+                                            {{$u->nama}}</option>
+                                        @endforeach
+                                    </select>
+                                    @if ($errors->has('id_users'))
+                                    <span class="text-danger">{{ $errors->first('id_users') }}</span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -33,6 +42,9 @@ Edit Data Transaksi Bank Sampah
                                     <input type="date" name="tanggal_transaksi"
                                         class="form-control form-control-alternative" placeholder="Tanggal Transaksi"
                                         value="{{$transaksi->tanggal_transaksi}}">
+                                    @if ($errors->has('tanggal_transaksi'))
+                                    <span class="text-danger">{{ $errors->first('tanggal_transaksi') }}</span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -42,6 +54,9 @@ Edit Data Transaksi Bank Sampah
                                     <label class="form-control-label" for="input-nama">Keterangan</label>
                                     <input type="text" name="keterangan" class="form-control form-control-alternative"
                                         placeholder="Keterangan" value="{{$transaksi->keterangan}}">
+                                    @if ($errors->has('keterangan'))
+                                    <span class="text-danger">{{ $errors->first('keterangan') }}</span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -49,25 +64,34 @@ Edit Data Transaksi Bank Sampah
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-first-name">Jenis Sampah</label>
-                                    <input type="text" name="id_konversi"
-                                        class="form-control form-control-alternative" placeholder="Jenis Sampah"
-                                        value="{{$transaksi->id_konversi}}">
+                                    <select name="id_konversi" class="form-control">
+                                        <option value="">Pilih nama bank sampah...</option>
+                                        @foreach($konversi as $k)
+                                        <option value="{{$k->id}}"
+                                            {{ $k->id == $transaksi->id_konversi ? 'selected' : '' }}>
+                                            {{$k->jenis_sampah}}</option>
+                                        @endforeach
+                                    </select>
+                                    @if ($errors->has('id_konversi'))
+                                    <span class="text-danger">{{ $errors->first('id_konversi') }}</span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-first-name">Berat</label>
-                                    <input type="number" name="berat"
-                                        class="form-control form-control-alternative" placeholder="Jenis Sampah"
-                                        value="{{$transaksi->berat}}">
+                                    <input type="number" name="berat" class="form-control form-control-alternative"
+                                        placeholder="Jenis Sampah" value="{{$transaksi->berat}}">
+                                    @if ($errors->has('berat'))
+                                    <span class="text-danger">{{ $errors->first('berat') }}</span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-first-name">Harga Total</label>
-                                    <input type="text" name="harga_total"
-                                        class="form-control form-control-alternative" placeholder="Jenis Sampah"
-                                        value="{{$transaksi->harga_total}}">
+                                    <input type="text" name="harga_total" class="form-control form-control-alternative"
+                                        placeholder="Jenis Sampah" value="{{$transaksi->harga_total}}">
                                 </div>
                             </div>
                         </div>
