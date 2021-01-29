@@ -29,8 +29,8 @@ Daftar Warga
                         <th scope="col">Nama</th>
                         <th scope="col">Kategori</th>
                         <th scope="col">No Telp</th>
-                        <th scope="col">Nama Contact Person</th>
-                        <th scope="col">No Telp Contact Person</th>
+                        <th scope="col">Nama Narahubung</th>
+                        <th scope="col">No Telp Narahubung</th>
                         <th scope="col">Kota</th>
                         <th scope="col">Kecamatan</th>
                         <th scope="col">Desa</th>

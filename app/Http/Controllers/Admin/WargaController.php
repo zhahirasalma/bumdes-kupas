@@ -29,7 +29,9 @@ class WargaController extends Controller
      */
     public function create()
     {
-        return view('backend.warga.tambah');
+        $kategori = KategoriSampah::select('id', 'jenis_sampah')->get();
+        $user = User::select('id', 'nama')->get();
+        return view('backend.warga.tambah', compact('kategori', 'user'));
     }
 
     /**
@@ -40,10 +42,28 @@ class WargaController extends Controller
      */
     public function store(Request $request)
     {
+        $messages = [
+            'NIK.required' => 'NIK wajib diisi.',
+            'id_users.required' => 'Nama wajib diisi.',
+            'id_kategori_sampah.required' => 'Kategori wajib diisi.',
+            'id_users.not_in' => 'Pilih nama sesuai daftar.',
+            'id_kategori_sampah.not_in' => 'Pilih kategori sesuai daftar.',
+            'no_telp.required' => 'No telepon wajib diisi.',
+            'nama_cp.required' => 'Nama narahubung wajib diisi.',
+            'no_telp_cp.required' => 'No telp narahubung wajib diisi.',
+            'kota.required' => 'Kota wajib diisi.',
+            'kecamatan.required' => 'Kecamatan wajib diisi.',
+            'desa.required' => 'Desa wajib diisi.',
+            'dukuh.required' => 'Dukuh wajib diisi.',
+            'RT.required' => 'RT wajib diisi.',
+            'RW.required' => 'RW wajib diisi.',
+            'detail_alamat.required' => 'Detail alamat wajib diisi.',
+        ];
+
         $request->validate([
             'NIK' => 'required',
-            'id_users' => 'required',
-            'id_kategori_sampah' => 'required',
+            'id_users' => 'required|not_in:0',
+            'id_kategori_sampah' => 'required|not_in:0',
             'no_telp' => 'required',
             'nama_cp' => 'required',
             'no_telp_cp' => 'required',
@@ -54,8 +74,7 @@ class WargaController extends Controller
             'RT' => 'required',
             'RW' => 'required',
             'detail_alamat' => 'required',
-            'lokasi' => 'required',
-        ]);
+        ], $messages);
 
         Warga::create($request->all());
         return redirect()->route('warga.index')
@@ -82,7 +101,9 @@ class WargaController extends Controller
     public function edit($id)
     {
         $w = Warga::find($id);
-        return view('backend.warga.edit', compact('w'));
+        $kategori = KategoriSampah::select('id', 'jenis_sampah')->get();
+        $user = User::select('id', 'nama')->get();
+        return view('backend.warga.edit', compact('w', 'kategori', 'user'));
     }
 
     /**
@@ -94,6 +115,24 @@ class WargaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $messages = [
+            'NIK.required' => 'NIK wajib diisi.',
+            'id_users.required' => 'Nama wajib diisi.',
+            'id_kategori_sampah.required' => 'Kategori wajib diisi.',
+            'id_users.not_in' => 'Pilih nama sesuai daftar.',
+            'id_kategori_sampah.not_in' => 'Pilih kategori sesuai daftar.',
+            'no_telp.required' => 'No telepon wajib diisi.',
+            'nama_cp.required' => 'Nama narahubung wajib diisi.',
+            'no_telp_cp.required' => 'No telp narahubung wajib diisi.',
+            'kota.required' => 'Kota wajib diisi.',
+            'kecamatan.required' => 'Kecamatan wajib diisi.',
+            'desa.required' => 'Desa wajib diisi.',
+            'dukuh.required' => 'Dukuh wajib diisi.',
+            'RT.required' => 'RT wajib diisi.',
+            'RW.required' => 'RW wajib diisi.',
+            'detail_alamat.required' => 'Detail alamat wajib diisi.',
+        ];
+
         $request->validate([
             'NIK' => 'required',
             'id_users' => 'required',
@@ -108,8 +147,7 @@ class WargaController extends Controller
             'RT' => 'required',
             'RW' => 'required',
             'detail_alamat' => 'required',
-            'lokasi' => 'required',
-        ]);
+        ], $messages);
 
         $w = Warga::find($id);
         $w->update($request->all());
@@ -133,10 +171,14 @@ class WargaController extends Controller
 
     public function searchKategori(Request $request)
     {
-    	if ($request->has('q')) {
+        $data = [];
+        
+        if ($request->has('q')) {
     		$cari = $request->q;
-    		$data = DB::table('kategori_sampah')->select('id', 'jenis_sampah')->where('jenis_sampah', 'LIKE', '%$cari%')->get();
-    		return response()->json($data);
-    	}
+            $data = KategoriSampah::select('id', 'jenis_sampah')
+                    ->where('jenis_sampah', 'LIKE', '%$cari%')
+                    ->get();  
+            return response()->json($data);
+        }
     }
 }

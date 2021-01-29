@@ -74,6 +74,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['prefix'=>'admin'], function(){
+    Route::get('/cari', [App\Http\Controllers\Admin\WargaController::class, 'searchKategori'])->name('cari');
     Route::resources([
         'pengambilan' => App\Http\Controllers\Admin\PengambilanController::class,
         'users' => App\Http\Controllers\Admin\UsersController::class,

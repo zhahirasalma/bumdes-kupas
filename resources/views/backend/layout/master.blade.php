@@ -16,6 +16,9 @@
         <link href="{{asset('assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css')}}" rel="stylesheet" />
         <!-- CSS Files -->
         <link href="{{asset('assets/css/argon-dashboard.css?v=1.1.0')}}" rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />        
+        
+    </head>
     </head>
 
     <body class="">
@@ -47,7 +50,11 @@
         <script src="{{asset('assets/js/plugins/chart.js/dist/Chart.extension.js')}}"></script>
         <!--   Argon JS   -->
         <script src="{{asset('assets/js/argon-dashboard.min.js?v=1.1.0')}}"></script>
-        <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+        @stack('script')
+
         <script>
             window.TrackJS &&
                 TrackJS.install({
