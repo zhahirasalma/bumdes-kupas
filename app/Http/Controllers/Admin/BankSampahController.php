@@ -27,7 +27,8 @@ class BankSampahController extends Controller
      */
     public function create()
     {
-        return view('backend.bank_sampah.tambah');
+        $user = User::select('id', 'nama')->get();
+        return view('backend.bank_sampah.tambah', compact('user'));
     }
 
     /**
@@ -38,6 +39,18 @@ class BankSampahController extends Controller
      */
     public function store(Request $request)
     {
+        $messages = [
+            'id_users.required' => 'Nama wajib diisi.',
+            'no_telp.required' => 'No telepon wajib diisi.',
+            'kota.required' => 'Kota wajib diisi.',
+            'kecamatan.required' => 'Kecamatan wajib diisi.',
+            'desa.required' => 'Desa wajib diisi.',
+            'dukuh.required' => 'Dukuh wajib diisi.',
+            'RT.required' => 'RT wajib diisi.',
+            'RW.required' => 'RW wajib diisi.',
+            'detail_alamat.required' => 'Detail alamat wajib diisi.',
+        ];
+
         $request->validate([
             'id_users' => 'required',
             'no_telp' => 'required',
@@ -48,7 +61,7 @@ class BankSampahController extends Controller
             'RT' => 'required',
             'RW' => 'required',
             'detail_alamat' => 'required',
-        ]);
+        ], $messages);
 
         BankSampah::create($request->all());
         return redirect()->route('bank_sampah.index')
@@ -75,7 +88,8 @@ class BankSampahController extends Controller
     public function edit($id)
     {
         $data = BankSampah::find($id);
-        return view('backend.bank_sampah.edit', compact('data'));
+        $user = User::select('id', 'nama')->get();
+        return view('backend.bank_sampah.edit', compact('data', 'user'));
     }
 
     /**
@@ -87,6 +101,18 @@ class BankSampahController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $messages = [
+            'id_users.required' => 'Nama wajib diisi.',
+            'no_telp.required' => 'No telepon wajib diisi.',
+            'kota.required' => 'Kota wajib diisi.',
+            'kecamatan.required' => 'Kecamatan wajib diisi.',
+            'desa.required' => 'Desa wajib diisi.',
+            'dukuh.required' => 'Dukuh wajib diisi.',
+            'RT.required' => 'RT wajib diisi.',
+            'RW.required' => 'RW wajib diisi.',
+            'detail_alamat.required' => 'Detail alamat wajib diisi.',
+        ];
+
         $request->validate([
             'id_users' => 'required',
             'no_telp' => 'required',
@@ -97,7 +123,7 @@ class BankSampahController extends Controller
             'RT' => 'required',
             'RW' => 'required',
             'detail_alamat' => 'required',
-        ]);
+        ], $messages);
 
         $data = BankSampah::find($id);
         $data->update($request->all());
