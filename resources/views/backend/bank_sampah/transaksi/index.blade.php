@@ -27,7 +27,7 @@ Daftar Transaksi Bank Sampah
                         <th scope="col">Nama Bank Sampah</th>
                         <th scope="col">Tanggal Transaksi</th>
                         <th scope="col">Jenis Sampah</th>
-                        <th scope="col">Berat Sampah</th>
+                        <th scope="col">Berat Sampah (kg)</th>
                         <th scope="col">Harga Total</th>
                         <th scope="col">Keterangan</th>
                         <th scope="col">Unduh Transaksi</th>
@@ -53,7 +53,7 @@ Daftar Transaksi Bank Sampah
                             {{$tr->berat}}
                         </td>
                         <td>
-                            {{$tr->harga_total}}
+                            @currency($tr->harga_total)
                         </td>
                         <td>
                             {{$tr->keterangan}}

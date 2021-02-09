@@ -47,7 +47,7 @@ Daftar Transaksi Retribusi
                             {{$r->nama_kolektor}}
                         </td>
                         <td>
-                            {{$r->jumlah_tagihan}}
+                            @currency($r->jumlah_tagihan)
                         </td>
                         <td>
                             {{$r->bulan_tagihan}}
