@@ -17,17 +17,14 @@ class CreateBankSampahTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_users')->nullable();
             $table->string('no_telp');
-            $table->string('kota');
-            $table->string('kecamatan');
-            $table->string('desa');
+            $table->unsignedBigInteger('id_alamat')->nullable();
             $table->string('dukuh');
-            $table->string('RT');
-            $table->string('RW');
             $table->string('detail_alamat');
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('id_users')->references('id')->on('users')->onDelete('cascade'); 
+            $table->foreign('id_alamat')->references('id')->on('alamat')->onDelete('cascade'); 
         });
     }
 

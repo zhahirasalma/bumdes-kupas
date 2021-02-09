@@ -16,14 +16,9 @@ class BankSampahSeeder extends Seeder
     {
         DB::table('bank_sampah')->insert([
             'no_telp' => '0857868790',
-            'kota' => 'Yogyakarta',
-            'kecamatan' => 'Sewon',
-            'desa' => 'Panggungharjo',
             'dukuh' => 'Panggungharjo', 
-            'RT' => '0', 
-            'RW' => '0', 
             'detail_alamat' => 'Panggungharjo, sewon, jogja', 
-            'id_users' => 8
+            'id_users' => 3
         ]);
     }
 }

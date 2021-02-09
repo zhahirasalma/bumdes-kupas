@@ -20,7 +20,6 @@ class CreateWargaTable extends Migration
             $table->unsignedBigInteger('id_kategori_sampah')->nullable();
             $table->unsignedBigInteger('id_alamat')->nullable();
             $table->string('no_telp');
-            $table->string('nama_cp');
             $table->string('dukuh');
             $table->string('detail_alamat');
             $table->string('lokasi');
