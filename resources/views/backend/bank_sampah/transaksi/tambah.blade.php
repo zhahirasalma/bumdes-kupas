@@ -90,7 +90,7 @@ Tambah Data Transaksi Bank Sampah
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-first-name">Harga Total</label>
                                     <input type="text" name="harga_total" class="form-control form-control-alternative"
-                                        placeholder="Harga total" value="">
+                                        placeholder="Harga total" value="" disabled>
                                 </div>
                             </div>
                         </div>
