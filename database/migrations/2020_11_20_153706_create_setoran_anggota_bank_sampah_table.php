@@ -18,6 +18,7 @@ class CreateSetoranAnggotaBankSampahTable extends Migration
             $table->string('nama');
             $table->date('tanggal_transaksi')->nullable();
             $table->unsignedBigInteger('id_bank_sampah')->nullable();
+            $table->string('uraian');
             $table->timestamps();
             $table->softDeletes();
 

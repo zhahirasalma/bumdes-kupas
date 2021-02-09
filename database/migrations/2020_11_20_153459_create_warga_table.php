@@ -18,22 +18,18 @@ class CreateWargaTable extends Migration
             $table->string('NIK');
             $table->unsignedBigInteger('id_users')->nullable();
             $table->unsignedBigInteger('id_kategori_sampah')->nullable();
+            $table->unsignedBigInteger('id_alamat')->nullable();
             $table->string('no_telp');
             $table->string('nama_cp');
-            $table->string('no_telp_cp');
-            $table->string('kota');
-            $table->string('kecamatan');
-            $table->string('desa');
             $table->string('dukuh');
-            $table->string('RT');
-            $table->string('RW');
             $table->string('detail_alamat');
             $table->string('lokasi');
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('id_users')->references('id')->on('users')->onDelete('cascade'); 
-            $table->foreign('id_kategori_sampah')->references('id')->on('kategori_sampah')->onDelete('cascade'); 
+            $table->foreign('id_kategori_sampah')->references('id')->on('kategori_sampah')->onDelete('cascade');
+            $table->foreign('id_alamat')->references('id')->on('alamat')->onDelete('cascade'); 
         });
     }
 
