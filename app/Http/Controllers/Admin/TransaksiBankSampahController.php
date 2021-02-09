@@ -60,6 +60,10 @@ class TransaksiBankSampahController extends Controller
         
         $input = $request->all();
         $input['id_bank_sampah'] = BankSampah::WHERE('id_users', $request['id_users'])->value('id');
+
+        $hargasampah = KonversiSampah::WHERE('id', $request['id_konversi'])->value('harga_konversi');
+        $input['harga_total'] = $request['berat'] * $hargasampah;
+
         TransaksiBankSampah::create($input);
         return redirect()->route('transaksi.index')
                         ->with('success','Data berhasil ditambahkan');
@@ -117,7 +121,12 @@ class TransaksiBankSampahController extends Controller
 
         $transaksi = TransaksiBankSampah::find($id);
         $input = $request->all();
+
         $input['id_bank_sampah'] = BankSampah::WHERE('id_users', $request['id_users'])->value('id');
+        
+        $hargasampah = KonversiSampah::WHERE('id', $request['id_konversi'])->value('harga_konversi');
+        $input['harga_total'] = $request['berat'] * $hargasampah;
+
         $transaksi->update($input);
         return redirect()->route('transaksi.index')
                         ->with('success','Data berhasil diubah');
