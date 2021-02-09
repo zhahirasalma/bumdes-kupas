@@ -23,7 +23,7 @@ Setor Anggota Bank Sampah
                         <div class="card shadow">
                             <div class="card-body">
                                 <div class="col text-right">
-                                    <a href="/tambahSetorBankSampah" class="btn btn-sm btn-primary">Tambah Data</a>
+                                    <a href="{{route('daftar_setor.create')}}" class="btn btn-sm btn-primary">Tambah Data</a>
                                 </div>
                                 <br>
                                 <div class="table-responsive">
@@ -38,21 +38,27 @@ Setor Anggota Bank Sampah
                                             </tr>
                                         </thead>
                                         <tbody>
+                                        @foreach($daftar_setor as $daftar_setor)
                                             <tr>
-                                                <td>1</td>
-                                                <td>2</td>
-                                                <td>3</td>
-                                                <td>4</td>
+                                            <th scope="row">
+                                                {{$loop->iteration}}
+                                            </th>
+                                                <td>{{$daftar_setor->nama}}</td>
+                                                <td>{{$daftar_setor->tanggal_transaksi}}</td>
+                                                <td>{{$daftar_setor->uraian}}</td>
                                                 <td>
-                                                    <a class="text-success" data-toggle="tooltip"
-                                                        data-placement="top" data-original-title="Edit"><i
-                                                            class="far fa-edit"></i></a>
-                                                    <a @click="deleteData(item.id)" class="text-danger"
-                                                        data-toggle="tooltip" data-placement="top"
-                                                        data-original-title="Delete"><i
-                                                            class="far fa-trash-alt"></i></a>
+                                                    <form action="{{ route('daftar_setor.destroy', $daftar_setor->id) }}" method="POST">    
+                                                    <a href="{{ route('daftar_setor.edit', $daftar_setor->id) }}"
+                                                        class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top"
+                                                         data-original-title="Edit"><i class="far fa-edit"></i></a>
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
+                                                            data-original-title="Delete" type="submit"><i class="far fa-trash-alt"></i></button>
+                                                    </form>
                                                 </td>
                                             </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </div>

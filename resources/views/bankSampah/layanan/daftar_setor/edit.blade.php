@@ -25,15 +25,16 @@ Tambah Setor Anggota Bank Sampah
                             <div class="card-header bg-white border-0">
                                 <div class="row align-items-center">
                                     <div class="card-body">
-                                        <form action="{{route('daftar_setor.store')}}" method="POST">
+                                        <form action="{{route('daftar_setor.update', $daftar_setor->id)}}" method="POST">
                                             @csrf
+                                            @method('PUT')
                                             <div class="pl-lg-4">
                                                 <div class="row">
                                                     <div class="col-lg-6">
                                                         <div class="form-group">
                                                             <label class="form-control-label" for="input-nama">Nama Anggota</label>
                                                             <input type="text" name="nama" id="nama" class="form-control form-control-alternative"
-                                                                placeholder="Nama Anggota" value="">
+                                                                placeholder="Nama Anggota" value="{{$daftar_setor->nama}}">
                                                             @if ($errors->has('nama'))
                                                             <span
                                                                 class="text-danger">{{ $errors->first('nama') }}</span>
@@ -45,7 +46,7 @@ Tambah Setor Anggota Bank Sampah
                                                         <div class="form-group">
                                                             <label class="form-control-label" for="input-tanggal">Tanggal Setor</label>
                                                             <input type="date" name="tanggal_transaksi" id="tanggal_transaksi" class="form-control form-control-alternative"
-                                                                placeholder="Tanggal" value="">
+                                                                placeholder="Tanggal" value="{{$daftar_setor->tanggal_transaksi}}">
                                                             @if ($errors->has('tanggal_transaksi'))
                                                             <span
                                                                 class="text-danger">{{ $errors->first('tanggal_transaksi') }}</span>
@@ -58,7 +59,7 @@ Tambah Setor Anggota Bank Sampah
                                                                 for="input-uraian">Uraian</label>
                                                             <input type="text" id="uraian" name="uraian"
                                                                 class="form-control form-control-alternative"
-                                                                placeholder="Uraian" value="">
+                                                                placeholder="Uraian" value="{{$daftar_setor->uraian}}">
                                                             @if ($errors->has('uraian'))
                                                             <span
                                                                 class="text-danger">{{ $errors->first('uraian') }}</span>
@@ -66,7 +67,7 @@ Tambah Setor Anggota Bank Sampah
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <button class="btn btn-primary" type="submit">Tambah</button>
+                                                <button class="btn btn-primary" type="submit">Ubah</button>
                                             </div>
                                         </form>
                                     </div>

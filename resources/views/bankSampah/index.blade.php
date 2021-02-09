@@ -52,7 +52,7 @@ Bank Sampah
                         <div class="portfolio-item-caption-content text-center text-white"><i
                                 class="fas fa-plus fa-3x"></i></div>
                     </div> -->
-                    <a href="daftarSetorBankSampah"><img class="img-fluid" src="{{asset('template/assets/img/portfolio/setoran-anggota.png')}}"
+                    <a href="{{route('daftar_setor.index')}}"><img class="img-fluid" src="{{asset('template/assets/img/portfolio/setoran-anggota.png')}}"
                         alt="" /></a>
                     <h3 class="portfolio-modal-subtitle text-center text-secondary text-uppercase mb-0">Daftar Setoran
                         Anggota</h3>
