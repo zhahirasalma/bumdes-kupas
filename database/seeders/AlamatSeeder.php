@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 
-class BankSampahSeeder extends Seeder
+class AlamatSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,16 +14,16 @@ class BankSampahSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('bank_sampah')->insert([
-            'no_telp' => '0857868790',
+        DB::table('alamat')->insert([
             'kota' => 'Yogyakarta',
             'kecamatan' => 'Sewon',
             'desa' => 'Panggungharjo',
-            'dukuh' => 'Panggungharjo', 
-            'RT' => '0', 
-            'RW' => '0', 
-            'detail_alamat' => 'Panggungharjo, sewon, jogja', 
-            'id_users' => 8
+        ]);
+
+        DB::table('alamat')->insert([
+            'kota' => 'Bantul',
+            'kecamatan' => 'Sewon',
+            'desa' => 'Panggungharjo',
         ]);
     }
 }
