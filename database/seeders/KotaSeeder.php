@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 
-class AlamatSeeder extends Seeder
+class KotaSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,16 +14,16 @@ class AlamatSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('alamat')->insert([
+        DB::table('kota')->insert([
             'kota' => 'Yogyakarta',
-            'kecamatan' => 'Sewon',
-            'desa' => 'Panggungharjo',
         ]);
 
-        DB::table('alamat')->insert([
+        DB::table('kota')->insert([
             'kota' => 'Bantul',
-            'kecamatan' => 'Sewon',
-            'desa' => 'Panggungharjo',
+        ]);
+
+        DB::table('kota')->insert([
+            'kota' => 'Sleman',
         ]);
     }
 }

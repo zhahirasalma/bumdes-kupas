@@ -18,7 +18,9 @@ class CreateWargaTable extends Migration
             $table->string('NIK');
             $table->unsignedBigInteger('id_users')->nullable();
             $table->unsignedBigInteger('id_kategori_sampah')->nullable();
-            $table->unsignedBigInteger('id_alamat')->nullable();
+            $table->unsignedBigInteger('id_kota')->nullable();
+            $table->unsignedBigInteger('id_kecamatan')->nullable();
+            $table->unsignedBigInteger('id_desa')->nullable();
             $table->string('no_telp');
             $table->string('dukuh');
             $table->string('detail_alamat');
@@ -28,7 +30,9 @@ class CreateWargaTable extends Migration
 
             $table->foreign('id_users')->references('id')->on('users')->onDelete('cascade'); 
             $table->foreign('id_kategori_sampah')->references('id')->on('kategori_sampah')->onDelete('cascade');
-            $table->foreign('id_alamat')->references('id')->on('alamat')->onDelete('cascade'); 
+            $table->foreign('id_kota')->references('id')->on('kota')->onDelete('cascade');
+            $table->foreign('id_kecamatan')->references('id')->on('kecamatan')->onDelete('cascade'); 
+            $table->foreign('id_desa')->references('id')->on('desa')->onDelete('cascade');  
         });
     }
 

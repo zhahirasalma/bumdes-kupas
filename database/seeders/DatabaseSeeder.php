@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         $this->call(UsersSeeder::class);
         $this->call(BankSampahSeeder::class);
-        $this->call(AlamatSeeder::class);
+        $this->call(KotaSeeder::class);
+        $this->call(KecamatanSeeder::class);
+        $this->call(DesaSeeder::class);
     }
 }

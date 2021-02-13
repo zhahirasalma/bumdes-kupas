@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAlamatTable extends Migration
+class CreateDesaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class CreateAlamatTable extends Migration
      */
     public function up()
     {
-        Schema::create('alamat', function (Blueprint $table) {
+        Schema::create('desa', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('kota');
-            $table->string('kecamatan');
             $table->string('desa');
             $table->timestamps();
             $table->softDeletes();
-
         });
     }
 
@@ -31,6 +28,6 @@ class CreateAlamatTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('alamat');
+        Schema::dropIfExists('desa');
     }
 }

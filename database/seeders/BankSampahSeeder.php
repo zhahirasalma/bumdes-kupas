@@ -18,7 +18,7 @@ class BankSampahSeeder extends Seeder
             'no_telp' => '0857868790',
             'dukuh' => 'Panggungharjo', 
             'detail_alamat' => 'Panggungharjo, sewon, jogja', 
-            'id_users' => 3
+            'id_users' => 4
         ]);
     }
 }
