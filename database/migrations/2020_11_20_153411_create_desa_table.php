@@ -16,8 +16,11 @@ class CreateDesaTable extends Migration
         Schema::create('desa', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('desa');
+            $table->unsignedBigInteger('id_kecamatan')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('id_kecamatan')->references('id')->on('kecamatan')->onDelete('cascade');
         });
     }
 
