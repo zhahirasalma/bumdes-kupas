@@ -21,7 +21,7 @@ Edit Data Bank Sampah
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="input-nama">Email</label>
+                                    <label class="form-control-label" for="input-nama">Nama</label>
                                     <select name="id_users" class="form-control">
                                         <option value="">Pilih nama bank sampah...</option>
                                         @foreach($user as $u)
@@ -47,66 +47,62 @@ Edit Data Bank Sampah
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="pl-lg-4">
                         <div class="row">
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-city">Kota</label>
-                                    <input type="text" name="kota" class="form-control form-control-alternative"
-                                        placeholder="City" value="{{$data->kota}}">
-                                    @if ($errors->has('kota'))
-                                    <span class="text-danger">{{ $errors->first('kota') }}</span>
+                                    <select name="id_kota" class="form-control" value="{{$data->kota->kota}}">
+                                        <option value="">Pilih kota...</option>
+                                        @foreach($kota as $kt)
+                                        <option value="{{$kt->id}}" {{ $kt->id == $data->id_kota ? 'selected' : '' }}>
+                                            {{$kt->kota}}</option>
+                                        @endforeach
+                                    </select>
+                                    @if ($errors->has('id_kota'))
+                                    <span class="text-danger">{{ $errors->first('id_kota') }}</span>
                                     @endif
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-country">Kecamatan</label>
-                                    <input type="text" name="kecamatan" class="form-control form-control-alternative"
-                                        placeholder="Country" value="{{$data->kecamatan}}">
-                                    @if ($errors->has('kecamatan'))
-                                    <span class="text-danger">{{ $errors->first('kecamatan') }}</span>
+                                    <select name="id_kecamatan" class="form-control"
+                                        value="{{$data->kecamatan->kecamatan}}">
+                                        <option value="">Pilih kecamatan...</option>
+                                        @foreach($kecamatan as $kc)
+                                        <option value="{{$kc->id}}" {{ $kc->id == $data->id_kecamatan ? 'selected' : '' }}>
+                                            {{$kc->kecamatan}}</option>
+                                        @endforeach
+                                    </select>
+                                    @if ($errors->has('id_kecamatan'))
+                                    <span class="text-danger">{{ $errors->first('id_kecamatan') }}</span>
                                     @endif
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="input-country">Desa</label>
-                                    <input type="text" name="desa" class="form-control form-control-alternative"
-                                        placeholder="Desa" value="{{$data->desa}}">
-                                    @if ($errors->has('desa'))
-                                    <span class="text-danger">{{ $errors->first('desa') }}</span>
+                                    <label class="form-control-label" for="input-city">Desa</label>
+                                    <select name="id_desa" class="form-control" value="{{$data->desa->desa}}">
+                                        <option value="">Pilih desa...</option>
+                                        @foreach($desa as $d)
+                                        <option value="{{$d->id}}" {{ $d->id == $data->id_desa ? 'selected' : '' }}>
+                                            {{$d->desa}}</option>
+                                        @endforeach
+                                    </select>
+                                    @if ($errors->has('id_desa'))
+                                    <span class="text-danger">{{ $errors->first('id_desa') }}</span>
                                     @endif
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="input-city">Dukuh</label>
+                                    <label class="form-control-label" for="input-country">Dukuh</label>
                                     <input type="text" name="dukuh" class="form-control form-control-alternative"
-                                        placeholder="City" value="{{$data->dukuh}}">
+                                        placeholder="Kecamatan" value="{{$data->dukuh}}">
                                     @if ($errors->has('dukuh'))
                                     <span class="text-danger">{{ $errors->first('dukuh') }}</span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="input-country">RT</label>
-                                    <input type="number" name="RT" class="form-control form-control-alternative"
-                                        placeholder="Country" value="{{$data->RT}}">
-                                    @if ($errors->has('RT'))
-                                    <span class="text-danger">{{ $errors->first('RT') }}</span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="input-country">RW</label>
-                                    <input type="number" name="RW" class="form-control form-control-alternative"
-                                        placeholder="Postal code" value="{{$data->RW}}">
-                                    @if ($errors->has('RW'))
-                                    <span class="text-danger">{{ $errors->first('RW') }}</span>
                                     @endif
                                 </div>
                             </div>

@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\BankSampah;
 use App\Models\User;
+use App\Models\Kota;
+use App\Models\Kecamatan;
+use App\Models\Desa;
 
 class BankSampahController extends Controller
 {
@@ -16,7 +19,7 @@ class BankSampahController extends Controller
      */
     public function index()
     {
-        $data = BankSampah::with('user')->get();
+        $data = BankSampah::with('user', 'kota', 'kecamatan', 'desa')->get();
         return view('backend.bank_sampah.index', compact('data'));
     }
 
@@ -28,7 +31,10 @@ class BankSampahController extends Controller
     public function create()
     {
         $user = User::select('id', 'nama')->where('role', 'bank_sampah')->get();
-        return view('backend.bank_sampah.tambah', compact('user'));
+        $kota = Kota::all();
+        $kecamatan = Kecamatan::all();
+        $desa = Desa::all();
+        return view('backend.bank_sampah.tambah', compact('user', 'kota', 'kecamatan', 'desa'));
     }
 
     /**
@@ -42,24 +48,20 @@ class BankSampahController extends Controller
         $messages = [
             'id_users.required' => 'Nama wajib diisi.',
             'no_telp.required' => 'No telepon wajib diisi.',
-            'kota.required' => 'Kota wajib diisi.',
-            'kecamatan.required' => 'Kecamatan wajib diisi.',
-            'desa.required' => 'Desa wajib diisi.',
+            'id_kota.required' => 'Kota wajib diisi.',
+            'id_kecamatan.required' => 'Kecamatan wajib diisi.',
+            'id_desa.required' => 'Desa wajib diisi.',
             'dukuh.required' => 'Dukuh wajib diisi.',
-            'RT.required' => 'RT wajib diisi.',
-            'RW.required' => 'RW wajib diisi.',
             'detail_alamat.required' => 'Detail alamat wajib diisi.',
         ];
 
         $request->validate([
             'id_users' => 'required',
             'no_telp' => 'required',
-            'kota' => 'required',
-            'kecamatan' => 'required',
-            'desa' => 'required',
+            'id_kota' => 'required',
+            'id_kecamatan' => 'required',
+            'id_desa' => 'required',
             'dukuh' => 'required',
-            'RT' => 'required',
-            'RW' => 'required',
             'detail_alamat' => 'required',
         ], $messages);
 
@@ -89,7 +91,10 @@ class BankSampahController extends Controller
     {
         $data = BankSampah::find($id);
         $user = User::select('id', 'nama')->where('role', 'bank_sampah')->get();
-        return view('backend.bank_sampah.edit', compact('data', 'user'));
+        $kota = Kota::all();
+        $kecamatan = Kecamatan::all();
+        $desa = Desa::all();
+        return view('backend.bank_sampah.edit', compact('data', 'user', 'kota', 'kecamatan', 'desa'));
     }
 
     /**
@@ -104,24 +109,20 @@ class BankSampahController extends Controller
         $messages = [
             'id_users.required' => 'Nama wajib diisi.',
             'no_telp.required' => 'No telepon wajib diisi.',
-            'kota.required' => 'Kota wajib diisi.',
-            'kecamatan.required' => 'Kecamatan wajib diisi.',
-            'desa.required' => 'Desa wajib diisi.',
+            'id_kota.required' => 'Kota wajib diisi.',
+            'id_kecamatan.required' => 'Kecamatan wajib diisi.',
+            'id_desa.required' => 'Desa wajib diisi.',
             'dukuh.required' => 'Dukuh wajib diisi.',
-            'RT.required' => 'RT wajib diisi.',
-            'RW.required' => 'RW wajib diisi.',
             'detail_alamat.required' => 'Detail alamat wajib diisi.',
         ];
 
         $request->validate([
             'id_users' => 'required',
             'no_telp' => 'required',
-            'kota' => 'required',
-            'kecamatan' => 'required',
-            'desa' => 'required',
+            'id_kota' => 'required',
+            'id_kecamatan' => 'required',
+            'id_desa' => 'required',
             'dukuh' => 'required',
-            'RT' => 'required',
-            'RW' => 'required',
             'detail_alamat' => 'required',
         ], $messages);
 

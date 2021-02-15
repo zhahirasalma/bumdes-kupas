@@ -47,66 +47,65 @@ Tambah Bank Sampah
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="pl-lg-4">
+
                         <div class="row">
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-city">Kota</label>
-                                    <input type="text" name="kota" class="form-control form-control-alternative"
-                                        placeholder="Kota" value="{{ old('kota')}}">
-                                    @if ($errors->has('kota'))
-                                    <span class="text-danger">{{ $errors->first('kota') }}</span>
+                                    <select name="id_kota" class="form-control">
+                                        <option value="">Pilih kota/kabupaten...</option>
+                                        @foreach($kota as $k)
+                                        <option value="{{$k->id}}" @if (old('kota')==$k->id ) selected="selected"
+                                            @endif>
+                                            {{$k->kota}}</option>
+                                        @endforeach
+                                    </select>
+                                    @if ($errors->has('id_kota'))
+                                    <span class="text-danger">{{ $errors->first('id_kota') }}</span>
                                     @endif
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-country">Kecamatan</label>
-                                    <input type="text" name="kecamatan" class="form-control form-control-alternative"
-                                        placeholder="Kecamatan" value="{{ old('kecamatan')}}">
-                                    @if ($errors->has('kecamatan'))
-                                    <span class="text-danger">{{ $errors->first('kecamatan') }}</span>
+                                    <select name="id_kecamatan" class="form-control">
+                                        <option value="">Pilih kecamatan...</option>
+                                        @foreach($kecamatan as $kc)
+                                        <option value="{{$kc->id}}" @if (old('kecamatan')==$kc->id ) selected="selected"
+                                            @endif>
+                                            {{$kc->kecamatan}}</option>
+                                        @endforeach
+                                    </select>
+                                    @if ($errors->has('id_kecamatan'))
+                                    <span class="text-danger">{{ $errors->first('id_kecamatan') }}</span>
                                     @endif
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-country">Desa</label>
-                                    <input type="text" name="desa" class="form-control form-control-alternative"
-                                        placeholder="Desa" value="{{ old('desa')}}">
-                                    @if ($errors->has('desa'))
-                                    <span class="text-danger">{{ $errors->first('desa') }}</span>
+                                    <select name="id_desa" class="form-control">
+                                        <option value="">Pilih desa...</option>
+                                        @foreach($desa as $d)
+                                        <option value="{{$d->id}}" @if (old('desa')==$d->id ) selected="selected"
+                                            @endif>
+                                            {{$d->desa}}</option>
+                                        @endforeach
+                                    </select>
+                                    @if ($errors->has('id_desa'))
+                                    <span class="text-danger">{{ $errors->first('id_desa') }}</span>
                                     @endif
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-city">Dukuh</label>
                                     <input type="text" name="dukuh" class="form-control form-control-alternative"
                                         placeholder="Dukuh" value="{{ old('dukuh')}}">
                                     @if ($errors->has('dukuh'))
                                     <span class="text-danger">{{ $errors->first('dukuh') }}</span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="input-country">RT</label>
-                                    <input type="number" name="RT" class="form-control form-control-alternative"
-                                        placeholder="RT" value="{{ old('RT')}}">
-                                    @if ($errors->has('RT'))
-                                    <span class="text-danger">{{ $errors->first('RT') }}</span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="input-country">RW</label>
-                                    <input type="number" name="RW" class="form-control form-control-alternative"
-                                        placeholder="RW" value="{{ old('RW')}}">
-                                    @if ($errors->has('RW'))
-                                    <span class="text-danger">{{ $errors->first('RW') }}</span>
                                     @endif
                                 </div>
                             </div>

@@ -27,10 +27,6 @@ Daftar Bank Sampah
                         <th scope="col">No</th>
                         <th scope="col">Nama</th>
                         <th scope="col">No Telp</th>
-                        <th scope="col">Kota</th>
-                        <th scope="col">Kecamatan</th>
-                        <th scope="col">Desa</th>
-                        <th scope="col">Dukuh</th>
                         <th scope="col">Alamat Detail</th>
                         <th scope="col">Aksi</th>
                     </tr>
@@ -48,19 +44,11 @@ Daftar Bank Sampah
                             {{$data->no_telp}}
                         </td>
                         <td>
-                            {{$data->kota}}
-                        </td>
-                        <td>
-                            {{$data->kecamatan}}
-                        </td>
-                        <td>
-                            {{$data->desa}}
-                        </td>
-                        <td>
-                            {{$data->dukuh}}
-                        </td>
-                        <td>
-                            {{$data->detail_alamat}}
+                            {{$data->detail_alamat}},
+                            {{$data->dukuh}},
+                            {{$data->desa->desa}},
+                            {{$data->kecamatan->kecamatan}},
+                            {{$data->kota->kota}}
                         </td>
                         <td>
                             <form action="{{ route('bank_sampah.destroy', $data->id) }}" method="POST">
