@@ -17,15 +17,11 @@ class Warga extends Model
         'NIK',
         'id_users',
         'id_kategori_sampah',
-        'nama_cp',
         'no_telp',
-        'no_telp_cp',
-        'kota',
-        'kecamatan',
-        'desa',
+        'id_kota',
+        'id_kecamatan',
+        'id_desa',
         'dukuh',
-        'RT',
-        'RW',
         'detail_alamat',
         'lokasi',
     ];
@@ -35,5 +31,14 @@ class Warga extends Model
     }
     public function kategori(){
         return $this->belongsTo('App\Models\KategoriSampah', 'id_kategori_sampah');
+    }
+    public function kota(){
+        return $this->belongsTo('App\Models\Kota', 'id_kota');
+    }
+    public function kecamatan(){
+        return $this->belongsTo('App\Models\Kecamatan', 'id_kecamatan');
+    }
+    public function desa(){
+        return $this->belongsTo('App\Models\Desa', 'id_desa');
     }
 }
