@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Warga;
 use App\Models\KategoriSampah;
 use App\Models\User;
+use App\Models\Kota;
+use App\Models\Kecamatan;
+use App\Models\Desa;
 
 
 class WargaController extends Controller
@@ -18,7 +21,7 @@ class WargaController extends Controller
      */
     public function index()
     {
-        $warga = Warga::with('kategori', 'user')->get();
+        $warga = Warga::with('kategori', 'user', 'kota', 'kecamatan', 'desa')->get();
         return view('backend.warga.index', compact('warga'));
     }
 
@@ -31,7 +34,11 @@ class WargaController extends Controller
     {
         $kategori = KategoriSampah::select('id', 'jenis_sampah')->get();
         $user = User::select('id', 'nama')->where('role', 'warga')->get();
-        return view('backend.warga.tambah', compact('kategori', 'user'));
+        $kota = Kota::all();
+        $kecamatan = Kecamatan::all();
+        $desa = Desa::all();
+        return view('backend.warga.tambah', compact('kategori', 'user', 
+                                                'kota', 'kecamatan', 'desa'));
     }
 
     /**
@@ -49,14 +56,10 @@ class WargaController extends Controller
             'id_users.not_in' => 'Pilih nama sesuai daftar.',
             'id_kategori_sampah.not_in' => 'Pilih kategori sesuai daftar.',
             'no_telp.required' => 'No telepon wajib diisi.',
-            'nama_cp.required' => 'Nama narahubung wajib diisi.',
-            'no_telp_cp.required' => 'No telp narahubung wajib diisi.',
-            'kota.required' => 'Kota wajib diisi.',
-            'kecamatan.required' => 'Kecamatan wajib diisi.',
-            'desa.required' => 'Desa wajib diisi.',
+            'id_kota.required' => 'Kota wajib diisi.',
+            'id_kecamatan.required' => 'Kecamatan wajib diisi.',
+            'id_desa.required' => 'Desa wajib diisi.',
             'dukuh.required' => 'Dukuh wajib diisi.',
-            'RT.required' => 'RT wajib diisi.',
-            'RW.required' => 'RW wajib diisi.',
             'detail_alamat.required' => 'Detail alamat wajib diisi.',
         ];
 
@@ -65,14 +68,10 @@ class WargaController extends Controller
             'id_users' => 'required|not_in:0',
             'id_kategori_sampah' => 'required|not_in:0',
             'no_telp' => 'required',
-            'nama_cp' => 'required',
-            'no_telp_cp' => 'required',
-            'kota' => 'required',
-            'kecamatan' => 'required',
-            'desa' => 'required',
+            'id_kota' => 'required',
+            'id_kecamatan' => 'required',
+            'id_desa' => 'required',
             'dukuh' => 'required',
-            'RT' => 'required',
-            'RW' => 'required',
             'detail_alamat' => 'required',
         ], $messages);
 
@@ -103,7 +102,11 @@ class WargaController extends Controller
         $w = Warga::find($id);
         $kategori = KategoriSampah::select('id', 'jenis_sampah')->get();
         $user = User::select('id', 'nama')->where('role', 'warga')->get();
-        return view('backend.warga.edit', compact('w', 'kategori', 'user'));
+        $kota = Kota::all();
+        $kecamatan = Kecamatan::all();
+        $desa = Desa::all();
+        return view('backend.warga.edit', compact('w', 'kategori', 'user',
+                                            'kota', 'kecamatan', 'desa'));
     }
 
     /**
@@ -122,30 +125,22 @@ class WargaController extends Controller
             'id_users.not_in' => 'Pilih nama sesuai daftar.',
             'id_kategori_sampah.not_in' => 'Pilih kategori sesuai daftar.',
             'no_telp.required' => 'No telepon wajib diisi.',
-            'nama_cp.required' => 'Nama narahubung wajib diisi.',
-            'no_telp_cp.required' => 'No telp narahubung wajib diisi.',
-            'kota.required' => 'Kota wajib diisi.',
-            'kecamatan.required' => 'Kecamatan wajib diisi.',
-            'desa.required' => 'Desa wajib diisi.',
+            'id_kota.required' => 'Kota wajib diisi.',
+            'id_kecamatan.required' => 'Kecamatan wajib diisi.',
+            'id_desa.required' => 'Desa wajib diisi.',
             'dukuh.required' => 'Dukuh wajib diisi.',
-            'RT.required' => 'RT wajib diisi.',
-            'RW.required' => 'RW wajib diisi.',
             'detail_alamat.required' => 'Detail alamat wajib diisi.',
         ];
 
         $request->validate([
             'NIK' => 'required',
-            'id_users' => 'required',
-            'id_kategori_sampah' => 'required',
+            'id_users' => 'required|not_in:0',
+            'id_kategori_sampah' => 'required|not_in:0',
             'no_telp' => 'required',
-            'nama_cp' => 'required',
-            'no_telp_cp' => 'required',
-            'kota' => 'required',
-            'kecamatan' => 'required',
-            'desa' => 'required',
+            'id_kota' => 'required',
+            'id_kecamatan' => 'required',
+            'id_desa' => 'required',
             'dukuh' => 'required',
-            'RT' => 'required',
-            'RW' => 'required',
             'detail_alamat' => 'required',
         ], $messages);
 
@@ -181,4 +176,5 @@ class WargaController extends Controller
             return response()->json($data);
         }
     }
+
 }

@@ -29,14 +29,6 @@ Daftar Warga
                         <th scope="col">Nama</th>
                         <th scope="col">Kategori</th>
                         <th scope="col">No Telp</th>
-                        <th scope="col">Nama Narahubung</th>
-                        <th scope="col">No Telp Narahubung</th>
-                        <th scope="col">Kota</th>
-                        <th scope="col">Kecamatan</th>
-                        <th scope="col">Desa</th>
-                        <th scope="col">Dukuh</th>
-                        <th scope="col">RT</th>
-                        <th scope="col">RW</th>
                         <th scope="col">Detail Alamat</th>
                         <th scope="col">Lokasi</th>
                         <th scope="col">Aksi</th>
@@ -61,31 +53,11 @@ Daftar Warga
                             {{$w->no_telp}}
                         </td>
                         <td>
-                            {{$w->nama_cp}}
-                        </td>
-                        <td>
-                            {{$w->no_telp_cp}}
-                        </td>
-                        <td>
-                            {{$w->kota}}
-                        </td>
-                        <td>
-                            {{$w->kecamatan}}
-                        </td>
-                        <td>
-                            {{$w->desa}}
-                        </td>
-                        <td>
-                            {{$w->dukuh}}
-                        </td>
-                        <td>
-                            {{$w->RT}}
-                        </td>
-                        <td>
-                            {{$w->RW}}
-                        </td>
-                        <td>
-                            {{$w->detail_alamat}}
+                            {{$w->detail_alamat}},
+                            {{$w->dukuh}},
+                            {{$w->desa->desa}},
+                            {{$w->kecamatan->kecamatan}},
+                            {{$w->kota->kota}}
                         </td>
                         <td>
                             {{$w->lokasi}}
