@@ -41,7 +41,7 @@ Daftar Pengambilan Sampah
                             {{$p->user->nama}}
                         </td>
                         <td>
-                            
+                            {{$p->warga->lokasi}}
                         </td>
                         <td>
                             {{$p->waktu_pengambilan}}
@@ -49,14 +49,15 @@ Daftar Pengambilan Sampah
                         <td>
                             <label class="custom-toggle">
                                 <input type="checkbox" checked>
-                                <span class="custom-toggle-slider rounded-circle"></span>
+                                <span class="custom-toggle-slider rounded-circle" data-label-off="Belum"
+                                    data-label-on="Sudah"></span>
                             </label>
                         </td>
                         <td>
                             <form action="{{ route('pengambilan.destroy', $p->id) }}" method="POST">
-                                <a href="{{ route('pengambilan.edit', $p->id) }}"
-                                    class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top"
-                                    data-original-title="Edit"><i class="far fa-edit"></i></a>
+                                <a href="{{ route('pengambilan.edit', $p->id) }}" class="btn btn-success btn-sm"
+                                    data-toggle="tooltip" data-placement="top" data-original-title="Edit"><i
+                                        class="far fa-edit"></i></a>
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"

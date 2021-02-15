@@ -22,7 +22,7 @@ Edit Pengambilan
                                 <div class="form-group">
                                     <label class="form-control-label">Nama Warga</label>
                                     <input type="text" name="id_users" class="form-control form-control-alternative"
-                                        placeholder="Nama Warga" value="{{$pengambilan->id_users}}">
+                                        placeholder="Nama Warga" value="{{$pengambilan->user->nama}}">
                                 </div>
                             </div>
                         </div>

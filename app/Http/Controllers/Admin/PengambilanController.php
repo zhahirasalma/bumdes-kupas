@@ -28,7 +28,8 @@ class PengambilanController extends Controller
      */
     public function create()
     {
-        return view('backend.pengambilan.tambah');
+        $warga = User::select('id', 'nama')->where('role', 'warga')->get();
+        return view('backend.pengambilan.tambah', compact('warga'));
     }
 
     /**
@@ -39,15 +40,27 @@ class PengambilanController extends Controller
      */
     public function store(Request $request)
     {
+        $messages =[
+            'id_users.required' => 'Pilih minimal 1 nama',
+            'waktu_pengambilan.required' => "Waktu wajib diisi"
+        ];
+        
         $request->validate([
             'id_users' => 'required',
             'waktu_pengambilan' => 'required',
-        ]);
+        ], $messages);
         
-        $input = $request->all();
-        $input['id_warga'] = Warga::WHERE('id_users', $request['id_users'])->value('id');
-        $input['status'] = "aktif";
-        Pengambilan::create($input);
+        $input= $request->id_users;
+        $data=array();
+        foreach($input as $i){
+            $data[] = [
+                'id_users' => $i,
+                'id_warga' => Warga::WHERE('id_users', $i)->value('id'),
+                'waktu_pengambilan' => $request->waktu_pengambilan,
+                'status' => 'aktif'
+            ];
+        }
+        Pengambilan::insert($data);
         return redirect()->route('pengambilan.index')
                         ->with('success','Data berhasil ditambahkan');
     }
@@ -72,7 +85,9 @@ class PengambilanController extends Controller
     public function edit($id)
     {
         $pengambilan = Pengambilan::find($id);
-        return view('backend.pengambilan.edit', compact('pengambilan'));
+        $user = User::select('nama')->join('pengambilan_sampah', 'id_users', '=','users.id')
+                ->where('users.id', $id)->get();
+        return view('backend.pengambilan.edit', compact('pengambilan', 'user'));
     }
 
     /**

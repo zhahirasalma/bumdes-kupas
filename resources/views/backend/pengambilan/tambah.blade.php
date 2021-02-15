@@ -21,8 +21,20 @@ Tambah Pengambilan
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label">Nama Warga</label>
-                                    <input type="text" name="id_users" class="form-control form-control-alternative"
-                                        placeholder="Nama Warga" value="">
+                                    @foreach($warga as $w)
+                                    <div class="row">
+                                        <div class="col-lg-6" class="form-check">
+                                            <label>
+                                                <input type="checkbox" name="id_users[]" id="id_users"
+                                                    value="{{$w->id}}">
+                                                {{$w->nama}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                    @if ($errors->has('id_users'))
+                                    <span class="text-danger">{{ $errors->first('id_users') }}</span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -33,6 +45,9 @@ Tambah Pengambilan
                                     <input type="date" name="waktu_pengambilan"
                                         class="form-control form-control-alternative" placeholder="Waktu Pengambilan"
                                         value="">
+                                    @if ($errors->has('waktu_pengambilan'))
+                                    <span class="text-danger">{{ $errors->first('waktu_pengambilan') }}</span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
