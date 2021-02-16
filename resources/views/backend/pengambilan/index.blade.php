@@ -47,11 +47,23 @@ Daftar Pengambilan Sampah
                             {{$p->waktu_pengambilan}}
                         </td>
                         <td>
-                            <label class="custom-toggle">
-                                <input type="checkbox" checked>
-                                <span class="custom-toggle-slider rounded-circle" data-label-off="Belum"
-                                    data-label-on="Sudah"></span>
-                            </label>
+                            <style>
+                                .toggle.ios,
+                                .toggle-on.ios,
+                                .toggle-off.ios {
+                                    border-radius: 20px;
+                                }
+
+                                .toggle.ios .toggle-handle {
+                                    border-radius: 20px;
+                                }
+
+                            </style>
+                            <input data-style="ios" data-size="sm" data-id="{{$p->id}}" class="toggle-class"
+                                type="checkbox" data-toggle="toggle" data-onstyle="outline-danger"
+                                data-offstyle="outline-success" data-off="Terambil" data-on="Belum diambil"
+                                {{$p->status ? 'checked' : ''}}>
+
                         </td>
                         <td>
                             <form action="{{ route('pengambilan.destroy', $p->id) }}" method="POST">
@@ -71,5 +83,28 @@ Daftar Pengambilan Sampah
         </div>
     </div>
 </div>
-
 @endsection
+
+@push('script')
+<script>
+    $(function () {
+        $('.toggle-class').change(function () {
+            var status = $(this).prop('checked') == true ? 1 : 0;
+            var id = $(this).data('id');
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: '{{route('ubahstatus')}}',
+                data: {
+                    'status': status,
+                    'id': id
+                },
+                success: function (data) {
+                    console.log('Success')
+                }
+            });
+        });
+    });
+
+</script>
+@endpush

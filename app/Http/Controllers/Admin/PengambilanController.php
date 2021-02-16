@@ -57,7 +57,7 @@ class PengambilanController extends Controller
                 'id_users' => $i,
                 'id_warga' => Warga::WHERE('id_users', $i)->value('id'),
                 'waktu_pengambilan' => $request->waktu_pengambilan,
-                'status' => 'aktif'
+                'status' => 1
             ];
         }
         Pengambilan::insert($data);
@@ -99,15 +99,17 @@ class PengambilanController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $messages =[
+            'waktu_pengambilan.required' => "Waktu wajib diisi"
+        ];
+        
         $request->validate([
-            'id_users' => 'required',
             'waktu_pengambilan' => 'required',
-        ]);
+        ], $messages);
 
         $pengambilan = Pengambilan::find($id);
         $input = $request->all();
-        $input['id_warga'] = Warga::WHERE('id_users', $request['id_users'])->value('id');
-        $input['status'] = "aktif";
+        $input['id_warga'] = Warga::WHERE('id_users', $pengambilan->id_users)->value('id');
         $pengambilan->update($input);
         return redirect()->route('pengambilan.index')
                         ->with('success','Data berhasil diubah');
@@ -125,5 +127,12 @@ class PengambilanController extends Controller
         $pengambilan->delete();
         return redirect()->route('pengambilan.index')
                         ->with('success','Data berhasil dihapus');
+    }
+
+    public function ubahstatus(Request $request)
+    {
+        $pengambilan = Pengambilan::find($request->id);
+        $pengambilan->status = $request->status;
+        $pengambilan->save();
     }
 }
