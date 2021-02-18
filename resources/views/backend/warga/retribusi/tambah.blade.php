@@ -20,7 +20,7 @@ Tambah Data Transaksi Retribusi
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-nama">Nama Warga</label>
-                                    <select name="id_users" class="form-control">
+                                    <select name="id_users" id="id_users" class="form-control">
                                         <option value="">Pilih nama warga...</option>
                                         @foreach($user as $u)
                                         <option value="{{$u->id}}" @if (old('id_users')==$u->id ) selected="selected"
@@ -113,3 +113,15 @@ Tambah Data Transaksi Retribusi
 </div>
 </div>
 @endsection
+
+@push('script')
+<script type="text/javascript">
+$(document).ready(function () {
+  $('#id_users').select2({
+        allowClear: true,
+        placeholder: "Pilih nama warga...",
+        theme: 'bootstrap4',
+    });
+})
+</script>
+@endpush

@@ -18,9 +18,9 @@
         <link href="{{asset('assets/css/argon-dashboard.css?v=1.1.0')}}" rel="stylesheet" />
 
         <!-- select 2 -->
-        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+        <link href="{{asset('select2/dist/css/select2.min.css')}}" rel="stylesheet" />
         <link rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
+            href="{{asset('select2/dist/css/select2-bootstrap4.min.css')}}">
 
         <!-- toogle button -->
         <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
@@ -58,9 +58,8 @@
         <script src="{{asset('assets/js/plugins/chart.js/dist/Chart.extension.js')}}"></script>
         <!--   Argon JS   -->
         <script src="{{asset('assets/js/argon-dashboard.min.js?v=1.1.0')}}"></script>
-        <!-- Select2 -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+        <!-- Select2 -->      
+        <script src="{{asset('select2/dist/js/select2.min.js')}}"></script>
         <!-- Button toggle -->
         <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 

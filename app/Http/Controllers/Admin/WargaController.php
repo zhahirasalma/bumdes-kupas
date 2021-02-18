@@ -163,18 +163,4 @@ class WargaController extends Controller
         return redirect()->route('warga.index')
                         ->with('success','Data berhasil dihapus'); 
     }
-
-    public function searchKategori(Request $request)
-    {
-        $data = [];
-        
-        if ($request->has('q')) {
-    		$cari = $request->q;
-            $data = KategoriSampah::select('id', 'jenis_sampah')
-                    ->where('jenis_sampah', 'LIKE', '%$cari%')
-                    ->get();  
-            return response()->json($data);
-        }
-    }
-
 }

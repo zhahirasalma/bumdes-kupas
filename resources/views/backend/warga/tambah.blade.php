@@ -31,7 +31,7 @@ Tambah Data Warga
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-nama">Nama</label>
-                                    <select name="id_users" class="form-control">
+                                    <select name="id_users" id="id_users" class="form-control">
                                         <option value="">Pilih nama warga...</option>
                                         @foreach($user as $u)
                                         <option value="{{$u->id}}" @if (old('id_users')==$u->id ) selected="selected"
@@ -49,8 +49,8 @@ Tambah Data Warga
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-nama">Kategori</label>
-                                    <select name="id_kategori_sampah" class="form-control">
-                                        <option value="">Pilih kategori...</option>
+                                    <select name="id_kategori_sampah" id="kategori" class="form-control">
+                                        <option></option>
                                         @foreach($kategori as $k)
                                         <option value="{{$k->id}}" @if (old('id_kategori_sampah')==$k->id )
                                             selected="selected" @endif>{{$k->jenis_sampah}}</option>
@@ -76,7 +76,7 @@ Tambah Data Warga
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-city">Kota</label>
-                                    <select name="id_kota" class="form-control">
+                                    <select name="id_kota" id="kota" class="form-control">
                                         <option value="">Pilih kota/kabupaten...</option>
                                         @foreach($kota as $k)
                                         <option value="{{$k->id}}" @if (old('kota')==$k->id ) selected="selected"
@@ -92,7 +92,7 @@ Tambah Data Warga
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-country">Kecamatan</label>
-                                    <select name="id_kecamatan" class="form-control">
+                                    <select name="id_kecamatan" id="kecamatan" class="form-control">
                                         <option value="">Pilih kecamatan...</option>
                                         @foreach($kecamatan as $kc)
                                         <option value="{{$kc->id}}" @if (old('kecamatan')==$kc->id ) selected="selected"
@@ -110,7 +110,7 @@ Tambah Data Warga
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-city">Desa</label>
-                                    <select name="id_desa" class="form-control">
+                                    <select name="id_desa" id="desa" class="form-control">
                                         <option value="">Pilih desa...</option>
                                         @foreach($desa as $d)
                                         <option value="{{$d->id}}" @if (old('desa')==$d->id ) selected="selected"
@@ -167,25 +167,44 @@ Tambah Data Warga
 
 @push('script')
 <script type="text/javascript">
-    $('#kategori').select2({
-        placeholder: 'Pilih...',
-        ajax: {
-            url: 'admin/cari',
-            dataType: 'json',
-            delay: 250,
-            processResults: function (data) {
-                return {
-                    results: $.map(data, function (item) {
-                        return {
-                            text: item.jenis_sampah,
-                            id: item.id
-                        }
-                    })
-                };
-            },
-            cache: true
-        }
+$(document).ready(function () {
+  $('#id_users').select2({
+        allowClear: true,
+        placeholder: "Pilih nama warga...",
+        theme: 'bootstrap4',
     });
+})
 
+$(document).ready(function () {
+  $('#kategori').select2({
+        allowClear: true,
+        placeholder: "Pilih kategori...",
+        theme: 'bootstrap4',
+    });
+})
+
+$(document).ready(function () {
+  $('#kota').select2({
+        allowClear: true,
+        placeholder: "Pilih kota/kabupaten...",
+        theme: 'bootstrap4',
+    });
+})
+
+$(document).ready(function () {
+  $('#kecamatan').select2({
+        allowClear: true,
+        placeholder: "Pilih kecamatan...",
+        theme: 'bootstrap4',
+    });
+})
+
+$(document).ready(function () {
+  $('#desa').select2({
+        allowClear: true,
+        placeholder: "Pilih desa...",
+        theme: 'bootstrap4',
+    });
+})
 </script>
 @endpush
