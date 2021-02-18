@@ -23,7 +23,7 @@
             href="{{asset('select2/dist/css/select2-bootstrap4.min.css')}}">
 
         <!-- toogle button -->
-        <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
+        <link href="{{asset('bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css')}}"
             rel="stylesheet">
 
     </head>
@@ -61,7 +61,7 @@
         <!-- Select2 -->      
         <script src="{{asset('select2/dist/js/select2.min.js')}}"></script>
         <!-- Button toggle -->
-        <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+        <script src="{{asset('bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js')}}"></script>
 
         @stack('script')
 
