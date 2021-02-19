@@ -69,3 +69,14 @@ Users
 </div>
 
 @endsection
+
+@push('script')
+<script>
+    $(document).ready(function () {
+        var table = $('#tabel').DataTable({
+            responsive: true
+        });
+        new $.fn.dataTable.FixedHeader(table);
+    });
+</script>
+@endpush

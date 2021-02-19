@@ -69,14 +69,6 @@
         <script src="{{asset('datatables/js/dataTables.responsive.min.js')}}"></script>
         <script src="{{asset('datatables/js/responsive.bootstrap.min.js')}}"></script>
 
-        <script>
-            $(document).ready(function () {
-                var table = $('#tabel').DataTable({
-                    responsive: true
-                });
-                new $.fn.dataTable.FixedHeader(table);
-            });
-        </script>
         @stack('script')
 
         <script>

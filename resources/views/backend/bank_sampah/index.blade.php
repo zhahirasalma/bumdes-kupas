@@ -52,9 +52,9 @@ Daftar Bank Sampah
                         </td>
                         <td>
                             <form action="{{ route('bank_sampah.destroy', $data->id) }}" method="POST">
-                                <a href="{{ route('bank_sampah.edit', $data->id) }}"
-                                    class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top"
-                                    data-original-title="Edit"><i class="far fa-edit"></i></a>
+                                <a href="{{ route('bank_sampah.edit', $data->id) }}" class="btn btn-success btn-sm"
+                                    data-toggle="tooltip" data-placement="top" data-original-title="Edit"><i
+                                        class="far fa-edit"></i></a>
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
@@ -68,5 +68,15 @@ Daftar Bank Sampah
         </div>
     </div>
 </div>
-
 @endsection
+
+@push('script')
+<script>
+    $(document).ready(function () {
+        var table = $('#tabel').DataTable({
+            responsive: true
+        });
+        new $.fn.dataTable.FixedHeader(table);
+    });
+</script>
+@endpush

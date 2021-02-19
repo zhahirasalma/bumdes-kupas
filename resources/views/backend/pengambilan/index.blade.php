@@ -86,7 +86,15 @@ Daftar Pengambilan Sampah
 @endsection
 
 @push('script')
+@push('script')
 <script>
+    $(document).ready(function () {
+        var table = $('#tabel').DataTable({
+            responsive: true
+        });
+        new $.fn.dataTable.FixedHeader(table);
+    });
+
     $(function () {
         $('.toggle-class').change(function () {
             var status = $(this).prop('checked') == true ? 1 : 0;
