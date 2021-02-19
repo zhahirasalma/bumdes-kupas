@@ -21,7 +21,7 @@ Kategori Sampah
         </div>
         <div class="table-responsive">
             <!-- Projects table -->
-            <table class="table align-items-center table-flush">
+            <table class="table align-items-center table-flush" id="tabel">
                 <thead class="thead-light">
                     <tr>
                         <th scope="col">No</th>

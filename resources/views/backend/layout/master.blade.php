@@ -19,13 +19,13 @@
 
         <!-- select 2 -->
         <link href="{{asset('select2/dist/css/select2.min.css')}}" rel="stylesheet" />
-        <link rel="stylesheet"
-            href="{{asset('select2/dist/css/select2-bootstrap4.min.css')}}">
+        <link rel="stylesheet" href="{{asset('select2/dist/css/select2-bootstrap4.min.css')}}">
 
         <!-- toogle button -->
-        <link href="{{asset('bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css')}}"
-            rel="stylesheet">
+        <link href="{{asset('bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css')}}" rel="stylesheet">
 
+        <!-- datatables -->
+        <link href="{{asset('datatables/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
     </head>
     </head>
 
@@ -58,11 +58,25 @@
         <script src="{{asset('assets/js/plugins/chart.js/dist/Chart.extension.js')}}"></script>
         <!--   Argon JS   -->
         <script src="{{asset('assets/js/argon-dashboard.min.js?v=1.1.0')}}"></script>
-        <!-- Select2 -->      
+        <!-- Select2 -->
         <script src="{{asset('select2/dist/js/select2.min.js')}}"></script>
         <!-- Button toggle -->
         <script src="{{asset('bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js')}}"></script>
+        <!-- Datatables -->
+        <script src="{{asset('datatables/js/jquery.dataTables.min.js')}}"></script>
+        <script src="{{asset('datatables/js/dataTables.bootstrap4.min.js')}}"></script>
+        <script src="{{asset('datatables/js/dataTables.fixedHeader.min.js')}}"></script>
+        <script src="{{asset('datatables/js/dataTables.responsive.min.js')}}"></script>
+        <script src="{{asset('datatables/js/responsive.bootstrap.min.js')}}"></script>
 
+        <script>
+            $(document).ready(function () {
+                var table = $('#tabel').DataTable({
+                    responsive: true
+                });
+                new $.fn.dataTable.FixedHeader(table);
+            });
+        </script>
         @stack('script')
 
         <script>
