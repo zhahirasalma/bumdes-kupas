@@ -7,6 +7,10 @@ use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Models\BankSampah;
 use App\Models\Warga;
+use App\Models\Kota;
+use App\Models\Kecamatan;
+use App\Models\Desa;
+use App\Models\KategoriSampah;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -55,16 +59,12 @@ class RegisterController extends Controller
             'nama' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:5', 'confirmed'],
-            'nama_cp' => ['required', 'string', 'min:5', 'max:255'],
             'NIK' => ['required'],
             'no_telp' => ['required','min:10', 'max:13', 'unique:users'],
-            'no_telp_cp' => ['required', 'min:10', 'max:13', 'unique:users'],
             'kota' => ['required'],
             'kecamatan' => ['required'],
             'desa' => ['required'],
             'dukuh' => ['required'],
-            'RT' => ['required'],
-            'RW' => ['required'],
             'detail_alamat',
             'lokasi' => ['required'],
             'id_kategori_sampah' => ['required'],
@@ -77,12 +77,82 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
+    // protected function create(array $data)
+    // {
+    //     return User::create([
+    //         'nama' => $data['nama'],
+    //         'email' => $data['email'],
+    //         'password' => Hash::make($data['password']),
+    //     ]);
+    // }
+
+    public function create(){
+        $kategori = KategoriSampah::select('id', 'jenis_sampah')->get();
+        $kota = Kota::select('id', 'kota')->get();
+        $kecamatan = Kecamatan::select('id', 'kecamatan')->get();
+        $desa = Desa::select('id', 'desa')->get();
+        return view('warga.register', compact('kategori', 'kota', 'kecamatan', 'desa'));
+    }
+
+    public function create_bank_sampah(){
+        $kota = Kota::select('id', 'kota')->get();
+        $kecamatan = Kecamatan::select('id', 'kecamatan')->get();
+        $desa = Desa::select('id', 'desa')->get();
+        return view('bankSampah.register', compact('kota', 'kecamatan', 'desa'));
+    }
+
+    public function show(){
+
+    }
+
+    public function store (Request $request)
     {
-        return User::create([
-            'nama' => $data['nama'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        $this->validate($request,[
+            'nama' => 'required|min:3|string',
+            'email' => 'required|min:11|email|unique:users',
+            'password' => 'required|min:5',
+            'NIK' => 'required|numeric',
+            'no_telp' => 'required|min:11|numeric',
+            
+       ],
+       [
+           'nama.required' => 'Nama tidak boleh kosong.',
+           'nama.min' => 'Nama minimal terdiri dari 3 huruf.',
+           'nama.string' => 'Nama harus berupa huruf.',
+           'email.required' => 'Email tidak boleh kosong.',
+           'email.email' => 'Email tidak valid.',
+           'email.unique' => 'Email telah digunakan.',
+           'password.min' => 'Kata sandi tidak boleh kurang dari 5 karakter',
+           'password.required' => 'Kata sandi tidak boleh kosong',
+           'NIK.required' => 'NIK tidak boleh kosong.',
+           'NIK.numeric' => 'NIK harus berupa angka.',
+           'no_telp.required' => 'Nomor telepon tidak boleh kosong.',
+           'no_telp.min' => 'Nomor telepon minimal terdiri dari 11 angka',
+           'no_telp.numeric' => 'Nomor telepon harus berupa angka'
+       ]);
+       $user = new User;
+       $user->nama = $request->input('nama');
+       $user->email = $request->input('email');
+       $user->password = $request->input('password');
+       if($user){
+           $user->save();
+       }
+       
+       $warga = new Warga;
+       $warga->NIK = $request->input('NIK');
+       $warga->no_telp = $request->input('no_telp');
+       $warga->id_kota = $request->input('id_kota');
+       $warga->id_kota = $request->input('id_kecamatan');
+       $warga->id_kota = $request->input('id_desa');
+       $warga->dukuh = $request->input('dukuh');
+       $warga->detail_alamat = $request->input('detail_alamat');
+       $warga->lokasi = $request->input('lokasi');
+       $warga->id_kategori_sampah = $request->input('id_kategori_sampah');
+       if($warga){
+        $warga->save();
+        }
+
+        $bank_sampah = new BankSampah;
+
     }
 }

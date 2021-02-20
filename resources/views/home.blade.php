@@ -69,13 +69,13 @@ Home
         <div class="form-row justify-content-center">
             <div class="form-group col-md-2.5">
                 <!-- <label>Name</label> -->
-                <a href="/registerwarga" class="btn btn-primary text-uppercase" id="sendMessageButton"
+                <a href="{{route('registrasi.create')}}" class="btn btn-primary text-uppercase" id="sendMessageButton"
                     type="submit">Daftar Sebagai
                     Warga</a>
             </div>
             <div class="form-group col-md-2.5">
                 <!-- <label>Name</label> -->
-                <a href="/registerBankSampah" class="btn btn-primary text-uppercase" id="sendMessageButton"
+                <a href="/bank_sampah" class="btn btn-primary text-uppercase" id="sendMessageButton"
                     type="submit">Daftar Sebagai Bank Sampah</a>
             </div>
         </div>

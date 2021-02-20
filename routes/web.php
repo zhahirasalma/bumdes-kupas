@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,8 +15,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
-
-
 Route::get('/', function () {
     return view('home');
 });
@@ -28,32 +27,30 @@ Route::get('/homebankSampah', function () {
     return view('bankSampah.index');
 });
 
-Route::get('/registerwarga', function () {
-    return view('warga.register');
-});
+// Route::get('/registerwarga', function () {
+//     return view('warga.register');
+// });
 
-Route::get('/registerBankSampah', function () {
-    return view('bankSampah.register');
-});
+// Route::get('/registerBankSampah', function () {
+//     return view('bankSampah.register');
+// });
 
 Route::get('/historyTransaksi', function () {
     return view('bankSampah.layanan.history_transaksi');
 });
 
-// Route::get('/daftarSetorBankSampah', function () {
-//     return view('bankSampah.layanan.daftar_setor.index');
-// });
-
-// Route::get('/tambahSetorBankSampah', function () {
-//     return view('bankSampah.layanan.daftar_setor.tambah');
-// });
 Route::resources([
-    'daftar_setor' => App\Http\Controllers\DaftarSetorController::class
+    'daftar_setor' => App\Http\Controllers\DaftarSetorController::class,
+    'warga' => App\Http\Controllers\WargaController::class,
+    'registrasi' => App\Http\Controllers\Auth\RegisterController::class,
+    'history_transaksi' => App\Http\Controllers\HistoryTransaksiController::class
     ]);
+// Route::get('/registrasi/warga', [App\Http\Controllers\RegisterController::class, 'warga'])->name('warga');
+Route::get('/bank_sampah', [App\Http\Controllers\Auth\RegisterController::class, 'create_bank_sampah'])->name('create_bank_sampah');
 
-Route::get('/registerBankSampah', function () {
-    return view('bankSampah.register');
-});
+// Route::get('/registerBankSampah', function () {
+//     return view('bankSampah.register');
+// });
 
 Route::get('/admin', function () {
     return view('dashboard');
