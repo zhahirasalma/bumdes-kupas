@@ -56,25 +56,15 @@ Route::get('/admin', function () {
     return view('dashboard');
 });
 
-
-
-Route::get('/admin/konversi', function () {
-    return view('backend.konversi.index');
-});
-
-Route::get('/admin/kategori_sampah', function () {
-    return view('backend.kategori_sampah.index');
-});
-
-Route::get('/admin/pengambilan', function () {
-    return view('backend.pengambilan.index');
-});
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['prefix'=>'admin'], function(){
     Route::get('/ubahstatus', [App\Http\Controllers\Admin\PengambilanController::class, 'ubahstatus'])->name('ubahstatus');
+    Route::any('/data', [App\Http\Controllers\Admin\PengambilanController::class, 'data'])->name('data');
+    Route::any('/pengambilan/tambah', [App\Http\Controllers\Admin\PengambilanController::class, 'tambah'])
+    ->name('pengambilan/tambah');
 
     Route::resources([
         'pengambilan' => App\Http\Controllers\Admin\PengambilanController::class,

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Pengambilan;
 use App\Models\User;
 use App\Models\Warga;
+use App\Models\KategoriSampah;
 
 class PengambilanController extends Controller
 {
@@ -17,7 +18,7 @@ class PengambilanController extends Controller
      */
     public function index()
     {
-        $pengambilan = Pengambilan::with('user', 'warga')->get();
+        $pengambilan = Pengambilan::with('user', 'warga')->get();        
         return view('backend.pengambilan.index', compact('pengambilan'));
     }
 
@@ -28,41 +29,7 @@ class PengambilanController extends Controller
      */
     public function create()
     {
-        $warga = User::select('id', 'nama')->where('role', 'warga')->get();
-        return view('backend.pengambilan.tambah', compact('warga'));
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $messages =[
-            'id_users.required' => 'Pilih minimal 1 nama',
-            'waktu_pengambilan.required' => "Waktu wajib diisi"
-        ];
-        
-        $request->validate([
-            'id_users' => 'required',
-            'waktu_pengambilan' => 'required',
-        ], $messages);
-        
-        $input= $request->id_users;
-        $data=array();
-        foreach($input as $i){
-            $data[] = [
-                'id_users' => $i,
-                'id_warga' => Warga::WHERE('id_users', $i)->value('id'),
-                'waktu_pengambilan' => $request->waktu_pengambilan,
-                'status' => 1
-            ];
-        }
-        Pengambilan::insert($data);
-        return redirect()->route('pengambilan.index')
-                        ->with('success','Data berhasil ditambahkan');
+        return view('backend.pengambilan.tambah');
     }
 
     /**
@@ -75,46 +42,7 @@ class PengambilanController extends Controller
     {
         //
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $pengambilan = Pengambilan::find($id);
-        $user = User::select('nama')->join('pengambilan_sampah', 'id_users', '=','users.id')
-                ->where('users.id', $id)->get();
-        return view('backend.pengambilan.edit', compact('pengambilan', 'user'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $messages =[
-            'waktu_pengambilan.required' => "Waktu wajib diisi"
-        ];
-        
-        $request->validate([
-            'waktu_pengambilan' => 'required',
-        ], $messages);
-
-        $pengambilan = Pengambilan::find($id);
-        $input = $request->all();
-        $input['id_warga'] = Warga::WHERE('id_users', $pengambilan->id_users)->value('id');
-        $pengambilan->update($input);
-        return redirect()->route('pengambilan.index')
-                        ->with('success','Data berhasil diubah');
-    }
-
+    
     /**
      * Remove the specified resource from storage.
      *
@@ -134,5 +62,64 @@ class PengambilanController extends Controller
         $pengambilan = Pengambilan::find($request->id);
         $pengambilan->status = $request->status;
         $pengambilan->save();
+    }
+
+    public function data(Request $request)
+    {
+    	$orderBy = 'users.nama';
+        switch($request->input('order.0.column')){
+            case "1":
+                $orderBy = 'users.nama';
+                break;
+            case "2":
+                $orderBy = 'kategori_sampah.jenis_sampah';
+                break;
+        }
+        
+        $data = Warga::select('warga.*', 'kategori_sampah.jenis_sampah', 'users.nama')
+                    ->join('users', 'users.id', '=', 'warga.id_users')
+                    ->join('kategori_sampah', 'kategori_sampah.id', '=', 'warga.id_kategori_sampah');
+        
+        //filter by kategory
+        if($request->input('filter') != 0){
+            $data = $data->where('warga.id_kategori_sampah', $request->filter);
+        }else{
+            $data;
+        }
+
+        //menjalankan search
+        if($request->input('search.value')!=null){
+            $data = $data->where(function($q)use($request){
+                $q->whereRaw('LOWER(users.nama) like ? ',['%'.strtolower($request->input('search.value')).'%'])
+                ->orWhereRaw('LOWER(kategori_sampah.jenis_sampah) like ? ',['%'.strtolower($request->input('search.value')).'%'])
+                ;
+            });
+        }
+        
+        $recordsFiltered = $data->get()->count();
+        if($request->input('length')!=-1) $data = $data->skip($request->input('start'))->take($request->input('length'));
+        $data = $data->orderBy($orderBy,$request->input('order.0.dir'))->get();
+        $recordsTotal = $data->count();
+        return response()->json([
+            'draw'=>$request->input('draw'),
+            'recordsTotal'=>$recordsTotal,
+            'recordsFiltered'=>$recordsFiltered,
+            'data'=>$data
+        ]);
+    }
+
+    public function tambah(Request $request)
+    {        
+        $input= $request->id_users;
+        $data=array();
+        foreach($input as $i){
+            $data[] = [
+                'id_users' => $i,
+                'id_warga' => Warga::WHERE('id_users', $i)->value('id'),
+                'status' => 1
+            ];
+        }
+        Pengambilan::insert($data);
+        return response()->json(true);
     }
 }

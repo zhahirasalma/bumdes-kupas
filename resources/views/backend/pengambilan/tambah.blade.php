@@ -6,56 +6,150 @@ Tambah Pengambilan
 
 @section('content')
 <div class="col-xl-12">
-    <div class="card bg-secondary shadow">
-        <div class="card-header bg-white border-0">
-            <div class="col-8">
-                <h3 class="mb-0">Form Tambah</h3>
+    <div class="card shadow">
+        <div class="card-header border-0">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h3 class="mb-0">Form Tambah</h3>
+                </div>
+                <div class="col text-right">
+                    <button type="button" id="button-tambah" onclick="tambah()" class="btn btn-success">Tambah</button>
+                </div>
             </div>
         </div>
-        <div class="row align-items-center">
-            <div class="card-body">
-                <form action="{{route('pengambilan.store')}}" method="POST">
-                    @csrf
-                    <div class="pl-lg-4">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="form-control-label">Nama Warga</label>
-                                    @foreach($warga as $w)
-                                    <div class="row">
-                                        <div class="col-lg-6" class="form-check">
-                                            <label>
-                                                <input type="checkbox" name="id_users[]" id="id_users"
-                                                    value="{{$w->id}}">
-                                                {{$w->nama}}
-                                            </label>
-                                        </div>
-                                    </div>
-                                    @endforeach
-                                    @if ($errors->has('id_users'))
-                                    <span class="text-danger">{{ $errors->first('id_users') }}</span>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="form-control-label">Waktu Pengambilan</label>
-                                    <input type="date" name="waktu_pengambilan"
-                                        class="form-control form-control-alternative" placeholder="Waktu Pengambilan"
-                                        value="">
-                                    @if ($errors->has('waktu_pengambilan'))
-                                    <span class="text-danger">{{ $errors->first('waktu_pengambilan') }}</span>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                        <button class="btn btn-success" type="submit">Tambah</button>
+        <div class="pl-lg-4">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label class="form-control-label" for="input-nama">Tampilkan berdasarkan</label>
+                        <select name="kategori" id="kategori" class="form-control filter">
+                            <option value="0">Semua Warga</option>
+                            @foreach(App\Models\KategoriSampah::all() as $k)
+                            <option value="{{$k->id}}" @if (old('kategori')==$k->id )
+                                selected="selected" @endif>{{$k->jenis_sampah}}</option>
+                            @endforeach
+                        </select>
+                        @if ($errors->has('kategori'))
+                        <span class="text-danger">{{ $errors->first('kategori') }}</span>
+                        @endif
                     </div>
-                </form>
+                </div>
             </div>
         </div>
+        <form action="{{route('pengambilan.store')}}" method="POST">
+            @csrf
+            <div class="table-responsive">
+                <!-- Projects table -->
+                <table class="table align-items-center table-flush" id="tabel">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>
+                                <input type="checkbox" id="cb-head">
+                            </th>
+                            <th scope="col">Nama Warga</th>
+                            <th scope="col">Kategori</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+            </div>
+        </form>
     </div>
 </div>
+</div>
+</div>
 @endsection
+
+@push('script')
+<script type="text/javascript">
+    let filter = $("#kategori").val()
+    const tabel = $('#tabel').DataTable({
+        "pageLength": 100,
+        "lengthMenu": [
+            [10, 25, 50, 100, -1],
+            [10, 25, 50, 100, 'semua']
+        ],
+        "bLengthChange": true,
+        "bFilter": true,
+        "bInfo": true,
+        "processing": true,
+        "bServerSide": true,
+        "order": [
+            [1, "asc"]
+        ],
+        "autoWidth": false,
+        "ajax": {
+            url: "{{route('data')}}",
+            type: "POST",
+            data: function (d) {
+                d.filter = filter;
+                return d
+            }
+        },
+        columnDefs: [{
+                "targets": 0,
+                "class": "text-nowrap",
+                "sortable": false,
+                "render": function (data, type, row, meta) {
+                    return `<input type="checkbox" class="cb-child" value="${row.id_users}">`;
+                }
+            },
+            {
+                "targets": 1,
+                "class": "text-nowrap",
+                "sortable": false,
+                "render": function (data, type, row, meta) {
+                    return row.nama;
+                }
+            },
+            {
+                "targets": 2,
+                "class": "text-nowrap",
+                "sortable": false,
+                "render": function (data, type, row, meta) {
+                    return row.jenis_sampah;
+                }
+            }
+        ]
+    });
+
+    //filter data by kategori
+    $(".filter").on('change', function () {
+        filter = $("#kategori").val()
+        tabel.ajax.reload(null, false)
+    })
+
+    //checkbox
+    $("#cb-head").on('click', function () {
+        var isChecked = $("#cb-head").prop('checked')
+        $(".cb-child").prop('checked', isChecked)
+    })
+
+    $("#tabel tbody").on('click', '.cb-child', function () {
+        if ($(this).prop('checked') != true) {
+            $("#cb-head").prop('checked', false)
+        }
+    })
+
+    //tambah data
+    function tambah() {
+        let checkbox_terpilih = $("#tabel tbody .cb-child:checked")
+        let semua_id = []
+        $.each(checkbox_terpilih, function (index, elm) {
+            semua_id.push(elm.value)
+        })
+        $.ajax({
+            url: "{{route('pengambilan/tambah')}}",
+            method: 'post',
+            data: {
+                id_users: semua_id
+            },
+            success: function (res) {
+                window.location.href = "/admin/pengambilan"
+            },
+        })
+    }
+
+</script>
+@endpush
