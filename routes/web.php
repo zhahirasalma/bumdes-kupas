@@ -27,6 +27,8 @@ Route::get('/homebankSampah', function () {
     return view('bankSampah.index');
 });
 
+Route::post('/store_bank_sampah', [App\Http\Controllers\Auth\RegisterController::class, 'store_bank_sampah'])->name('store_bank_sampah');
+Route::post('/store_warga', [App\Http\Controllers\Auth\RegisterController::class, 'store_warga'])->name('store_warga');
 // Route::get('/registerwarga', function () {
 //     return view('warga.register');
 // });

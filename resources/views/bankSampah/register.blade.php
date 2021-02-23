@@ -16,8 +16,8 @@ Registrasi Bank Sampah
         <!-- Contact Section Form-->
         <div class="row">
             <div class="col-lg-8 mx-auto">
-                <form method="POST" action="{{ route('register') }}">
-                    @csrf
+                <form method="POST" action="{{route('store_bank_sampah')}}">
+                    @csrf   
                     <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19.-->
                     <form id="contactForm" name="sentMessage" novalidate="novalidate">
                         <div class="col-lg-16">

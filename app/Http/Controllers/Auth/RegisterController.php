@@ -14,6 +14,7 @@ use App\Models\KategoriSampah;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -105,8 +106,55 @@ class RegisterController extends Controller
 
     }
 
-    public function store (Request $request)
+    public function store_bank_sampah (Request $request)
     {
+        $this->validate($request,[
+            'nama' => 'required|min:3|string',
+            'email' => 'required|min:11|email|unique:users',
+            'password' => 'required|min:5',
+            'NIK' => 'required|numeric',
+            'no_telp' => 'required|min:11|numeric',
+            
+       ],
+       [
+           'nama.required' => 'Nama tidak boleh kosong.',
+           'nama.min' => 'Nama minimal terdiri dari 3 huruf.',
+           'nama.string' => 'Nama harus berupa huruf.',
+           'email.required' => 'Email tidak boleh kosong.',
+           'email.email' => 'Email tidak valid.',
+           'email.unique' => 'Email telah digunakan.',
+           'password.min' => 'Kata sandi tidak boleh kurang dari 5 karakter',
+           'password.required' => 'Kata sandi tidak boleh kosong',
+           'NIK.required' => 'NIK tidak boleh kosong.',
+           'NIK.numeric' => 'NIK harus berupa angka.',
+           'no_telp.required' => 'Nomor telepon tidak boleh kosong.',
+           'no_telp.min' => 'Nomor telepon minimal terdiri dari 11 angka',
+           'no_telp.numeric' => 'Nomor telepon harus berupa angka'
+       ]);
+       $user = new User;
+       $user->nama = $request->input('nama');
+       $user->email = $request->input('email');
+       $user->password = $request->input('password');
+       if($user){
+           $user->save();
+       }
+
+        $bank_sampah = new BankSampah;
+        $bank_sampah->id_users=$user->id;
+        $bank_sampah->no_telp = $request->input('no_telp');
+        $bank_sampah->id_kota = $request->input('id_kota');
+        $bank_sampah->id_kota = $request->input('id_kecamatan');
+        $bank_sampah->id_kota = $request->input('id_desa');
+        $bank_sampah->dukuh = $request->input('dukuh');
+        $bank_sampah->detail_alamat = $request->input('detail_alamat');
+        if($bank_sampah){
+            $bank_sampah->save();
+        }
+
+        return redirect('bankSampah.index');
+
+    }
+    public function store_warga(Request $request){
         $this->validate($request,[
             'nama' => 'required|min:3|string',
             'email' => 'required|min:11|email|unique:users',
@@ -139,6 +187,7 @@ class RegisterController extends Controller
        }
        
        $warga = new Warga;
+       $warga->id_users=$user->id;
        $warga->NIK = $request->input('NIK');
        $warga->no_telp = $request->input('no_telp');
        $warga->id_kota = $request->input('id_kota');
@@ -152,7 +201,7 @@ class RegisterController extends Controller
         $warga->save();
         }
 
-        $bank_sampah = new BankSampah;
-
+        return redirect('warga.index');
     }
+    
 }
