@@ -17,6 +17,9 @@
         type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="{{asset('template/css/styles.css')}}" rel="stylesheet" />
+    <!-- Select2 -->
+    <link href="{{asset('select2/dist/css/select2.min.css')}}" rel="stylesheet" />
+    <link rel="stylesheet" href="{{asset('select2/dist/css/select2-bootstrap4.min.css')}}">
 </head>
 
 <body id="page-top">
@@ -45,9 +48,13 @@
     <script src="{{asset('template/assets/mail/contact_me.js')}}"></script>
     <!-- Core theme JS-->
     <script src="{{asset('template/js/scripts.js')}}"></script>
+    <!-- Select2 -->
+    <script src="{{asset('select2/dist/js/select2.min.js')}}"></script>
 
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet"/>
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+    @stack('script')
 </body>
 
 </html>

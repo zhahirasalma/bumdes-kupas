@@ -108,30 +108,28 @@ class RegisterController extends Controller
 
     public function store_bank_sampah (Request $request)
     {
-        $this->validate($request,[
-            'nama' => 'required|min:3|string',
-            'email' => 'required|min:11|email|unique:users',
-            'password' => 'required|min:5',
-            'NIK' => 'required|numeric',
-            'no_telp' => 'required|min:11|numeric',
+    //     $this->validate($request,[
+    //         'nama' => 'required|min:3|string',
+    //         'email' => 'required|min:11|email|unique:users',
+    //         'password' => 'required|min:5',
+    //         'no_telp' => 'required|min:11|numeric',
             
-       ],
-       [
-           'nama.required' => 'Nama tidak boleh kosong.',
-           'nama.min' => 'Nama minimal terdiri dari 3 huruf.',
-           'nama.string' => 'Nama harus berupa huruf.',
-           'email.required' => 'Email tidak boleh kosong.',
-           'email.email' => 'Email tidak valid.',
-           'email.unique' => 'Email telah digunakan.',
-           'password.min' => 'Kata sandi tidak boleh kurang dari 5 karakter',
-           'password.required' => 'Kata sandi tidak boleh kosong',
-           'NIK.required' => 'NIK tidak boleh kosong.',
-           'NIK.numeric' => 'NIK harus berupa angka.',
-           'no_telp.required' => 'Nomor telepon tidak boleh kosong.',
-           'no_telp.min' => 'Nomor telepon minimal terdiri dari 11 angka',
-           'no_telp.numeric' => 'Nomor telepon harus berupa angka'
-       ]);
+    //    ],
+    //    [
+    //        'nama.required' => 'Nama tidak boleh kosong.',
+    //        'nama.min' => 'Nama minimal terdiri dari 3 huruf.',
+    //        'nama.string' => 'Nama harus berupa huruf.',
+    //        'email.required' => 'Email tidak boleh kosong.',
+    //        'email.email' => 'Email tidak valid.',
+    //        'email.unique' => 'Email telah digunakan.',
+    //        'password.min' => 'Kata sandi tidak boleh kurang dari 5 karakter',
+    //        'password.required' => 'Kata sandi tidak boleh kosong',
+    //        'no_telp.required' => 'Nomor telepon tidak boleh kosong.',
+    //        'no_telp.min' => 'Nomor telepon minimal terdiri dari 11 angka',
+    //        'no_telp.numeric' => 'Nomor telepon harus berupa angka'
+    //    ]);
        $user = new User;
+       $user->role="bank_sampah";
        $user->nama = $request->input('nama');
        $user->email = $request->input('email');
        $user->password = $request->input('password');
@@ -151,7 +149,7 @@ class RegisterController extends Controller
             $bank_sampah->save();
         }
 
-        return redirect('bankSampah.index');
+        return redirect()->route('bankSampah.index');
 
     }
     public function store_warga(Request $request){

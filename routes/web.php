@@ -29,13 +29,6 @@ Route::get('/homebankSampah', function () {
 
 Route::post('/store_bank_sampah', [App\Http\Controllers\Auth\RegisterController::class, 'store_bank_sampah'])->name('store_bank_sampah');
 Route::post('/store_warga', [App\Http\Controllers\Auth\RegisterController::class, 'store_warga'])->name('store_warga');
-// Route::get('/registerwarga', function () {
-//     return view('warga.register');
-// });
-
-// Route::get('/registerBankSampah', function () {
-//     return view('bankSampah.register');
-// });
 
 Route::get('/historyTransaksi', function () {
     return view('bankSampah.layanan.history_transaksi');
@@ -45,14 +38,11 @@ Route::resources([
     'daftar_setor' => App\Http\Controllers\DaftarSetorController::class,
     'warga' => App\Http\Controllers\WargaController::class,
     'registrasi' => App\Http\Controllers\Auth\RegisterController::class,
-    'history_transaksi' => App\Http\Controllers\HistoryTransaksiController::class
+    'history_transaksi' => App\Http\Controllers\HistoryTransaksiController::class,
+    'bankSampah' => App\Http\Controllers\BankSampahController::class,
     ]);
 // Route::get('/registrasi/warga', [App\Http\Controllers\RegisterController::class, 'warga'])->name('warga');
 Route::get('/bank_sampah', [App\Http\Controllers\Auth\RegisterController::class, 'create_bank_sampah'])->name('create_bank_sampah');
-
-// Route::get('/registerBankSampah', function () {
-//     return view('bankSampah.register');
-// });
 
 Route::get('/admin', function () {
     return view('dashboard');

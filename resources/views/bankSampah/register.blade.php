@@ -139,3 +139,31 @@ Registrasi Bank Sampah
     </div>
 </header>
 @endsection
+
+@push('script')
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#id_kota').select2({
+        allowClear: true,
+        placeholder: "Pilih kota/kabupaten...",
+        theme: 'bootstrap4',
+    });
+})
+
+$(document).ready(function () {
+  $('#id_kecamatan').select2({
+        allowClear: true,
+        placeholder: "Pilih kecamatan...",
+        theme: 'bootstrap4',
+    });
+})
+$(document).ready(function () {
+  $('#id_desa').select2({
+        allowClear: true,
+        placeholder: "Pilih desa...",
+        theme: 'bootstrap4',
+    });
+})
+</script>
+
+@endpush
