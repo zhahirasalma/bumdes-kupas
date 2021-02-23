@@ -65,6 +65,10 @@ Route::group(['prefix'=>'admin'], function(){
     Route::any('/data', [App\Http\Controllers\Admin\PengambilanController::class, 'data'])->name('data');
     Route::any('/pengambilan/tambah', [App\Http\Controllers\Admin\PengambilanController::class, 'tambah'])
     ->name('pengambilan/tambah');
+    Route::get('/list-kecamatan/{kota_id}', [App\Http\Controllers\Admin\AlamatController::class, 'listKecamatan'])
+    ->name('list-kecamatan');
+    Route::get('/list-desa/{id_kecamatan}', [App\Http\Controllers\Admin\AlamatController::class, 'listDesa'])
+    ->name('list-desa');
 
     Route::resources([
         'pengambilan' => App\Http\Controllers\Admin\PengambilanController::class,

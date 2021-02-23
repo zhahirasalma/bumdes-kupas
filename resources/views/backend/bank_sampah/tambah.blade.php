@@ -34,8 +34,6 @@ Tambah Bank Sampah
                                     @endif
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-first-name">No Telepon</label>
@@ -52,7 +50,7 @@ Tambah Bank Sampah
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-city">Kota</label>
-                                    <select name="id_kota" class="form-control">
+                                    <select name="id_kota" id="kota" onChange="updateKecamatan()" class="form-control">
                                         <option value="">Pilih kota/kabupaten...</option>
                                         @foreach($kota as $k)
                                         <option value="{{$k->id}}" @if (old('kota')==$k->id ) selected="selected"
@@ -68,13 +66,9 @@ Tambah Bank Sampah
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-country">Kecamatan</label>
-                                    <select name="id_kecamatan" class="form-control">
+                                    <select name="id_kecamatan" id="kecamatan" onChange="updateDesa()"
+                                        class="form-control" disabled>
                                         <option value="">Pilih kecamatan...</option>
-                                        @foreach($kecamatan as $kc)
-                                        <option value="{{$kc->id}}" @if (old('kecamatan')==$kc->id ) selected="selected"
-                                            @endif>
-                                            {{$kc->kecamatan}}</option>
-                                        @endforeach
                                     </select>
                                     @if ($errors->has('id_kecamatan'))
                                     <span class="text-danger">{{ $errors->first('id_kecamatan') }}</span>
@@ -86,13 +80,8 @@ Tambah Bank Sampah
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-country">Desa</label>
-                                    <select name="id_desa" class="form-control">
+                                    <select name="id_desa" id="desa" class="form-control" disabled>
                                         <option value="">Pilih desa...</option>
-                                        @foreach($desa as $d)
-                                        <option value="{{$d->id}}" @if (old('desa')==$d->id ) selected="selected"
-                                            @endif>
-                                            {{$d->desa}}</option>
-                                        @endforeach
                                     </select>
                                     @if ($errors->has('id_desa'))
                                     <span class="text-danger">{{ $errors->first('id_desa') }}</span>
@@ -128,3 +117,78 @@ Tambah Bank Sampah
     </div>
 </div>
 @endsection
+
+@push('script')
+<script type="text/javascript">
+    function updateKecamatan() {
+        let kota = $("#kota").val()
+        $("#kecamatan").children().remove();
+        $("#kecamatan").val('');
+        $("#kecamatan").append('<option value="">Pilih kecamatan...</option>');
+        $("#kecamatan").prop('disabled', true)
+        updateDesa();
+        if (kota != '' && kota != null) {
+            $.ajax({
+                url: "{{url('')}}/admin/list-kecamatan/" + kota,
+                success: function (res) {
+                    $("#kecamatan").prop('disabled', false)
+                    let tampilan_option = '';
+                    $.each(res, function (index, kecamatan) {
+                        tampilan_option +=
+                            `<option value="${kecamatan.id}">${kecamatan.kecamatan}</option>`
+                    })
+                    $("#kecamatan").append(tampilan_option);
+                },
+            });
+        }
+    }
+
+    function updateDesa() {
+        let kecamatan = $("#kecamatan").val()
+        $("#desa").children().remove();
+        $("#desa").val('');
+        $("#desa").append('<option value="">Pilih desa...</option>');
+        $("#desa").prop('disabled', true)
+        if (kecamatan != '' && kecamatan != null) {
+            $.ajax({
+                url: "{{url('')}}/admin/list-desa/" + kecamatan,
+                success: function (res) {
+                    $("#desa").prop('disabled', false)
+                    let tampilan_option = '';
+                    $.each(res, function (index, desa) {
+                        tampilan_option += `<option value="${desa.id}">${desa.desa}</option>`
+                    })
+                    $("#desa").append(tampilan_option);
+                },
+            });
+        }
+    }
+
+    $(document).ready(function () {
+        $('#id_users').select2({
+            allowClear: true,
+            placeholder: "Pilih nama bank sampah...",
+            theme: 'bootstrap4',
+        });
+
+        $('#kota').select2({
+            allowClear: true,
+            placeholder: "Pilih kota/kabupaten...",
+            theme: 'bootstrap4',
+        });
+
+        $('#kecamatan').select2({
+            allowClear: true,
+            placeholder: "Pilih kecamatan...",
+            theme: 'bootstrap4',
+        });
+
+        $('#desa').select2({
+            allowClear: true,
+            placeholder: "Pilih desa...",
+            theme: 'bootstrap4',
+        });
+    })
+
+</script>
+@endpush
