@@ -202,36 +202,34 @@ Tambah Data Warga
         }
     }
 
-    $(document).ready(function () {
-        $('#id_users').select2({
-            allowClear: true,
-            placeholder: "Pilih nama warga...",
-            theme: 'bootstrap4',
-        });
+    $('#id_users').select2({
+        allowClear: true,
+        placeholder: "Pilih nama warga...",
+        theme: 'bootstrap4',
+    });
 
-        $('#kategori').select2({
-            allowClear: true,
-            placeholder: "Pilih kategori...",
-            theme: 'bootstrap4',
-        });
+    $('#kategori').select2({
+        allowClear: true,
+        placeholder: "Pilih kategori...",
+        theme: 'bootstrap4',
+    });
 
-        $('#kota').select2({
-            allowClear: true,
-            placeholder: "Pilih kota/kabupaten...",
-            theme: 'bootstrap4',
-        });
+    $('#kota').select2({
+        allowClear: true,
+        placeholder: "Pilih kota/kabupaten...",
+        theme: 'bootstrap4',
+    });
 
-        $('#kecamatan').select2({
-            allowClear: true,
-            placeholder: "Pilih kecamatan...",
-            theme: 'bootstrap4',
-        });
+    $('#kecamatan').select2({
+        allowClear: true,
+        placeholder: "Pilih kecamatan...",
+        theme: 'bootstrap4',
+    });
 
-        $('#desa').select2({
-            allowClear: true,
-            placeholder: "Pilih desa...",
-            theme: 'bootstrap4',
-        });
+    $('#desa').select2({
+        allowClear: true,
+        placeholder: "Pilih desa...",
+        theme: 'bootstrap4',
     })
 
 </script>

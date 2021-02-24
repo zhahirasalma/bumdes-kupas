@@ -21,7 +21,7 @@ Tambah Bank Sampah
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-nama">Nama</label>
-                                    <select name="id_users" class="form-control">
+                                    <select name="id_users" id="id_users" class="form-control">
                                         <option value="">Pilih nama bank sampah...</option>
                                         @foreach($user as $u)
                                         <option value="{{$u->id}}" @if (old('id_users')==$u->id ) selected="selected"
@@ -164,30 +164,28 @@ Tambah Bank Sampah
         }
     }
 
-    $(document).ready(function () {
-        $('#id_users').select2({
-            allowClear: true,
-            placeholder: "Pilih nama bank sampah...",
-            theme: 'bootstrap4',
-        });
+    $('#id_users').select2({
+        allowClear: true,
+        placeholder: "Pilih nama bank sampah...",
+        theme: 'bootstrap4',
+    });
 
-        $('#kota').select2({
-            allowClear: true,
-            placeholder: "Pilih kota/kabupaten...",
-            theme: 'bootstrap4',
-        });
+    $('#kota').select2({
+        allowClear: true,
+        placeholder: "Pilih kota/kabupaten...",
+        theme: 'bootstrap4',
+    });
 
-        $('#kecamatan').select2({
-            allowClear: true,
-            placeholder: "Pilih kecamatan...",
-            theme: 'bootstrap4',
-        });
+    $('#kecamatan').select2({
+        allowClear: true,
+        placeholder: "Pilih kecamatan...",
+        theme: 'bootstrap4',
+    });
 
-        $('#desa').select2({
-            allowClear: true,
-            placeholder: "Pilih desa...",
-            theme: 'bootstrap4',
-        });
+    $('#desa').select2({
+        allowClear: true,
+        placeholder: "Pilih desa...",
+        theme: 'bootstrap4',
     })
 
 </script>

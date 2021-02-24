@@ -2001,7 +2001,7 @@ pre code {
     padding: 0.625rem 0.75rem;
     font-size: 1rem;
     line-height: 1.5;
-    color: #8898aa;
+    color: #495057;
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid #cad1d7;
@@ -15982,6 +15982,7 @@ textarea[resize="horizontal"] {
 
 .form-control-alternative:focus {
     box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+    color: #495057;
 }
 
 .form-control-lg {

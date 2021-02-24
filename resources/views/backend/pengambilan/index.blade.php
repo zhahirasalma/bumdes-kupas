@@ -88,12 +88,10 @@ Daftar Pengambilan Sampah
 @push('script')
 @push('script')
 <script>
-    $(document).ready(function () {
-        var table = $('#tabel').DataTable({
-            responsive: true
-        });
-        new $.fn.dataTable.FixedHeader(table);
+    var table = $('#tabel').DataTable({
+        responsive: true
     });
+    new $.fn.dataTable.FixedHeader(table);
 
     $(function () {
         $('.toggle-class').change(function () {
@@ -102,7 +100,8 @@ Daftar Pengambilan Sampah
             $.ajax({
                 type: "GET",
                 dataType: "json",
-                url: '{{route('ubahstatus')}}',
+                url: '{{route('
+                ubahstatus ')}}',
                 data: {
                     'status': status,
                     'id': id

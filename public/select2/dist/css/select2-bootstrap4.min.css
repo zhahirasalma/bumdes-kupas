@@ -162,7 +162,7 @@ form.was-validated select:valid~.select2-container--bootstrap4 .select2-selectio
     display: block;
     width: 100%;
     height: calc(2.75rem + 2px);
-    font-size: 0.95rem;
+    font-size: 0.875rem;
     line-height: 1.5;
     color: #8898aa;
     background-color: #fff;
@@ -174,9 +174,10 @@ form.was-validated select:valid~.select2-container--bootstrap4 .select2-selectio
 }
 
 .select2-container--bootstrap4 .select2-selection--single .select2-selection__placeholder {
-    line-height: calc(2.75rem + 1px);
+    line-height: calc(1.5em + .75rem);
     color: #adb5bd;
     opacity: 1;
+    border-radius: .25rem; 
 }
 
 .select2-container--bootstrap4 .select2-selection--single .select2-selection__arrow {
@@ -202,7 +203,9 @@ form.was-validated select:valid~.select2-container--bootstrap4 .select2-selectio
 .select2-container--bootstrap4 .select2-selection--single .select2-selection__rendered {
     padding-left: .75rem;
     line-height: calc(1.5em + .75rem);
-    color: #495057
+    color: #495057;
+    padding: .375rem .75rem;
+    border-radius: .25rem
 }
 
 .select2-search--dropdown .select2-search__field {
