@@ -89,9 +89,8 @@ Daftar Pengambilan Sampah
 @push('script')
 <script>
     var table = $('#tabel').DataTable({
-        responsive: true
+        
     });
-    new $.fn.dataTable.FixedHeader(table);
 
     $(function () {
         $('.toggle-class').change(function () {
