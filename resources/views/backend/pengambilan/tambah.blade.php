@@ -53,6 +53,7 @@ Tambah Pengambilan
                     <tbody>
 
                     </tbody>
+                </table>
             </div>
         </form>
     </div>
