@@ -62,6 +62,8 @@ Route::group(['prefix'=>'admin'], function(){
     Route::get('/list-desa/{id_kecamatan}', [App\Http\Controllers\Admin\AlamatController::class, 'listDesa'])
     ->name('list-desa');
     Route::put('/import-kategori',[App\Http\Controllers\Admin\KategoriSampahController::class, 'importKategori']);
+    Route::put('/import-konversi',[App\Http\Controllers\Admin\KonversiController::class, 'importKonversi']);
+
 
     Route::resources([
         'pengambilan' => App\Http\Controllers\Admin\PengambilanController::class,

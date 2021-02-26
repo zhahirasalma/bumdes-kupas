@@ -79,7 +79,7 @@ Kategori Sampah
                     <div class="col-md-12">
                         <p>Import data kategori sampah sesuai format contoh berikut.<br /><a
                                 href="{{url('')}}/excel-kategori.xlsx"><i class="fas fa-download"></i> File Contoh Excel
-                                Karyawan</a></p>
+                                Kategori</a></p>
                     </div>
                     <div class="col-md-12">
                         <label>File Excel Kategori</label><br>

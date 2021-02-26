@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\KonversiSampah;
+use App\Imports\KonversiImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class KonversiController extends Controller
 {
@@ -114,5 +116,12 @@ class KonversiController extends Controller
         $konversi->delete();       
         return redirect()->route('konversi.index')
                         ->with('success','Data berhasil dihapus'); 
+    }
+
+    public function importKonversi(Request $request)
+    {
+        $file = $request->file('excel-konversi');
+        Excel::import(new KonversiImport,$file);
+        return redirect()->back();
     }
 }
