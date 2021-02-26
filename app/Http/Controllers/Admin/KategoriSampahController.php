@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\KategoriSampah;
+use App\Imports\KategoriImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class KategoriSampahController extends Controller
 {
@@ -114,5 +116,12 @@ class KategoriSampahController extends Controller
         $kategori->delete();       
         return redirect()->route('kategori_sampah.index')
                         ->with('success','Data berhasil dihapus'); 
+    }
+
+    public function importKategori(Request $request)
+    {
+        $file = $request->file('excel-kategori');
+        Excel::import(new KategoriImport,$file);
+        return redirect()->back();
     }
 }
