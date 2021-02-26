@@ -103,8 +103,10 @@ class WargaController extends Controller
         $kategori = KategoriSampah::select('id', 'jenis_sampah')->get();
         $user = User::select('id', 'nama')->where('role', 'warga')->get();
         $kota = Kota::all();
-        $kecamatan = Kecamatan::all();
-        $desa = Desa::all();
+        $kecamatan = Kecamatan::all()->where('id_kota', Kota::where('id', 
+                Warga::where('id', $id)->value('id_kota'))->value('id'));
+        $desa = Desa::all()->where('id_kecamatan', Kecamatan::where('id', 
+                Warga::where('id', $id)->value('id_kecamatan'))->value('id'));
         return view('backend.warga.edit', compact('w', 'kategori', 'user',
                                             'kota', 'kecamatan', 'desa'));
     }

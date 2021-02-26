@@ -92,8 +92,10 @@ class BankSampahController extends Controller
         $data = BankSampah::find($id);
         $user = User::select('id', 'nama')->where('role', 'bank_sampah')->get();
         $kota = Kota::all();
-        $kecamatan = Kecamatan::all();
-        $desa = Desa::all();
+        $kecamatan = Kecamatan::all()->where('id_kota', Kota::where('id', 
+                Banksampah::where('id', $id)->value('id_kota'))->value('id'));
+        $desa = Desa::all()->where('id_kecamatan', Kecamatan::where('id', 
+                Banksampah::where('id', $id)->value('id_kecamatan'))->value('id'));
         return view('backend.bank_sampah.edit', compact('data', 'user', 'kota', 'kecamatan', 'desa'));
     }
 

@@ -22,7 +22,7 @@ Edit Data Bank Sampah
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-nama">Nama</label>
-                                    <select name="id_users" class="form-control">
+                                    <select name="id_users" id="id_users" class="form-control">
                                         <option value="">Pilih nama bank sampah...</option>
                                         @foreach($user as $u)
                                         <option value="{{$u->id}}" {{ $u->id == $data->id_users ? 'selected' : '' }}>
@@ -51,7 +51,8 @@ Edit Data Bank Sampah
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-city">Kota</label>
-                                    <select name="id_kota" class="form-control" value="{{$data->kota->kota}}">
+                                    <select name="id_kota" id="kota" onChange="updateKecamatan()" class="form-control"
+                                        value="{{$data->kota->kota}}">
                                         <option value="">Pilih kota...</option>
                                         @foreach($kota as $kt)
                                         <option value="{{$kt->id}}" {{ $kt->id == $data->id_kota ? 'selected' : '' }}>
@@ -66,11 +67,12 @@ Edit Data Bank Sampah
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-country">Kecamatan</label>
-                                    <select name="id_kecamatan" class="form-control"
-                                        value="{{$data->kecamatan->kecamatan}}">
+                                    <select name="id_kecamatan" id="kecamatan" onChange="updateDesa()"
+                                        class="form-control" value="{{$data->kecamatan->kecamatan}}">
                                         <option value="">Pilih kecamatan...</option>
                                         @foreach($kecamatan as $kc)
-                                        <option value="{{$kc->id}}" {{ $kc->id == $data->id_kecamatan ? 'selected' : '' }}>
+                                        <option value="{{$kc->id}}"
+                                            {{ $kc->id == $data->id_kecamatan ? 'selected' : '' }}>
                                             {{$kc->kecamatan}}</option>
                                         @endforeach
                                     </select>
@@ -84,7 +86,7 @@ Edit Data Bank Sampah
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-city">Desa</label>
-                                    <select name="id_desa" class="form-control" value="{{$data->desa->desa}}">
+                                    <select name="id_desa" id="desa" class="form-control" value="{{$data->desa->desa}}">
                                         <option value="">Pilih desa...</option>
                                         @foreach($desa as $d)
                                         <option value="{{$d->id}}" {{ $d->id == $data->id_desa ? 'selected' : '' }}>
@@ -125,3 +127,76 @@ Edit Data Bank Sampah
     </div>
 </div>
 @endsection
+
+@push('script')
+<script type="text/javascript">
+    function updateKecamatan() {
+        let kota = $("#kota").val()
+        $("#kecamatan").children().remove();
+        $("#kecamatan").val('');
+        $("#kecamatan").append('<option value="">Pilih kecamatan...</option>');
+        $("#kecamatan").prop('disabled', true)
+        updateDesa();
+        if (kota != '' && kota != null) {
+            $.ajax({
+                url: "{{url('')}}/admin/list-kecamatan/" + kota,
+                success: function (res) {
+                    $("#kecamatan").prop('disabled', false)
+                    let tampilan_option = '';
+                    $.each(res, function (index, kecamatan) {
+                        tampilan_option +=
+                            `<option value="${kecamatan.id}">${kecamatan.kecamatan}</option>`
+                    })
+                    $("#kecamatan").append(tampilan_option);
+                },
+            });
+        }
+    }
+
+    function updateDesa() {
+        let kecamatan = $("#kecamatan").val()
+        $("#desa").children().remove();
+        $("#desa").val('');
+        $("#desa").append('<option value="">Pilih desa...</option>');
+        $("#desa").prop('disabled', true)
+        if (kecamatan != '' && kecamatan != null) {
+            $.ajax({
+                url: "{{url('')}}/admin/list-desa/" + kecamatan,
+                success: function (res) {
+                    $("#desa").prop('disabled', false)
+                    let tampilan_option = '';
+                    $.each(res, function (index, desa) {
+                        tampilan_option += `<option value="${desa.id}">${desa.desa}</option>`
+                    })
+                    $("#desa").append(tampilan_option);
+                },
+            });
+        }
+    }
+
+    $('#id_users').select2({
+        allowClear: true,
+        placeholder: "Pilih nama bank sampah...",
+        theme: 'bootstrap4',
+    });
+
+    $('#kota').select2({
+        allowClear: true,
+        placeholder: "Pilih kota/kabupaten...",
+        theme: 'bootstrap4',
+    });
+
+    $('#kecamatan').select2({
+        allowClear: true,
+        placeholder: "Pilih kecamatan...",
+        theme: 'bootstrap4',
+    });
+
+    $('#desa').select2({
+        allowClear: true,
+        placeholder: "Pilih desa...",
+        theme: 'bootstrap4',
+    })
+
+</script>
+@endpush

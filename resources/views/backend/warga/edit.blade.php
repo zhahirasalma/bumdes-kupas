@@ -32,7 +32,7 @@ Edit Data Warga
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-nama">Nama</label>
-                                    <select name="id_users" class="form-control">
+                                    <select name="id_users" id="id_users" class="form-control">
                                         <option value="">Pilih nama warga...</option>
                                         @foreach($user as $u)
                                         <option value="{{$u->id}}" {{ $u->id == $w->id_users ? 'selected' : '' }}>
@@ -49,7 +49,7 @@ Edit Data Warga
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-nama">Kategori</label>
-                                    <select name="id_kategori_sampah" class="form-control"
+                                    <select name="id_kategori_sampah" id="kategori" class="form-control"
                                         value="{{$w->kategori->jenis_sampah}}">
                                         <option value="">Pilih kategori...</option>
                                         @foreach($kategori as $k)
@@ -78,12 +78,11 @@ Edit Data Warga
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-city">Kota</label>
-                                    <select name="id_kota" class="form-control"
+                                    <select name="id_kota" id="kota" onChange="updateKecamatan()" class="form-control"
                                         value="{{$w->kota->kota}}">
                                         <option value="">Pilih kota...</option>
                                         @foreach($kota as $kt)
-                                        <option value="{{$kt->id}}"
-                                            {{ $kt->id == $w->id_kota ? 'selected' : '' }}>
+                                        <option value="{{$kt->id}}" {{ $kt->id == $w->id_kota ? 'selected' : '' }}>
                                             {{$kt->kota}}</option>
                                         @endforeach
                                     </select>
@@ -95,12 +94,11 @@ Edit Data Warga
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-country">Kecamatan</label>
-                                    <select name="id_kecamatan" class="form-control"
-                                        value="{{$w->kecamatan->kecamatan}}">
+                                    <select name="id_kecamatan" id="kecamatan" onChange="updateDesa()"
+                                        class="form-control" value="{{$w->kecamatan->kecamatan}}">
                                         <option value="">Pilih kecamatan...</option>
                                         @foreach($kecamatan as $kc)
-                                        <option value="{{$kc->id}}"
-                                            {{ $kc->id == $w->id_kecamatan ? 'selected' : '' }}>
+                                        <option value="{{$kc->id}}" {{ $kc->id == $w->id_kecamatan ? 'selected' : '' }}>
                                             {{$kc->kecamatan}}</option>
                                         @endforeach
                                     </select>
@@ -114,12 +112,10 @@ Edit Data Warga
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-city">Desa</label>
-                                    <select name="id_desa" class="form-control"
-                                        value="{{$w->desa->desa}}">
+                                    <select name="id_desa" id="desa" class="form-control" value="{{$w->desa->desa}}">
                                         <option value="">Pilih desa...</option>
                                         @foreach($desa as $d)
-                                        <option value="{{$d->id}}"
-                                            {{ $d->id == $w->id_desa ? 'selected' : '' }}>
+                                        <option value="{{$d->id}}" {{ $d->id == $w->id_desa ? 'selected' : '' }}>
                                             {{$d->desa}}</option>
                                         @endforeach
                                     </select>
@@ -169,3 +165,82 @@ Edit Data Warga
     </div>
 </div>
 @endsection
+
+@push('script')
+<script type="text/javascript">
+    function updateKecamatan() {
+        let kota = $("#kota").val()
+        $("#kecamatan").children().remove();
+        $("#kecamatan").val('');
+        $("#kecamatan").append('<option value="">Pilih kecamatan...</option>');
+        $("#kecamatan").prop('disabled', true)
+        updateDesa();
+        if (kota != '' && kota != null) {
+            $.ajax({
+                url: "{{url('')}}/admin/list-kecamatan/" + kota,
+                success: function (res) {
+                    $("#kecamatan").prop('disabled', false)
+                    let tampilan_option = '';
+                    $.each(res, function (index, kecamatan) {
+                        tampilan_option +=
+                            `<option value="${kecamatan.id}">${kecamatan.kecamatan}</option>`
+                    })
+                    $("#kecamatan").append(tampilan_option);
+                },
+            });
+        }
+    }
+
+    function updateDesa() {
+        let kecamatan = $("#kecamatan").val()
+        $("#desa").children().remove();
+        $("#desa").val('');
+        $("#desa").append('<option value="">Pilih desa...</option>');
+        $("#desa").prop('disabled', true)
+        if (kecamatan != '' && kecamatan != null) {
+            $.ajax({
+                url: "{{url('')}}/admin/list-desa/" + kecamatan,
+                success: function (res) {
+                    $("#desa").prop('disabled', false)
+                    let tampilan_option = '';
+                    $.each(res, function (index, desa) {
+                        tampilan_option += `<option value="${desa.id}">${desa.desa}</option>`
+                    })
+                    $("#desa").append(tampilan_option);
+                },
+            });
+        }
+    }
+
+    $('#id_users').select2({
+        allowClear: true,
+        placeholder: "Pilih nama bank sampah...",
+        theme: 'bootstrap4',
+    });
+
+    $('#kategori').select2({
+        allowClear: true,
+        placeholder: "Pilih kategori...",
+        theme: 'bootstrap4',
+    });
+
+    $('#kota').select2({
+        allowClear: true,
+        placeholder: "Pilih kota/kabupaten...",
+        theme: 'bootstrap4',
+    });
+
+    $('#kecamatan').select2({
+        allowClear: true,
+        placeholder: "Pilih kecamatan...",
+        theme: 'bootstrap4',
+    });
+
+    $('#desa').select2({
+        allowClear: true,
+        placeholder: "Pilih desa...",
+        theme: 'bootstrap4',
+    })
+
+</script>
+@endpush
