@@ -20,7 +20,6 @@ class CreatePengambilanSampahTable extends Migration
             $table->date('waktu_pengambilan')->nullable();
             $table->string('status');
             $table->timestamps();
-            $table->softDeletes();
 
             $table->foreign('id_users')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('id_warga')->references('id')->on('warga')->onDelete('cascade'); 

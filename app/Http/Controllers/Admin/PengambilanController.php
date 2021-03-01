@@ -8,6 +8,7 @@ use App\Models\Pengambilan;
 use App\Models\User;
 use App\Models\Warga;
 use App\Models\KategoriSampah;
+use Carbon\carbon;
 
 class PengambilanController extends Controller
 {
@@ -78,7 +79,9 @@ class PengambilanController extends Controller
         
         $data = Warga::select('warga.*', 'kategori_sampah.jenis_sampah', 'users.nama')
                     ->join('users', 'users.id', '=', 'warga.id_users')
-                    ->join('kategori_sampah', 'kategori_sampah.id', '=', 'warga.id_kategori_sampah');
+                    ->join('kategori_sampah', 'kategori_sampah.id', '=', 'warga.id_kategori_sampah')
+                    ->LEFTJOIN('pengambilan_sampah', 'pengambilan_sampah.id_warga', '=', 'warga.id')
+                    ->whereNULL('pengambilan_sampah.id_warga');
         
         //filter by kategory
         if($request->input('filter') != 0){
@@ -114,6 +117,7 @@ class PengambilanController extends Controller
         $data=array();
         foreach($input as $i){
             $data[] = [
+                'created_at' => Carbon::now(),
                 'id_users' => $i,
                 'id_warga' => Warga::WHERE('id_users', $i)->value('id'),
                 'status' => 1
