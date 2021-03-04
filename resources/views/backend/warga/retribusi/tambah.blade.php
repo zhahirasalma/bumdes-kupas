@@ -20,7 +20,8 @@ Tambah Data Transaksi Retribusi
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-nama">Nama Warga</label>
-                                    <select name="id_users" id="id_users" class="form-control">
+                                    <select name="id_users" id="id_users" onChange="updateTagihan()"
+                                        class="form-control">
                                         <option value="">Pilih nama warga...</option>
                                         @foreach($user as $u)
                                         <option value="{{$u->id}}" @if (old('id_users')==$u->id ) selected="selected"
@@ -46,10 +47,10 @@ Tambah Data Transaksi Retribusi
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="input-nama">Jumlah Tagihan</label>
-                                    <input type="text" name="jumlah_tagihan"
+                                    <label class="form-control-label" for="jumlah_tagihan">Jumlah Tagihan</label>
+                                    <input type="text" id="jumlah_tagihan" name="jumlah_tagihan"
                                         class="form-control form-control-alternative" placeholder="Jumlah Tagihan"
-                                        value="{{ old('jumlah_tagihan')}}">
+                                        disabled>
                                     @if ($errors->has('jumlah_tagihan'))
                                     <span class="text-danger">{{ $errors->first('jumlah_tagihan') }}</span>
                                     @endif
@@ -58,11 +59,46 @@ Tambah Data Transaksi Retribusi
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-first-name">Bulan Tagihan</label>
-                                    <input type="text" name="bulan_tagihan"
-                                        class="form-control form-control-alternative" placeholder="Bulan Tagihan"
-                                        value="{{ old('bulan_tagihan')}}">
-                                    @if ($errors->has('bulan_tagihan'))
-                                    <span class="text-danger">{{ $errors->first('bulan_tagihan') }}</span>
+                                    <select name="bulan_tagihan" id="bulan_tagihan" class="form-control">
+                                        <option value="">Pilih bulan...</option>
+                                        <option value="Januari" @if (old('bulan_tagihan') !='' ) selected="selected"
+                                            @endif>
+                                            Januari</option>
+                                        <option value="Februari" @if (old('bulan_tagihan') !='' ) selected="selected"
+                                            @endif>
+                                            Februari</option>
+                                        <option value="Maret" @if (old('bulan_tagihan') !='' ) selected="selected"
+                                            @endif>
+                                            Maret</option>
+                                        <option value="April" @if (old('bulan_tagihan') !='' ) selected="selected"
+                                            @endif>
+                                            April</option>
+                                        <option value="Mei" @if (old('bulan_tagihan') !='' ) selected="selected" @endif>
+                                            Mei</option>
+                                        <option value="Juni" @if (old('bulan_tagihan') !='' ) selected="selected"
+                                            @endif>
+                                            Juni</option>
+                                        <option value="Juli" @if (old('bulan_tagihan') !='' ) selected="selected"
+                                            @endif>
+                                            Juli</option>
+                                        <option value="Agustus" @if (old('bulan_tagihan') !='' ) selected="selected"
+                                            @endif>
+                                            Agustus</option>
+                                        <option value="September" @if (old('bulan_tagihan') !='' ) selected="selected"
+                                            @endif>
+                                            September</option>
+                                        <option value="Oktober" @if (old('bulan_tagihan') !='' ) selected="selected"
+                                            @endif>
+                                            Oktober</option>
+                                        <option value="November" @if (old('bulan_tagihan') !='' ) selected="selected"
+                                            @endif>
+                                            November</option>
+                                        <option value="Desember" @if (old('bulan_tagihan') !='' ) selected="selected"
+                                            @endif>
+                                            Desember</option>
+                                    </select>
+                                    @if ($errors->has('id_users'))
+                                    <span class="text-danger">{{ $errors->first('id_users') }}</span>
                                     @endif
                                 </div>
                             </div>
@@ -83,10 +119,11 @@ Tambah Data Transaksi Retribusi
                                     <select name="keterangan" class="form-control form-control-alternative"
                                         placeholder="Keterangan pembayaran">
                                         <option value="">Pilih...</option>
-                                        <option value="sudah_bayar" @if (old('keterangan')=='sudah_bayar' ) selected="selected" @endif>
+                                        <option value="sudah_bayar" @if (old('keterangan')=='sudah_bayar' )
+                                            selected="selected" @endif>
                                             sudah bayar</option>
-                                        <option value="belum_bayar" @if (old('keterangan')=='belum_bayar' ) selected="selected"
-                                            @endif>belum bayar</option>
+                                        <option value="belum_bayar" @if (old('keterangan')=='belum_bayar' )
+                                            selected="selected" @endif>belum bayar</option>
                                     </select>
                                     @if ($errors->has('keterangan'))
                                     <span class="text-danger">{{ $errors->first('keterangan') }}</span>
@@ -100,9 +137,9 @@ Tambah Data Transaksi Retribusi
                             <label>Alamat</label>
                             <textarea name="alamat" rows="4" class="form-control form-control-alternative"
                                 placeholder="Alamat">{{ old('alamat')}}</textarea>
-                                @if ($errors->has('alamat'))
-                                    <span class="text-danger">{{ $errors->first('alamat') }}</span>
-                                    @endif
+                            @if ($errors->has('alamat'))
+                            <span class="text-danger">{{ $errors->first('alamat') }}</span>
+                            @endif
                         </div>
                     </div>
                     <button class="btn btn-success" type="submit">Tambah</button>
@@ -116,12 +153,30 @@ Tambah Data Transaksi Retribusi
 
 @push('script')
 <script type="text/javascript">
-$(document).ready(function () {
-  $('#id_users').select2({
+    function updateTagihan() {
+        let user = $('#id_users').val()
+        if (user != '' && user != null) {
+            $.ajax({
+                url: "{{url('')}}/admin/get-tagihan/" + user,
+                success: function (res) {
+                    $.each(res, function (index, tagihan) {
+                        $('#jumlah_tagihan').val(tagihan.harga_retribusi)
+                    })
+                },
+            });
+        }
+    }
+
+    $('#id_users').select2({
         allowClear: true,
         placeholder: "Pilih nama warga...",
         theme: 'bootstrap4',
     });
-})
+    $('#bulan_tagihan').select2({
+        allowClear: true,
+        placeholder: "Pilih bulan...",
+        theme: 'bootstrap4',
+    });
+
 </script>
 @endpush

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\RetribusiWarga;
 use App\Models\User;
 use App\Models\Warga;
+use App\Models\KategoriSampah;
 
 class TransaksiRetribusiController extends Controller
 {
@@ -140,5 +141,14 @@ class TransaksiRetribusiController extends Controller
         $retribusi->delete();
         return redirect()->route('retribusi.index')
                         ->with('success','Data berhasil dihapus');
+    }
+
+    public function getTagihan($user_id)
+    {
+        $tagihan = KategoriSampah::select('kategori_sampah.harga_retribusi')
+                    ->join('warga', 'warga.id_kategori_sampah', '=', 'kategori_sampah.id')
+                    ->join('users', 'users.id', '=', 'warga.id_users')
+                    ->where('users.id', $user_id)->get();
+        return response()->json($tagihan);
     }
 }
