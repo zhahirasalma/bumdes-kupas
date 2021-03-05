@@ -15,7 +15,8 @@ Daftar Warga
                 </div>
                 <div class="col text-right">
                     <a href="{{route('warga.create')}}" class="btn btn-success">Tambah</a>
-                    <a href="" class="btn btn-success">Tambah dari Excel</a>
+                    <button class="btn btn-success" data-toggle="modal" data-target="#modal-import">Import dari
+                        Excel</button>
                 </div>
             </div>
         </div>
@@ -84,7 +85,38 @@ Daftar Warga
         </div>
     </div>
 </div>
-
+<div class="modal fade" id="modal-import">
+    <div class="modal-dialog modal-lg">
+        <form method="post" id="form-import" action="{{url('/admin/import-warga')}}" enctype="multipart/form-data"
+            class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Import Data Warga</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{method_field('PUT')}}
+                {{csrf_field()}}
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>Import data warga sesuai format contoh berikut.<br /><a
+                                href="{{url('')}}/excel-warga.xlsx"><i class="fas fa-download"></i> File Contoh Excel
+                                Warga</a></p>
+                    </div>
+                    <div class="col-md-12">
+                        <label>File Excel Warga</label><br>
+                        <input type="file" name="excel-warga" required>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
+            </div>
+        </form>
+    </div>
+</div>
 @endsection
 
 @push('script')
