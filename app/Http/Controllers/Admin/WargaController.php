@@ -73,7 +73,7 @@ class WargaController extends Controller
         $request->validate([
             'NIK' => 'required|numeric|min:16|unique:users, NIK',
             'nama' => 'required|min:3|string',
-            'email' => 'required|min:10|email',
+            'email' => 'required|min:10|email|unique:users, email',
             'password' => 'required|min:5',
             'id_kategori_sampah' => 'required|not_in:0',
             'no_telp' => 'required|min:11|numeric',
@@ -85,26 +85,26 @@ class WargaController extends Controller
         ], $messages);
 
         $user = new User;
-       $user->nama = $request->input('nama');
-       $user->email = $request->input('email');
-       $user->password = $request->input('password');
-       $user->role = "warga";
-       if($user){
+        $user->nama = $request->input('nama');
+        $user->email = $request->input('email');
+        $user->password = bcrypt($request->input('password'));
+        $user->role = "warga";
+        if($user){
            $user->save();
-       }
-       
-       $warga = new Warga;
-       $warga->id_users=$user->id;
-       $warga->NIK = $request->input('NIK');
-       $warga->no_telp = $request->input('no_telp');
-       $warga->id_kota = $request->input('id_kota');
-       $warga->id_kecamatan = $request->input('id_kecamatan');
-       $warga->id_desa = $request->input('id_desa');
-       $warga->dukuh = $request->input('dukuh');
-       $warga->detail_alamat = $request->input('detail_alamat');
-       $warga->lokasi = $request->input('lokasi');
-       $warga->id_kategori_sampah = $request->input('id_kategori_sampah');
-       if($warga){
+        }
+        
+        $warga = new Warga;
+        $warga->id_users=$user->id;
+        $warga->NIK = $request->input('NIK');
+        $warga->no_telp = $request->input('no_telp');
+        $warga->id_kota = $request->input('id_kota');
+        $warga->id_kecamatan = $request->input('id_kecamatan');
+        $warga->id_desa = $request->input('id_desa');
+        $warga->dukuh = $request->input('dukuh');
+        $warga->detail_alamat = $request->input('detail_alamat');
+        $warga->lokasi = $request->input('lokasi');
+        $warga->id_kategori_sampah = $request->input('id_kategori_sampah');
+        if($warga){
            $warga->save();
         }
 
@@ -195,7 +195,6 @@ class WargaController extends Controller
             'role' => "warga"
         ]);
         
-
         $warga->update([
             'NIK' => $request->input('NIK'),
             'no_telp' => $request->input('no_telp'),

@@ -21,16 +21,10 @@ Tambah Bank Sampah
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-nama">Nama</label>
-                                    <select name="id_users" id="id_users" class="form-control">
-                                        <option value="">Pilih nama bank sampah...</option>
-                                        @foreach($user as $u)
-                                        <option value="{{$u->id}}" @if (old('id_users')==$u->id ) selected="selected"
-                                            @endif>
-                                            {{$u->nama}}</option>
-                                        @endforeach
-                                    </select>
-                                    @if ($errors->has('id_users'))
-                                    <span class="text-danger">{{ $errors->first('id_users') }}</span>
+                                    <input type="text" name="nama" class="form-control form-control-alternative"
+                                        placeholder="Nama" value="{{ old('nama')}}">
+                                    @if ($errors->has('nama'))
+                                    <span class="text-danger">{{ $errors->first('nama') }}</span>
                                     @endif
                                 </div>
                             </div>
@@ -45,7 +39,28 @@ Tambah Bank Sampah
                                 </div>
                             </div>
                         </div>
-
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-nama">Email</label>
+                                    <input type="email" name="email" class="form-control form-control-alternative"
+                                        placeholder="Email" value="{{ old('email')}}">
+                                    @if ($errors->has('email'))
+                                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-first-name">Password</label>
+                                    <input type="password" name="password" class="form-control form-control-alternative"
+                                        placeholder="Password" value="{{ old('password')}}">
+                                </div>
+                                @if ($errors->has('password'))
+                                <span class="text-danger">{{ $errors->first('password') }}</span>
+                                @endif
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
@@ -163,12 +178,6 @@ Tambah Bank Sampah
             });
         }
     }
-
-    $('#id_users').select2({
-        allowClear: true,
-        placeholder: "Pilih nama bank sampah...",
-        theme: 'bootstrap4',
-    });
 
     $('#kota').select2({
         allowClear: true,

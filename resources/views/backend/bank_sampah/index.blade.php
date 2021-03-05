@@ -27,6 +27,7 @@ Daftar Bank Sampah
                         <th scope="col">No</th>
                         <th scope="col">Nama</th>
                         <th scope="col">No Telp</th>
+                        <th scope="col">Email</th>
                         <th scope="col">Alamat Detail</th>
                         <th scope="col">Aksi</th>
                     </tr>
@@ -42,6 +43,9 @@ Daftar Bank Sampah
                         </td>
                         <td>
                             {{$data->no_telp}}
+                        </td>
+                        <td>
+                            {{$data->user->email}}
                         </td>
                         <td>
                             {{$data->detail_alamat}},

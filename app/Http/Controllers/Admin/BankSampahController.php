@@ -30,7 +30,6 @@ class BankSampahController extends Controller
      */
     public function create()
     {
-        $user = User::select('id', 'nama')->where('role', 'bank_sampah')->get();
         $kota = Kota::all();
         $kecamatan = Kecamatan::all();
         $desa = Desa::all();
@@ -46,8 +45,15 @@ class BankSampahController extends Controller
     public function store(Request $request)
     {
         $messages = [
-            'id_users.required' => 'Nama wajib diisi.',
+            'nama.required' => 'Nama wajib diisi.',
+            'nama.min' => 'Nama minimal 3 huruf.',
             'no_telp.required' => 'No telepon wajib diisi.',
+            'no_telp.min' => 'No telepon minimal 10 digit.',
+            'email.required' => 'Email wajib diisi.',
+            'email.min' => 'Email minimal 11 huruf.',
+            'email.unique' => 'Email sudah terpakai.',
+            'password.required' => 'Password wajib diisi.',
+            'password.min' => 'Password minimal 5 huruf.',
             'id_kota.required' => 'Kota wajib diisi.',
             'id_kecamatan.required' => 'Kecamatan wajib diisi.',
             'id_desa.required' => 'Desa wajib diisi.',
@@ -56,8 +62,10 @@ class BankSampahController extends Controller
         ];
 
         $request->validate([
-            'id_users' => 'required',
-            'no_telp' => 'required',
+            'nama' => 'required|min:3|string',
+            'no_telp' => 'required|min:11|numeric',
+            'email' => 'required|min:10|email|unique:users,email',
+            'password' => 'required|min:5',
             'id_kota' => 'required',
             'id_kecamatan' => 'required',
             'id_desa' => 'required',
@@ -65,7 +73,27 @@ class BankSampahController extends Controller
             'detail_alamat' => 'required',
         ], $messages);
 
-        BankSampah::create($request->all());
+        $user = new User;
+        $user->nama = $request->input('nama');
+        $user->email = $request->input('email');
+        $user->password = bcrypt($request->input('password'));
+        $user->role = "bank_sampah";
+        if($user){
+            $user->save();
+        }
+
+        $bank_sampah = new BankSampah;
+        $bank_sampah->id_users=$user->id;
+        $bank_sampah->no_telp = $request->input('no_telp');
+        $bank_sampah->id_kota = $request->input('id_kota');
+        $bank_sampah->id_kecamatan = $request->input('id_kecamatan');
+        $bank_sampah->id_desa = $request->input('id_desa');
+        $bank_sampah->dukuh = $request->input('dukuh');
+        $bank_sampah->detail_alamat = $request->input('detail_alamat');
+        if($bank_sampah){
+            $bank_sampah->save();
+        }
+
         return redirect()->route('bank_sampah.index')
                         ->with('success','Data berhasil ditambahkan');
     }
@@ -109,8 +137,14 @@ class BankSampahController extends Controller
     public function update(Request $request, $id)
     {
         $messages = [
-            'id_users.required' => 'Nama wajib diisi.',
+            'nama.required' => 'Nama wajib diisi.',
+            'nama.min' => 'Nama minimal 3 huruf.',
             'no_telp.required' => 'No telepon wajib diisi.',
+            'no_telp.min' => 'No telepon minimal 10 digit.',
+            'email.required' => 'Email wajib diisi.',
+            'email.min' => 'Email minimal 11 huruf.',
+            'password.required' => 'Password wajib diisi.',
+            'password.min' => 'Password minimal 5 huruf.',
             'id_kota.required' => 'Kota wajib diisi.',
             'id_kecamatan.required' => 'Kecamatan wajib diisi.',
             'id_desa.required' => 'Desa wajib diisi.',
@@ -119,8 +153,10 @@ class BankSampahController extends Controller
         ];
 
         $request->validate([
-            'id_users' => 'required',
-            'no_telp' => 'required',
+            'nama' => 'required|min:3|string',
+            'no_telp' => 'required|min:11|numeric',
+            'email' => 'required|min:10|email',
+            'password' => 'required|min:5',
             'id_kota' => 'required',
             'id_kecamatan' => 'required',
             'id_desa' => 'required',
@@ -128,8 +164,23 @@ class BankSampahController extends Controller
             'detail_alamat' => 'required',
         ], $messages);
 
-        $data = BankSampah::find($id);
-        $data->update($request->all());
+        $bank_sampah = BankSampah::find($id);
+
+        $user = User::where('id', $bank_sampah->id_users)->update([
+            'nama' => $request->input('nama'),
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->input('password')),
+            'role' => "bank_sampah"
+        ]);
+        
+        $bank_sampah->update([
+            'no_telp' => $request->input('no_telp'),
+            'id_kota' => $request->input('id_kota'),
+            'id_kecamatan' => $request->input('id_kecamatan'),
+            'id_desa' => $request->input('id_desa'),
+            'dukuh' => $request->input('dukuh'),
+            'detail_alamat' => $request->input('detail_alamat'),
+        ]);
         return redirect()->route('bank_sampah.index')
                         ->with('success','Data berhasil diubah');
     }
@@ -143,6 +194,8 @@ class BankSampahController extends Controller
     public function destroy($id)
     {
         $data = BankSampah::find($id);
+        $user = User::where('id', $data->id_users);
+        $user->delete();
         $data->delete();       
         return redirect()->route('bank_sampah.index')
                         ->with('success','Data berhasil dihapus');
