@@ -24,6 +24,9 @@ Tambah Pengambilan
                         <label class="form-control-label">Waktu Pengambilan</label>
                         <input type="date" id="waktu_pengambilan" class="form-control form-control-alternative"
                             placeholder="Waktu Pengambilan" value="{{old('waktu_pengambilan')}}">
+                            @if ($errors->has('waktu_pengambilan'))
+                        <span class="text-danger">{{ $errors->first('waktu_pengambilan') }}</span>
+                        @endif
                     </div>
                 </div>
             </div>

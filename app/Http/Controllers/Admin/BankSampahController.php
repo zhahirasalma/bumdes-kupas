@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Kota;
 use App\Models\Kecamatan;
 use App\Models\Desa;
+Use Alert;
 
 class BankSampahController extends Controller
 {
@@ -33,7 +34,7 @@ class BankSampahController extends Controller
         $kota = Kota::all();
         $kecamatan = Kecamatan::all();
         $desa = Desa::all();
-        return view('backend.bank_sampah.tambah', compact('user', 'kota', 'kecamatan', 'desa'));
+        return view('backend.bank_sampah.tambah', compact('kota', 'kecamatan', 'desa'));
     }
 
     /**
@@ -94,8 +95,8 @@ class BankSampahController extends Controller
             $bank_sampah->save();
         }
 
-        return redirect()->route('bank_sampah.index')
-                        ->with('success','Data berhasil ditambahkan');
+        Alert::success('Berhasil', 'Data bank sampah berhasil ditambahkan');
+        return redirect()->route('bank_sampah.index');  
     }
 
     /**
@@ -181,8 +182,8 @@ class BankSampahController extends Controller
             'dukuh' => $request->input('dukuh'),
             'detail_alamat' => $request->input('detail_alamat'),
         ]);
-        return redirect()->route('bank_sampah.index')
-                        ->with('success','Data berhasil diubah');
+        Alert::success('Berhasil', 'Data bank sampah berhasil diubah');
+        return redirect()->route('bank_sampah.index');  
     }
 
     /**
@@ -197,7 +198,8 @@ class BankSampahController extends Controller
         $user = User::where('id', $data->id_users);
         $user->delete();
         $data->delete();       
-        return redirect()->route('bank_sampah.index')
-                        ->with('success','Data berhasil dihapus');
+        
+        Alert::success('Berhasil', 'Data bank sampah berhasil dihapus');
+        return back();  
     }
 }

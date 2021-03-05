@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\KategoriSampah;
 use App\Imports\KategoriImport;
 use Maatwebsite\Excel\Facades\Excel;
+Use Alert;
 
 class KategoriSampahController extends Controller
 {
@@ -51,8 +52,8 @@ class KategoriSampahController extends Controller
         ], $messages);
 
         KategoriSampah::create($request->all());
-        return redirect()->route('kategori_sampah.index')
-                        ->with('success','Data berhasil ditambahkan');
+        Alert::success('Berhasil', 'Data kategori berhasil ditambahkan');
+        return redirect()->route('kategori_sampah.index');  
     }
 
     /**
@@ -100,8 +101,8 @@ class KategoriSampahController extends Controller
         
         $kategori = KategoriSampah::find($id);
         $kategori->update($request->all());
-        return redirect()->route('kategori_sampah.index')
-                        ->with('success','Data berhasil diubah');
+        Alert::success('Berhasil', 'Data kategori berhasil diubah');
+        return redirect()->route('kategori_sampah.index');  
     }
 
     /**
@@ -114,14 +115,15 @@ class KategoriSampahController extends Controller
     {
         $kategori = KategoriSampah::find($id);
         $kategori->delete();       
-        return redirect()->route('kategori_sampah.index')
-                        ->with('success','Data berhasil dihapus'); 
+        Alert::success('Berhasil', 'Data kategori berhasil dihapus');
+        return back();  
     }
 
     public function importKategori(Request $request)
     {
         $file = $request->file('excel-kategori');
         Excel::import(new KategoriImport,$file);
+        Alert::success('Berhasil', 'Data kategori berhasil dihapus');
         return redirect()->back();
     }
 }

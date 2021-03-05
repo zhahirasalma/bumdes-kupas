@@ -34,6 +34,7 @@
             @include('backend.layout.sidebar')
         </nav>
         <div class="main-content">
+            @include('sweetalert::alert')
             <!-- Navbar -->
             <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
                 <div class="container-fluid">

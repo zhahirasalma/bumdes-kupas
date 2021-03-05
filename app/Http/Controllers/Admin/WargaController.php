@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Kota;
 use App\Models\Kecamatan;
 use App\Models\Desa;
+Use Alert;
 
 
 class WargaController extends Controller
@@ -33,11 +34,10 @@ class WargaController extends Controller
     public function create()
     {
         $kategori = KategoriSampah::select('id', 'jenis_sampah')->get();
-        $user = User::select('id', 'nama')->where('role', 'warga')->get();
         $kota = Kota::all();
         $kecamatan = Kecamatan::all();
         $desa = Desa::all();
-        return view('backend.warga.tambah', compact('kategori', 'user', 
+        return view('backend.warga.tambah', compact('kategori', 
                                                 'kota', 'kecamatan', 'desa'));
     }
 
@@ -57,6 +57,7 @@ class WargaController extends Controller
             'nama.min' => 'Nama minimal 3 huruf.',
             'email.required' => 'Email wajib diisi.',
             'email.min' => 'Email minimal 11 huruf.',
+            'email.unique' => 'Email sudah terpakai.',
             'password.required' => 'Password wajib diisi.',
             'password.min' => 'Password minimal 5 huruf.',
             'id_kategori_sampah.required' => 'Kategori wajib diisi.',
@@ -70,10 +71,10 @@ class WargaController extends Controller
             'detail_alamat.required' => 'Detail alamat wajib diisi.',
         ];
 
-        $request->validate([
-            'NIK' => 'required|numeric|min:16|unique:users, NIK',
+        $validator = $request->validate([
+            'NIK' => 'required|numeric|min:16|unique:warga,NIK',
             'nama' => 'required|min:3|string',
-            'email' => 'required|min:10|email|unique:users, email',
+            'email' => 'required|min:10|email|unique:users,email',
             'password' => 'required|min:5',
             'id_kategori_sampah' => 'required|not_in:0',
             'no_telp' => 'required|min:11|numeric',
@@ -108,8 +109,8 @@ class WargaController extends Controller
            $warga->save();
         }
 
-        return redirect()->route('warga.index')
-                        ->with('success','Data berhasil ditambahkan');
+        Alert::success('Berhasil', 'Data warga berhasil ditambahkan');
+        return redirect()->route('warga.index');        
     }
 
     /**
@@ -172,7 +173,7 @@ class WargaController extends Controller
             'detail_alamat.required' => 'Detail alamat wajib diisi.',
         ];
 
-        $request->validate([
+        $validate = $request->validate([
             'NIK' => 'required|numeric|min:16',
             'nama' => 'required|min:3|string',
             'email' => 'required|min:10|email',
@@ -207,8 +208,8 @@ class WargaController extends Controller
             'id_kategori_sampah' => $request->input('id_kategori_sampah')
         ]);
 
-        return redirect()->route('warga.index')
-                        ->with('success','Data berhasil diubah');
+        Alert::success('Berhasil', 'Data warga berhasil diubah');
+        return redirect()->route('warga.index');  
     }
 
     /**
@@ -223,7 +224,7 @@ class WargaController extends Controller
         $user = User::where('id', $w->id_users);
         $user->delete();
         $w->delete();
-        return redirect()->route('warga.index')
-                        ->with('success','Data berhasil dihapus'); 
+        Alert::success('Berhasil', 'Data warga berhasil dihapus');
+        return back(); 
     }
 }

@@ -8,6 +8,7 @@ use App\Models\RetribusiWarga;
 use App\Models\User;
 use App\Models\Warga;
 use App\Models\KategoriSampah;
+Use Alert;
 
 class TransaksiRetribusiController extends Controller
 {
@@ -64,8 +65,8 @@ class TransaksiRetribusiController extends Controller
         $input = $request->all();
         $input['id_warga'] = Warga::WHERE('id_users', $request['id_users'])->value('id');
         RetribusiWarga::create($input);
-        return redirect()->route('retribusi.index')
-                        ->with('success','Data berhasil ditambahkan');
+        Alert::success('Berhasil', 'Data retribusi berhasil ditambahkan');
+        return redirect()->route('retribusi.index');  
     }
 
     /**
@@ -125,8 +126,8 @@ class TransaksiRetribusiController extends Controller
         $input = $request->all();
         $input['id_warga'] = Warga::WHERE('id_users', $request['id_users'])->value('id');
         $retribusi->update($input);
-        return redirect()->route('retribusi.index')
-                        ->with('success','Data berhasil diubah');
+        Alert::success('Berhasil', 'Data retribusi berhasil diubah');
+        return redirect()->route('retribusi.index');  
     }
 
     /**
@@ -139,8 +140,8 @@ class TransaksiRetribusiController extends Controller
     {
         $retribusi = RetribusiWarga::find($id);
         $retribusi->delete();
-        return redirect()->route('retribusi.index')
-                        ->with('success','Data berhasil dihapus');
+        Alert::success('Berhasil', 'Data retribusi berhasil dihapus');
+        return back();  
     }
 
     public function getTagihan($user_id)

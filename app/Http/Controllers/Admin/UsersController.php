@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+Use Alert;
 
 class UsersController extends Controller
 {
@@ -60,8 +61,8 @@ class UsersController extends Controller
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         User::create($input);
-        return redirect()->route('users.index')
-                        ->with('success','Data berhasil ditambahkan');
+        Alert::success('Berhasil', 'Data user berhasil ditambahkan');
+        return redirect()->route('users.index');  
     }
 
     /**
@@ -120,8 +121,8 @@ class UsersController extends Controller
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $users->update($input);
-        return redirect()->route('users.index')
-                        ->with('success','Data berhasil diubah');
+        Alert::success('Berhasil', 'Data user berhasil diubah');
+        return redirect()->route('users.index');  
     }
 
     /**
@@ -134,7 +135,7 @@ class UsersController extends Controller
     {
         $users = User::find($id);
         $users->delete();       
-        return redirect()->route('users.index')
-                        ->with('success','Data berhasil dihapus'); 
+        Alert::success('Berhasil', 'Data user berhasil diubah');
+        return back();   
     }
 }

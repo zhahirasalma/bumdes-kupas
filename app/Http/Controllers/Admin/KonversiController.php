@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\KonversiSampah;
 use App\Imports\KonversiImport;
 use Maatwebsite\Excel\Facades\Excel;
+Use Alert;
 
 class KonversiController extends Controller
 {
@@ -51,8 +52,8 @@ class KonversiController extends Controller
         ], $messages);
 
         KonversiSampah::create($request->all());
-        return redirect()->route('konversi.index')
-                        ->with('success','Data berhasil ditambahkan');
+        Alert::success('Berhasil', 'Data konversi berhasil ditambahkan');
+        return redirect()->route('konversi.index');  
     }
 
     /**
@@ -100,8 +101,8 @@ class KonversiController extends Controller
 
         $konversi = KonversiSampah::find($id);
         $konversi->update($request->all());
-        return redirect()->route('konversi.index')
-                        ->with('success','Data berhasil diubah');
+        Alert::success('Berhasil', 'Data konversi berhasil diubah');
+        return redirect()->route('konversi.index');  
     }
 
     /**
@@ -114,14 +115,15 @@ class KonversiController extends Controller
     {
         $konversi = KonversiSampah::find($id);
         $konversi->delete();       
-        return redirect()->route('konversi.index')
-                        ->with('success','Data berhasil dihapus'); 
+        Alert::success('Berhasil', 'Data konversi berhasil dihapus');
+        return back();   
     }
 
     public function importKonversi(Request $request)
     {
         $file = $request->file('excel-konversi');
         Excel::import(new KonversiImport,$file);
+        Alert::success('Berhasil', 'Data konversi berhasil ditambahkan');
         return redirect()->back();
     }
 }

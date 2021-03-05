@@ -8,6 +8,7 @@ use App\Models\TransaksiBankSampah;
 use App\Models\KonversiSampah;
 use App\Models\User;
 use App\Models\BankSampah;
+Use Alert;
 
 class TransaksiBankSampahController extends Controller
 {
@@ -65,8 +66,8 @@ class TransaksiBankSampahController extends Controller
         $input['harga_total'] = $request['berat'] * $hargasampah;
 
         TransaksiBankSampah::create($input);
-        return redirect()->route('transaksi.index')
-                        ->with('success','Data berhasil ditambahkan');
+        Alert::success('Berhasil', 'Data transaksi berhasil ditambahkan');
+        return redirect()->route('transaksi.index');  
     }
 
     /**
@@ -128,8 +129,8 @@ class TransaksiBankSampahController extends Controller
         $input['harga_total'] = $request['berat'] * $hargasampah;
 
         $transaksi->update($input);
-        return redirect()->route('transaksi.index')
-                        ->with('success','Data berhasil diubah');
+        Alert::success('Berhasil', 'Data transaksi berhasil diubah');
+        return redirect()->route('transaksi.index');  
     }
 
     /**
@@ -142,7 +143,7 @@ class TransaksiBankSampahController extends Controller
     {
         $transaksi = TransaksiBankSampah::find($id);
         $transaksi->delete();
-        return redirect()->route('transaksi.index')
-                        ->with('success','Data berhasil dihapus');
+        Alert::success('Berhasil', 'Data transaksi berhasil dihapus');
+        return back();  
     }
 }

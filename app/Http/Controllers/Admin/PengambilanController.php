@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Warga;
 use App\Models\KategoriSampah;
 use Carbon\carbon;
+use Alert;
 
 class PengambilanController extends Controller
 {
@@ -54,8 +55,8 @@ class PengambilanController extends Controller
     {
         $pengambilan = Pengambilan::find($id);
         $pengambilan->delete();
-        return redirect()->route('pengambilan.index')
-                        ->with('success','Data berhasil dihapus');
+        Alert::success('Berhasil', 'Data pengambilan berhasil dihapus');
+        return back();  
     }
 
     public function ubahstatus(Request $request)
