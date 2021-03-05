@@ -26,7 +26,7 @@ Daftar Pengambilan Sampah
                         <th scope="col">No</th>
                         <th scope="col">Nama Warga</th>
                         <th scope="col">Alamat</th>
-                        <th scope="col">Waktu Pengambilan</th>
+                        <th scope="col">Tanggal Pengambilan</th>
                         <th scope="col">Status</th>
                         <th scope="col">Aksi</th>
                     </tr>
@@ -67,9 +67,6 @@ Daftar Pengambilan Sampah
                         </td>
                         <td>
                             <form action="{{ route('pengambilan.destroy', $p->id) }}" method="POST">
-                                <a href="{{ route('pengambilan.edit', $p->id) }}" class="btn btn-success btn-sm"
-                                    data-toggle="tooltip" data-placement="top" data-original-title="Edit"><i
-                                        class="far fa-edit"></i></a>
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"

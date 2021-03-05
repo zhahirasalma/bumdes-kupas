@@ -21,6 +21,15 @@ Tambah Pengambilan
             <div class="row">
                 <div class="col-lg-4">
                     <div class="form-group">
+                        <label class="form-control-label">Waktu Pengambilan</label>
+                        <input type="date" id="waktu_pengambilan" class="form-control form-control-alternative"
+                            placeholder="Waktu Pengambilan" value="{{old('waktu_pengambilan')}}">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
                         <label class="form-control-label" for="input-nama">Tampilkan berdasarkan</label>
                         <select name="kategori" id="kategori" class="form-control filter">
                             <option value="0">Semua Warga</option>
@@ -137,6 +146,7 @@ Tambah Pengambilan
     function tambah() {
         let checkbox_terpilih = $("#tabel tbody .cb-child:checked")
         let semua_id = []
+        let waktu = $('#waktu_pengambilan').val()
         $.each(checkbox_terpilih, function (index, elm) {
             semua_id.push(elm.value)
         })
@@ -144,7 +154,8 @@ Tambah Pengambilan
             url: "{{route('pengambilan/tambah')}}",
             method: 'post',
             data: {
-                id_users: semua_id
+                id_users: semua_id,
+                waktu: waktu
             },
             success: function (res) {
                 window.location.href = "/admin/pengambilan"

@@ -114,13 +114,15 @@ class PengambilanController extends Controller
     public function tambah(Request $request)
     {        
         $input= $request->id_users;
+        $waktu = $request->waktu;
         $data=array();
         foreach($input as $i){
             $data[] = [
-                'created_at' => Carbon::now(),
                 'id_users' => $i,
                 'id_warga' => Warga::WHERE('id_users', $i)->value('id'),
-                'status' => 1
+                'waktu_pengambilan' => $waktu,
+                'status' => 1,
+                'created_at' => Carbon::now(),
             ];
         }
         Pengambilan::insert($data);
