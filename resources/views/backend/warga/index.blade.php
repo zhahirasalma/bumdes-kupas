@@ -27,6 +27,7 @@ Daftar Warga
                         <th scope="col">No</th>
                         <th scope="col">NIK</th>
                         <th scope="col">Nama</th>
+                        <th scope="col">Email</th>
                         <th scope="col">Kategori</th>
                         <th scope="col">No Telp</th>
                         <th scope="col">Detail Alamat</th>
@@ -45,6 +46,9 @@ Daftar Warga
                         </td>
                         <td>
                             {{$w->user->nama}}
+                        </td>
+                        <td>
+                            {{$w->user->email}}
                         </td>
                         <td>
                             {{$w->kategori->jenis_sampah}}

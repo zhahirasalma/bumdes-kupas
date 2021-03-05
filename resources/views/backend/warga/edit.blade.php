@@ -32,17 +32,34 @@ Edit Data Warga
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-nama">Nama</label>
-                                    <select name="id_users" id="id_users" class="form-control">
-                                        <option value="">Pilih nama warga...</option>
-                                        @foreach($user as $u)
-                                        <option value="{{$u->id}}" {{ $u->id == $w->id_users ? 'selected' : '' }}>
-                                            {{$u->nama}}</option>
-                                        @endforeach
-                                    </select>
-                                    @if ($errors->has('id_users'))
-                                    <span class="text-danger">{{ $errors->first('id_users') }}</span>
+                                    <input type="text" name="nama" class="form-control form-control-alternative"
+                                        placeholder="Nama" value="{{ $w->user->nama}}">
+                                    @if ($errors->has('nama'))
+                                    <span class="text-danger">{{ $errors->first('nama') }}</span>
                                     @endif
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-nama">Email</label>
+                                    <input type="email" name="email" class="form-control form-control-alternative"
+                                        placeholder="Email" value="{{$w->user->email}}">
+                                    @if ($errors->has('email'))
+                                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-first-name">Password</label>
+                                    <input type="password" name="password" class="form-control form-control-alternative"
+                                        placeholder="Password" value="{{ old('password')}}">
+                                </div>
+                                @if ($errors->has('password'))
+                                <span class="text-danger">{{ $errors->first('password') }}</span>
+                                @endif
                             </div>
                         </div>
                         <div class="row">
