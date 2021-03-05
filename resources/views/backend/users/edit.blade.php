@@ -65,10 +65,6 @@ Edit Users
                                             admin</option>
                                         <option value="educator" {{ $users->role == 'educator' ? 'selected' : '' }}>
                                             educator</option>
-                                        <option value="warga" {{ $users->role == 'warga' ? 'selected' : '' }}>
-                                            warga</option>
-                                        <option value="bank_sampah"
-                                            {{ $users->role == 'bank_sampah' ? 'selected' : '' }}>bank_sampah</option>
                                     </select>
                                     @if ($errors->has('role'))
                                     <span class="text-danger">{{ $errors->first('role') }}</span>

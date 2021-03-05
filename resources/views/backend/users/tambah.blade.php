@@ -64,10 +64,6 @@ Tambah Users
                                             admin</option>
                                         <option value="educator" @if (old('role')=='educator' ) selected="selected"
                                             @endif>educator</option>
-                                        <option value="warga" @if (old('role')=='warga' ) selected="selected" @endif>
-                                            warga</option>
-                                        <option value="bank_sampah" @if (old('role')=='bank_sampah' )
-                                            selected="selected" @endif>bank_sampah</option>
                                     </select>
                                     @if ($errors->has('role'))
                                     <span class="text-danger">{{ $errors->first('role') }}</span>

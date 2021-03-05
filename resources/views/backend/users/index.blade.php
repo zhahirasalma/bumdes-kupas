@@ -26,7 +26,6 @@ Users
                         <th scope="col">No</th>
                         <th scope="col">Nama</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Password</th>
                         <th scope="col">Role</th>
                         <th scope="col">Aksi</th>
                     </tr>
@@ -42,9 +41,6 @@ Users
                         </td>
                         <td>
                             {{$user->email}}
-                        </td>
-                        <td>
-                            
                         </td>
                         <td>
                             {{$user->role}}
