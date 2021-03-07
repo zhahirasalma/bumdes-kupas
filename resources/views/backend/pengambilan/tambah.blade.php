@@ -127,6 +127,11 @@ Tambah Pengambilan
         ]
     });
 
+    $('#kategori').select2({
+        allowClear: true,
+        theme: 'bootstrap4',
+    });
+
     //filter data by kategori
     $(".filter").on('change', function () {
         filter = $("#kategori").val()
