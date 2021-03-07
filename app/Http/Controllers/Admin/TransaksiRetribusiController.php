@@ -45,7 +45,6 @@ class TransaksiRetribusiController extends Controller
         $messages = [
             'id_users.required' => 'Nama wajib diisi.',
             'nama_kolektor.required' => 'Nama kolektor wajib diisi.',
-            'jumlah_tagihan.required' => 'Jumlah Tagihan wajib diisi.',
             'bulan_tagihan.required' => 'Bulan Tagihan wajib diisi.',
             'alamat.required' => 'Alamat wajib diisi.',
             'keterangan.required' => 'Keterangan wajib diisi.',
@@ -54,7 +53,6 @@ class TransaksiRetribusiController extends Controller
         
         $request->validate([
             'nama_kolektor' => 'required',
-            'jumlah_tagihan' => 'required',
             'bulan_tagihan' => 'required',
             'alamat' => 'required',
             'keterangan' => 'required',
@@ -64,6 +62,10 @@ class TransaksiRetribusiController extends Controller
         
         $input = $request->all();
         $input['id_warga'] = Warga::WHERE('id_users', $request['id_users'])->value('id');
+        $input['jumlah_tagihan'] = KategoriSampah::where('users.id', $request->id_users)
+                    ->join('warga', 'warga.id_kategori_sampah', '=', 'kategori_sampah.id')
+                    ->join('users', 'users.id', '=', 'warga.id_users')
+                    ->value('kategori_sampah.harga_retribusi');
         RetribusiWarga::create($input);
         Alert::success('Berhasil', 'Data retribusi berhasil ditambahkan');
         return redirect()->route('retribusi.index');  
@@ -105,7 +107,6 @@ class TransaksiRetribusiController extends Controller
         $messages = [
             'id_users.required' => 'Nama wajib diisi.',
             'nama_kolektor.required' => 'Nama kolektor wajib diisi.',
-            'jumlah_tagihan.required' => 'Jumlah Tagihan wajib diisi.',
             'bulan_tagihan.required' => 'Bulan Tagihan wajib diisi.',
             'alamat.required' => 'Alamat wajib diisi.',
             'keterangan.required' => 'Keterangan wajib diisi.',
@@ -114,7 +115,6 @@ class TransaksiRetribusiController extends Controller
         
         $request->validate([
             'nama_kolektor' => 'required',
-            'jumlah_tagihan' => 'required',
             'bulan_tagihan' => 'required',
             'alamat' => 'required',
             'keterangan' => 'required',
@@ -125,6 +125,10 @@ class TransaksiRetribusiController extends Controller
         $retribusi = RetribusiWarga::find($id);
         $input = $request->all();
         $input['id_warga'] = Warga::WHERE('id_users', $request['id_users'])->value('id');
+        $input['jumlah_tagihan'] = KategoriSampah::where('users.id', $request->id_users)
+                    ->join('warga', 'warga.id_kategori_sampah', '=', 'kategori_sampah.id')
+                    ->join('users', 'users.id', '=', 'warga.id_users')
+                    ->value('kategori_sampah.harga_retribusi');
         $retribusi->update($input);
         Alert::success('Berhasil', 'Data retribusi berhasil diubah');
         return redirect()->route('retribusi.index');  

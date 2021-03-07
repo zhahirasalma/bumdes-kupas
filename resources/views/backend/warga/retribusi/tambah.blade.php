@@ -48,7 +48,7 @@ Tambah Data Transaksi Retribusi
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="jumlah_tagihan">Jumlah Tagihan</label>
-                                    <input type="text" id="jumlah_tagihan" name="jumlah_tagihan"
+                                    <input type="text" id="jumlah_tagihan" 
                                         class="form-control form-control-alternative" placeholder="Jumlah Tagihan"
                                         disabled>
                                     @if ($errors->has('jumlah_tagihan'))

@@ -21,7 +21,7 @@ Edit Data Transaksi Retribusi
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-nama">Nama Warga</label>
-                                    <select name="id_users" class="form-control">
+                                    <select name="id_users" id="id_users" class="form-control" onChange="updateTagihan()">
                                         <option value="">Pilih nama warga...</option>
                                         @foreach($user as $u)
                                         <option value="{{$u->id}}"
@@ -48,9 +48,9 @@ Edit Data Transaksi Retribusi
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-nama">Jumlah Tagihan</label>
-                                    <input type="text" name="jumlah_tagihan"
+                                    <input type="text" id="jumlah_tagihan" 
                                         class="form-control form-control-alternative" placeholder="Jumlah Tagihan"
-                                        value="{{$retribusi->jumlah_tagihan}}">
+                                        value="{{$retribusi->jumlah_tagihan}}" disabled>
                                     @if ($errors->has('jumlah_tagihan'))
                                     <span class="text-danger">{{ $errors->first('jumlah_tagihan') }}</span>
                                     @endif
@@ -59,9 +59,33 @@ Edit Data Transaksi Retribusi
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-first-name">Bulan Tagihan</label>
-                                    <input type="text" name="bulan_tagihan"
-                                        class="form-control form-control-alternative" placeholder="Bulan Tagihan"
-                                        value="{{$retribusi->bulan_tagihan}}">
+                                    <select name="bulan_tagihan" id="bulan_tagihan" class="form-control">
+                                        <option value="">Pilih bulan...</option>
+                                        <option value="Januari" {{ $retribusi->bulan_tagihan == "Januari" ? 'selected' : '' }}>
+                                            Januari</option>
+                                        <option value="Februari" {{ $retribusi->bulan_tagihan == "Februari" ? 'selected' : '' }}>
+                                            Februari</option>
+                                        <option value="Maret" {{ $retribusi->bulan_tagihan == "Maret" ? 'selected' : '' }}>
+                                            Maret</option>
+                                        <option value="April" {{ $retribusi->bulan_tagihan == "April" ? 'selected' : '' }}>
+                                            April</option>
+                                        <option value="Mei" {{ $retribusi->bulan_tagihan == "Mei" ? 'selected' : '' }}>
+                                            Mei</option>
+                                        <option value="Juni" {{ $retribusi->bulan_tagihan == "Juni" ? 'selected' : '' }}>
+                                            Juni</option>
+                                        <option value="Juli" {{ $retribusi->bulan_tagihan == "Juli" ? 'selected' : '' }}>
+                                            Juli</option>
+                                        <option value="Agustus" {{ $retribusi->bulan_tagihan == "Agustus" ? 'selected' : '' }}>
+                                            Agustus</option>
+                                        <option value="September" {{ $retribusi->bulan_tagihan == "September" ? 'selected' : '' }}>
+                                            September</option>
+                                        <option value="Oktober" {{ $retribusi->bulan_tagihan == "Oktober" ? 'selected' : '' }}>
+                                            Oktober</option>
+                                        <option value="November" {{ $retribusi->bulan_tagihan == "November" ? 'selected' : '' }}>
+                                            November</option>
+                                        <option value="Desember" {{ $retribusi->bulan_tagihan == "Desember" ? 'selected' : '' }}>
+                                            Desember</option>
+                                    </select>
                                     @if ($errors->has('bulan_tagihan'))
                                     <span class="text-danger">{{ $errors->first('bulan_tagihan') }}</span>
                                     @endif
@@ -116,3 +140,33 @@ Edit Data Transaksi Retribusi
 </div>
 </div>
 @endsection
+
+@push('script')
+<script type="text/javascript">
+    function updateTagihan() {
+        let user = $('#id_users').val()
+        if (user != '' && user != null) {
+            $.ajax({
+                url: "{{url('')}}/admin/get-tagihan/" + user,
+                success: function (res) {
+                    $.each(res, function (index, tagihan) {
+                        $('#jumlah_tagihan').val(tagihan.harga_retribusi)
+                    })
+                },
+            });
+        }
+    }
+
+    $('#id_users').select2({
+        allowClear: true,
+        placeholder: "Pilih nama warga...",
+        theme: 'bootstrap4',
+    });
+    $('#bulan_tagihan').select2({
+        allowClear: true,
+        placeholder: "Pilih bulan...",
+        theme: 'bootstrap4',
+    });
+
+</script>
+@endpush
