@@ -44,10 +44,6 @@ Route::resources([
 // Route::get('/registrasi/warga', [App\Http\Controllers\RegisterController::class, 'warga'])->name('warga');
 Route::get('/bank_sampah', [App\Http\Controllers\Auth\RegisterController::class, 'create_bank_sampah'])->name('create_bank_sampah');
 
-Route::get('/admin', function () {
-    return view('dashboard');
-});
-
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -76,6 +72,7 @@ Route::group(['prefix'=>'admin'], function(){
         'bank_sampah' => App\Http\Controllers\Admin\BankSampahController::class,
         'transaksi' => App\Http\Controllers\Admin\TransaksiBankSampahController::class,
         'konversi' => App\Http\Controllers\Admin\KonversiController::class,
-        'kategori_sampah' => App\Http\Controllers\Admin\KategoriSampahController::class
+        'kategori_sampah' => App\Http\Controllers\Admin\KategoriSampahController::class,
+        'dashboard' => App\Http\Controllers\Admin\DashboardController::class
         ]);
 });

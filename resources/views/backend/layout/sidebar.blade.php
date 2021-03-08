@@ -9,7 +9,7 @@
         <!-- Navigation -->
         <ul class="navbar-nav">
             <li class="nav-item  class=" active" ">
-                <a class=" nav-link " href="/admin"> 
+                <a class=" nav-link " href="{{route('dashboard.index')}}"> 
                     <i class="ni ni-sound-wave text-grey"></i> Dashboard
                 </a>
             </li>
