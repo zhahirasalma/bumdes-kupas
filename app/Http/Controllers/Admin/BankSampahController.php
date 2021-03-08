@@ -9,6 +9,8 @@ use App\Models\User;
 use App\Models\Kota;
 use App\Models\Kecamatan;
 use App\Models\Desa;
+use App\Imports\BankSampahImport;
+use Maatwebsite\Excel\Facades\Excel;
 Use Alert;
 
 class BankSampahController extends Controller
@@ -201,5 +203,13 @@ class BankSampahController extends Controller
         
         Alert::success('Berhasil', 'Data bank sampah berhasil dihapus');
         return back();  
+    }
+
+    public function importBankSampah(Request $request)
+    {
+        $file = $request->file('excel-bankSampah');
+        Excel::import(new BankSampahImport,$file);
+        Alert::success('Berhasil', 'Data bank sampah berhasil ditambahkan');
+        return redirect()->back();
     }
 }

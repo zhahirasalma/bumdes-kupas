@@ -123,7 +123,7 @@ class KategoriSampahController extends Controller
     {
         $file = $request->file('excel-kategori');
         Excel::import(new KategoriImport,$file);
-        Alert::success('Berhasil', 'Data kategori berhasil dihapus');
+        Alert::success('Berhasil', 'Data kategori berhasil ditambahkan');
         return redirect()->back();
     }
 }
