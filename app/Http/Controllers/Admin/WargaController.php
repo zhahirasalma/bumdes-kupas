@@ -10,6 +10,8 @@ use App\Models\User;
 use App\Models\Kota;
 use App\Models\Kecamatan;
 use App\Models\Desa;
+use App\Imports\WargaImport;
+use Maatwebsite\Excel\Facades\Excel;
 Use Alert;
 
 
@@ -83,6 +85,7 @@ class WargaController extends Controller
             'id_desa' => 'required',
             'dukuh' => 'required',
             'detail_alamat' => 'required',
+            'lokasi' => 'nullable',
         ], $messages);
 
         $user = new User;
@@ -185,6 +188,7 @@ class WargaController extends Controller
             'id_desa' => 'required',
             'dukuh' => 'required',
             'detail_alamat' => 'required',
+            'lokasi' => 'nullable',
         ], $messages);
 
         $warga = Warga::find($id);
@@ -226,5 +230,13 @@ class WargaController extends Controller
         $w->delete();
         Alert::success('Berhasil', 'Data warga berhasil dihapus');
         return back(); 
+    }
+
+    public function importWarga(Request $request)
+    {
+        $file = $request->file('excel-warga');
+        Excel::import(new WargaImport,$file);
+        Alert::success('Berhasil', 'Data warga berhasil ditambahkan');
+        return redirect()->back();
     }
 }

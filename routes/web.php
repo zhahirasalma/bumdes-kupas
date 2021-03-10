@@ -60,6 +60,7 @@ Route::group(['prefix'=>'admin'], function(){
     Route::put('/import-kategori',[App\Http\Controllers\Admin\KategoriSampahController::class, 'importKategori']);
     Route::put('/import-konversi',[App\Http\Controllers\Admin\KonversiController::class, 'importKonversi']);
     Route::put('/import-bankSampah',[App\Http\Controllers\Admin\BankSampahController::class, 'importBankSampah']);
+    Route::put('/import-warga',[App\Http\Controllers\Admin\WargaController::class, 'importWarga']);
     Route::get('/get-tagihan/{user_id}', [App\Http\Controllers\Admin\TransaksiRetribusiController::class, 'getTagihan'])
     ->name('get-tagihan');
     Route::get('/reset', [App\Http\Controllers\Admin\PengambilanController::class, 'reset'])

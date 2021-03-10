@@ -24,7 +24,7 @@ class CreateWargaTable extends Migration
             $table->string('no_telp');
             $table->string('dukuh');
             $table->string('detail_alamat');
-            $table->string('lokasi');
+            $table->string('lokasi')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
