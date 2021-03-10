@@ -114,6 +114,11 @@ class PengambilanController extends Controller
 
     public function tambah(Request $request)
     {        
+        $this->validate($request, [
+            'id_users' => 'required',
+            'waktu' => 'required'
+            ]);
+
         $input= $request->id_users;
         $waktu = $request->waktu;
         $data=array();
@@ -128,5 +133,11 @@ class PengambilanController extends Controller
         }
         Pengambilan::insert($data);
         return response()->json(true);
+    }
+
+    public function reset(){
+        Pengambilan::whereNotNull('id')->delete();
+        Alert::success('Berhasil', 'Data pengambilan berhasil dihapus');
+        return back(); 
     }
 }

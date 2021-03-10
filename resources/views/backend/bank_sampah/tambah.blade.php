@@ -117,7 +117,7 @@ Tambah Bank Sampah
                     </div>
                     <div class="pl-lg-4">
                         <div class="form-group">
-                            <label>Detail Alamat</label>
+                            <label class="form-control-label">Detail Alamat</label>
                             <textarea rows="4" name="detail_alamat" class="form-control form-control-alternative"
                                 placeholder="Detail Alamat">{{ old('detail_alamat')}}</textarea>
                             @if ($errors->has('detail_alamat'))

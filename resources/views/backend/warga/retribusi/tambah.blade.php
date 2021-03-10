@@ -116,7 +116,7 @@ Tambah Data Transaksi Retribusi
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-first-name">Keterangan</label>
-                                    <select name="keterangan" class="form-control form-control-alternative"
+                                    <select name="keterangan" id="keterangan" class="form-control form-control-alternative"
                                         placeholder="Keterangan pembayaran">
                                         <option value="">Pilih...</option>
                                         <option value="sudah_bayar" @if (old('keterangan')=='sudah_bayar' )
@@ -134,7 +134,7 @@ Tambah Data Transaksi Retribusi
                     </div>
                     <div class="pl-lg-4">
                         <div class="form-group">
-                            <label>Alamat</label>
+                            <label class="form-control-label">Alamat</label>
                             <textarea name="alamat" rows="4" class="form-control form-control-alternative"
                                 placeholder="Alamat">{{ old('alamat')}}</textarea>
                             @if ($errors->has('alamat'))
@@ -175,6 +175,11 @@ Tambah Data Transaksi Retribusi
     $('#bulan_tagihan').select2({
         allowClear: true,
         placeholder: "Pilih bulan...",
+        theme: 'bootstrap4',
+    });
+    $('#keterangan').select2({
+        allowClear: true,
+        placeholder: "Pilih keterangan...",
         theme: 'bootstrap4',
     });
 

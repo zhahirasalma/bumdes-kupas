@@ -62,6 +62,8 @@ Route::group(['prefix'=>'admin'], function(){
     Route::put('/import-bankSampah',[App\Http\Controllers\Admin\BankSampahController::class, 'importBankSampah']);
     Route::get('/get-tagihan/{user_id}', [App\Http\Controllers\Admin\TransaksiRetribusiController::class, 'getTagihan'])
     ->name('get-tagihan');
+    Route::get('/reset', [App\Http\Controllers\Admin\PengambilanController::class, 'reset'])
+    ->name('reset');
 
 
     Route::resources([

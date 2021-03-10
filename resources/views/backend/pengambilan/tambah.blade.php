@@ -22,9 +22,10 @@ Tambah Pengambilan
                 <div class="col-lg-4">
                     <div class="form-group">
                         <label class="form-control-label">Waktu Pengambilan</label>
-                        <input type="date" id="waktu_pengambilan" class="form-control form-control-alternative"
-                            placeholder="Waktu Pengambilan" value="{{old('waktu_pengambilan')}}">
-                            @if ($errors->has('waktu_pengambilan'))
+                        <input type="date" id="waktu_pengambilan" name="waktu_pengambilan"
+                            class="form-control form-control-alternative" placeholder="Waktu Pengambilan"
+                            value="{{old('waktu_pengambilan')}}">
+                        @if ($errors->has('waktu_pengambilan'))
                         <span class="text-danger">{{ $errors->first('waktu_pengambilan') }}</span>
                         @endif
                     </div>
@@ -167,7 +168,7 @@ Tambah Pengambilan
             },
             success: function (res) {
                 window.location.href = "/admin/pengambilan"
-            },
+            }
         })
     }
 

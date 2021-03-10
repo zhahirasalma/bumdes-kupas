@@ -14,6 +14,7 @@ Daftar Pengambilan Sampah
                     <h3 class="mb-0">@yield('title')</h3>
                 </div>
                 <div class="col text-right">
+                    <a href="{{route('reset')}}" type="button" id="button-reset" class="btn btn-danger">Reset data</a>
                     <a href="{{route('pengambilan.create')}}" class="btn btn-success">Tambah</a>
                 </div>
             </div>
@@ -103,7 +104,7 @@ Daftar Pengambilan Sampah
                 },
                 success: function (data) {
                     console.log('Success')
-                }
+                },
             });
         });
     });
