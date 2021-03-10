@@ -29,6 +29,7 @@ class BankSampahImport implements ToCollection, WithHeadingRow
                 'nama' => $row['nama'],
                 'email' => $row['email'],
                 'password' => bcrypt($row['password']),
+                'role' => 'bank_sampah',
                 'created_at'=>$now,
             ]);
 

@@ -30,6 +30,7 @@ class WargaImport implements ToCollection, WithHeadingRow
                 'nama' => $row['nama'],
                 'email' => $row['email'],
                 'password' => bcrypt($row['password']),
+                'role' => 'warga',
                 'created_at'=>$now,
             ]);
 
