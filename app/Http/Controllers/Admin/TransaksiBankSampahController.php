@@ -8,7 +8,8 @@ use App\Models\TransaksiBankSampah;
 use App\Models\KonversiSampah;
 use App\Models\User;
 use App\Models\BankSampah;
-Use Alert;
+use Carbon\carbon;
+use Alert;
 
 class TransaksiBankSampahController extends Controller
 {
@@ -31,7 +32,7 @@ class TransaksiBankSampahController extends Controller
     public function create()
     {
         $user = User::select('id', 'nama')->where('role', 'bank_sampah')->get();
-        $konversi = KonversiSampah::select('id', 'jenis_sampah')->get();
+        $konversi = KonversiSampah::all();
         return view('backend.bank_sampah.transaksi.tambah', compact('user', 'konversi'));
     }
 
@@ -47,27 +48,31 @@ class TransaksiBankSampahController extends Controller
             'id_users.required' => 'Nama wajib diisi.',
             'tanggal_transaksi.required' => 'Tanggal Transaksi wajib diisi.',
             'keterangan.required' => 'Keterangan wajib diisi.',
-            'id_konversi.required' => 'Jenis sampah wajib diisi.',
-            'berat.required' => 'Berat wajib diisi.',
         ];
-        
+
         $request->validate([
             'id_users' => 'required',
             'tanggal_transaksi' => 'required',
             'keterangan' => 'required',
-            'id_konversi' => 'required',
-            'berat' => 'required',
         ], $messages);
-        
+
         $input = $request->all();
-        $input['id_bank_sampah'] = BankSampah::WHERE('id_users', $request['id_users'])->value('id');
-
-        $hargasampah = KonversiSampah::WHERE('id', $request['id_konversi'])->value('harga_konversi');
-        $input['harga_total'] = $request['berat'] * $hargasampah;
-
-        TransaksiBankSampah::create($input);
-        Alert::success('Berhasil', 'Data transaksi berhasil ditambahkan');
-        return redirect()->route('transaksi.index');  
+        $id_bank_sampah = BankSampah::WHERE('id_users', $request['id_users'])->value('id');
+        $data = array();
+        foreach ($input['row'] as $i) {
+            $data[] = [
+                'id_users' => $input['id_users'],
+                'id_bank_sampah' => $id_bank_sampah,
+                'tanggal_transaksi' => $input['tanggal_transaksi'],
+                'keterangan' => $input['keterangan'],
+                'id_konversi' => (int)$i['id_konversi'],
+                'berat' => $i['berat'],
+                'harga_total' => $i['harga'] * $i['berat'],
+                'created_at' => Carbon::now(),
+            ];
+        }
+        TransaksiBankSampah::insert($data);
+        return response()->json(true);
     }
 
     /**
@@ -108,29 +113,34 @@ class TransaksiBankSampahController extends Controller
             'id_users.required' => 'Nama wajib diisi.',
             'tanggal_transaksi.required' => 'Tanggal Transaksi wajib diisi.',
             'keterangan.required' => 'Keterangan wajib diisi.',
-            'id_konversi.required' => 'Jenis sampah wajib diisi.',
-            'berat.required' => 'Berat wajib diisi.',
         ];
-        
+
         $request->validate([
             'id_users' => 'required',
             'tanggal_transaksi' => 'required',
             'keterangan' => 'required',
-            'id_konversi' => 'required',
-            'berat' => 'required',
         ], $messages);
 
         $transaksi = TransaksiBankSampah::find($id);
         $input = $request->all();
+        $id_bank_sampah = BankSampah::WHERE('id_users', $request['id_users'])->value('id');
+        $data = array();
+        foreach ($input['row'] as $i) {
+            $data[] = [
+                'id_users' => $input['id_users'],
+                'id_bank_sampah' => $id_bank_sampah,
+                'tanggal_transaksi' => $input['tanggal_transaksi'],
+                'keterangan' => $input['keterangan'],
+                'id_konversi' => (int)$i['id_konversi'],
+                'berat' => $i['berat'],
+                'harga_total' => $i['harga'] * $i['berat'],
+                'updated_at' => Carbon::now(),
+            ];
+        }
 
-        $input['id_bank_sampah'] = BankSampah::WHERE('id_users', $request['id_users'])->value('id');
-        
-        $hargasampah = KonversiSampah::WHERE('id', $request['id_konversi'])->value('harga_konversi');
-        $input['harga_total'] = $request['berat'] * $hargasampah;
-
-        $transaksi->update($input);
+        $transaksi->update($data);
         Alert::success('Berhasil', 'Data transaksi berhasil diubah');
-        return redirect()->route('transaksi.index');  
+        return redirect()->route('transaksi.index');
     }
 
     /**
@@ -144,6 +154,6 @@ class TransaksiBankSampahController extends Controller
         $transaksi = TransaksiBankSampah::find($id);
         $transaksi->delete();
         Alert::success('Berhasil', 'Data transaksi berhasil dihapus');
-        return back();  
+        return back();
     }
 }
