@@ -86,8 +86,9 @@ Daftar Transaksi Retribusi
 <script>
     $(document).ready(function () {
         var table = $('#tabel').DataTable({
-            
+
         });
     });
+
 </script>
 @endpush

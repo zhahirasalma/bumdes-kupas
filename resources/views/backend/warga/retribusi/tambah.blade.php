@@ -48,9 +48,8 @@ Tambah Data Transaksi Retribusi
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="jumlah_tagihan">Jumlah Tagihan</label>
-                                    <input type="text" id="jumlah_tagihan" 
-                                        class="form-control form-control-alternative" placeholder="Jumlah Tagihan"
-                                        disabled>
+                                    <input type="text" id="jumlah_tagihan" class="form-control form-control-alternative"
+                                        placeholder="Jumlah Tagihan" disabled>
                                     @if ($errors->has('jumlah_tagihan'))
                                     <span class="text-danger">{{ $errors->first('jumlah_tagihan') }}</span>
                                     @endif
@@ -116,7 +115,8 @@ Tambah Data Transaksi Retribusi
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-first-name">Keterangan</label>
-                                    <select name="keterangan" id="keterangan" class="form-control form-control-alternative"
+                                    <select name="keterangan" id="keterangan"
+                                        class="form-control form-control-alternative"
                                         placeholder="Keterangan pembayaran">
                                         <option value="">Pilih...</option>
                                         <option value="sudah_bayar" @if (old('keterangan')=='sudah_bayar' )
@@ -141,13 +141,12 @@ Tambah Data Transaksi Retribusi
                             <span class="text-danger">{{ $errors->first('alamat') }}</span>
                             @endif
                         </div>
+                        <button class="btn btn-success" type="submit">Tambah</button>
                     </div>
-                    <button class="btn btn-success" type="submit">Tambah</button>
+                </form>
             </div>
-            </form>
         </div>
     </div>
-</div>
 </div>
 @endsection
 

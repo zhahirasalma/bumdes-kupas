@@ -67,8 +67,8 @@ Daftar Bank Sampah
                         </td>
                         </form>
                     </tr>
+                    @endforeach
                 </tbody>
-                @endforeach
             </table>
         </div>
     </div>
@@ -111,8 +111,9 @@ Daftar Bank Sampah
 <script>
     $(document).ready(function () {
         var table = $('#tabel').DataTable({
-    
+
         });
     });
+
 </script>
 @endpush
