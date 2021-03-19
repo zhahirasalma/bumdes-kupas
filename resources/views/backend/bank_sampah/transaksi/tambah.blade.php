@@ -18,102 +18,98 @@ Tambah Data Transaksi Bank Sampah
                     </div>
                 </div>
             </div>
-            <div class="row align-items-center">
-                <div class="card-body">
-                    <form id="form" action="{{route('transaksi.store')}}" method="POST">
-                        @csrf
-                        <div class="pl-lg-4">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="input-nama">Bank Sampah</label>
-                                        <select name="id_users" id="id_users" class="form-control">
-                                            <option value="">Pilih nama bank sampah...</option>
-                                            @foreach($user as $u)
-                                            <option value="{{$u->id}}" @if (old('id_users')==$u->id )
-                                                selected="selected"
-                                                @endif>
-                                                {{$u->nama}}</option>
-                                            @endforeach
-                                        </select>
-                                        @if ($errors->has('id_users'))
-                                        <span class="text-danger">{{ $errors->first('id_users') }}</span>
-                                        @endif
-                                    </div>
+            <div class="card-body">
+                <form id="form" action="{{route('transaksi.store')}}" method="POST">
+                    @csrf
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="input-nama">Bank Sampah</label>
+                                <select name="id_users" id="id_users" class="form-control">
+                                    <option value="">Pilih nama bank sampah...</option>
+                                    @foreach($user as $u)
+                                    <option value="{{$u->id}}" @if (old('id_users')==$u->id )
+                                        selected="selected"
+                                        @endif>
+                                        {{$u->nama}}</option>
+                                    @endforeach
+                                </select>
+                                @if ($errors->has('id_users'))
+                                <span class="text-danger">{{ $errors->first('id_users') }}</span>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="input-nama">Tanggal Transaksi</label>
+                                <input type="date" name="tanggal_transaksi" id="tanggal_transaksi"
+                                    class="form-control form-control-alternative" placeholder="Tanggal Transaksi"
+                                    value="{{old('tanggal_transaksi')}}">
+                                @if ($errors->has('tanggal_transaksi'))
+                                <span class="text-danger">{{ $errors->first('tanggal_transaksi') }}</span>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="input-nama">Keterangan</label>
+                                <input type="text" name="keterangan" id="keterangan"
+                                    class="form-control form-control-alternative" placeholder="Keterangan"
+                                    value="{{old('keterangan')}}">
+                                @if ($errors->has('keterangan'))
+                                <span class="text-danger">{{ $errors->first('keterangan') }}</span>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    <label class="form-control-label" for="input-nama">Deskripsi Sampah</label>
+                    <div id="deskripsi">
+                        <div class="row align-items-center">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <select name="id_konversi" id="id_konversi_0" class="form-control"
+                                        onChange="updateHarga(0)">
+                                        <option value="">Pilih jenis sampah...</option>
+                                        @foreach($konversi as $k)
+                                        <option value="{{$k->id}},{{$k->harga_konversi}}">
+                                            {{$k->jenis_sampah}}</option>
+                                        @endforeach
+                                    </select>
+                                    @if ($errors->has('id_konversi'))
+                                    <span class="text-danger">{{ $errors->first('id_konversi') }}</span>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="input-nama">Tanggal Transaksi</label>
-                                        <input type="date" name="tanggal_transaksi" id="tanggal_transaksi"
-                                            class="form-control form-control-alternative"
-                                            placeholder="Tanggal Transaksi" value="{{old('tanggal_transaksi')}}">
-                                        @if ($errors->has('tanggal_transaksi'))
-                                        <span class="text-danger">{{ $errors->first('tanggal_transaksi') }}</span>
-                                        @endif
-                                    </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <input type="number" name="berat" id="berat_0"
+                                        class="form-control form-control-alternative" placeholder="Berat Sampah"
+                                        value="1" onChange="updateHarga(0)">
+                                    @if ($errors->has('berat'))
+                                    <span class="text-danger">{{ $errors->first('berat') }}</span>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="input-nama">Keterangan</label>
-                                        <input type="text" name="keterangan" id="keterangan"
-                                            class="form-control form-control-alternative" placeholder="Keterangan"
-                                            value="{{old('keterangan')}}">
-                                        @if ($errors->has('keterangan'))
-                                        <span class="text-danger">{{ $errors->first('keterangan') }}</span>
-                                        @endif
-                                    </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <input type="text" name="harga_total" id="harga_total_0"
+                                        class="form-control form-control-alternative" placeholder="Harga total" value=""
+                                        disabled>
                                 </div>
                             </div>
-                            <label class="form-control-label" for="input-nama">Deskripsi Sampah</label>
-                            <div id="deskripsi">
-                                <div class="row align-items-center">
-                                    <div class="col-lg-3">
-                                        <div class="form-group">
-                                            <select name="id_konversi" id="id_konversi_0" class="form-control"
-                                                onChange="updateHarga(0)">
-                                                <option value="">Pilih jenis sampah...</option>
-                                                @foreach($konversi as $k)
-                                                <option value="{{$k->id}},{{$k->harga_konversi}}">
-                                                    {{$k->jenis_sampah}}</option>
-                                                @endforeach
-                                            </select>
-                                            @if ($errors->has('id_konversi'))
-                                            <span class="text-danger">{{ $errors->first('id_konversi') }}</span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="form-group">
-                                            <input type="number" name="berat" id="berat_0"
-                                                class="form-control form-control-alternative" placeholder="Berat Sampah"
-                                                value="1" onChange="updateHarga(0)">
-                                            @if ($errors->has('berat'))
-                                            <span class="text-danger">{{ $errors->first('berat') }}</span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="form-group">
-                                            <input type="text" name="harga_total" id="harga_total_0"
-                                                class="form-control form-control-alternative" placeholder="Harga total"
-                                                value="" disabled>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 ">
-                                        <div class="form-group">
-                                            <button type="button" class="btn btn-success" id="tambah" onClick="add()"><i
-                                                    class="fas fa-plus"></i></button>
-                                        </div>
-                                    </div>
+                            <div class="col-lg-3 ">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-success" id="tambah" onClick="add()"><i
+                                            class="fas fa-plus"></i></button>
                                 </div>
                             </div>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
