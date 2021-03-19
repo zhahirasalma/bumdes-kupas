@@ -52,6 +52,9 @@
             </div>
             <div class="container-fluid mt--7">
                 @yield('content')
+                <footer class="footer">
+                   
+                </footer>
             </div>
         </div>
         <!--   Core   -->
