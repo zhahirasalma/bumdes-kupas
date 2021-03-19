@@ -25,12 +25,7 @@ Daftar Transaksi Bank Sampah
                     <tr>
                         <th scope="col">No</th>
                         <th scope="col">Nama Bank Sampah</th>
-                        <th scope="col">Tanggal Transaksi</th>
-                        <th scope="col">Jenis Sampah</th>
-                        <th scope="col">Berat Sampah (kg)</th>
                         <th scope="col">Harga Total</th>
-                        <th scope="col">Keterangan</th>
-                        <th scope="col">Unduh Transaksi</th>
                         <th scope="col">Aksi</th>
                     </tr>
                 </thead>
@@ -44,32 +39,18 @@ Daftar Transaksi Bank Sampah
                             {{$tr->user->nama}}
                         </td>
                         <td>
-                            {{$tr->tanggal_transaksi}}
+                            @currency($tr->jumlah)
                         </td>
                         <td>
-                            {{$tr->konversi->jenis_sampah}}
-                        </td>
-                        <td>
-                            {{$tr->berat}}
-                        </td>
-                        <td>
-                            @currency($tr->harga_total)
-                        </td>
-                        <td>
-                            {{$tr->keterangan}}
-                        </td>
-                        <td>
-                            <button class="btn btn-outline-success btn-sm" type="button"> Unduh </button>
-                        </td>
-                        <td>
-                            <form action="{{ route('transaksi.destroy', $tr->id) }}" method="POST">
-                                <a href="{{ route('transaksi.edit', $tr->id) }}" class="btn btn-success btn-sm"
-                                    data-toggle="tooltip" data-placement="top" data-original-title="Edit"><i
-                                        class="far fa-edit"></i></a>
+                            <form action="{{ route('transaksi.destroy', $tr->id_bank_sampah) }}" method="POST">
+                                <a href="{{ route('detail-transaksi', $tr->id_bank_sampah) }}"
+                                    class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top"
+                                    data-original-title="Detail"><i class="fas fa-info-circle"></i></a>
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
-                                    data-original-title="Delete" type="submit"><i class="far fa-trash-alt"></i></button>
+                                    data-original-title="Delete All" type="submit"><i
+                                        class="far fa-trash-alt"></i></button>
                         </td>
                         </form>
                     </tr>
@@ -85,7 +66,9 @@ Daftar Transaksi Bank Sampah
 <script>
     $(document).ready(function () {
         var table = $('#tabel').DataTable({
+
         });
     });
+
 </script>
 @endpush

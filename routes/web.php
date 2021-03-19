@@ -63,9 +63,18 @@ Route::group(['prefix'=>'admin'], function(){
     Route::put('/import-warga',[App\Http\Controllers\Admin\WargaController::class, 'importWarga']);
     Route::get('/get-tagihan/{user_id}', [App\Http\Controllers\Admin\TransaksiRetribusiController::class, 'getTagihan'])
     ->name('get-tagihan');
-    Route::get('/reset', [App\Http\Controllers\Admin\PengambilanController::class, 'reset'])
+    Route::get('/reset', [App\Http\Controllers\Admin\TransaksiBankSampahController::class, 'reset'])
     ->name('reset');
 
+    //detail transaksi
+    Route::get('detail-transaksi/{id_bank_sampah}', [App\Http\Controllers\Admin\TransaksiBankSampahController::class, 'detail'])
+    ->name('detail-transaksi');
+    Route::delete('delete-transaksi/{id}', [App\Http\Controllers\Admin\TransaksiBankSampahController::class, 'deleteItem'])
+    ->name('delete-transaksi');
+
+    //get konversi
+    Route::get('/get-konversi/{konversi}', [App\Http\Controllers\Admin\TransaksiBankSampahController::class, 'getKonversi'])
+    ->name('get-konversi');
 
     Route::resources([
         'pengambilan' => App\Http\Controllers\Admin\PengambilanController::class,

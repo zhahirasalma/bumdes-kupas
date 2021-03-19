@@ -20,7 +20,10 @@ class TransaksiBankSampahController extends Controller
      */
     public function index()
     {
-        $transaksi = TransaksiBankSampah::with('bankSampah', 'user', 'konversi')->get();
+        $transaksi = TransaksiBankSampah::groupBy('id_bank_sampah')
+                        ->selectRaw('*, sum(harga_total) as jumlah')
+                        ->with('bankSampah', 'user', 'konversi')
+                        ->get();
         return view('backend.bank_sampah.transaksi.index', compact('transaksi'));
     }
 
@@ -113,34 +116,30 @@ class TransaksiBankSampahController extends Controller
             'id_users.required' => 'Nama wajib diisi.',
             'tanggal_transaksi.required' => 'Tanggal Transaksi wajib diisi.',
             'keterangan.required' => 'Keterangan wajib diisi.',
+            'id_konversi.required' => 'Jenis Sampah wajib diisi.',
+            'berat.required' => 'Berat wajib diisi.',
         ];
 
         $request->validate([
             'id_users' => 'required',
             'tanggal_transaksi' => 'required',
             'keterangan' => 'required',
+            'id_konversi' => 'required',
+            'berat' => 'required',
         ], $messages);
 
         $transaksi = TransaksiBankSampah::find($id);
         $input = $request->all();
-        $id_bank_sampah = BankSampah::WHERE('id_users', $request['id_users'])->value('id');
-        $data = array();
-        foreach ($input['row'] as $i) {
-            $data[] = [
-                'id_users' => $input['id_users'],
-                'id_bank_sampah' => $id_bank_sampah,
-                'tanggal_transaksi' => $input['tanggal_transaksi'],
-                'keterangan' => $input['keterangan'],
-                'id_konversi' => (int)$i['id_konversi'],
-                'berat' => $i['berat'],
-                'harga_total' => $i['harga'] * $i['berat'],
-                'updated_at' => Carbon::now(),
-            ];
-        }
+        $input['id_bank_sampah'] = BankSampah::WHERE('id_users', $request['id_users'])->value('id');
 
-        $transaksi->update($data);
+        $konversi = KonversiSampah::where('id', $request['id_konversi'])->value('harga_konversi');
+        $input['harga_total'] = $konversi * $request->berat;
+        
+        $transaksi->update($input);
         Alert::success('Berhasil', 'Data transaksi berhasil diubah');
-        return redirect()->route('transaksi.index');
+
+        $id_bank_sampah = $input['id_bank_sampah'];
+        return redirect()->route('detail-transaksi', [$id_bank_sampah]);
     }
 
     /**
@@ -149,11 +148,34 @@ class TransaksiBankSampahController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id_bank_sampah)
+    {
+        $transaksi = TransaksiBankSampah::where('id_bank_sampah', $id_bank_sampah);
+        $transaksi->delete();
+        Alert::success('Berhasil', 'Data transaksi berhasil dihapus');
+        return back();
+    }
+
+    public function detail(Request $request)
+    {
+        $id_bank_sampah = $request->id_bank_sampah;
+        $detail = TransaksiBankSampah::with('bankSampah', 'user', 'konversi')
+                        ->where('id_bank_sampah', $id_bank_sampah)
+                        ->get();
+        return view('backend.bank_sampah.transaksi.detail', compact('detail'));
+    }
+
+    public function deleteItem($id)
     {
         $transaksi = TransaksiBankSampah::find($id);
         $transaksi->delete();
         Alert::success('Berhasil', 'Data transaksi berhasil dihapus');
         return back();
+    }
+
+    public function getKonversi($konversi)
+    {
+        $konversi = KonversiSampah::where('id', $konversi)->value('harga_konversi');
+        return response()->json($konversi);
     }
 }

@@ -21,7 +21,7 @@ Edit Data Transaksi Bank Sampah
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-nama">Bank Sampah</label>
-                                    <select name="id_users" class="form-control">
+                                    <select name="id_users" id="id_users" class="form-control">
                                         <option value="">Pilih nama bank sampah...</option>
                                         @foreach($user as $u)
                                         <option value="{{$u->id}}"
@@ -64,7 +64,7 @@ Edit Data Transaksi Bank Sampah
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-first-name">Jenis Sampah</label>
-                                    <select name="id_konversi" class="form-control">
+                                    <select name="id_konversi" id="id_konversi" class="form-control" onChange="updateKonversi()">
                                         <option value="">Pilih nama bank sampah...</option>
                                         @foreach($konversi as $k)
                                         <option value="{{$k->id}}"
@@ -80,8 +80,8 @@ Edit Data Transaksi Bank Sampah
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-first-name">Berat</label>
-                                    <input type="number" name="berat" class="form-control form-control-alternative"
-                                        placeholder="Jenis Sampah" value="{{$transaksi->berat}}">
+                                    <input type="number" name="berat" id="berat" class="form-control form-control-alternative"
+                                        placeholder="Jenis Sampah" value="{{$transaksi->berat}}" onChange="updateKonversi()">
                                     @if ($errors->has('berat'))
                                     <span class="text-danger">{{ $errors->first('berat') }}</span>
                                     @endif
@@ -90,8 +90,8 @@ Edit Data Transaksi Bank Sampah
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-first-name">Harga Total</label>
-                                    <input type="text" name="harga_total" class="form-control form-control-alternative"
-                                        placeholder="Jenis Sampah" value="{{$transaksi->harga_total}}">
+                                    <input type="text" name="harga_total" id="harga_total" class="form-control form-control-alternative" placeholder="Jenis Sampah"
+                                        value="{{$transaksi->harga_total}}" disabled>
                                 </div>
                             </div>
                         </div>
@@ -103,3 +103,31 @@ Edit Data Transaksi Bank Sampah
     </div>
 </div>
 @endsection
+
+<script type="text/javascript">
+    function updateKonversi() {
+        var harga = $('#id_konversi').val()
+        if (harga != '' && harga != null) {
+            $.ajax({
+                url: "{{url('')}}/admin/get-konversi/" + harga,
+                success: function (res) {
+                    total = res * $('#berat').val();
+                    $('#harga_total').val(total)
+                },
+                    
+            });
+        }
+    };
+
+</script>
+
+@push('script')
+<script type="text/javascript">
+    $('#id_users').select2({
+        allowClear: true,
+        placeholder: "Pilih nama...",
+        theme: 'bootstrap4',
+    });
+
+</script>
+@endpush
