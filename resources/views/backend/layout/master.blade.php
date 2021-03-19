@@ -48,6 +48,9 @@
             <!-- End Navbar -->
             <!-- Header -->
             <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+                @yield('card')
+            </div>
+            <div class="container-fluid mt--7">
                 @yield('content')
             </div>
         </div>

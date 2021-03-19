@@ -2,7 +2,7 @@
 @section('title')
 Dashboard
 @endsection
-@section('content')
+@section('card')
 
 <div class="container-fluid">
     <div class="header-body">

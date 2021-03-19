@@ -5,73 +5,74 @@ Tambah Pengambilan
 
 
 @section('content')
-<div class="col-xl-12">
-    <div class="card shadow">
-        <div class="card-header border-0">
-            <div class="row align-items-center">
-                <div class="col">
-                    <h3 class="mb-0">Form Tambah</h3>
-                </div>
-                <div class="col text-right">
-                    <button type="button" id="button-tambah" onclick="tambah()" class="btn btn-success">Tambah</button>
-                </div>
-            </div>
-        </div>
-        <div class="pl-lg-4">
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="form-group">
-                        <label class="form-control-label">Waktu Pengambilan</label>
-                        <input type="date" id="waktu_pengambilan" name="waktu_pengambilan"
-                            class="form-control form-control-alternative" placeholder="Waktu Pengambilan"
-                            value="{{old('waktu_pengambilan')}}">
-                        @if ($errors->has('waktu_pengambilan'))
-                        <span class="text-danger">{{ $errors->first('waktu_pengambilan') }}</span>
-                        @endif
+<div class="row">
+    <div class="col">
+        <div class="card shadow">
+            <div class="card-header border-0">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h3 class="mb-0">Form Tambah</h3>
+                    </div>
+                    <div class="col text-right">
+                        <button type="button" id="button-tambah" onclick="tambah()"
+                            class="btn btn-success">Tambah</button>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="form-group">
-                        <label class="form-control-label" for="input-nama">Tampilkan berdasarkan</label>
-                        <select name="kategori" id="kategori" class="form-control filter">
-                            <option value="0">Semua Warga</option>
-                            @foreach(App\Models\KategoriSampah::all() as $k)
-                            <option value="{{$k->id}}" @if (old('kategori')==$k->id )
-                                selected="selected" @endif>{{$k->jenis_sampah}}</option>
-                            @endforeach
-                        </select>
-                        @if ($errors->has('kategori'))
-                        <span class="text-danger">{{ $errors->first('kategori') }}</span>
-                        @endif
+            <div class="pl-lg-4">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label class="form-control-label">Waktu Pengambilan</label>
+                            <input type="date" id="waktu_pengambilan" name="waktu_pengambilan"
+                                class="form-control form-control-alternative" placeholder="Waktu Pengambilan"
+                                value="{{old('waktu_pengambilan')}}">
+                            @if ($errors->has('waktu_pengambilan'))
+                            <span class="text-danger">{{ $errors->first('waktu_pengambilan') }}</span>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label class="form-control-label" for="input-nama">Tampilkan berdasarkan</label>
+                            <select name="kategori" id="kategori" class="form-control filter">
+                                <option value="0">Semua Warga</option>
+                                @foreach(App\Models\KategoriSampah::all() as $k)
+                                <option value="{{$k->id}}" @if (old('kategori')==$k->id )
+                                    selected="selected" @endif>{{$k->jenis_sampah}}</option>
+                                @endforeach
+                            </select>
+                            @if ($errors->has('kategori'))
+                            <span class="text-danger">{{ $errors->first('kategori') }}</span>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <form action="{{route('pengambilan.store')}}" method="POST">
-            @csrf
-            <div class="table-responsive">
-                <!-- Projects table -->
-                <table class="table align-items-center table-flush" id="tabel">
-                    <thead class="thead-light">
-                        <tr>
-                            <th>
-                                <input type="checkbox" id="cb-head">
-                            </th>
-                            <th scope="col">Nama Warga</th>
-                            <th scope="col">Kategori</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+            <form action="{{route('pengambilan.store')}}" method="POST">
+                @csrf
+                <div class="table-responsive">
+                    <!-- Projects table -->
+                    <table class="table align-items-center table-flush" id="tabel">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>
+                                    <input type="checkbox" id="cb-head">
+                                </th>
+                                <th scope="col">Nama Warga</th>
+                                <th scope="col">Kategori</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-                    </tbody>
-                </table>
-            </div>
-        </form>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-</div>
 </div>
 @endsection
 

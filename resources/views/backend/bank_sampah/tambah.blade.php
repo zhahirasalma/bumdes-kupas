@@ -5,7 +5,8 @@ Tambah Bank Sampah
 
 
 @section('content')
-<div class="col-xl-12">
+<div class="row">
+    <div class="col">
     <div class="card bg-secondary shadow">
         <div class="card-header bg-white border-0">
             <div class="col-8">
