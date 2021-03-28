@@ -63,7 +63,7 @@ Route::group(['prefix'=>'admin'], function(){
     Route::put('/import-warga',[App\Http\Controllers\Admin\WargaController::class, 'importWarga']);
     Route::get('/get-tagihan/{user_id}', [App\Http\Controllers\Admin\TransaksiRetribusiController::class, 'getTagihan'])
     ->name('get-tagihan');
-    Route::get('/reset', [App\Http\Controllers\Admin\TransaksiBankSampahController::class, 'reset'])
+    Route::get('/reset', [App\Http\Controllers\Admin\PengambilanController::class, 'reset'])
     ->name('reset');
 
     //detail transaksi

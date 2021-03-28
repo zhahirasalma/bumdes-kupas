@@ -78,6 +78,7 @@ Tambah Pengambilan
 
 @push('script')
 <script type="text/javascript">
+    var selected_rows = [];
     let filter = $("#kategori").val()
     const tabel = $('#tabel').DataTable({
         "pageLength": 100,
@@ -137,7 +138,11 @@ Tambah Pengambilan
     //filter data by kategori
     $(".filter").on('change', function () {
         filter = $("#kategori").val()
-        tabel.ajax.reload(null, false)
+        tabel.ajax.reload(function () {
+            if(selected_rows.length > 0){
+                $(".cb-child").val(selected_rows).is(':checked');
+            }
+        })
     })
 
     //checkbox
@@ -172,6 +177,20 @@ Tambah Pengambilan
             }
         })
     }
+
+
+    //save selected cb
+    $("#tabel tbody").on('click', '.cb-child', function () {
+        var isChecked = $(this).is(':checked')
+        if (isChecked) {
+            let checked = $(this)[0].value;
+            selected_rows.push(checked);
+        } else {
+            let uncheck = $(this)[0].value;
+            var index = selected_rows.indexOf(uncheck);
+            selected_rows.splice(index, 1);
+        }
+    })
 
 </script>
 @endpush
