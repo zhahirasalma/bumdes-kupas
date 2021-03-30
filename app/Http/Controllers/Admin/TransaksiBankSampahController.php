@@ -169,7 +169,6 @@ class TransaksiBankSampahController extends Controller
     {
         $transaksi = TransaksiBankSampah::find($id);
         $transaksi->delete();
-        Alert::success('Berhasil', 'Data transaksi berhasil dihapus');
         return back();
     }
 

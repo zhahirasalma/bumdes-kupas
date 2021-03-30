@@ -3,6 +3,10 @@
 Daftar Transaksi Bank Sampah
 @endsection
 
+<head>
+    <link rel=”stylesheet” href="{{asset('swal/sweetalert.css')}}">
+    <script src="{{asset('swal/sweetalert.js')}}"></script>
+</head>
 
 @section('content')
 <div class="row">
@@ -46,13 +50,13 @@ Daftar Transaksi Bank Sampah
                                     <a href="{{ route('detail-transaksi', $tr->id_bank_sampah) }}"
                                         class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top"
                                         data-original-title="Detail"><i class="fas fa-info-circle"></i></a>
-                                    @csrf
+                                    <!-- @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
                                         data-original-title="Delete All" type="submit"><i
-                                            class="far fa-trash-alt"></i></button>
+                                            class="far fa-trash-alt"></i></button> -->
+                                </form>
                             </td>
-                            </form>
                         </tr>
                         @endforeach
                     </tbody>

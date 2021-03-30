@@ -27,7 +27,6 @@
         <!-- datatables -->
         <link href="{{asset('datatables/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
     </head>
-    </head>
 
     <body class="">
         <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
@@ -53,7 +52,7 @@
             <div class="container-fluid mt--7">
                 @yield('content')
                 <footer class="footer">
-                   
+
                 </footer>
             </div>
         </div>
@@ -77,7 +76,7 @@
         <script src="{{asset('datatables/js/responsive.bootstrap.min.js')}}"></script>
 
         @stack('script')
-
+        
         <script>
             window.TrackJS &&
                 TrackJS.install({

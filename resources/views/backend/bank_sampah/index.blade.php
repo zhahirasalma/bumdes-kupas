@@ -3,6 +3,10 @@
 Daftar Bank Sampah
 @endsection
 
+<head>
+    <link rel=”stylesheet” href="{{asset('swal/sweetalert.css')}}">
+    <script src="{{asset('swal/sweetalert.js')}}"></script>
+</head>
 
 @section('content')
 
@@ -61,11 +65,9 @@ Daftar Bank Sampah
                                     <a href="{{ route('bank_sampah.edit', $data->id) }}" class="btn btn-success btn-sm"
                                         data-toggle="tooltip" data-placement="top" data-original-title="Edit"><i
                                             class="far fa-edit"></i></a>
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
-                                        data-original-title="Delete" type="submit"><i
-                                            class="far fa-trash-alt"></i></button>
+                                    <a class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
+                                        data-original-title="Delete" onClick="deleteConfirm({{$data->id}})">
+                                        <i class="far fa-trash-alt" style="color: white;"></i></a>
                             </td>
                             </form>
                         </tr>
@@ -119,6 +121,49 @@ Daftar Bank Sampah
 
         });
     });
+
+    function deleteConfirm(id) {
+        Swal.fire({
+            title: 'Harap Konfirmasi',
+            text: "Anda tidak dapat mengembalikan data yang telah dihapus!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Lanjutkan'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name=csrf-token]').attr('content')
+                    },
+                    url: "bank_sampah/" + id,
+                    method: "post",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "_method": "DELETE",
+                        id: id
+                    },
+                    success: function (data) {
+                        Swal.fire({
+                            title: 'Berhasil!',
+                            text: 'Data berhasil di hapus!',
+                            icon: 'success',
+                        });
+                        window.location.href = "/admin/users"
+                    },
+                    error: function () {
+                        Swal.fire({
+                            title: 'Gagal!',
+                            text: 'Data tidak dapat di hapus!',
+                            icon: 'warning',
+                        });
+                        window.location.href = "/admin/users"
+                    }
+                });
+            }
+        })
+    }
 
 </script>
 @endpush
