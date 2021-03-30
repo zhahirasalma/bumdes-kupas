@@ -29,9 +29,17 @@
     </head>
 
     <body class="">
-        <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
+        <div class=".d-none .d-lg-block .d-xl-none">
+            <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
             @include('backend.layout.sidebar')
         </nav>
+        </div>
+        
+        <div class=".d-none .d-sm-block .d-md-none">
+            <nav>
+                @include('backend.layout.sidebar-mobile')
+            </nav>
+        </div>
         <div class="main-content">
             @include('sweetalert::alert')
             <!-- Navbar -->
@@ -73,7 +81,7 @@
         <script src="{{asset('datatables/js/responsive.bootstrap.min.js')}}"></script>
 
         @stack('script')
-        
+
         <script>
             window.TrackJS &&
                 TrackJS.install({
