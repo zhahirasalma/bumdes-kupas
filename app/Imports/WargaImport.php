@@ -44,7 +44,8 @@ class WargaImport implements ToCollection, WithHeadingRow
                 'id_desa' => Desa::where("desa", "like", "%".$row['desa']."%")->first()->id,
                 'dukuh' => $row['dukuh'],
                 'detail_alamat' => $row['detail_alamat'],
-                'lokasi' => $row['lokasi'],
+                'latitude' => $row['latitude'],
+                'longitude' => $row['longitude'],
                 'created_at'=>$now,
             ]);
         }
