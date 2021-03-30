@@ -66,6 +66,9 @@ Route::group(['prefix'=>'admin'], function(){
     Route::get('/reset', [App\Http\Controllers\Admin\PengambilanController::class, 'reset'])
     ->name('reset');
 
+    Route::get('export-transaksi/{id_bank_sampah}',[App\Http\Controllers\Admin\TransaksiBankSampahController::class, 'exportExcel'])
+    ->name('export-transaksi');
+
     //detail transaksi
     Route::get('detail-transaksi/{id_bank_sampah}', [App\Http\Controllers\Admin\TransaksiBankSampahController::class, 'detail'])
     ->name('detail-transaksi');

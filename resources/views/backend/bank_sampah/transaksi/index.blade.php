@@ -29,6 +29,7 @@ Daftar Transaksi Bank Sampah
                         <tr>
                             <th scope="col">No</th>
                             <th scope="col">Nama Bank Sampah</th>
+                            <th scope="col">Tanggal Transaksi</th>
                             <th scope="col">Harga Total</th>
                             <th scope="col">Aksi</th>
                         </tr>
@@ -41,6 +42,9 @@ Daftar Transaksi Bank Sampah
                             </th>
                             <td>
                                 {{$tr->user->nama}}
+                            </td>
+                            <td>
+                                {{$tr->tanggal_transaksi}}
                             </td>
                             <td>
                                 @currency($tr->jumlah)

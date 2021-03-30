@@ -19,8 +19,7 @@ Detail Transaksi Bank Sampah
                         </span>
                     </div>
                     <div class="col text-right">
-
-                        <a href="" class="btn btn-success">Unduh Data</a>
+                        <a href="{{ route('export-transaksi', $detail[0]->id_bank_sampah) }}" class="btn btn-success">Unduh Data</a>
                     </div>
                 </div>
             </div>
@@ -46,29 +45,19 @@ Detail Transaksi Bank Sampah
                             </th>
                             <td>
                                 {{$d->tanggal_transaksi}}
-                                <!-- <input type="text" class="form-control"
-                                placeholder="Jenis Sampah" value="{{$d->konversi->jenis_sampah}}" disabled> -->
                             </td>
                             <td>
                                 {{$d->konversi->jenis_sampah}}
-                                <!-- <input type="text" class="form-control"
-                                placeholder="Jenis Sampah" value="{{$d->konversi->jenis_sampah}}" disabled> -->
                             </td>
                             <td>
                                 {{$d->konversi->harga_konversi}}
-                                <!-- <input type="text" class="form-control"
-                                placeholder="Harga Konversi" value="{{$d->konversi->harga_konversi}}" disabled> -->
 
                             </td>
                             <td>
                                 {{$d->berat}}
-                                <!-- <input type="text" class="form-control"
-                                placeholder="Berat" value="{{$d->berat}}" disabled> -->
                             </td>
                             <td>
                                 @currency($d->harga_total)
-                                <!-- <input type="text" class="form-control"
-                                placeholder="Harga Total" value=" @currency($d->harga_total)" disabled> -->
 
                             </td>
                             <td>

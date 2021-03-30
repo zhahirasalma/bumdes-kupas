@@ -9,6 +9,8 @@ use App\Models\KonversiSampah;
 use App\Models\User;
 use App\Models\BankSampah;
 use Carbon\carbon;
+use App\Exports\TransaksiExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Alert;
 
 class TransaksiBankSampahController extends Controller
@@ -176,5 +178,14 @@ class TransaksiBankSampahController extends Controller
     {
         $konversi = KonversiSampah::where('id', $konversi)->value('harga_konversi');
         return response()->json($konversi);
+    }
+
+    public function exportExcel(Request $request)
+    {   
+        $bank_sampah = User::join('bank_sampah', 'bank_sampah.id_users', 'users.id')
+                        ->where('bank_sampah.id', $request->id_bank_sampah)
+                        ->value('nama');
+        $filename = "rekap_transaksi_".$bank_sampah."_".date('Y-m-d-H-i-s').'.xlsx';
+        return Excel::download(new TransaksiExport($request->id_bank_sampah), $filename);
     }
 }
