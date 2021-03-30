@@ -106,7 +106,8 @@ class WargaController extends Controller
         $warga->id_desa = $request->input('id_desa');
         $warga->dukuh = $request->input('dukuh');
         $warga->detail_alamat = $request->input('detail_alamat');
-        $warga->lokasi = $request->input('lokasi');
+        $warga->latitude = $request->input('lat');
+        $warga->longitude = $request->input('long');
         $warga->id_kategori_sampah = $request->input('id_kategori_sampah');
         if($warga){
            $warga->save();
