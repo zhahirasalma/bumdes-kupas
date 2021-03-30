@@ -3,6 +3,10 @@
 Tambah Pengambilan
 @endsection
 
+<head>
+    <link rel=”stylesheet” href="{{asset('swal/sweetalert.css')}}">
+    <script src="{{asset('swal/sweetalert.js')}}"></script>
+</head>
 
 @section('content')
 <div class="row">
@@ -27,9 +31,8 @@ Tambah Pengambilan
                             <input type="date" id="waktu_pengambilan" name="waktu_pengambilan"
                                 class="form-control form-control-alternative" placeholder="Waktu Pengambilan"
                                 value="{{old('waktu_pengambilan')}}">
-                            @if ($errors->has('waktu_pengambilan'))
-                            <span class="text-danger">{{ $errors->first('waktu_pengambilan') }}</span>
-                            @endif
+                            <span class="text-danger">Tanggal harus diisi</span>
+
                         </div>
                     </div>
                 </div>
@@ -74,6 +77,12 @@ Tambah Pengambilan
         </div>
     </div>
 </div>
+
+<style>
+    .text-danger{
+        display: none;
+    }
+</style>
 @endsection
 
 @push('script')
@@ -139,7 +148,7 @@ Tambah Pengambilan
     $(".filter").on('change', function () {
         filter = $("#kategori").val()
         tabel.ajax.reload(function () {
-            if(selected_rows.length > 0){
+            if (selected_rows.length > 0) {
                 $(".cb-child").val(selected_rows).is(':checked');
             }
         })
@@ -159,23 +168,33 @@ Tambah Pengambilan
 
     //tambah data
     function tambah() {
+        let error = false;
         let checkbox_terpilih = $("#tabel tbody .cb-child:checked")
         let semua_id = []
         let waktu = $('#waktu_pengambilan').val()
+        if (waktu === "") {
+            error = true;
+            $( ".text-danger" ).show();
+        }
+
         $.each(checkbox_terpilih, function (index, elm) {
             semua_id.push(elm.value)
         })
-        $.ajax({
-            url: "{{route('pengambilan/tambah')}}",
-            method: 'post',
-            data: {
-                id_users: semua_id,
-                waktu: waktu
-            },
-            success: function (res) {
-                window.location.href = "/admin/pengambilan"
-            }
-        })
+
+        if (!error) {
+            $.ajax({
+                url: "{{route('pengambilan/tambah')}}",
+                method: 'post',
+                data: {
+                    id_users: semua_id,
+                    waktu: waktu
+                },
+                success: function (res) {
+                    window.location.href = "/admin/pengambilan"
+                }
+            })
+        }
+
     }
 
 

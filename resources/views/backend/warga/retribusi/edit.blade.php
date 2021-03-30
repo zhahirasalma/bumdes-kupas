@@ -3,6 +3,11 @@
 Edit Data Transaksi Retribusi
 @endsection
 
+<head>
+    <link rel=”stylesheet” href="{{asset('swal/sweetalert.css')}}">
+    <script src="{{asset('swal/sweetalert.js')}}"></script>
+</head>
+
 @section('content')
 <div class="row">
     <div class="col">
@@ -15,7 +20,7 @@ Edit Data Transaksi Retribusi
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{route('retribusi.update', $retribusi->id)}}" method="POST">
+                <input type="hidden" id="id" value="{{$retribusi->id}}">
                     @csrf
                     @method('PUT')
                     <div class="row">
@@ -29,19 +34,15 @@ Edit Data Transaksi Retribusi
                                         {{$u->nama}}</option>
                                     @endforeach
                                 </select>
-                                @if ($errors->has('id_users'))
-                                <span class="text-danger">{{ $errors->first('id_users') }}</span>
-                                @endif
+                                <span class="text-danger error-id_users">Nama harus dipilih</span>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="input-nama">Nama Kolektor</label>
-                                <input type="text" name="nama_kolektor" class="form-control form-control-alternative"
+                                <input type="text" id="nama_kolektor" class="form-control form-control-alternative"
                                     placeholder="Nama Kolektor" value="{{$retribusi->nama_kolektor}}">
-                                @if ($errors->has('nama_kolektor'))
-                                <span class="text-danger">{{ $errors->first('nama_kolektor') }}</span>
-                                @endif
+                                <span class="text-danger error-nama_kolektor">Nama kolektor harus diisi</span>
                             </div>
                         </div>
                     </div>
@@ -93,9 +94,7 @@ Edit Data Transaksi Retribusi
                                         {{ $retribusi->bulan_tagihan == "Desember" ? 'selected' : '' }}>
                                         Desember</option>
                                 </select>
-                                @if ($errors->has('bulan_tagihan'))
-                                <span class="text-danger">{{ $errors->first('bulan_tagihan') }}</span>
-                                @endif
+                                <span class="text-danger error-bulan_tagihan">Bulan tagihan harus diisi</span>
                             </div>
                         </div>
                     </div>
@@ -104,18 +103,16 @@ Edit Data Transaksi Retribusi
                             <div class="form-group">
                                 <label class="form-control-label" for="input-first-name">Tanggal
                                     Transaksi</label>
-                                <input type="date" name="tanggal_transaksi"
+                                <input type="date" id="tanggal_transaksi"
                                     class="form-control form-control-alternative" placeholder="Tanggal Transaksi"
                                     value="{{$retribusi->tanggal_transaksi}}">
-                                @if ($errors->has('tanggal_transaksi'))
-                                <span class="text-danger">{{ $errors->first('tanggal_transaksi') }}</span>
-                                @endif
+                                <span class="text-danger error-tanggal_transaksi">Tanggal harus diisi</span>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="input-first-name">Keterangan</label>
-                                <select name="keterangan" class="form-control form-control-alternative"
+                                <select id="keterangan" class="form-control form-control-alternative"
                                     placeholder="Keterangan pembayaran">
                                     <option value="">Pilih...</option>
                                     <option value="sudah_bayar"
@@ -126,9 +123,7 @@ Edit Data Transaksi Retribusi
                                         bayar
                                     </option>
                                 </select>
-                                @if ($errors->has('keterangan'))
-                                <span class="text-danger">{{ $errors->first('keterangan') }}</span>
-                                @endif
+                                <span class="text-danger error-keterangan">Keterangan harus diisi</span>
                             </div>
                         </div>
                     </div>
@@ -136,17 +131,15 @@ Edit Data Transaksi Retribusi
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label>Alamat</label>
-                                <textarea name="alamat" rows="4" class="form-control form-control-alternative"
+                                <textarea id="alamat" rows="4" class="form-control form-control-alternative"
                                     placeholder="Alamat">{{$retribusi->alamat}}</textarea>
-                                @if ($errors->has('alamat'))
-                                <span class="text-danger">{{ $errors->first('alamat') }}</span>
-                                @endif
+                                <span class="text-danger error-alamat">Alamat harus diisi</span>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
-                            <button class="btn btn-success" type="submit">Ubah</button>
+                            <button class="btn btn-success" onClick="tambah()" type="submit">Ubah</button>
                         </div>
                     </div>
                 </form>
@@ -154,6 +147,13 @@ Edit Data Transaksi Retribusi
         </div>
     </div>
 </div>
+
+<style>
+    .error-id_users, .error-nama_kolektor, .error-bulan_tagihan, .error-tanggal_transaksi, 
+    .error-keterangan, .error-alamat{
+        display: none;
+    }
+</style>
 @endsection
 
 @push('script')
@@ -169,6 +169,76 @@ Edit Data Transaksi Retribusi
                     })
                 },
             });
+        }
+    }
+
+    function tambah() {
+        var id_users= $('#id_users').val()
+        var nama_kolektor = $('#nama_kolektor').val()
+        var bulan_tagihan = $('#bulan_tagihan').val()
+        var tanggal_transaksi = $('#tanggal_transaksi').val()
+        var keterangan = $('#keterangan').val()
+        var alamat = $('#alamat').val()
+        var jumlah_tagihan = $('#jumlah_tagihan').val()
+        var id = $('#id').val()
+        var error = false;
+
+        if(id_users === ''){
+            error = true;
+            $('.error-id_users').show()
+        }
+
+        if(nama_kolektor === ''){
+            error = true;
+            $('.error-nama_kolektor').show()
+        }
+
+        if(bulan_tagihan === ''){
+            error = true;
+            $('.error-bulan_tagihan').show()
+        }
+
+        if(tanggal_transaksi === ''){
+            error = true;
+            $('.error-tanggal_transaksi').show()
+        }
+
+        if(keterangan === ''){
+            error = true;
+            $('.error-keterangan').show()
+        }
+
+        if(alamat === ''){
+            error = true;
+            $('.error-alamat').show()
+        }
+
+        if(!error){
+            $.ajax({
+                url: "/admin/retribusi/"+id,
+                method: 'post',
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "_method": "PUT",
+                    id_users: id_users,
+                    nama_kolektor: nama_kolektor,
+                    jumlah_tagihan: jumlah_tagihan,
+                    bulan_tagihan: bulan_tagihan,
+                    tanggal_transaksi: tanggal_transaksi,
+                    keterangan: keterangan,
+                    alamat: alamat
+                },
+                success: function (res) {
+                    Swal.fire({
+                            title: 'Berhasil!',
+                            text: 'Data berhasil di tambahkan!',
+                            icon: 'success',
+                        });
+                    window.location.href = "/admin/retribusi"
+                }
+            })
+        }else{
+            console.log("error")
         }
     }
 
