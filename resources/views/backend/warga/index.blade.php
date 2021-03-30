@@ -70,7 +70,7 @@ Daftar Warga
                                 {{$w->kota->kota}}
                             </td>
                             <td>
-                                <a href="https://maps.google.com/?q={{$w->latitude}},{{$w->longitude}}">Klik alamat</a>
+                                <a target="_blank" href="https://maps.google.com/?q={{$w->latitude}},{{$w->longitude}}">Klik alamat</a>
                             </td>
                             <td>
                                 <form action="{{ route('warga.destroy', $w->id) }}" method="POST">

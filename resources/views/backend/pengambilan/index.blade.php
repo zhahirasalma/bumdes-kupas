@@ -48,7 +48,9 @@ Daftar Pengambilan Sampah
                                 {{$p->user->nama}}
                             </td>
                             <td>
-                                {{$p->warga->lokasi}}
+                                <a target="_blank"
+                                    href="https://maps.google.com/?q={{$p->warga->latitude}},{{$p->warga->longitude}}">Klik
+                                    alamat</a>
                             </td>
                             <td>
                                 {{$p->waktu_pengambilan}}
@@ -74,8 +76,8 @@ Daftar Pengambilan Sampah
                             </td>
                             <td>
                                 <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
-                                        data-original-title="Delete" onClick="deleteConfirm({{$p->id}})">
-                                        <i class="far fa-trash-alt" style="color: white;"></i></button>
+                                    data-original-title="Delete" onClick="deleteConfirm({{$p->id}})">
+                                    <i class="far fa-trash-alt" style="color: white;"></i></button>
                             </td>
                         </tr>
                         @endforeach
