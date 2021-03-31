@@ -3,6 +3,11 @@
 Tambah Kategori Sampah
 @endsection
 
+<head>
+    <link rel=”stylesheet” href="{{asset('swal/sweetalert.css')}}">
+    <script src="{{asset('swal/sweetalert.js')}}"></script>
+</head>
+
 
 @section('content')
 <div class="row">
@@ -16,17 +21,14 @@ Tambah Kategori Sampah
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{route('kategori_sampah.store')}}" method="POST">
                     @csrf
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-control-label">Jenis Sampah</label>
-                                <input type="text" name="jenis_sampah" class="form-control form-control-alternative"
+                                <input type="text" id="jenis_sampah" class="form-control form-control-alternative"
                                     placeholder="Jenis Sampah" value="{{old('jenis_sampah')}}">
-                                @if ($errors->has('jenis_sampah'))
-                                <span class="text-danger">{{ $errors->first('jenis_sampah') }}</span>
-                                @endif
+                                <span class="text-danger error-jenis">Jenis sampah harus diisi</span>
                             </div>
                         </div>
                     </div>
@@ -34,17 +36,15 @@ Tambah Kategori Sampah
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-control-label">Harga Retribusi</label>
-                                <input type="text" name="harga_retribusi" class="form-control form-control-alternative"
+                                <input type="text" id="harga_retribusi" class="form-control form-control-alternative"
                                     placeholder="Harga Retribusi" value="{{old('harga_retribusi')}}">
-                                @if ($errors->has('harga_retribusi'))
-                                <span class="text-danger">{{ $errors->first('harga_retribusi') }}</span>
-                                @endif
+                                <span class="text-danger error-harga">Harga retribusi harus diisi</span>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
-                            <button class="btn btn-success" type="submit">Tambah</button>
+                            <button class="btn btn-success" onClick="tambah()" type="submit">Tambah</button>
                         </div>
                     </div>
                 </form>
@@ -52,4 +52,64 @@ Tambah Kategori Sampah
         </div>
     </div>
 </div>
+
+
+<style>
+    .error-jenis,
+    .error-harga {
+        display: none;
+    }
+
+</style>
 @endsection
+
+<script>
+    function tambah() {
+        var jenis_sampah = $('#jenis_sampah').val()
+        var harga_retribusi = $('#harga_retribusi').val()
+        var error = false;
+
+        if (jenis_sampah === '') {
+            error = true;
+            $('.error-jenis').show()
+        }
+
+        if (harga_retribusi === '') {
+            error = true;
+            $('.error-harga').show()
+        }
+        if (!error) {
+            $.ajax({
+                url: "{{route('kategori_sampah.store')}}",
+                method: 'post',
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    jenis_sampah: jenis_sampah,
+                    harga_retribusi: harga_retribusi
+                },
+                success: function (res) {
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        text: 'Data berhasil di tambahkan!',
+                        icon: 'success',
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK",
+                    }).then((result) => {
+                        if(result.value){
+                            window.location.href = "/admin/kategori_sampah"
+                        }
+                    });
+                },
+                error: function (xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    var text = err.message;
+                    Swal.fire({
+                        title: 'Gagal!',
+                        html: text,
+                        icon: 'warning',
+                    });
+                }
+            })
+        }
+    }
+</script>

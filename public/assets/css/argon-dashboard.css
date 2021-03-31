@@ -615,6 +615,9 @@ pre code {
     .container {
         max-width: 720px;
     }
+    .mobile-menu{
+        display: none !important;
+    }
 }
 
 @media (min-width: 992px) {

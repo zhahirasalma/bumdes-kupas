@@ -3,6 +3,10 @@
 Edit Data Bank Sampah
 @endsection
 
+<head>
+    <link rel=”stylesheet” href="{{asset('swal/sweetalert.css')}}">
+    <script src="{{asset('swal/sweetalert.js')}}"></script>
+</head>
 
 @section('content')
 <div class="row">
@@ -16,28 +20,24 @@ Edit Data Bank Sampah
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{route('bank_sampah.update', $data->id)}}" method="POST">
+                <input type="hidden" id="id" value="{{$data->id}}">
                     @csrf
                     @method('PUT')
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="input-nama">Nama</label>
-                                <input type="text" name="nama" class="form-control form-control-alternative"
+                                <input type="text" id="nama" class="form-control form-control-alternative"
                                     placeholder="Nama" value="{{ $data->user->nama}}">
-                                @if ($errors->has('nama'))
-                                <span class="text-danger">{{ $errors->first('nama') }}</span>
-                                @endif
+                                <span class="text-danger error-nama">Nama harus diisi</span>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="input-first-name">No Telepon</label>
-                                <input type="text" name="no_telp" class="form-control form-control-alternative"
+                                <input type="text" id="no_telp" class="form-control form-control-alternative"
                                     placeholder="No Telepon" value="{{$data->no_telp}}">
-                                @if ($errors->has('no_telp'))
-                                <span class="text-danger">{{ $errors->first('no_telp') }}</span>
-                                @endif
+                                <span class="text-danger error-no-telp">No telepon harus diisi</span>
                             </div>
                         </div>
                     </div>
@@ -45,22 +45,18 @@ Edit Data Bank Sampah
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="input-nama">Email</label>
-                                <input type="email" name="email" class="form-control form-control-alternative"
+                                <input type="email" id="email" class="form-control form-control-alternative"
                                     placeholder="Email" value="{{$data->user->email}}">
-                                @if ($errors->has('email'))
-                                <span class="text-danger">{{ $errors->first('email') }}</span>
-                                @endif
+                                <span class="text-danger error-email">Email harus diisi</span>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="input-first-name">Password</label>
-                                <input type="password" name="password" class="form-control form-control-alternative"
+                                <input type="password" id="password" class="form-control form-control-alternative"
                                     placeholder="Password" value="{{ old('password')}}">
+                                    <span class="text-danger error-password">Password harus diisi</span>
                             </div>
-                            @if ($errors->has('password'))
-                            <span class="text-danger">{{ $errors->first('password') }}</span>
-                            @endif
                         </div>
                     </div>
                     <div class="row">
@@ -75,9 +71,7 @@ Edit Data Bank Sampah
                                         {{$kt->kota}}</option>
                                     @endforeach
                                 </select>
-                                @if ($errors->has('id_kota'))
-                                <span class="text-danger">{{ $errors->first('id_kota') }}</span>
-                                @endif
+                                <span class="text-danger error-kota">Pilih salah satu</span>
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -91,9 +85,7 @@ Edit Data Bank Sampah
                                         {{$kc->kecamatan}}</option>
                                     @endforeach
                                 </select>
-                                @if ($errors->has('id_kecamatan'))
-                                <span class="text-danger">{{ $errors->first('id_kecamatan') }}</span>
-                                @endif
+                                <span class="text-danger error-kecamatan">Pilih salah satu</span>
                             </div>
                         </div>
                     </div>
@@ -108,19 +100,15 @@ Edit Data Bank Sampah
                                         {{$d->desa}}</option>
                                     @endforeach
                                 </select>
-                                @if ($errors->has('id_desa'))
-                                <span class="text-danger">{{ $errors->first('id_desa') }}</span>
-                                @endif
+                                <span class="text-danger error-desa">Pilih salah satu</span>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="input-country">Dukuh</label>
-                                <input type="text" name="dukuh" class="form-control form-control-alternative"
+                                <input type="text" id="dukuh" class="form-control form-control-alternative"
                                     placeholder="Kecamatan" value="{{$data->dukuh}}">
-                                @if ($errors->has('dukuh'))
-                                <span class="text-danger">{{ $errors->first('dukuh') }}</span>
-                                @endif
+                                <span class="text-danger error-dukuh">Dukuh harus diisi</span>
                             </div>
                         </div>
                     </div>
@@ -128,17 +116,15 @@ Edit Data Bank Sampah
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label>Detail Alamat</label>
-                                <textarea rows="4" name="detail_alamat" class="form-control form-control-alternative"
-                                    placeholder="A few words about you ...">{{$data->detail_alamat}}</textarea>
-                                @if ($errors->has('detail_alamat'))
-                                <span class="text-danger">{{ $errors->first('detail_alamat') }}</span>
-                                @endif
+                                <textarea rows="4" id="detail_alamat" class="form-control form-control-alternative"
+                                    placeholder="Detail alamat">{{$data->detail_alamat}}</textarea>
+                                <span class="text-danger error-alamat">Alamat harus diisi</span>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
-                            <button class=" btn btn-success" type="submit">Ubah</button>
+                            <button class=" btn btn-success" onClick="ubah()" type="submit">Ubah</button>
                         </div>
                     </div>
                 </form>
@@ -146,10 +132,149 @@ Edit Data Bank Sampah
         </div>
     </div>
 </div>
+
+<style>
+    .error-nama,
+    .error-no-telp,
+    .error-email,
+    .error-password,
+    .error-kota,
+    .error-kecamatan,
+    .error-desa,
+    .error-dukuh,
+    .error-alamat {
+        display: none;
+    }
+</style>
 @endsection
 
 @push('script')
 <script type="text/javascript">
+    function ubah() {
+        var nama = $('#nama').val()
+        var no_telp = $('#no_telp').val()
+        var email = $('#email').val()
+        var password = $('#password').val()
+        var kota = $('#kota').val()
+        var kecamatan = $('#kecamatan').val()
+        var desa = $('#desa').val()
+        var dukuh = $('#dukuh').val()
+        var detail_alamat = $('#detail_alamat').val()
+        var id = $('#id').val()
+        var error = false;
+
+        if (nama === '') {
+            error = true;
+            $('.error-nama').show()
+        }
+        
+        if (no_telp === '') {
+            error = true;
+            $('.error-no-telp').show()
+        }
+
+        if (email === '') {
+            error = true;
+            $('.error-email').show()
+        }
+
+        if (password === '') {
+            error = true;
+            $('.error-password').show()
+        }
+
+        
+        if (kota === '') {
+            error = true;
+            $('.error-kota').show()
+        }
+
+        if (kecamatan === '') {
+            error = true;
+            $('.error-kecamatan').show()
+        }
+
+        if (desa === '') {
+            error = true;
+            $('.error-desa').show()
+        }
+
+        if (dukuh === '') {
+            error = true;
+            $('.error-dukuh').show()
+        }
+
+        if (detail_alamat === '') {
+            error = true;
+            $('.error-alamat').show()
+        }
+        if (!error) {
+            $.ajax({
+                url: "/admin/bank_sampah/" + id,
+                method: 'post',
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "_method": "PUT",
+                    nama: nama,
+                    no_telp: no_telp,
+                    email: email,
+                    password: password,
+                    id_kota: kota,
+                    id_kecamatan: kecamatan,
+                    id_desa: desa,
+                    dukuh: dukuh,
+                    detail_alamat: detail_alamat,
+                },
+                success: function (res) {
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        text: 'Data berhasil di ubah!',
+                        icon: 'success',
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK",
+                    }).then((result) => {
+                        if (result.value) {
+                            window.location.href = "/admin/bank_sampah"
+                        }
+                    });
+                },
+                error: function (xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    var text = err.errors;
+                    var msg0 = ' '
+                    var msg1 = ' '
+                    var msg2 = ' '
+                    var msg3 = ' '
+                    var msg4 = ' '
+
+
+                    if (text.nama) {
+                        msg1 = text.nama[0];
+                    }
+
+                    if (text.email) {
+                        msg2 = text.email[0];
+                    }
+
+                    if (text.password) {
+                        msg3 = text.password[0];
+                    }
+
+                    if (text.no_telp) {
+                        msg4 = text.no_telp[0];
+                    }
+
+                    Swal.fire({
+                        title: 'Gagal!',
+                        html: msg0 + '<br>' + msg1 + '<br>' + msg2 + '<br>' + msg3 + '<br>' +
+                            msg4,
+                        icon: 'warning',
+                    });
+                }
+            })
+        }
+    };
+
     function updateKecamatan() {
         let kota = $("#kota").val()
         $("#kecamatan").children().remove();

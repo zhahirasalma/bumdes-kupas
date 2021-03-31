@@ -28,18 +28,12 @@
         <link href="{{asset('datatables/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
     </head>
 
-    <body class="">
-        <div class=".d-none .d-lg-block .d-xl-none">
-            <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
+    <body class="g-sidenav-show g-sidenav-pinned">
+        <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
             @include('backend.layout.sidebar')
+            @include('backend.layout.sidebar-mobile')
         </nav>
-        </div>
-        
-        <div class=".d-none .d-sm-block .d-md-none">
-            <nav>
-                @include('backend.layout.sidebar-mobile')
-            </nav>
-        </div>
+
         <div class="main-content">
             @include('sweetalert::alert')
             <!-- Navbar -->

@@ -4,13 +4,16 @@ Edit Data Warga
 @endsection
 
 <head>
+    <link rel=”stylesheet” href="{{asset('swal/sweetalert.css')}}">
+    <script src="{{asset('swal/sweetalert.js')}}"></script>
     <!-- leaflet css  -->
-    <link rel="stylesheet" href="{{asset('leaflet/leaflet.css')}}"/>
+    <link rel="stylesheet" href="{{asset('leaflet/leaflet.css')}}" />
     <style>
         /* ukuran peta */
         #mapid {
             height: 50%;
         }
+
     </style>
 </head>
 
@@ -26,206 +29,339 @@ Edit Data Warga
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{route('warga.update', $w->id)}}" method="POST">
-                    @csrf
-                    @method('PUT')
+                <input type="hidden" id="id" value="{{$w->id}}">
+                @csrf
+                @method('PUT')
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="form-control-label" for="input-nama">NIK</label>
+                            <input type="text" id="NIK" class="form-control form-control-alternative" placeholder="NIK"
+                                value="{{$w->NIK}}">
+                            <span class="text-danger error-nik">NIK harus diisi</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="form-control-label" for="input-nama">Nama</label>
+                            <input type="text" id="nama" class="form-control form-control-alternative"
+                                placeholder="Nama" value="{{ $w->user->nama}}">
+                            <span class="text-danger error-nama">Nama harus diisi</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="form-control-label" for="input-nama">Email</label>
+                            <input type="email" id="email" class="form-control form-control-alternative"
+                                placeholder="Email" value="{{$w->user->email}}">
+                            <span class="text-danger error-email">Email harus diisi</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="form-control-label" for="input-first-name">Password</label>
+                            <input type="password" id="password" class="form-control form-control-alternative"
+                                placeholder="Password" value="{{ $w->password}}">
+                            <span class="text-danger error-password">Password harus diisi</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="form-control-label" for="input-nama">Kategori</label>
+                            <select name="id_kategori_sampah" id="kategori" class="form-control"
+                                value="{{$w->kategori->jenis_sampah}}">
+                                <option value="">Pilih kategori...</option>
+                                @foreach($kategori as $k)
+                                <option value="{{$k->id}}" {{ $k->id == $w->id_kategori_sampah ? 'selected' : '' }}>
+                                    {{$k->jenis_sampah}}</option>
+                                @endforeach
+                            </select>
+                            <span class="text-danger error-kategori">Pilih salah satu</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="form-control-label" for="input-first-name">No Telepon</label>
+                            <input type="text" id="no_telp" class="form-control form-control-alternative"
+                                placeholder="No Telepon" value="{{$w->no_telp}}">
+                            <span class="text-danger error-no-telp">No telepon harus diisi</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="form-control-label" for="input-city">Kota</label>
+                            <select name="id_kota" id="kota" onChange="updateKecamatan()" class="form-control"
+                                value="{{$w->kota->kota}}">
+                                <option value="">Pilih kota...</option>
+                                @foreach($kota as $kt)
+                                <option value="{{$kt->id}}" {{ $kt->id == $w->id_kota ? 'selected' : '' }}>
+                                    {{$kt->kota}}</option>
+                                @endforeach
+                            </select>
+                            <span class="text-danger error-kota">Pilih salah satu</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="form-control-label" for="input-country">Kecamatan</label>
+                            <select name="id_kecamatan" id="kecamatan" onChange="updateDesa()" class="form-control"
+                                value="{{$w->kecamatan->kecamatan}}">
+                                <option value="">Pilih kecamatan...</option>
+                                @foreach($kecamatan as $kc)
+                                <option value="{{$kc->id}}" {{ $kc->id == $w->id_kecamatan ? 'selected' : '' }}>
+                                    {{$kc->kecamatan}}</option>
+                                @endforeach
+                            </select>
+                            <span class="text-danger error-kecamatan">Pilih salah satu</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="form-control-label" for="input-city">Desa</label>
+                            <select name="id_desa" id="desa" class="form-control" value="{{$w->desa->desa}}">
+                                <option value="">Pilih desa...</option>
+                                @foreach($desa as $d)
+                                <option value="{{$d->id}}" {{ $d->id == $w->id_desa ? 'selected' : '' }}>
+                                    {{$d->desa}}</option>
+                                @endforeach
+                            </select>
+                            <span class="text-danger error-desa">Pilih salah satu</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="form-control-label" for="input-country">Dukuh</label>
+                            <input type="text" id="dukuh" class="form-control form-control-alternative"
+                                placeholder="Kecamatan" value="{{$w->dukuh}}">
+                            <span class="text-danger error-dukuh">Dukuh harus diisi</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="form-control-label">Detail Alamat</label>
+                            <textarea rows="4" id="detail_alamat" class="form-control form-control-alternative"
+                                placeholder="Detail Alamat">{{$w->detail_alamat}}</textarea>
+                            <span class="text-danger error-alamat">Alamat harus diisi</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="display: none;">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="form-control-label" for="input-nama">Latitude</label>
+                            <input type="text" id="lat" name="lat" class="form-control form-control-alternative"
+                                placeholder="Lokasi" value="{{ $w->latitude}}">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="form-control-label" for="input-nama">Longitude</label>
+                            <input type="text" id="long" name="long" class="form-control form-control-alternative"
+                                placeholder="Lokasi" value="{{ $w->longitude}}">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <label class="form-control-label" for="input-nama">Lokasi</label>
                     <div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-control-label" for="input-nama">NIK</label>
-                                <input type="text" name="NIK" class="form-control form-control-alternative"
-                                    placeholder="NIK" value="{{$w->NIK}}">
-                                @if ($errors->has('NIK'))
-                                <span class="text-danger">{{ $errors->first('NIK') }}</span>
-                                @endif
-                            </div>
+                        <div id="search" class="col-lg-4">
+                            <input type="text" class="form-control form-control-alternative" name="addr" value=""
+                                id="addr" size="58">
                         </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-control-label" for="input-nama">Nama</label>
-                                <input type="text" name="nama" class="form-control form-control-alternative"
-                                    placeholder="Nama" value="{{ $w->user->nama}}">
-                                @if ($errors->has('nama'))
-                                <span class="text-danger">{{ $errors->first('nama') }}</span>
-                                @endif
-                            </div>
-                        </div>
+                        <button class="btn btn-success" type="button" onclick="addr_search();">Search</button>
+                    </div> <br>
+                    <div class="form-group">
+                        <div id="mapid" style="height: 500px;"></div>
+                        <span class="text">Klik pada peta untuk memilih</span>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-control-label" for="input-nama">Email</label>
-                                <input type="email" name="email" class="form-control form-control-alternative"
-                                    placeholder="Email" value="{{$w->user->email}}">
-                                @if ($errors->has('email'))
-                                <span class="text-danger">{{ $errors->first('email') }}</span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-control-label" for="input-first-name">Password</label>
-                                <input type="password" name="password" class="form-control form-control-alternative"
-                                    placeholder="Password" value="{{ old('password')}}">
-                            </div>
-                            @if ($errors->has('password'))
-                            <span class="text-danger">{{ $errors->first('password') }}</span>
-                            @endif
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <button class="btn btn-success" onClick="ubah()" type="submit">Ubah</button>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-control-label" for="input-nama">Kategori</label>
-                                <select name="id_kategori_sampah" id="kategori" class="form-control"
-                                    value="{{$w->kategori->jenis_sampah}}">
-                                    <option value="">Pilih kategori...</option>
-                                    @foreach($kategori as $k)
-                                    <option value="{{$k->id}}" {{ $k->id == $w->id_kategori_sampah ? 'selected' : '' }}>
-                                        {{$k->jenis_sampah}}</option>
-                                    @endforeach
-                                </select>
-                                @if ($errors->has('id_kategori_sampah'))
-                                <span class="text-danger">{{ $errors->first('id_kategori_sampah') }}</span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-control-label" for="input-first-name">No Telepon</label>
-                                <input type="text" name="no_telp" class="form-control form-control-alternative"
-                                    placeholder="No Telepon" value="{{$w->no_telp}}">
-                                @if ($errors->has('no_telp'))
-                                <span class="text-danger">{{ $errors->first('no_telp') }}</span>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-control-label" for="input-city">Kota</label>
-                                <select name="id_kota" id="kota" onChange="updateKecamatan()" class="form-control"
-                                    value="{{$w->kota->kota}}">
-                                    <option value="">Pilih kota...</option>
-                                    @foreach($kota as $kt)
-                                    <option value="{{$kt->id}}" {{ $kt->id == $w->id_kota ? 'selected' : '' }}>
-                                        {{$kt->kota}}</option>
-                                    @endforeach
-                                </select>
-                                @if ($errors->has('id_kota'))
-                                <span class="text-danger">{{ $errors->first('id_kota') }}</span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-control-label" for="input-country">Kecamatan</label>
-                                <select name="id_kecamatan" id="kecamatan" onChange="updateDesa()" class="form-control"
-                                    value="{{$w->kecamatan->kecamatan}}">
-                                    <option value="">Pilih kecamatan...</option>
-                                    @foreach($kecamatan as $kc)
-                                    <option value="{{$kc->id}}" {{ $kc->id == $w->id_kecamatan ? 'selected' : '' }}>
-                                        {{$kc->kecamatan}}</option>
-                                    @endforeach
-                                </select>
-                                @if ($errors->has('id_kecamatan'))
-                                <span class="text-danger">{{ $errors->first('id_kecamatan') }}</span>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-control-label" for="input-city">Desa</label>
-                                <select name="id_desa" id="desa" class="form-control" value="{{$w->desa->desa}}">
-                                    <option value="">Pilih desa...</option>
-                                    @foreach($desa as $d)
-                                    <option value="{{$d->id}}" {{ $d->id == $w->id_desa ? 'selected' : '' }}>
-                                        {{$d->desa}}</option>
-                                    @endforeach
-                                </select>
-                                @if ($errors->has('id_desa'))
-                                <span class="text-danger">{{ $errors->first('id_desa') }}</span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-control-label" for="input-country">Dukuh</label>
-                                <input type="text" name="dukuh" class="form-control form-control-alternative"
-                                    placeholder="Kecamatan" value="{{$w->dukuh}}">
-                                @if ($errors->has('dukuh'))
-                                <span class="text-danger">{{ $errors->first('dukuh') }}</span>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-control-label">Detail Alamat</label>
-                                <textarea rows="4" name="detail_alamat" class="form-control form-control-alternative"
-                                    placeholder="Detail Alamat">{{$w->detail_alamat}}</textarea>
-                                @if ($errors->has('detail_alamat'))
-                                <span class="text-danger">{{ $errors->first('detail_alamat') }}</span>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row" style="display: none;">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-control-label" for="input-nama">Latitude</label>
-                                <input type="text" id="lat" name="lat" class="form-control form-control-alternative"
-                                    placeholder="Lokasi" value="{{ old('lokasi')}}">
-                                @if ($errors->has('lokasi'))
-                                <span class="text-danger">{{ $errors->first('lokasi') }}</span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-control-label" for="input-nama">Longitude</label>
-                                <input type="text" id="long" name="long" class="form-control form-control-alternative"
-                                    placeholder="Lokasi" value="{{ old('lokasi')}}">
-                                @if ($errors->has('lokasi'))
-                                <span class="text-danger">{{ $errors->first('lokasi') }}</span>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="form-control-label" for="input-nama">Lokasi</label>
-                        <div class="row">
-                            <div id="search" class="col-lg-4">
-                                <input type="text" class="form-control form-control-alternative" name="addr" value=""
-                                    id="addr" size="58">
-                            </div>
-                            <button class="btn btn-success" type="button" onclick="addr_search();">Search</button>
-                        </div> <br>
-                            <div class="form-group">
-                                <div id="mapid"></div>
-                            </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <button class="btn btn-success" type="submit">Ubah</button>
-                        </div>
-                    </div>
+                </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
 
+<style>
+    .error-nik,
+    .error-nama,
+    .error-email,
+    .error-password,
+    .error-kategori,
+    .error-no-telp,
+    .error-kota,
+    .error-kecamatan,
+    .error-desa,
+    .error-dukuh,
+    .error-alamat {
+        display: none;
+    }
 
+</style>
 @endsection
 
 @push('script')
 <script src="{{asset('leaflet/leaflet.js')}}"></script>
 <script type="text/javascript">
+    function ubah() {
+        var nik = $('#NIK').val()
+        var nama = $('#nama').val()
+        var email = $('#email').val()
+        var password = $('#password').val()
+        var kategori = $('#kategori').val()
+        var no_telp = $('#no_telp').val()
+        var kota = $('#kota').val()
+        var kecamatan = $('#kecamatan').val()
+        var desa = $('#desa').val()
+        var dukuh = $('#dukuh').val()
+        var detail_alamat = $('#detail_alamat').val()
+        var latitude = $('#lat').val()
+        var longitude = $('#long').val()
+        var id = $('#id').val()
+        var error = false;
+
+        if (nik === '') {
+            error = true;
+            $('.error-nik').show()
+        }
+
+        if (nama === '') {
+            error = true;
+            $('.error-nama').show()
+        }
+
+        if (email === '') {
+            error = true;
+            $('.error-email').show()
+        }
+
+        if (password === '') {
+            error = true;
+            $('.error-password').show()
+        }
+
+        if (kategori === '') {
+            error = true;
+            $('.error-kategori').show()
+        }
+
+        if (no_telp === '') {
+            error = true;
+            $('.error-no-telp').show()
+        }
+
+        if (kota === '') {
+            error = true;
+            $('.error-kota').show()
+        }
+
+        if (kecamatan === '') {
+            error = true;
+            $('.error-kecamatan').show()
+        }
+
+        if (desa === '') {
+            error = true;
+            $('.error-desa').show()
+        }
+
+        if (dukuh === '') {
+            error = true;
+            $('.error-dukuh').show()
+        }
+
+        if (detail_alamat === '') {
+            error = true;
+            $('.error-alamat').show()
+        }
+        if (!error) {
+            $.ajax({
+                url: "/admin/warga/" + id,
+                method: 'post',
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "_method": "PUT",
+                    NIK: nik,
+                    nama: nama,
+                    email: email,
+                    password: password,
+                    id_kategori_sampah: kategori,
+                    id_kota: kota,
+                    id_kecamatan: kecamatan,
+                    id_desa: desa,
+                    no_telp: no_telp,
+                    dukuh: dukuh,
+                    detail_alamat: detail_alamat,
+                    latitude: latitude,
+                    longitude: longitude,
+                },
+                success: function (data) {
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        text: 'Data berhasil di ubah!',
+                        icon: 'success',
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK",
+                    }).then((result) => {
+                        if (result.value) {
+                            window.location.href = "/admin/warga"
+                        }
+                    });
+                },
+                error: function (xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    var text = err.errors;
+                    var msg0 = ' '
+                    var msg1 = ' '
+                    var msg2 = ' '
+                    var msg3 = ' '
+                    var msg4 = ' '
+
+                    if (text.NIK) {
+                        msg0 = text.NIK[0];
+                    }
+
+                    if (text.nama) {
+                        msg1 = text.nama[0];
+                    }
+
+                    if (text.email) {
+                        msg2 = text.email[0];
+                    }
+
+                    if (text.password) {
+                        msg3 = text.password[0];
+                    }
+
+                    if (text.no_telp) {
+                        msg4 = text.no_telp[0];
+                    }
+
+                    Swal.fire({
+                        title: 'Gagal!',
+                        html: msg0 + '<br>' + msg1 + '<br>' + msg2 + '<br>' + msg3 + '<br>' +
+                            msg4,
+                        icon: 'warning',
+                    });
+                }
+            })
+        }
+    };
+
     $(document).ready(function () {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition);
@@ -234,8 +370,17 @@ Edit Data Warga
         }
     });
 
-    var lat = "-7.797068";
-    var long = "110.370529";
+    var latitude = $('#lat').val()
+    var longitude = $('#long').val()
+
+    if (latitude === '') {
+        var lat = "-7.797068";
+        var long = "110.370529";
+    } else {
+        var lat = latitude
+        var long = longitude
+    }
+
     var mymap = L.map('mapid').setView([lat, long], 13);
 
     function showPosition(position) {
@@ -274,7 +419,7 @@ Edit Data Warga
             console.log(replace)
 
             //value pada form latitde, longitude akan berganti secara otomatis
-            document.getElementById('lat').value =lat; 
+            document.getElementById('lat').value = lat;
             document.getElementById('long').value = long;
         }
         mymap.on('click', onMapClick); //jalankan fungsi

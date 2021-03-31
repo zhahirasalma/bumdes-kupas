@@ -3,6 +3,10 @@
 Tambah Users
 @endsection
 
+<head>
+    <link rel=”stylesheet” href="{{asset('swal/sweetalert.css')}}">
+    <script src="{{asset('swal/sweetalert.js')}}"></script>
+</head>
 
 @section('content')
 <div class="row">
@@ -16,69 +20,151 @@ Tambah Users
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{route('users.store')}}" method="POST">
-                    @csrf
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-control-label" for="input-nama">Nama</label>
-                                <input type="text" name="nama" class="form-control form-control-alternative"
-                                    placeholder="Nama" value="{{ old('nama')}}">
-                                @if ($errors->has('nama'))
-                                <span class="text-danger">{{ $errors->first('nama') }}</span>
-                                @endif
-                            </div>
+                @csrf
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="form-control-label" for="input-nama">Nama</label>
+                            <input type="text" id="nama" class="form-control form-control-alternative"
+                                placeholder="Nama" value="{{ old('nama')}}">
+                            <span class="text-danger error-nama">Nama harus diisi</span>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-control-label" for="input-first-name">Email</label>
-                                <input type="email" name="email" class="form-control form-control-alternative"
-                                    placeholder="Email" value="{{ old('email')}}">
-                                @if ($errors->has('email'))
-                                <span class="text-danger">{{ $errors->first('email') }}</span>
-                                @endif
-                            </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="form-control-label" for="input-first-name">Email</label>
+                            <input type="email" id="email" class="form-control form-control-alternative"
+                                placeholder="Email" value="{{ old('email')}}">
+                            <span class="text-danger error-email">Email harus diisi</span>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-control-label" for="input-first-name">Password</label>
-                                <input type="password" name="password" class="form-control form-control-alternative"
-                                    placeholder="Password" value="{{ old('password')}}">
-                                @if ($errors->has('password'))
-                                <span class="text-danger">{{ $errors->first('password') }}</span>
-                                @endif
-                            </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="form-control-label" for="input-first-name">Password</label>
+                            <input type="password" id="password" class="form-control form-control-alternative"
+                                placeholder="Password" value="{{ old('password')}}">
+                            <span class="text-danger error-password">Password harus diisi</span>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-control-label" for="input-first-name">Role</label>
-                                <select name="role" class="form-control form-control-alternative" placeholder="Role">
-                                    <option value="">Pilih...</option>
-                                    <option value="admin" @if (old('role')=='admin' ) selected="selected" @endif>
-                                        admin</option>
-                                    <option value="educator" @if (old('role')=='educator' ) selected="selected" @endif>
-                                        educator
-                                    </option>
-                                </select>
-                                @if ($errors->has('role'))
-                                <span class="text-danger">{{ $errors->first('role') }}</span>
-                                @endif
-                            </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="form-control-label" for="input-first-name">Role</label>
+                            <select id="role" class="form-control form-control-alternative" placeholder="Role">
+                                <option value="">Pilih...</option>
+                                <option value="admin" @if (old('role')=='admin' ) selected="selected" @endif>
+                                    admin</option>
+                                <option value="educator" @if (old('role')=='educator' ) selected="selected" @endif>
+                                    educator
+                                </option>
+                            </select>
+                            <span class="text-danger error-role">Pilih salah satu</span>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <button class=" btn btn-success" type="submit">Tambah</button></div>
-                    </div>
-                </form>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <button class=" btn btn-success" onClick="tambah()" type="submit">Tambah</button></div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<style>
+    .error-nama,
+    .error-email,
+    .error-password,
+    .error-role {
+        display: none;
+    }
+
+</style>
 @endsection
+
+<script>
+    function tambah() {
+        var nama = $('#nama').val()
+        var email = $('#email').val()
+        var password = $('#password').val()
+        var role = $('#role').val()
+        var error = false;
+
+        if (nama === '') {
+            error = true;
+            $('.error-nama').show()
+        }
+
+        if (email === '') {
+            error = true;
+            $('.error-email').show()
+        }
+
+        if (password === '') {
+            error = true;
+            $('.error-password').show()
+        }
+
+        if (role === '') {
+            error = true;
+            $('.error-role').show()
+        }
+        if (!error) {
+            $.ajax({
+                url: "{{route('users.store')}}",
+                method: 'post',
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    nama: nama,
+                    email: email,
+                    password: password,
+                    role: role
+                },
+                success: function (res) {
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        text: 'Data berhasil di tambahkan!',
+                        icon: 'success',
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK",
+                    }).then((result) => {
+                        if(result.value){
+                            window.location.href = "/admin/users"
+                        }
+                    });
+                },
+                error: function (xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    var text = err.errors;
+                    var msg1 = ' '
+                    var msg2 = ' '
+                    var msg3 = ' '
+
+                    if (text.nama) {
+                        msg1 = text.nama[0];
+                    }
+
+                    if (text.email) {
+                        msg2 = text.email[0];
+                    }
+
+                    if (text.password) {
+                        msg3 = text.password[0];
+                    }
+
+                    Swal.fire({
+                        title: 'Gagal!',
+                        html: msg1 + '<br>' + msg2 + '<br>' + msg3,
+                        icon: 'warning',
+                    });
+                }
+            })
+        }
+    }
+
+</script>

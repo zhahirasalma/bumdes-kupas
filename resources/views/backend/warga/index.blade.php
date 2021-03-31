@@ -48,29 +48,31 @@ Daftar Warga
                                 {{$loop->iteration}}
                             </th>
                             <td>
-                                {{$w->NIK}}
+                                {{ $w->NIK != 'null' ? $w->NIK : ''  }}
                             </td>
                             <td>
-                                {{$w->user->nama}}
+                                {{ $w->user->nama != 'null' ? $w->user->nama : ''  }}
                             </td>
                             <td>
-                                {{$w->user->email}}
+                                {{ $w->user->email != 'null' ? $w->user->email : ''  }}
                             </td>
                             <td>
-                                {{$w->kategori->jenis_sampah}}
+                                {{ $w->kategori->jenis_sampah != 'null' ? $w->kategori->jenis_sampah : ''  }}
                             </td>
                             <td>
-                                {{$w->no_telp}}
+                                {{ $w->no_telp != 'null' ? $w->no_telp : ''  }}
                             </td>
                             <td>
-                                {{$w->detail_alamat}},
-                                {{$w->dukuh}},
-                                {{$w->desa->desa}},
-                                {{$w->kecamatan->kecamatan}},
-                                {{$w->kota->kota}}
+                                {{ $w->detail_alamat != 'null' ? $w->detail_alamat : ''  }},
+                                {{ $w->dukuh != 'null' ? $w->dukuh : ''  }},</br>
+                                {{ $w->desa->desa != 'null' ? $w->desa->desa : ''  }},
+                                {{ $w->kecamatan->kecamatan != 'null' ? $w->kecamatan->kecamatan : ''  }},
+                                {{ $w->kota->kota != 'null' ? $w->kota->kota : ''  }}
                             </td>
                             <td>
-                                <a target="_blank" href="https://maps.google.com/?q={{$w->latitude}},{{$w->longitude}}">Klik alamat</a>
+                                @if ($w->latitude != null && $w->longitude != null)
+                                    <a target="_blank" href="https://maps.google.com/?q={{$w->latitude}},{{$w->longitude}}">Klik alamat</a>    
+                                @endif
                             </td>
                             <td>
                                 <form action="{{ route('warga.destroy', $w->id) }}" method="POST">

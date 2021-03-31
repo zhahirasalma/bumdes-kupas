@@ -3,6 +3,11 @@
 Tambah Data Transaksi Retribusi
 @endsection
 
+<head>
+    <link rel=”stylesheet” href="{{asset('swal/sweetalert.css')}}">
+    <script src="{{asset('swal/sweetalert.js')}}"></script>
+</head>
+
 @section('content')
 <div class="row">
     <div class="col">
@@ -35,8 +40,9 @@ Tambah Data Transaksi Retribusi
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label class="form-control-label" for="input-nama">Nama Kolektor</label>
-                            <input type="text" name="nama_kolektor" id="nama_kolektor" class="form-control form-control-alternative"
-                                placeholder="Nama Kolektor" value="{{ old('nama_kolektor')}}">
+                            <input type="text" name="nama_kolektor" id="nama_kolektor"
+                                class="form-control form-control-alternative" placeholder="Nama Kolektor"
+                                value="{{ old('nama_kolektor')}}">
                             <span class="text-danger error-nama_kolektor">Nama kolektor harus diisi</span>
                         </div>
                     </div>
@@ -88,8 +94,9 @@ Tambah Data Transaksi Retribusi
                         <div class="form-group">
                             <label class="form-control-label" for="input-first-name">Tanggal
                                 Transaksi</label>
-                            <input type="date" name="tanggal_transaksi" id="tanggal_transaksi" class="form-control form-control-alternative"
-                                placeholder="Tanggal Transaksi" value="{{ old('tanggal_transaksi')}}">
+                            <input type="date" name="tanggal_transaksi" id="tanggal_transaksi"
+                                class="form-control form-control-alternative" placeholder="Tanggal Transaksi"
+                                value="{{ old('tanggal_transaksi')}}">
                             <span class="text-danger error-tanggal_transaksi">Tanggal harus diisi</span>
                         </div>
                     </div>
@@ -130,10 +137,15 @@ Tambah Data Transaksi Retribusi
 </div>
 
 <style>
-    .error-id_users, .error-nama_kolektor, .error-bulan_tagihan, .error-tanggal_transaksi, 
-    .error-keterangan, .error-alamat{
+    .error-id_users,
+    .error-nama_kolektor,
+    .error-bulan_tagihan,
+    .error-tanggal_transaksi,
+    .error-keterangan,
+    .error-alamat {
         display: none;
     }
+
 </style>
 @endsection
 
@@ -152,9 +164,9 @@ Tambah Data Transaksi Retribusi
             });
         }
     }
-    
+
     function tambah() {
-        var id_users= $('#id_users').val()
+        var id_users = $('#id_users').val()
         var nama_kolektor = $('#nama_kolektor').val()
         var bulan_tagihan = $('#bulan_tagihan').val()
         var tanggal_transaksi = $('#tanggal_transaksi').val()
@@ -163,37 +175,37 @@ Tambah Data Transaksi Retribusi
         var jumlah_tagihan = $('#jumlah_tagihan').val()
         var error = false;
 
-        if(id_users === ''){
+        if (id_users === '') {
             error = true;
             $('.error-id_users').show()
         }
 
-        if(nama_kolektor === ''){
+        if (nama_kolektor === '') {
             error = true;
             $('.error-nama_kolektor').show()
         }
 
-        if(bulan_tagihan === ''){
+        if (bulan_tagihan === '') {
             error = true;
             $('.error-bulan_tagihan').show()
         }
 
-        if(tanggal_transaksi === ''){
+        if (tanggal_transaksi === '') {
             error = true;
             $('.error-tanggal_transaksi').show()
         }
 
-        if(keterangan === ''){
+        if (keterangan === '') {
             error = true;
             $('.error-keterangan').show()
         }
 
-        if(alamat === ''){
+        if (alamat === '') {
             error = true;
             $('.error-alamat').show()
         }
 
-        if(!error){
+        if (!error) {
             $.ajax({
                 url: "{{route('retribusi.store')}}",
                 method: 'post',
@@ -209,17 +221,28 @@ Tambah Data Transaksi Retribusi
                 },
                 success: function (res) {
                     Swal.fire({
-                            title: 'Berhasil!',
-                            text: 'Data berhasil di tambahkan!',
-                            icon: 'success',
-                        });
-                    window.location.href = "/admin/retribusi"
+                        title: 'Berhasil!',
+                        text: 'Data berhasil di tambahkan!',
+                        icon: 'success',
+                    }).then((result) => {
+                        if (result.value) {
+                            window.location.href = "/admin/retribusi"
+                        }
+                    });
+                },
+                error: function (xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    var text = err.message;
+
+                    Swal.fire({
+                        title: 'Gagal!',
+                        text: text,
+                        icon: 'warning',
+                    });
                 }
             })
         }
     }
-
-    
 
     $('#id_users').select2({
         allowClear: true,

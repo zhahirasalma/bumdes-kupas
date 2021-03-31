@@ -23,7 +23,8 @@ class Warga extends Model
         'id_desa',
         'dukuh',
         'detail_alamat',
-        'lokasi',
+        'latitude',
+        'longitude'
     ];
     
     public function user(){

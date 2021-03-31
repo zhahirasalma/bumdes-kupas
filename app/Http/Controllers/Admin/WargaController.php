@@ -85,7 +85,8 @@ class WargaController extends Controller
             'id_desa' => 'required',
             'dukuh' => 'required',
             'detail_alamat' => 'required',
-            'lokasi' => 'nullable',
+            'latitude' => 'nullable',
+            'longitude' => 'nullable',
         ], $messages);
 
         $user = new User;
@@ -97,24 +98,29 @@ class WargaController extends Controller
            $user->save();
         }
         
-        $warga = new Warga;
-        $warga->id_users=$user->id;
-        $warga->NIK = $request->input('NIK');
-        $warga->no_telp = $request->input('no_telp');
-        $warga->id_kota = $request->input('id_kota');
-        $warga->id_kecamatan = $request->input('id_kecamatan');
-        $warga->id_desa = $request->input('id_desa');
-        $warga->dukuh = $request->input('dukuh');
-        $warga->detail_alamat = $request->input('detail_alamat');
-        $warga->latitude = $request->input('lat');
-        $warga->longitude = $request->input('long');
-        $warga->id_kategori_sampah = $request->input('id_kategori_sampah');
-        if($warga){
-           $warga->save();
+        if($user){
+            $warga = new Warga;
+            $warga->id_users=$user->id;
+            $warga->NIK = $request->input('NIK');
+            $warga->no_telp = $request->input('no_telp');
+            $warga->id_kota = $request->input('id_kota');
+            $warga->id_kecamatan = $request->input('id_kecamatan');
+            $warga->id_desa = $request->input('id_desa');
+            $warga->dukuh = $request->input('dukuh');
+            $warga->detail_alamat = $request->input('detail_alamat');
+            $warga->latitude = $request->input('latitude');
+            $warga->longitude = $request->input('longitude');
+            $warga->id_kategori_sampah = $request->input('id_kategori_sampah');
+            if($warga){
+                $warga->save();
+                Alert::success('Berhasil', 'Data warga berhasil ditambahkan');
+                return redirect()->route('warga.index');
+            }
         }
 
-        Alert::success('Berhasil', 'Data warga berhasil ditambahkan');
-        return redirect()->route('warga.index');        
+        
+
+                
     }
 
     /**
@@ -157,41 +163,6 @@ class WargaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $messages = [
-            'NIK.required' => 'NIK wajib diisi.',
-            'NIK.min' => 'NIK harus 16 digit.',
-            'nama.required' => 'Nama wajib diisi.',
-            'nama.min' => 'Nama minimal 3 huruf.',
-            'email.required' => 'Email wajib diisi.',
-            'email.min' => 'Email minimal 11 huruf.',
-            'password.required' => 'Password wajib diisi.',
-            'password.min' => 'Password minimal 5 huruf.',
-            'id_kategori_sampah.required' => 'Kategori wajib diisi.',
-            'id_kategori_sampah.not_in' => 'Pilih kategori sesuai daftar.',
-            'no_telp.required' => 'No telepon wajib diisi.',
-            'no_telp.min' => 'No telepon minimal 10 digit.',
-            'id_kota.required' => 'Kota wajib diisi.',
-            'id_kecamatan.required' => 'Kecamatan wajib diisi.',
-            'id_desa.required' => 'Desa wajib diisi.',
-            'dukuh.required' => 'Dukuh wajib diisi.',
-            'detail_alamat.required' => 'Detail alamat wajib diisi.',
-        ];
-
-        $validate = $request->validate([
-            'NIK' => 'required|numeric|min:16',
-            'nama' => 'required|min:3|string',
-            'email' => 'required|min:10|email',
-            'password' => 'required|min:5',
-            'id_kategori_sampah' => 'required|not_in:0',
-            'no_telp' => 'required|min:11|numeric',
-            'id_kota' => 'required',
-            'id_kecamatan' => 'required',
-            'id_desa' => 'required',
-            'dukuh' => 'required',
-            'detail_alamat' => 'required',
-            'lokasi' => 'nullable',
-        ], $messages);
-
         $warga = Warga::find($id);
 
         $user = User::where('id', $warga->id_users)->update([
@@ -200,21 +171,30 @@ class WargaController extends Controller
             'password' => bcrypt($request->input('password')),
             'role' => "warga"
         ]);
-        
-        $warga->update([
-            'NIK' => $request->input('NIK'),
-            'no_telp' => $request->input('no_telp'),
-            'id_kota' => $request->input('id_kota'),
-            'id_kecamatan' => $request->input('id_kecamatan'),
-            'id_desa' => $request->input('id_desa'),
-            'dukuh' => $request->input('dukuh'),
-            'detail_alamat' => $request->input('detail_alamat'),
-            'lokasi' => $request->input('lokasi'),
-            'id_kategori_sampah' => $request->input('id_kategori_sampah')
-        ]);
 
-        Alert::success('Berhasil', 'Data warga berhasil diubah');
-        return redirect()->route('warga.index');  
+        if($user){
+            $warga = $warga->update([
+                'NIK' => $request->input('NIK'),
+                'no_telp' => $request->input('no_telp'),
+                'id_kota' => $request->input('id_kota'),
+                'id_kecamatan' => $request->input('id_kecamatan'),
+                'id_desa' => $request->input('id_desa'),
+                'dukuh' => $request->input('dukuh'),
+                'detail_alamat' => $request->input('detail_alamat'),
+                'latitude' => $request->input('latitude'),
+                'longitude' => $request->input('longitude'),
+                'id_kategori_sampah' => $request->input('id_kategori_sampah')
+            ]);
+            if($warga){
+                Alert::success('Berhasil', 'Data warga berhasil diubah');
+                return redirect()->route('warga.index');
+            }else{
+                Alert::warning('Gagal', 'Data tidak bisa diubah');
+            }
+        }else{
+            Alert::warning('Gagal', 'Data tidak bisa diubah');
+        };
+        
     }
 
     /**
