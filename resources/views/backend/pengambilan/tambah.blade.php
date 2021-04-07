@@ -79,9 +79,10 @@ Tambah Pengambilan
 </div>
 
 <style>
-    .text-danger{
+    .text-danger {
         display: none;
     }
+
 </style>
 @endsection
 
@@ -161,9 +162,21 @@ Tambah Pengambilan
     })
 
     $("#tabel tbody").on('click', '.cb-child', function () {
+        var isChecked = $(this).is(':checked')
+
         if ($(this).prop('checked') != true) {
             $("#cb-head").prop('checked', false)
+        } else {
+            if (isChecked) {
+                let checked = $(this)[0].value;
+                selected_rows.push(checked);
+            } else {
+                let uncheck = $(this)[0].value;
+                var index = selected_rows.indexOf(uncheck);
+                selected_rows.splice(index, 1);
+            }
         }
+
     })
 
     //tambah data
@@ -174,7 +187,7 @@ Tambah Pengambilan
         let waktu = $('#waktu_pengambilan').val()
         if (waktu === "") {
             error = true;
-            $( ".text-danger" ).show();
+            $(".text-danger").show();
         }
 
         $.each(checkbox_terpilih, function (index, elm) {
@@ -196,20 +209,6 @@ Tambah Pengambilan
         }
 
     }
-
-
-    //save selected cb
-    $("#tabel tbody").on('click', '.cb-child', function () {
-        var isChecked = $(this).is(':checked')
-        if (isChecked) {
-            let checked = $(this)[0].value;
-            selected_rows.push(checked);
-        } else {
-            let uncheck = $(this)[0].value;
-            var index = selected_rows.indexOf(uncheck);
-            selected_rows.splice(index, 1);
-        }
-    })
 
 </script>
 @endpush

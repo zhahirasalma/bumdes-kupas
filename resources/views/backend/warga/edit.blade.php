@@ -176,9 +176,9 @@ Edit Data Warga
                     <div class="row">
                         <div id="search" class="col-lg-4">
                             <input type="text" class="form-control form-control-alternative" name="addr" value=""
-                                id="addr" size="58">
+                                id="addr" size="58" placeholder="Cari lokasi">
                         </div>
-                        <button class="btn btn-success" type="button" onclick="addr_search();">Search</button>
+                        <button class="btn btn-success" type="button" onclick="addr_search();">Cari</button>
                     </div> <br>
                     <div class="form-group">
                         <div id="mapid" style="height: 500px;"></div>
