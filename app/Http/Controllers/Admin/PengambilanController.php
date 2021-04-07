@@ -64,6 +64,8 @@ class PengambilanController extends Controller
         $pengambilan = Pengambilan::find($request->id);
         $pengambilan->status = $request->status;
         $pengambilan->save();
+
+        return response()->json($pengambilan);
     }
 
     public function data(Request $request)

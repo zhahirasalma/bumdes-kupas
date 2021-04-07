@@ -109,8 +109,21 @@ Daftar Pengambilan Sampah
                     'id': id
                 },
                 success: function (data) {
-                    console.log('Success')
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        text: 'Status berhasil diubah!',
+                        icon: 'success',
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK",
+                    })
                 },
+                error: function (error) {
+                    Swal.fire({
+                        title: 'Gagal!',
+                        text: 'Tidak dapat mengubah status',
+                        icon: 'warning',
+                    });
+                }
             });
         });
     });

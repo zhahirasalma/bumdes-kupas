@@ -8,7 +8,7 @@
     <div class="collapse navbar-collapse" id="sidenav-collapse-main">
         <!-- Navigation -->
         <ul class="navbar-nav">
-            <li class="nav-item  class=" active" ">
+            <li class="nav-item">
                 <a class=" nav-link " href="{{route('dashboard.index')}}"> 
                     <i class="ni ni-sound-wave text-grey"></i> Dashboard
                 </a>
