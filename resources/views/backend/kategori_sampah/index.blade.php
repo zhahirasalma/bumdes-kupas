@@ -42,10 +42,12 @@ Kategori Sampah
                                 {{$loop->iteration}}
                             </th>
                             <td>
-                                {{$kategori->jenis_sampah}}
+                                {{$kategori->jenis_sampah != null ? $kategori->jenis_sampah : ''}}
                             </td>
                             <td>
-                                @currency($kategori->harga_retribusi)
+                                @if ($kategori->harga_retribusi != null) @currency($kategori->harga_retribusi)
+                                @else
+                                @endif
                             </td>
                             <td>
                                 <form action="{{ route('kategori_sampah.destroy', $kategori->id) }}" method="POST">

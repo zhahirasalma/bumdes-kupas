@@ -42,13 +42,13 @@ Users
                                 {{$loop->iteration}}
                             </th>
                             <td>
-                                {{$user->nama}}
+                                {{$user->nama != null ? $user->nama : '' }}
                             </td>
                             <td>
-                                {{$user->email}}
+                                {{$user->email != null ? $user->email : ''}}
                             </td>
                             <td>
-                                {{$user->role}}
+                                {{$user->role != null $user->role : ''}}
                             </td>
                             <td>
                                 <form action="{{ route('users.destroy', $user->id) }}" method="POST">

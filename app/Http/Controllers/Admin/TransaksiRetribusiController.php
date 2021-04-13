@@ -46,7 +46,6 @@ class TransaksiRetribusiController extends Controller
             'id_users.required' => 'Nama wajib diisi.',
             'nama_kolektor.required' => 'Nama kolektor wajib diisi.',
             'bulan_tagihan.required' => 'Bulan Tagihan wajib diisi.',
-            'alamat.required' => 'Alamat wajib diisi.',
             'keterangan.required' => 'Keterangan wajib diisi.',
             'tanggal_transaksi.required' => 'Tanggal transaksi wajib diisi.',
         ];
@@ -54,7 +53,6 @@ class TransaksiRetribusiController extends Controller
         $request->validate([
             'nama_kolektor' => 'required',
             'bulan_tagihan' => 'required',
-            'alamat' => 'required',
             'keterangan' => 'required',
             'tanggal_transaksi' => 'required',
             'id_users' => 'required'
@@ -108,7 +106,6 @@ class TransaksiRetribusiController extends Controller
             'id_users.required' => 'Nama wajib diisi.',
             'nama_kolektor.required' => 'Nama kolektor wajib diisi.',
             'bulan_tagihan.required' => 'Bulan Tagihan wajib diisi.',
-            'alamat.required' => 'Alamat wajib diisi.',
             'keterangan.required' => 'Keterangan wajib diisi.',
             'tanggal_transaksi.required' => 'Tanggal transaksi wajib diisi.',
         ];
@@ -116,7 +113,6 @@ class TransaksiRetribusiController extends Controller
         $request->validate([
             'nama_kolektor' => 'required',
             'bulan_tagihan' => 'required',
-            'alamat' => 'required',
             'keterangan' => 'required',
             'tanggal_transaksi' => 'required',
             'id_users' => 'required'

@@ -45,20 +45,20 @@ Daftar Bank Sampah
                                 {{$loop->iteration}}
                             </th>
                             <td>
-                                {{$data->user->nama}}
+                                {{$data->user->nama != null ? $data->user->nama : ''}}
                             </td>
                             <td>
-                                {{$data->no_telp}}
+                                {{$data->no_telp != null ? $data->no_telp : ''}}
                             </td>
                             <td>
-                                {{$data->user->email}}
+                                {{$data->user->email != null ? $data->user->email : ''}}
                             </td>
                             <td>
-                                {{$data->detail_alamat}},
-                                {{$data->dukuh}},
-                                {{$data->desa->desa}},
-                                {{$data->kecamatan->kecamatan}},
-                                {{$data->kota->kota}}
+                                {{$data->detail_alamat != null ? $data->detail_alamat : '-'}},
+                                {{$data->dukuh != null ? $data->dukuh : '-'}},
+                                {{$data->desa->desa != null ? $data->desa->desa : '-'}},
+                                {{$data->kecamatan->kecamatan != null ? $data->kecamatan->kecamatan : '-'}},
+                                {{$data->kota->kota != null ? $data->kota->kota : '-'}}
                             </td>
                             <td>
                                 <form action="{{ route('bank_sampah.destroy', $data->id) }}" method="POST">

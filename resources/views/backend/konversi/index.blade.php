@@ -42,10 +42,12 @@ Konversi Harga Sampah
                                 {{$loop->iteration}}
                             </th>
                             <td>
-                                {{$konversi->jenis_sampah}}
+                                {{$konversi->jenis_sampah != null ? $konversi->jenis_sampah : ''}}
                             </td>
                             <td>
-                                @currency($konversi->harga_konversi)
+                                @if ($konversi->harga_konversi != null) @currency($konversi->harga_konversi)
+                                @else
+                                @endif
                             </td>
                             <td>
                                 <form action="{{ route('konversi.destroy', $konversi->id) }}" method="POST">

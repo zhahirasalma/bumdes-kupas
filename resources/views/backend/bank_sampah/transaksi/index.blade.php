@@ -41,13 +41,17 @@ Daftar Transaksi Bank Sampah
                                 {{$loop->iteration}}
                             </th>
                             <td>
-                                {{$tr->user->nama}}
+                                {{$tr->user->nama != null ? $tr->user->nama : ''}}
                             </td>
                             <td>
-                                {{$tr->tanggal_transaksi}}
+                                {{$tr->tanggal_transaksi != null ? $tr->tanggal_transaksi : ''}}
                             </td>
                             <td>
-                                @currency($tr->jumlah)
+                                @if ($tr->jumlah != null)
+                                    @currency($tr->jumlah)
+                                @else
+                                    
+                                @endif
                             </td>
                             <td>
                                 <form action="{{ route('transaksi.destroy', $tr->id_bank_sampah) }}" method="POST">

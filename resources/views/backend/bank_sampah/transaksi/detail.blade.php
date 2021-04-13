@@ -58,23 +58,26 @@ Detail Transaksi Bank Sampah
                                 {{$loop->iteration}}
                             </th>
                             <td>
-                                {{$d->tanggal_transaksi}}
+                                {{$d->tanggal_transaksi != null ? $d->tanggal_transaksi : ''}}
                             </td>
                             <td>
-                                {{$d->konversi->jenis_sampah}}
+                                {{$d->konversi->jenis_sampah != null ? $d->konversi->jenis_sampah : ''}}
                             </td>
                             <td>
-                                {{$d->konversi->harga_konversi}}
-
+                                {{$d->konversi->harga_konversi != null ? $d->konversi->harga_konversi : ''}}
                             </td>
                             <td>
-                                {{$d->berat}}
+                                {{$d->berat != null ? $d->berat : ''}}
                             </td>
                             <td>
-                                @currency($d->harga_total)
+                                @if ($d->harga_total != null)
+                                    @currency($d->harga_total)
+                                @else
+                                    
+                                @endif
                             </td>
                             <td>
-                                {{$d->keterangan}}
+                                {{$d->keterangan != null ? $d->keterangan : ''}}
                             </td>
                             <td>
                                 <form action="{{ route('delete-transaksi', $d->id) }}" method="POST">

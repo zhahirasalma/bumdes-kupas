@@ -33,7 +33,6 @@ Daftar Transaksi Retribusi
                             <th scope="col">Nama Kolektor</th>
                             <th scope="col">Jumlah Tagihan</th>
                             <th scope="col">Bulan Tagihan</th>
-                            <th scope="col">Alamat</th>
                             <th scope="col">Tanggal Transaksi</th>
                             <th scope="col">Keterangan</th>
                             <th scope="col">Aksi</th>
@@ -46,25 +45,24 @@ Daftar Transaksi Retribusi
                                 {{$loop->iteration}}
                             </th>
                             <td>
-                                {{$r->user->nama}}
+                                {{ $r->user->nama != 'null' ? $r->user->nama : ''  }}
                             </td>
                             <td>
-                                {{$r->nama_kolektor}}
+                                {{ $r->nama_kolektor != 'null' ? $r->nama_kolektor : ''  }}
                             </td>
                             <td>
-                                @currency($r->jumlah_tagihan)
+                                @if ($r->jumlah_tagihan != 'null') @currency($r->jumlah_tagihan)
+                                @else 
+                                @endif
                             </td>
                             <td>
-                                {{$r->bulan_tagihan}}
+                                {{ $r->bulan_tagihan != 'null' ? $r->bulan_tagihan : ''  }}
                             </td>
                             <td>
-                                {{$r->alamat}}
+                                {{ $r->tanggal_transaksi != 'null' ? $r->tanggal_transaksi : ''  }}
                             </td>
                             <td>
-                                {{$r->tanggal_transaksi}}
-                            </td>
-                            <td>
-                                {{$r->keterangan}}
+                                {{ $r->keterangan != 'null' ? $r->keterangan : ''  }}
                             </td>
                             <td>
                                 <form action="{{ route('retribusi.destroy', $r->id) }}" method="POST">

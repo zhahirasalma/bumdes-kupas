@@ -45,15 +45,18 @@ Daftar Pengambilan Sampah
                                 {{$loop->iteration}}
                             </th>
                             <td>
-                                {{$p->user->nama}}
+                                {{$p->user->nama != 'null' ? $p->user->nama : ''}}
                             </td>
                             <td>
+                                @if ($p->warga->latitude != null || $p->warga->longitude != null)
                                 <a target="_blank"
                                     href="https://maps.google.com/?q={{$p->warga->latitude}},{{$p->warga->longitude}}">Klik
                                     alamat</a>
+                                @else 
+                                @endif
                             </td>
                             <td>
-                                {{$p->waktu_pengambilan}}
+                                {{$p->waktu_pengambilan != 'null' ? $p->waktu_pengambilan : ''}}
                             </td>
                             <td>
                                 <style>
