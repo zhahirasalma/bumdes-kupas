@@ -74,8 +74,8 @@ Daftar Transaksi Retribusi
                                     <a class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
                                         data-original-title="Delete" onClick="deleteConfirm({{$r->id}})">
                                         <i class="far fa-trash-alt" style="color: white;"></i></a>
+                                </form>
                             </td>
-                            </form>
                         </tr>
                         @endforeach
                     </tbody>
@@ -122,7 +122,7 @@ Daftar Transaksi Retribusi
                             text: 'Data berhasil di hapus!',
                             icon: 'success',
                         });
-                        window.location.href = "/admin/users"
+                        window.location.href = "/admin/retribusi"
                     },
                     error: function () {
                         Swal.fire({
@@ -130,11 +130,12 @@ Daftar Transaksi Retribusi
                             text: 'Data tidak dapat di hapus!',
                             icon: 'warning',
                         });
-                        window.location.href = "/admin/users"
+                        window.location.href = "/admin/retribusi"
                     }
                 });
             }
         })
     }
+
 </script>
 @endpush

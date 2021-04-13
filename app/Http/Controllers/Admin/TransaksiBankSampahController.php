@@ -52,13 +52,12 @@ class TransaksiBankSampahController extends Controller
         $messages = [
             'id_users.required' => 'Nama wajib diisi.',
             'tanggal_transaksi.required' => 'Tanggal Transaksi wajib diisi.',
-            'keterangan.required' => 'Keterangan wajib diisi.',
         ];
 
         $request->validate([
             'id_users' => 'required',
             'tanggal_transaksi' => 'required',
-            'keterangan' => 'required',
+            'keterangan' => 'nullable',
         ], $messages);
 
         $input = $request->all();
@@ -117,7 +116,6 @@ class TransaksiBankSampahController extends Controller
         $messages = [
             'id_users.required' => 'Nama wajib diisi.',
             'tanggal_transaksi.required' => 'Tanggal Transaksi wajib diisi.',
-            'keterangan.required' => 'Keterangan wajib diisi.',
             'id_konversi.required' => 'Jenis Sampah wajib diisi.',
             'berat.required' => 'Berat wajib diisi.',
         ];
@@ -125,7 +123,7 @@ class TransaksiBankSampahController extends Controller
         $request->validate([
             'id_users' => 'required',
             'tanggal_transaksi' => 'required',
-            'keterangan' => 'required',
+            'keterangan' => 'nullable',
             'id_konversi' => 'required',
             'berat' => 'required',
         ], $messages);

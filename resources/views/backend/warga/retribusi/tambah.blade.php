@@ -118,16 +118,6 @@ Tambah Data Transaksi Retribusi
                 </div>
                 <div class="row">
                     <div class="col-lg-6">
-                        <div class="form-group">
-                            <label class="form-control-label">Alamat</label>
-                            <textarea name="alamat" id="alamat" rows="4" class="form-control form-control-alternative"
-                                placeholder="Alamat">{{ old('alamat')}}</textarea>
-                            <span class="text-danger error-alamat">Alamat harus diisi</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6">
                         <button class="btn btn-success" type="submit" onClick="tambah()">Tambah</button>
                     </div>
                 </div>
@@ -141,8 +131,7 @@ Tambah Data Transaksi Retribusi
     .error-nama_kolektor,
     .error-bulan_tagihan,
     .error-tanggal_transaksi,
-    .error-keterangan,
-    .error-alamat {
+    .error-keterangan{
         display: none;
     }
 
@@ -198,11 +187,6 @@ Tambah Data Transaksi Retribusi
         if (keterangan === '') {
             error = true;
             $('.error-keterangan').show()
-        }
-
-        if (alamat === '') {
-            error = true;
-            $('.error-alamat').show()
         }
 
         if (!error) {

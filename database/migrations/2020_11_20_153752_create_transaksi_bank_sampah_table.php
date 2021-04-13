@@ -17,7 +17,7 @@ class CreateTransaksiBankSampahTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_bank_sampah')->nullable();
             $table->date('tanggal_transaksi')->nullable();
-            $table->string('keterangan');
+            $table->string('keterangan')->nullable();
             $table->unsignedBigInteger('id_users')->nullable();
             $table->unsignedBigInteger('id_konversi')->nullable();
             $table->string('berat');
