@@ -115,12 +115,12 @@ class WargaController extends Controller
                 $warga->save();
                 Alert::success('Berhasil', 'Data warga berhasil ditambahkan');
                 return redirect()->route('warga.index');
+            }else{
+                Alert::warning('Gagal', 'Data tidak bisa diubah');
             }
-        }
-
-        
-
-                
+        }else{
+            Alert::warning('Gagal', 'Data tidak bisa diubah');
+        };                   
     }
 
     /**
