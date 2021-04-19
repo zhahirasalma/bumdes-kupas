@@ -48,7 +48,7 @@ Users
                                 {{$user->email != null ? $user->email : ''}}
                             </td>
                             <td>
-                                {{$user->role != null $user->role : ''}}
+                                {{$user->role != null ? $user->role : ''}}
                             </td>
                             <td>
                                 <form action="{{ route('users.destroy', $user->id) }}" method="POST">

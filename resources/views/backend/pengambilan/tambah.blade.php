@@ -89,9 +89,11 @@ Tambah Pengambilan
 @push('script')
 <script type="text/javascript">
     var selected_rows = [];
+    var item = [];
+    var page = 0;
     let filter = $("#kategori").val()
     const tabel = $('#tabel').DataTable({
-        "pageLength": 100,
+        "pageLength": 10,
         "lengthMenu": [
             [10, 25, 50, 100, -1],
             [10, 25, 50, 100, 'semua']
@@ -110,6 +112,10 @@ Tambah Pengambilan
             type: "POST",
             data: function (d) {
                 d.filter = filter;
+                if(page != d.start){
+                    page = d.start
+                    $("#cb-head").prop('checked', false)
+                }
                 return d
             }
         },
@@ -158,7 +164,21 @@ Tambah Pengambilan
     //checkbox
     $("#cb-head").on('click', function () {
         var isChecked = $("#cb-head").prop('checked')
-        $(".cb-child").prop('checked', isChecked)
+        if (isChecked) {
+            $(".cb-child").each(function () {
+                item.push($(this).val())
+            });
+            $(".cb-child").prop('checked', isChecked)
+        }else {
+            item = [];
+        }
+        selected_rows = item
+        console.log(selected_rows)
+        tabel.ajax.reload(function () {
+            if (selected_rows.length > 0) {
+                $(".cb-child").val(selected_rows).is(':checked');
+            }
+        })
     })
 
     $("#tabel tbody").on('click', '.cb-child', function () {
@@ -178,24 +198,38 @@ Tambah Pengambilan
             $(".text-danger").show();
         }
 
-        $.each(checkbox_terpilih, function (index, elm) {
-            semua_id.push(elm.value)
-        })
-
         if (!error) {
             $.ajax({
                 url: "{{route('pengambilan/tambah')}}",
                 method: 'post',
                 data: {
-                    id_users: semua_id,
+                    id_users: selected_rows,
                     waktu: waktu
                 },
-                success: function (res) {
-                    window.location.href = "/admin/pengambilan"
+                success: function (data) {
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        text: 'Data berhasil di tambahkan!',
+                        icon: 'success',
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK",
+                    }).then((result) => {
+                        if (result.value) {
+                            window.location.href = "/admin/pengambilan"
+                        }
+                    });
+                },
+                error: function (xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    var text = err.message;
+                    Swal.fire({
+                        title: 'Gagal!',
+                        html: text,
+                        icon: 'warning',
+                    });
                 }
             })
         }
-
     }
 
     //save selected cb
