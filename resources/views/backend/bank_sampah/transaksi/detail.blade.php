@@ -64,7 +64,11 @@ Detail Transaksi Bank Sampah
                                 {{$d->konversi->jenis_sampah != null ? $d->konversi->jenis_sampah : ''}}
                             </td>
                             <td>
-                                {{$d->konversi->harga_konversi != null ? $d->konversi->harga_konversi : ''}}
+                                @if ($d->konversi->harga_konversi != null)
+                                    @currency($d->konversi->harga_konversi)
+                                @else
+                                    
+                                @endif
                             </td>
                             <td>
                                 {{$d->berat != null ? $d->berat : ''}}

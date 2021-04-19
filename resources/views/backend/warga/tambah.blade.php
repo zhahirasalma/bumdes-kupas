@@ -134,11 +134,15 @@ Tambah Data Warga
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label">Detail Alamat</label>
-                    <textarea rows="4" id="detail_alamat" class="form-control form-control-alternative"
-                        placeholder="Detail Alamat">{{ old('detail_alamat')}}</textarea>
-                    <span class="text-danger error-alamat">Alamat harus diisi</span>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="form-control-label">Detail Alamat</label>
+                            <textarea rows="4" id="detail_alamat" class="form-control form-control-alternative"
+                                placeholder="Detail Alamat">{{ old('detail_alamat')}}</textarea>
+                            <span class="text-danger error-alamat">Alamat harus diisi</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="row" style="display: none;">
                     <div class="col-lg-6">
@@ -194,6 +198,7 @@ Tambah Data Warga
     .error-alamat {
         display: none;
     }
+
 </style>
 @endsection
 
@@ -351,8 +356,8 @@ Tambah Data Warga
         }
     });
 
-    var lat = "-2.9547949";
-    var long = "104.6929233";
+    var lat = "-7.797068";
+    var long = "110.370529";
     var mymap = L.map('mapid').setView([lat, long], 13);
 
     function showPosition(position) {
@@ -516,5 +521,6 @@ Tambah Data Warga
         placeholder: "Pilih desa...",
         theme: 'bootstrap4',
     });
+
 </script>
 @endpush

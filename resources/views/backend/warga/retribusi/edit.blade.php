@@ -125,16 +125,6 @@ Edit Data Transaksi Retribusi
                 </div>
                 <div class="row">
                     <div class="col-lg-6">
-                        <div class="form-group">
-                            <label>Alamat</label>
-                            <textarea id="alamat" rows="4" class="form-control form-control-alternative"
-                                placeholder="Alamat">{{$retribusi->alamat}}</textarea>
-                            <span class="text-danger error-alamat">Alamat harus diisi</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6">
                         <button class="btn btn-success" onClick="ubah()" type="submit">Ubah</button>
                     </div>
                 </div>
