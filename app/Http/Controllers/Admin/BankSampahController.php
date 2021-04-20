@@ -85,20 +85,20 @@ class BankSampahController extends Controller
             $user->save();
         }
 
-        $bank_sampah = new BankSampah;
-        $bank_sampah->id_users=$user->id;
-        $bank_sampah->no_telp = $request->input('no_telp');
-        $bank_sampah->id_kota = $request->input('id_kota');
-        $bank_sampah->id_kecamatan = $request->input('id_kecamatan');
-        $bank_sampah->id_desa = $request->input('id_desa');
-        $bank_sampah->dukuh = $request->input('dukuh');
-        $bank_sampah->detail_alamat = $request->input('detail_alamat');
-        if($bank_sampah){
-            $bank_sampah->save();
-        }
-
-        Alert::success('Berhasil', 'Data bank sampah berhasil ditambahkan');
-        return redirect()->route('bank_sampah.index');  
+        if($user){
+            $bank_sampah = new BankSampah;
+            $bank_sampah->id_users=$user->id;
+            $bank_sampah->no_telp = $request->input('no_telp');
+            $bank_sampah->id_kota = $request->input('id_kota');
+            $bank_sampah->id_kecamatan = $request->input('id_kecamatan');
+            $bank_sampah->id_desa = $request->input('id_desa');
+            $bank_sampah->dukuh = $request->input('dukuh');
+            $bank_sampah->detail_alamat = $request->input('detail_alamat');
+            if($bank_sampah){
+                $bank_sampah->save();
+            }
+            return redirect()->route('bank_sampah.index');  
+        }   
     }
 
     /**
@@ -176,16 +176,17 @@ class BankSampahController extends Controller
             'role' => "bank_sampah"
         ]);
         
-        $bank_sampah->update([
-            'no_telp' => $request->input('no_telp'),
-            'id_kota' => $request->input('id_kota'),
-            'id_kecamatan' => $request->input('id_kecamatan'),
-            'id_desa' => $request->input('id_desa'),
-            'dukuh' => $request->input('dukuh'),
-            'detail_alamat' => $request->input('detail_alamat'),
-        ]);
-        Alert::success('Berhasil', 'Data bank sampah berhasil diubah');
-        return redirect()->route('bank_sampah.index');  
+        if($user){
+            $bank_sampah->update([
+                'no_telp' => $request->input('no_telp'),
+                'id_kota' => $request->input('id_kota'),
+                'id_kecamatan' => $request->input('id_kecamatan'),
+                'id_desa' => $request->input('id_desa'),
+                'dukuh' => $request->input('dukuh'),
+                'detail_alamat' => $request->input('detail_alamat'),
+            ]);
+            return redirect()->route('bank_sampah.index'); 
+        } 
     }
 
     /**
