@@ -348,94 +348,62 @@ Tambah Data Warga
         }
     };
 
-    $(document).ready(function () {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-        } else {
-            alert("Geolocation is not supported by this browser.");
-        }
-    });
-
-    var lat = "-7.797068";
-    var long = "110.370529";
+    var lat = "-7.80411";
+    var long = "110.364455";
     var mymap = L.map('mapid').setView([lat, long], 13);
+    var popup = L.popup();
 
-    function showPosition(position) {
-        var lat = position.coords.latitude;
-        var long = position.coords.longitude;
-        // set lokasi latitude dan longitude, lokasinya posisi user
-        //setting maps menggunakan api mapbox bukan google maps, daftar dan dapatkan token      
-        L.tileLayer(
-            'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibmFiaWxjaGVuIiwiYSI6ImNrOWZzeXh5bzA1eTQzZGxpZTQ0cjIxZ2UifQ.1YMI-9pZhxALpQ_7x2MxHw', {
-                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-                maxZoom: 20,
-                id: 'mapbox/streets-v11', //menggunakan peta model streets-v11 kalian bisa melihat jenis-jenis peta lainnnya di web resmi mapbox
-                tileSize: 512,
-                zoomOffset: -1,
-                accessToken: 'your.mapbox.access.token'
-            }).addTo(mymap);
+    // set lokasi latitude dan longitude, lokasinya posisi user
+    //setting maps menggunakan api mapbox bukan google maps, daftar dan dapatkan token      
+    L.tileLayer(
+        'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibmFiaWxjaGVuIiwiYSI6ImNrOWZzeXh5bzA1eTQzZGxpZTQ0cjIxZ2UifQ.1YMI-9pZhxALpQ_7x2MxHw', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 20,
+            id: 'mapbox/streets-v11', //menggunakan peta model streets-v11 kalian bisa melihat jenis-jenis peta lainnnya di web resmi mapbox
+            tileSize: 512,
+            zoomOffset: -1,
+            accessToken: 'your.mapbox.access.token'
+        }).addTo(mymap);
 
+    // buat variabel berisi fugnsi L.popup 
+    
 
-        // buat variabel berisi fugnsi L.popup 
-        var popup = L.popup();
+    // buat fungsi popup saat map diklik
+    function onMapClick(e) {
+        popup
+            .setLatLng(e.latlng)
+            .setContent("koordinatnya adalah " + e.latlng
+                .toString()
+            ) //set isi konten yang ingin ditampilkan, kali ini kita akan menampilkan latitude dan longitude
+            .openOn(mymap);
 
-        // buat fungsi popup saat map diklik
-        function onMapClick(e) {
-            popup
-                .setLatLng(e.latlng)
-                .setContent("koordinatnya adalah " + e.latlng
-                    .toString()
-                ) //set isi konten yang ingin ditampilkan, kali ini kita akan menampilkan latitude dan longitude
-                .openOn(mymap);
+        var reg = /[^a-zA-Z0-9\!\@\#\$\%\^\*\_\|]+/;
+        var latlong = e.latlng.toString();
+        var replace = latlong.replace(/[^\d.,-]/g, '');
+        var lat = replace.split(",")[0]
+        var long = replace.split(",")[1]
 
-            var reg = /[^a-zA-Z0-9\!\@\#\$\%\^\*\_\|]+/;
-            var latlong = e.latlng.toString();
-            var replace = latlong.replace(/[^\d.,-]/g, '');
-            var lat = replace.split(",")[0]
-            var long = replace.split(",")[1]
-
-            //value pada form latitde, longitude akan berganti secara otomatis
-            document.getElementById('lat').value = lat;
-            document.getElementById('long').value = long;
-        }
-        mymap.on('click', onMapClick); //jalankan fungsi
-    }
-
-
-    var myMarker = L.marker([lat, long], {
-        title: "Coordinates",
-        alt: "Coordinates",
-        draggable: true
-    }).addTo(mymap).on('dragend', function () {
-        var lat = myMarker.getLatLng().lat.toFixed(8);
-        var long = myMarker.getLatLng().lng.toFixed(8);
-        var czoom = mymap.getZoom();
-        if (czoom < 18) {
-            nzoom = czoom + 2;
-        }
-        if (nzoom > 18) {
-            nzoom = 18;
-        }
-        if (czoom != 18) {
-            mymap.setView([lat, long], nzoom);
-        } else {
-            mymap.setView([lat, long]);
-        }
+        //value pada form latitde, longitude akan berganti secara otomatis
         document.getElementById('lat').value = lat;
         document.getElementById('long').value = long;
-        myMarker.bindPopup("Lat " + lat + "<br />Lon " + long).openPopup();
-    });
+    }
+    mymap.on('click', onMapClick); //jalankan fungsi
 
     function myFunction(arr) {
         var out = "<br />";
         var i;
         if (arr.length > 0) {
             mymap.setView([arr[0].lat, arr[0].lon], 18);
-            myMarker.setLatLng([arr[0].lat, arr[0].lon]);
+            popup
+                .setLatLng([arr[0].lat, arr[0].lon])
+                .setContent("koordinatnya adalah " + [arr[0].lat, arr[0].lon]
+                    .toString()
+                ) //set isi konten yang ingin ditampilkan, kali ini kita akan menampilkan latitude dan longitude
+                .openOn(mymap);
             document.getElementById('lat').value = arr[0].lat;
             document.getElementById('long').value = arr[0].lon;
         } else {
-            alert("Sorry, no results...");
+            alert("Alamat tidak ditemukan");
         }
     }
 
