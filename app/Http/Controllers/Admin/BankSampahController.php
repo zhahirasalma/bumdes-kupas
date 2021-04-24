@@ -11,6 +11,7 @@ use App\Models\Kecamatan;
 use App\Models\Desa;
 use App\Imports\BankSampahImport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Validation\Rule;
 Use Alert;
 
 class BankSampahController extends Controller
@@ -51,7 +52,8 @@ class BankSampahController extends Controller
             'nama.required' => 'Nama wajib diisi.',
             'nama.min' => 'Nama minimal 3 huruf.',
             'no_telp.required' => 'No telepon wajib diisi.',
-            'no_telp.min' => 'No telepon minimal 10 digit.',
+            'no_telp.size' => 'No telepon minimal 11 digit.',
+            'no_telp.numeric' => 'No telepon harus angka.',
             'email.required' => 'Email wajib diisi.',
             'email.min' => 'Email minimal 11 huruf.',
             'email.unique' => 'Email sudah terpakai.',
@@ -65,9 +67,10 @@ class BankSampahController extends Controller
         ];
 
         $request->validate([
-            'nama' => 'required|min:3|string',
-            'no_telp' => 'required|min:11|numeric',
-            'email' => 'required|min:10|email|unique:users,email',
+            'nama' => 'required|min:3',
+            'no_telp' => 'required|numeric|size:11',
+            'email' => ['required','min:10', 'email',
+                        Rule::unique('users', 'email')->whereNull('deleted_at')],
             'password' => 'required|min:5',
             'id_kota' => 'required',
             'id_kecamatan' => 'required',
@@ -143,9 +146,11 @@ class BankSampahController extends Controller
             'nama.required' => 'Nama wajib diisi.',
             'nama.min' => 'Nama minimal 3 huruf.',
             'no_telp.required' => 'No telepon wajib diisi.',
-            'no_telp.min' => 'No telepon minimal 10 digit.',
+            'no_telp.size' => 'No telepon minimal 11 digit.',
+            'no_telp.numeric' => 'No telepon harus angka.',
             'email.required' => 'Email wajib diisi.',
             'email.min' => 'Email minimal 11 huruf.',
+            'email.unique' => 'Email sudah terpakai.',
             'password.required' => 'Password wajib diisi.',
             'password.min' => 'Password minimal 5 huruf.',
             'id_kota.required' => 'Kota wajib diisi.',
@@ -156,9 +161,10 @@ class BankSampahController extends Controller
         ];
 
         $request->validate([
-            'nama' => 'required|min:3|string',
-            'no_telp' => 'required|min:11|numeric',
-            'email' => 'required|min:10|email',
+            'nama' => 'required|min:3',
+            'no_telp' => 'required|numeric',
+            'email' => ['required','min:10', 'email',
+                        Rule::unique('users', 'email')->ignore($id)->whereNull('deleted_at')],
             'password' => 'required|min:5',
             'id_kota' => 'required',
             'id_kecamatan' => 'required',
@@ -201,8 +207,6 @@ class BankSampahController extends Controller
         $user = User::where('id', $data->id_users);
         $user->delete();
         $data->delete();       
-        
-        Alert::success('Berhasil', 'Data bank sampah berhasil dihapus');
         return back();  
     }
 

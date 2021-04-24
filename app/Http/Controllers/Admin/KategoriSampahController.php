@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\KategoriSampah;
 use App\Imports\KategoriImport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Validation\Rule;
 Use Alert;
 
 class KategoriSampahController extends Controller
@@ -42,18 +43,20 @@ class KategoriSampahController extends Controller
     {
         $messages = [
             'jenis_sampah.required' => 'Jenis sampah wajib diisi.',
+            'jenis_sampah.unique' => 'Jenis sampah sudah ada.',
             'harga_retribusi.required' => 'Harga retribusi wajib diisi.',
             'harga_retribusi.numeric' => 'Harga retribusi harus berupa angka.',
         ];
 
         $request->validate([
-            'jenis_sampah' => 'required',
+            'jenis_sampah' => [
+                'required', 
+                Rule::unique('kategori_sampah', 'jenis_sampah')->whereNull('deleted_at')
+            ],
             'harga_retribusi' => 'required|numeric',
         ], $messages);
 
         KategoriSampah::create($request->all());
-        Alert::success('Berhasil', 'Data kategori berhasil ditambahkan');
-        return redirect()->route('kategori_sampah.index');  
     }
 
     /**
@@ -90,19 +93,21 @@ class KategoriSampahController extends Controller
     {
         $messages = [
             'jenis_sampah.required' => 'Jenis sampah wajib diisi.',
+            'jenis_sampah.unique' => 'Jenis sampah sudah ada.',
             'harga_retribusi.required' => 'Harga retribusi wajib diisi.',
             'harga_retribusi.numeric' => 'Harga retribusi harus berupa angka.',
         ];
 
         $request->validate([
-            'jenis_sampah' => 'required',
+            'jenis_sampah' => [
+                'required', 
+                Rule::unique('kategori_sampah', 'jenis_sampah')->ignore($id)->whereNull('deleted_at')
+            ],
             'harga_retribusi' => 'required|numeric',
         ], $messages);
         
         $kategori = KategoriSampah::find($id);
         $kategori->update($request->all());
-        Alert::success('Berhasil', 'Data kategori berhasil diubah');
-        return redirect()->route('kategori_sampah.index');  
     }
 
     /**

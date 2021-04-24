@@ -229,36 +229,30 @@ Tambah Bank Sampah
                 error: function (xhr, status, error) {
                     var err = eval("(" + xhr.responseText + ")");
                     var text = err.errors;
-                    var msg0 = ' '
                     var msg1 = ' '
                     var msg2 = ' '
                     var msg3 = ' '
                     var msg4 = ' '
 
-                    if (text.NIK) {
-                        msg0 = text.NIK[0];
-                    }
-
                     if (text.nama) {
-                        msg1 = text.nama[0];
+                        msg1 = text.nama[0] + '<br>' ;
                     }
 
                     if (text.email) {
-                        msg2 = text.email[0];
+                        msg2 = text.email[0] + '<br>';
                     }
 
                     if (text.password) {
-                        msg3 = text.password[0];
+                        msg3 = text.password[0] + '<br>';
                     }
 
                     if (text.no_telp) {
-                        msg4 = text.no_telp[0];
+                        msg4 = text.no_telp[0] + '<br>';
                     }
-
+                    console.log(text)
                     Swal.fire({
                         title: 'Gagal!',
-                        html: msg0 + '<br>' + msg1 + '<br>' + msg2 + '<br>' + msg3 + '<br>' +
-                            msg4,
+                        html: msg1 + msg2+ msg3 + msg4,
                         icon: 'warning',
                     });
                 }

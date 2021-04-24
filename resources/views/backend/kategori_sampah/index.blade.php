@@ -125,7 +125,7 @@ Kategori Sampah
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name=csrf-token]').attr('content')
                     },
-                    url: "kategori/" + id,
+                    url: "kategori_sampah/" + id,
                     method: "post",
                     data: {
                         "_token": "{{ csrf_token() }}",
@@ -138,7 +138,7 @@ Kategori Sampah
                             text: 'Data berhasil di hapus!',
                             icon: 'success',
                         });
-                        window.location.href = "/admin/kategori"
+                        window.location.href = "/admin/kategori_sampah"
                     },
                     error: function () {
                         Swal.fire({
@@ -146,7 +146,7 @@ Kategori Sampah
                             text: 'Data tidak dapat di hapus!',
                             icon: 'warning',
                         });
-                        window.location.href = "/admin/kategori"
+                        window.location.href = "/admin/kategori_sampah"
                     }
                 });
             }

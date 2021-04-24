@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Validation\Rule;
 Use Alert;
 
 class UsersController extends Controller
@@ -52,17 +53,17 @@ class UsersController extends Controller
         ];
 
         $validator = $request->validate([
-            'nama' => 'required|min:5|unique:users,nama',
-            'email' => 'required|email|unique:users,email',
+            'nama' => ['required','min:5',
+                        Rule::unique('users', 'nama')->whereNull('deleted_at')],
+            'email' => ['required','min:10', 'email',
+                        Rule::unique('users', 'email')->whereNull('deleted_at')],
             'password' => 'required|min:5',
             'role' => 'required|not_in:0',
         ], $messages);
     
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
-        User::create($input);
-        Alert::success('Berhasil', 'Data user berhasil ditambahkan');
-        return redirect()->route('users.index');  
+        User::create($input); 
     }
 
     /**
@@ -111,8 +112,10 @@ class UsersController extends Controller
         ];
 
         $validator = $request->validate([
-            'nama' => 'required|min:5|unique:users,nama',
-            'email' => 'required|email|unique:users,email',
+            'nama' => ['required','min:5',
+                        Rule::unique('users', 'nama')->ignore($id)->whereNull('deleted_at')],
+            'email' => ['required','min:10', 'email',
+                        Rule::unique('users', 'email')->ignore($id)->whereNull('deleted_at')],
             'password' => 'required|min:5',
             'role' => 'required|not_in:0',
         ], $messages);
@@ -121,8 +124,6 @@ class UsersController extends Controller
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $users->update($input);
-        Alert::success('Berhasil', 'Data user berhasil diubah');
-        return redirect()->route('users.index');  
     }
 
     /**
@@ -134,8 +135,6 @@ class UsersController extends Controller
     public function destroy($id)
     {
         $users = User::find($id);
-        $users->delete();       
-        Alert::success('Berhasil', 'Data user berhasil diubah');
-        return back();   
+        $users->delete();
     }
 }

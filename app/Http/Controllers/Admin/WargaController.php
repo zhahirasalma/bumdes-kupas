@@ -12,6 +12,7 @@ use App\Models\Kecamatan;
 use App\Models\Desa;
 use App\Imports\WargaImport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Validation\Rule;
 Use Alert;
 
 
@@ -74,12 +75,14 @@ class WargaController extends Controller
         ];
 
         $validator = $request->validate([
-            'NIK' => 'required|numeric|min:16|unique:warga,NIK',
-            'nama' => 'required|min:3|string',
-            'email' => 'required|min:10|email|unique:users,email',
+            'NIK' => ['required', 'min:16',
+                        Rule::unique('warga', 'NIK')->whereNull('deleted_at')],
+            'nama' => 'required|min:3',
+            'email' => ['required','min:10', 'email',
+                        Rule::unique('users', 'email')->whereNull('deleted_at')],
             'password' => 'required|min:5',
             'id_kategori_sampah' => 'required|not_in:0',
-            'no_telp' => 'required|min:11|numeric',
+            'no_telp' => 'required|min:11',
             'id_kota' => 'required',
             'id_kecamatan' => 'required',
             'id_desa' => 'required',
@@ -113,14 +116,8 @@ class WargaController extends Controller
             $warga->id_kategori_sampah = $request->input('id_kategori_sampah');
             if($warga){
                 $warga->save();
-                Alert::success('Berhasil', 'Data warga berhasil ditambahkan');
-                return redirect()->route('warga.index');
-            }else{
-                Alert::warning('Gagal', 'Data tidak bisa diubah');
-            }
-        }else{
-            Alert::warning('Gagal', 'Data tidak bisa diubah');
-        };                   
+            }  
+        }                
     }
 
     /**
@@ -163,6 +160,46 @@ class WargaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $messages = [
+            'NIK.required' => 'NIK wajib diisi.',
+            'NIK.unique' => 'NIK tidak boleh sama.',
+            'NIK.min' => 'NIK harus 16 digit.',
+            'nama.required' => 'Nama wajib diisi.',
+            'nama.min' => 'Nama minimal 3 huruf.',
+            'email.required' => 'Email wajib diisi.',
+            'email.min' => 'Email minimal 11 huruf.',
+            'email.unique' => 'Email sudah terpakai.',
+            'password.required' => 'Password wajib diisi.',
+            'password.min' => 'Password minimal 5 huruf.',
+            'id_kategori_sampah.required' => 'Kategori wajib diisi.',
+            'id_kategori_sampah.not_in' => 'Pilih kategori sesuai daftar.',
+            'no_telp.required' => 'No telepon wajib diisi.',
+            'no_telp.min' => 'No telepon minimal 10 digit.',
+            'id_kota.required' => 'Kota wajib diisi.',
+            'id_kecamatan.required' => 'Kecamatan wajib diisi.',
+            'id_desa.required' => 'Desa wajib diisi.',
+            'dukuh.required' => 'Dukuh wajib diisi.',
+            'detail_alamat.required' => 'Detail alamat wajib diisi.',
+        ];
+        $user_id = Warga::where('id', $id)->value('id_users');
+        $validator = $request->validate([
+            'NIK' => ['required','min:16',
+                        Rule::unique('warga', 'NIK')->ignore($id)->whereNull('deleted_at')],
+            'nama' => 'required|min:3',
+            'email' => ['required','min:10', 'email',
+                        Rule::unique('users', 'email')->ignore($user_id)->whereNull('deleted_at')],
+            'password' => 'required|min:5',
+            'id_kategori_sampah' => 'required|not_in:0',
+            'no_telp' => 'required|min:11',
+            'id_kota' => 'required',
+            'id_kecamatan' => 'required',
+            'id_desa' => 'required',
+            'dukuh' => 'required',
+            'detail_alamat' => 'required',
+            'latitude' => 'nullable',
+            'longitude' => 'nullable',
+        ], $messages);
+        
         $warga = Warga::find($id);
 
         $user = User::where('id', $warga->id_users)->update([
@@ -185,16 +222,7 @@ class WargaController extends Controller
                 'longitude' => $request->input('longitude'),
                 'id_kategori_sampah' => $request->input('id_kategori_sampah')
             ]);
-            if($warga){
-                Alert::success('Berhasil', 'Data warga berhasil diubah');
-                return redirect()->route('warga.index');
-            }else{
-                Alert::warning('Gagal', 'Data tidak bisa diubah');
-            }
-        }else{
-            Alert::warning('Gagal', 'Data tidak bisa diubah');
-        };
-        
+        }; 
     }
 
     /**
@@ -209,8 +237,6 @@ class WargaController extends Controller
         $user = User::where('id', $w->id_users);
         $user->delete();
         $w->delete();
-        Alert::success('Berhasil', 'Data warga berhasil dihapus');
-        return back(); 
     }
 
     public function importWarga(Request $request)

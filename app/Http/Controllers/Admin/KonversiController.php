@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\KonversiSampah;
 use App\Imports\KonversiImport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Validation\Rule;
 Use Alert;
 
 class KonversiController extends Controller
@@ -42,18 +43,20 @@ class KonversiController extends Controller
     {
         $messages = [
             'jenis_sampah.required' => 'Jenis sampah wajib diisi.',
+            'jenis_sampah.unique' => 'Jenis sampah sudah ada.',
             'harga_konversi.required' => 'Harga Konversi wajib diisi.',
             'harga_konversi.numeric' => 'Harga Konversi harus berupa angka.',
         ];
 
         $validator = $request->validate([
-            'jenis_sampah' => 'required',
+            'jenis_sampah' => [
+                'required', 
+                Rule::unique('konversi', 'jenis_sampah')->whereNull('deleted_at')
+            ],
             'harga_konversi' => 'required|numeric',
         ], $messages);
 
-        KonversiSampah::create($request->all());
-        Alert::success('Berhasil', 'Data konversi berhasil ditambahkan');
-        return redirect()->route('konversi.index');  
+        KonversiSampah::create($request->all()); 
     }
 
     /**
@@ -90,19 +93,21 @@ class KonversiController extends Controller
     {
         $messages = [
             'jenis_sampah.required' => 'Jenis sampah wajib diisi.',
+            'jenis_sampah.unique' => 'Jenis sampah sudah ada.',
             'harga_konversi.required' => 'Harga Konversi wajib diisi.',
             'harga_konversi.numeric' => 'Harga Konversi harus berupa angka.',
         ];
 
         $validator = $request->validate([
-            'jenis_sampah' => 'required',
+            'jenis_sampah' => [
+                'required', 
+                Rule::unique('konversi', 'jenis_sampah')->ignore($id)->whereNull('deleted_at')
+            ],
             'harga_konversi' => 'required|numeric',
         ], $messages);
 
         $konversi = KonversiSampah::find($id);
         $konversi->update($request->all());
-        Alert::success('Berhasil', 'Data konversi berhasil diubah');
-        return redirect()->route('konversi.index');  
     }
 
     /**
@@ -115,7 +120,6 @@ class KonversiController extends Controller
     {
         $konversi = KonversiSampah::find($id);
         $konversi->delete();       
-        Alert::success('Berhasil', 'Data konversi berhasil dihapus');
         return back();   
     }
 

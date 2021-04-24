@@ -103,10 +103,21 @@ Edit Konversi Sampah
                 },
                 error: function (xhr, status, error) {
                     var err = eval("(" + xhr.responseText + ")");
-                    var text = err.message;
+                    var text = err.errors;
+                    var msg = ''
+                    var msg1 = ''
+
+                    if(text.jenis_sampah){
+                        msg = text.jenis_sampah[0] + '<br>'
+                    }
+
+                    if(text.harga_konversi){
+                        msg1 = text.harga_konversi[0] + '<br>'
+                    }
+
                     Swal.fire({
                         title: 'Gagal!',
-                        html: text,
+                        html: msg + msg1,
                         icon: 'warning',
                     });
                 }

@@ -262,6 +262,5 @@ Tambah Data Transaksi Bank Sampah
         placeholder: "Pilih nama...",
         theme: 'bootstrap4',
     });
-
 </script>
 @endpush

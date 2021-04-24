@@ -146,20 +146,20 @@ Tambah Users
                     var msg3 = ' '
 
                     if (text.nama) {
-                        msg1 = text.nama[0];
+                        msg1 = text.nama[0] + '<br>' ;
                     }
 
                     if (text.email) {
-                        msg2 = text.email[0];
+                        msg2 = text.email[0] + '<br>' ;
                     }
 
                     if (text.password) {
-                        msg3 = text.password[0];
+                        msg3 = text.password[0] + '<br>' ;
                     }
 
                     Swal.fire({
                         title: 'Gagal!',
-                        html: msg1 + '<br>' + msg2 + '<br>' + msg3,
+                        html: msg1 + msg2 + msg3,
                         icon: 'warning',
                     });
                 }
