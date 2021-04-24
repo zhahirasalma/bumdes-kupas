@@ -13,7 +13,7 @@ Dashboard
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                <h5 class="card-title text-uppercase text-muted mb-0">Jumlah Transaksi Retribusi</h5>
+                                <h5 class="card-title text-uppercase text-muted mb-0">Total Transaksi Retribusi</h5>
 
                             </div>
                             <div class="col-auto">
@@ -33,7 +33,7 @@ Dashboard
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                <h5 class="card-title text-uppercase text-muted mb-0">Jumlah Transaksi Bank Sampah</h5>
+                                <h5 class="card-title text-uppercase text-muted mb-0">Total Transaksi Bank Sampah</h5>
                             </div>
                             <div class="col-auto">
                                 <div class="icon icon-shape bg-info text-white rounded-circle shadow">
