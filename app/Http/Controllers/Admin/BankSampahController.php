@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Kota;
 use App\Models\Kecamatan;
 use App\Models\Desa;
+use App\Models\TransaksiBankSampah;
 use App\Imports\BankSampahImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Validation\Rule;
@@ -202,12 +203,18 @@ class BankSampahController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        $data = BankSampah::find($id);
-        $user = User::where('id', $data->id_users);
-        $user->delete();
-        $data->delete();       
-        return back();  
+    {   
+        $check = TransaksiBankSampah::where('id_bank_sampah', $id)->exists();
+
+        if($check){
+            Alert::warning('Gagal', 'Data bank sampah digunakan di tabel transaksi bank sampah');
+        }else{
+            $data = BankSampah::find($id);
+            $user = User::where('id', $data->id_users);
+            $user->delete();
+            $data->delete();
+            Alert::success('Berhasil', 'Data bank sampah berhasil dihapus');
+        }
     }
 
     public function importBankSampah(Request $request)

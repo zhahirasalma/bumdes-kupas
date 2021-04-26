@@ -59,7 +59,7 @@ Daftar Transaksi Bank Sampah
                                         class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top"
                                         data-original-title="Detail"><i class="fas fa-info-circle"></i></a>
                                     <a class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
-                                        data-original-title="Delete" onClick="deleteConfirm({{$tr->id}})">
+                                        data-original-title="Delete" onClick="deleteConfirm({{$tr->id_bank_sampah}})">
                                         <i class="far fa-trash-alt" style="color: white;"></i></a>
                                 </form>
                             </td>

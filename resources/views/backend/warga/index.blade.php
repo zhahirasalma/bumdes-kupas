@@ -71,7 +71,8 @@ Daftar Warga
                             </td>
                             <td>
                                 @if ($w->latitude != null && $w->longitude != null)
-                                    <a target="_blank" href="https://maps.google.com/?q={{$w->latitude}},{{$w->longitude}}">Klik alamat</a>    
+                                <a target="_blank"
+                                    href="https://maps.google.com/?q={{$w->latitude}},{{$w->longitude}}">Klik alamat</a>
                                 @endif
                             </td>
                             <td>
@@ -114,7 +115,8 @@ Daftar Warga
                     </div>
                     <div class="col-md-12">
                         <label>File Excel Warga</label><br>
-                        <input type="file" name="excel-warga" required>
+                        <input type="file" name="excel-warga" required><br>
+                        <p>*Pastikan isi file sesuai format yang telah dicontohkan.</p>
                     </div>
                 </div>
             </div>
@@ -158,11 +160,6 @@ Daftar Warga
                         id: id
                     },
                     success: function (data) {
-                        Swal.fire({
-                            title: 'Berhasil!',
-                            text: 'Data berhasil di hapus!',
-                            icon: 'success',
-                        });
                         window.location.href = "/admin/warga"
                     },
                     error: function () {

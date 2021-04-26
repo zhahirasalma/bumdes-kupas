@@ -89,7 +89,8 @@ Kategori Sampah
                     </div>
                     <div class="col-md-12">
                         <label>File Excel Kategori</label><br>
-                        <input type="file" name="excel-kategori" required>
+                        <input type="file" name="excel-kategori" required><br>
+                        <p>*Pastikan isi file sesuai format yang telah dicontohkan.</p>
                     </div>
                 </div>
             </div>
@@ -133,11 +134,6 @@ Kategori Sampah
                         id: id
                     },
                     success: function (data) {
-                        Swal.fire({
-                            title: 'Berhasil!',
-                            text: 'Data berhasil di hapus!',
-                            icon: 'success',
-                        });
                         window.location.href = "/admin/kategori_sampah"
                     },
                     error: function () {

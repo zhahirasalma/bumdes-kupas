@@ -89,7 +89,8 @@ Konversi Harga Sampah
                     </div>
                     <div class="col-md-12">
                         <label>File Excel Konversi</label><br>
-                        <input type="file" name="excel-konversi" required>
+                        <input type="file" name="excel-konversi" required></br>
+                        <p>*Pastikan isi file sesuai format yang telah dicontohkan.</p>
                     </div>
                 </div>
             </div>
@@ -133,11 +134,6 @@ Konversi Harga Sampah
                         id: id
                     },
                     success: function (data) {
-                        Swal.fire({
-                            title: 'Berhasil!',
-                            text: 'Data berhasil di hapus!',
-                            icon: 'success',
-                        });
                         window.location.href = "/admin/konversi"
                     },
                     error: function () {
@@ -145,8 +141,11 @@ Konversi Harga Sampah
                             title: 'Gagal!',
                             text: 'Data tidak dapat di hapus!',
                             icon: 'warning',
+                        }).then((result) => {
+                            if (result.value) {
+                                window.location.href = "/admin/konversi"
+                            }
                         });
-                        window.location.href = "/admin/konversi"
                     }
                 });
             }

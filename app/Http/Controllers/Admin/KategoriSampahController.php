@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\KategoriSampah;
+use App\Models\Warga;
 use App\Imports\KategoriImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Validation\Rule;
@@ -117,11 +118,16 @@ class KategoriSampahController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        $kategori = KategoriSampah::find($id);
-        $kategori->delete();       
-        Alert::success('Berhasil', 'Data kategori berhasil dihapus');
-        return back();  
+    { 
+        $check = Warga::where('id_kategori_sampah', $id)->exists();
+
+        if($check){
+            Alert::warning('Gagal', 'Data kategori digunakan di tabel warga');
+        }else{
+            $kategori = KategoriSampah::find($id);
+        $kategori->delete(); 
+            Alert::success('Berhasil', 'Data kategori berhasil dihapus');
+        }
     }
 
     public function importKategori(Request $request)

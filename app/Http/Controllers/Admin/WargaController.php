@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Kota;
 use App\Models\Kecamatan;
 use App\Models\Desa;
+use App\Models\RetribusiWarga;
 use App\Imports\WargaImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Validation\Rule;
@@ -233,10 +234,17 @@ class WargaController extends Controller
      */
     public function destroy($id)
     {
-        $w = Warga::find($id);
-        $user = User::where('id', $w->id_users);
-        $user->delete();
-        $w->delete();
+        $check = RetribusiWarga::where('id_warga', $id)->exists();
+
+        if($check){
+            Alert::warning('Gagal', 'Data warga digunakan di tabel transaksi retribusi');
+        }else{
+            $w = Warga::find($id);
+            $user = User::where('id', $w->id_users);
+            $user->delete();
+            $w->delete();
+            Alert::success('Berhasil', 'Data warga berhasil dihapus');
+        } 
     }
 
     public function importWarga(Request $request)

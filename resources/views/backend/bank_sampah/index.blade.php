@@ -101,7 +101,8 @@ Daftar Bank Sampah
                     </div>
                     <div class="col-md-12">
                         <label>File Excel Bank Sampah</label><br>
-                        <input type="file" name="excel-bankSampah" required>
+                        <input type="file" name="excel-bankSampah" required><br>
+                        <p>*Pastikan isi file sesuai format yang telah dicontohkan.</p>
                     </div>
                 </div>
             </div>
@@ -145,20 +146,16 @@ Daftar Bank Sampah
                         id: id
                     },
                     success: function (data) {
-                        Swal.fire({
-                            title: 'Berhasil!',
-                            text: 'Data berhasil di hapus!',
-                            icon: 'success',
-                        });
-                        window.location.href = "/admin/users"
+                        window.location.href = "/admin/bank_sampah"
                     },
-                    error: function () {
+                    error: function (error) {
+                        console.log(error)
                         Swal.fire({
                             title: 'Gagal!',
                             text: 'Data tidak dapat di hapus!',
                             icon: 'warning',
                         });
-                        window.location.href = "/admin/users"
+                        window.location.href = "/admin/bank_sampah"
                     }
                 });
             }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\KonversiSampah;
+use App\Models\TransaksiBankSampah;
 use App\Imports\KonversiImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Validation\Rule;
@@ -118,13 +119,19 @@ class KonversiController extends Controller
      */
     public function destroy($id)
     {
-        $konversi = KonversiSampah::find($id);
-        $konversi->delete();       
-        return back();   
+        $check = TransaksiBankSampah::where('id_konversi', $id)->exists();
+
+        if($check){
+            Alert::warning('Gagal', 'Data konversi digunakan di tabel transaksi bank sampah');
+        }else{
+            $konversi = KonversiSampah::find($id);
+            $konversi->delete();
+            Alert::success('Berhasil', 'Data konversi berhasil dihapus');
+        } 
     }
 
     public function importKonversi(Request $request)
-    {
+    {   
         $file = $request->file('excel-konversi');
         Excel::import(new KonversiImport,$file);
         Alert::success('Berhasil', 'Data konversi berhasil ditambahkan');
