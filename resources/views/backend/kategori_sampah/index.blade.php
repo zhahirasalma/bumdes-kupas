@@ -101,6 +101,60 @@ Kategori Sampah
         </form>
     </div>
 </div>
+<button style="display: none;" class="modal-success" data-toggle="modal" data-target="#success-modal"></button>
+<button style="display: none;" class="btn-error" data-toggle="modal" data-target="#error-modal"></button>
+<div class="modal fade" id="error-modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-body">
+            @if (isset($errors) && $errors->any())
+            <div class="alert alert-danger">
+                @foreach ($errors->all() as $error)
+                {{ $error }}
+                @endforeach
+            </div>
+            @endif
+
+            @if (session()->has('failures'))
+            <table class="table table-danger">
+                <tr>
+                    <th>Baris ke</th>
+                    <th>Nama kolom</th>
+                    <th>Error</th>
+                    <th>Nilai</th>
+                </tr>
+
+                @foreach (session()->get('failures') as $validation)
+                <tr>
+                    <td>{{ $validation->row() }}</td>
+                    <td>{{ $validation->attribute() }}</td>
+                    <td>
+                        <ul>
+                            @foreach ($validation->errors() as $e)
+                            <li>{{ $e }}</li>
+                            @endforeach
+                        </ul>
+                    </td>
+                    <td>
+                        {{ $validation->values()[$validation->attribute()] }}
+                    </td>
+                </tr>
+                @endforeach
+            </table>
+            @endif
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="success-modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-body">
+            @if (session('status'))
+            <div class="alert alert-success" role="alert">
+                {{ session('status') }}
+            </div>
+            @endif
+        </div>
+    </div>
+</div>
 @endsection
 
 @push('script')
@@ -110,6 +164,14 @@ Kategori Sampah
 
         });
     });
+
+    @if(session()->has('failures'))
+        $('.btn-error').click();
+    @endif
+
+    @if (session('status'))
+        $('.modal-success').click();
+    @endif
 
     function deleteConfirm(id) {
         Swal.fire({

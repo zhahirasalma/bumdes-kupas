@@ -133,8 +133,14 @@ class KategoriSampahController extends Controller
     public function importKategori(Request $request)
     {
         $file = $request->file('excel-kategori');
-        Excel::import(new KategoriImport,$file);
-        Alert::success('Berhasil', 'Data kategori berhasil ditambahkan');
-        return redirect()->back();
+        
+        $import = new KategoriImport();
+        $import->import($file);
+
+        if($import->failures()->isNotEmpty()){
+            return back()->withFailures($import->failures());
+        }
+        
+        return back()->withStatus('Berhasil, Data kategori berhasil ditambahkan.');
     }
 }

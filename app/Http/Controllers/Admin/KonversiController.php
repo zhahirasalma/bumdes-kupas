@@ -133,8 +133,14 @@ class KonversiController extends Controller
     public function importKonversi(Request $request)
     {   
         $file = $request->file('excel-konversi');
-        Excel::import(new KonversiImport,$file);
-        Alert::success('Berhasil', 'Data konversi berhasil ditambahkan');
-        return redirect()->back();
+        
+        $import = new KonversiImport();
+        $import->import($file);
+
+        if($import->failures()->isNotEmpty()){
+            return back()->withFailures($import->failures());
+        }
+        
+        return back()->withStatus('Berhasil, Data konversi berhasil ditambahkan.');
     }
 }
