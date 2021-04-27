@@ -220,8 +220,14 @@ class BankSampahController extends Controller
     public function importBankSampah(Request $request)
     {
         $file = $request->file('excel-bankSampah');
-        Excel::import(new BankSampahImport,$file);
-        Alert::success('Berhasil', 'Data bank sampah berhasil ditambahkan');
-        return redirect()->back();
+        
+        $import = new BankSampahImport();
+        $import->import($file);
+
+        if($import->failures()->isNotEmpty()){
+            return back()->withFailures($import->failures());
+        }
+        
+        return back()->withStatus('Berhasil, Data bank sampah berhasil ditambahkan.');
     }
 }

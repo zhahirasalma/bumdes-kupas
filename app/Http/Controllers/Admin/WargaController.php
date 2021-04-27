@@ -248,10 +248,16 @@ class WargaController extends Controller
     }
 
     public function importWarga(Request $request)
-    {
+    { 
         $file = $request->file('excel-warga');
-        Excel::import(new WargaImport,$file);
-        Alert::success('Berhasil', 'Data warga berhasil ditambahkan');
-        return redirect()->back();
+        
+        $import = new WargaImport();
+        $import->import($file);
+
+        if($import->failures()->isNotEmpty()){
+            return back()->withFailures($import->failures());
+        }
+        
+        return back()->withStatus('Berhasil, Data warga berhasil ditambahkan.');
     }
 }
