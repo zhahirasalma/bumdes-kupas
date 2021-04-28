@@ -106,8 +106,7 @@ Daftar Pengambilan Sampah
             $.ajax({
                 type: "GET",
                 dataType: "json",
-                url: '{{route('
-                ubahstatus ')}}',
+                url: '{{route('ubahstatus')}}',
                 data: {
                     'status': status,
                     'id': id
