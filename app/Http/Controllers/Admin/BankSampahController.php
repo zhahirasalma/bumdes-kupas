@@ -53,7 +53,7 @@ class BankSampahController extends Controller
             'nama.required' => 'Nama wajib diisi.',
             'nama.min' => 'Nama minimal 3 huruf.',
             'no_telp.required' => 'No telepon wajib diisi.',
-            'no_telp.size' => 'No telepon minimal 11 digit.',
+            'no_telp.min' => 'No telepon minimal 11 digit.',
             'no_telp.numeric' => 'No telepon harus angka.',
             'email.required' => 'Email wajib diisi.',
             'email.min' => 'Email minimal 11 huruf.',
@@ -69,7 +69,7 @@ class BankSampahController extends Controller
 
         $request->validate([
             'nama' => 'required|min:3',
-            'no_telp' => 'required|numeric|size:11',
+            'no_telp' => 'required|min:11',
             'email' => ['required','min:10', 'email',
                         Rule::unique('users', 'email')->whereNull('deleted_at')],
             'password' => 'required|min:5',
@@ -147,7 +147,7 @@ class BankSampahController extends Controller
             'nama.required' => 'Nama wajib diisi.',
             'nama.min' => 'Nama minimal 3 huruf.',
             'no_telp.required' => 'No telepon wajib diisi.',
-            'no_telp.size' => 'No telepon minimal 11 digit.',
+            'no_telp.min' => 'No telepon minimal 11 digit.',
             'no_telp.numeric' => 'No telepon harus angka.',
             'email.required' => 'Email wajib diisi.',
             'email.min' => 'Email minimal 11 huruf.',
@@ -161,11 +161,12 @@ class BankSampahController extends Controller
             'detail_alamat.required' => 'Detail alamat wajib diisi.',
         ];
 
+        $user_id = BankSampah::where('id', $id)->value('id_users');
         $request->validate([
             'nama' => 'required|min:3',
-            'no_telp' => 'required|numeric',
+            'no_telp' => 'required|min:11',
             'email' => ['required','min:10', 'email',
-                        Rule::unique('users', 'email')->ignore($id)->whereNull('deleted_at')],
+                        Rule::unique('users','email')->ignore($user_id)->whereNull('deleted_at')],
             'password' => 'required|min:5',
             'id_kota' => 'required',
             'id_kecamatan' => 'required',
