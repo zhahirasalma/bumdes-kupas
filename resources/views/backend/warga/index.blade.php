@@ -193,11 +193,11 @@ Daftar Warga
     });
 
     @if(session()->has('failures'))
-        $('.btn-error').click();
+    $('.btn-error').click();
     @endif
 
-    @if (session('status'))
-        $('.modal-success').click();
+    @if(session('status'))
+    $('.modal-success').click();
     @endif
 
     function deleteConfirm(id) {
@@ -230,8 +230,11 @@ Daftar Warga
                             title: 'Gagal!',
                             text: 'Data tidak dapat di hapus!',
                             icon: 'warning',
+                        }).then((result) => {
+                            if (result.value) {
+                                window.location.href = "/admin/warga"
+                            }
                         });
-                        window.location.href = "/admin/warga"
                     }
                 });
             }

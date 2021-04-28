@@ -52,7 +52,7 @@ Daftar Pengambilan Sampah
                                 <a target="_blank"
                                     href="https://maps.google.com/?q={{$p->warga->latitude}},{{$p->warga->longitude}}">Klik
                                     alamat</a>
-                                @else 
+                                @else
                                 @endif
                             </td>
                             <td>
@@ -106,7 +106,8 @@ Daftar Pengambilan Sampah
             $.ajax({
                 type: "GET",
                 dataType: "json",
-                url: '{{route('ubahstatus')}}',
+                url: '{{route('
+                ubahstatus ')}}',
                 data: {
                     'status': status,
                     'id': id
@@ -158,8 +159,11 @@ Daftar Pengambilan Sampah
                             title: 'Berhasil!',
                             text: 'Data berhasil di hapus!',
                             icon: 'success',
+                        }).then((result) => {
+                            if (result.value) {
+                                window.location.href = "/admin/pengambilan"
+                            }
                         });
-                        window.location.href = "/admin/pengambilan"
                     },
                     error: function () {
                         Swal.fire({

@@ -106,8 +106,11 @@ Users
                             title: 'Berhasil!',
                             text: 'Data berhasil di hapus!',
                             icon: 'success',
+                        }).then((result) => {
+                            if (result.value) {
+                                window.location.href = "/admin/users"
+                            }
                         });
-                        window.location.href = "/admin/users"
                     },
                     error: function () {
                         Swal.fire({

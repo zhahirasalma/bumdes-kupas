@@ -178,11 +178,11 @@ Daftar Bank Sampah
         });
     });
 
-    @if(session()->has('failures'))
+    @if(session()-> has('failures'))
         $('.btn-error').click();
     @endif
 
-    @if (session('status'))
+    @if(session('status'))
         $('.modal-success').click();
     @endif
 
@@ -217,8 +217,11 @@ Daftar Bank Sampah
                             title: 'Gagal!',
                             text: 'Data tidak dapat di hapus!',
                             icon: 'warning',
+                        }).then((result) => {
+                            if (result.value) {
+                                window.location.href = "/admin/bank_sampah"
+                            }
                         });
-                        window.location.href = "/admin/bank_sampah"
                     }
                 });
             }

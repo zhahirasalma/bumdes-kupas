@@ -165,12 +165,12 @@ Kategori Sampah
         });
     });
 
-    @if(session()->has('failures'))
-        $('.btn-error').click();
+    @if(session()-> has('failures'))
+    $('.btn-error').click();
     @endif
 
-    @if (session('status'))
-        $('.modal-success').click();
+    @if(session('status'))
+    $('.modal-success').click();
     @endif
 
     function deleteConfirm(id) {
@@ -203,8 +203,11 @@ Kategori Sampah
                             title: 'Gagal!',
                             text: 'Data tidak dapat di hapus!',
                             icon: 'warning',
+                        }).then((result) => {
+                            if (result.value) {
+                                window.location.href = "/admin/kategori_sampah"
+                            }
                         });
-                        window.location.href = "/admin/kategori_sampah"
                     }
                 });
             }

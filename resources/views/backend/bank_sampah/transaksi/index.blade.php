@@ -48,9 +48,9 @@ Daftar Transaksi Bank Sampah
                             </td>
                             <td>
                                 @if ($tr->jumlah != null)
-                                    @currency($tr->jumlah)
+                                @currency($tr->jumlah)
                                 @else
-                                    
+
                                 @endif
                             </td>
                             <td>
@@ -102,16 +102,22 @@ Daftar Transaksi Bank Sampah
                             title: 'Berhasil!',
                             text: 'Data berhasil di hapus!',
                             icon: 'success',
+                        }).then((result) => {
+                            if (result.value) {
+                                window.location.href = "/admin/transaksi"
+                            }
                         });
-                        window.location.href = "/admin/transaksi"
                     },
                     error: function () {
                         Swal.fire({
                             title: 'Gagal!',
                             text: 'Data tidak dapat di hapus!',
                             icon: 'warning',
-                        });
-                        window.location.href = "/admin/transaksi"
+                        }).then((result) => {
+                            if (result.value) {
+                                window.location.href = "/admin/transaksi"
+                            }
+                        })
                     }
                 });
             }
