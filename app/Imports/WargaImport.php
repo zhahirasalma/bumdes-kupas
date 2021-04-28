@@ -58,7 +58,6 @@ class WargaImport implements ToCollection, WithHeadingRow, SkipsOnFailure, WithV
                     ]);
                 }
             }
-            
         }
     }
 

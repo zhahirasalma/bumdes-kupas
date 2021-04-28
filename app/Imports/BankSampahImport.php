@@ -33,23 +33,25 @@ class BankSampahImport implements ToCollection, WithHeadingRow, SkipsOnFailure, 
                 $this->errors[] = $validator->errors();
             }else{
                 $user = User::create([
-                'nama' => $row['nama'],
-                'email' => $row['email'],
-                'password' => bcrypt($row['password']),
-                'role' => 'bank_sampah',
-                'created_at'=>$now,
-                ]);
-
-                BankSampah::create([
-                    'id_users' => $user->id,
-                    'no_telp' => $row['no_telp'],
-                    'id_kota' => Kota::where("kota", "like", "%".$row['kota']."%")->first()->id,
-                    'id_kecamatan' => Kecamatan::where("kecamatan", "like", "%".$row['kecamatan']."%")->first()->id,
-                    'id_desa' => Desa::where("desa", "like", "%".$row['desa']."%")->first()->id,
-                    'dukuh' => $row['dukuh'],
-                    'detail_alamat' => $row['detail_alamat'],
+                    'nama' => $row['nama'],
+                    'email' => $row['email'],
+                    'password' => bcrypt($row['password']),
+                    'role' => 'bank_sampah',
                     'created_at'=>$now,
                 ]);
+
+                if($user){
+                    BankSampah::create([
+                        'id_users' => $user->id,
+                        'no_telp' => $row['no_telp'],
+                        'id_kota' => Kota::where("kota", "like", "%".$row['kota']."%")->first()->id,
+                        'id_kecamatan' => Kecamatan::where("kecamatan", "like", "%".$row['kecamatan']."%")->first()->id,
+                        'id_desa' => Desa::where("desa", "like", "%".$row['desa']."%")->first()->id,
+                        'dukuh' => $row['dukuh'],
+                        'detail_alamat' => $row['detail_alamat'],
+                        'created_at'=>$now,
+                    ]);
+                } 
             }
         }
     }
