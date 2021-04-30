@@ -67,7 +67,8 @@ class RegisterController extends Controller
             'desa' => ['required'],
             'dukuh' => ['required'],
             'detail_alamat',
-            'lokasi' => ['required'],
+            'latitude' => ['required'],
+            'longitude' => ['required'],
             'id_kategori_sampah' => ['required'],
         ]);
     }
@@ -103,36 +104,38 @@ class RegisterController extends Controller
     }
 
     public function show(){
-
+ 
     }
 
     public function store_bank_sampah (Request $request)
     {
-    //     $this->validate($request,[
-    //         'nama' => 'required|min:3|string',
-    //         'email' => 'required|min:11|email|unique:users',
-    //         'password' => 'required|min:5',
-    //         'no_telp' => 'required|min:11|numeric',
+        $this->validate($request,[
+            'nama' => 'required|min:3|string',
+            'email' => 'required|min:11|email|unique:users',
+            'password' => 'required|min:5',
+            'no_telp' => 'required|min:11|numeric',
+            'dukuh' => 'required',
             
-    //    ],
-    //    [
-    //        'nama.required' => 'Nama tidak boleh kosong.',
-    //        'nama.min' => 'Nama minimal terdiri dari 3 huruf.',
-    //        'nama.string' => 'Nama harus berupa huruf.',
-    //        'email.required' => 'Email tidak boleh kosong.',
-    //        'email.email' => 'Email tidak valid.',
-    //        'email.unique' => 'Email telah digunakan.',
-    //        'password.min' => 'Kata sandi tidak boleh kurang dari 5 karakter',
-    //        'password.required' => 'Kata sandi tidak boleh kosong',
-    //        'no_telp.required' => 'Nomor telepon tidak boleh kosong.',
-    //        'no_telp.min' => 'Nomor telepon minimal terdiri dari 11 angka',
-    //        'no_telp.numeric' => 'Nomor telepon harus berupa angka'
-    //    ]);
+       ],
+       [
+           'nama.required' => 'Nama tidak boleh kosong.',
+           'nama.min' => 'Nama minimal terdiri dari 3 huruf.',
+           'nama.string' => 'Nama harus berupa huruf.',
+           'email.required' => 'Email tidak boleh kosong.',
+           'email.email' => 'Email tidak valid.',
+           'email.unique' => 'Email telah digunakan.',
+           'password.min' => 'Kata sandi tidak boleh kurang dari 5 karakter',
+           'password.required' => 'Kata sandi tidak boleh kosong',
+           'no_telp.required' => 'Nomor telepon tidak boleh kosong.',
+           'no_telp.min' => 'Nomor telepon minimal terdiri dari 11 angka',
+           'no_telp.numeric' => 'Nomor telepon harus berupa angka',
+           'dukuh.required' => 'Dukuh tidak boleh kosong'
+       ]);
        $user = new User;
-       $user->role="bank_sampah";
        $user->nama = $request->input('nama');
        $user->email = $request->input('email');
        $user->password = $request->input('password');
+       $user->role="bank_sampah";
        if($user){
            $user->save();
        }
@@ -141,8 +144,8 @@ class RegisterController extends Controller
         $bank_sampah->id_users=$user->id;
         $bank_sampah->no_telp = $request->input('no_telp');
         $bank_sampah->id_kota = $request->input('id_kota');
-        $bank_sampah->id_kota = $request->input('id_kecamatan');
-        $bank_sampah->id_kota = $request->input('id_desa');
+        $bank_sampah->id_kecamatan = $request->input('id_kecamatan');
+        $bank_sampah->id_desa = $request->input('id_desa');
         $bank_sampah->dukuh = $request->input('dukuh');
         $bank_sampah->detail_alamat = $request->input('detail_alamat');
         if($bank_sampah){
@@ -189,17 +192,18 @@ class RegisterController extends Controller
        $warga->NIK = $request->input('NIK');
        $warga->no_telp = $request->input('no_telp');
        $warga->id_kota = $request->input('id_kota');
-       $warga->id_kota = $request->input('id_kecamatan');
-       $warga->id_kota = $request->input('id_desa');
+       $warga->id_kecamatan = $request->input('id_kecamatan');
+       $warga->desa = $request->input('id_desa');
        $warga->dukuh = $request->input('dukuh');
        $warga->detail_alamat = $request->input('detail_alamat');
-       $warga->lokasi = $request->input('lokasi');
+       $warga->latitude = $request->input('latitude');
+       $warga->longitude = $request->input('longitude');
        $warga->id_kategori_sampah = $request->input('id_kategori_sampah');
        if($warga){
         $warga->save();
         }
 
-        return redirect('warga.index');
+        return redirect('nasabah_warga.index');
     }
     
 }
