@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\BankSampah;
+use Auth;
 
 class BankSampahController extends Controller
 {
@@ -13,7 +15,8 @@ class BankSampahController extends Controller
      */
     public function index()
     {
-        return view("bankSampah.index");
+        $user = Auth::user();
+        return view('bankSampah.index', compact('user'));
     }
 
     /**

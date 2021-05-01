@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\DaftarSetor;
+use Auth;
 
 class WargaController extends Controller
 {
@@ -13,7 +15,9 @@ class WargaController extends Controller
      */
     public function index()
     {
-        return view('bankSampah.warga.index', compact('daftar_setor'));
+        $user = Auth::user();
+        $daftar_setor = DaftarSetor::all();
+        return view('warga.index', compact('daftar_setor', 'user'));
     }
 
     /**
@@ -80,5 +84,9 @@ class WargaController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function __construct(){
+        $this->middleware('auth');
     }
 }

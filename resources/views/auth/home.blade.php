@@ -33,12 +33,19 @@ Home
 
         <div class="row justify-content-center">
             <div class="col-lg-8 mx-auto">
-                <form id="contactForm" name="sentMessage" novalidate="novalidate">
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
                     <div class="col-lg-4 mx-auto">
                         <div class="form-group">
                             <!-- <label>Name</label> -->
-                            <input class="form-control" id="email" type="email" placeholder="Email" required="required"
-                                data-validation-required-message="Masukkan Email" />
+                            <input class="form-control" for="email" id="email" type="email" placeholder="Email"
+                                class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}"
+                                required autocomplete="email" autofocus>
+                            @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                             <p class="help-block text-danger"></p>
                         </div>
                     </div>
@@ -46,12 +53,21 @@ Home
                         <div class="form-group">
                             <!-- <label>Name</label> -->
                             <input class="form-control" id="password" type="password" placeholder="Kata Sandi"
-                                required="required" data-validation-required-message="Masukkan Kata Sandi" />
+                                class="form-control @error('password') is-invalid @enderror" required
+                                autocomplete="current-password">
+
+                            @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+
                             <p class="help-block text-danger"></p>
                         </div>
                         <div class="form-group text-center">
-                            <a href="/homebankSampah" class="btn btn-primary" id="sendMessageButton"
-                                type="submit">Masuk</a>
+                            <button type="submit" class="btn btn-primary">
+                                    {{ __('Login') }}
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -75,7 +91,7 @@ Home
             </div>
             <div class="form-group col-md-2.5">
                 <!-- <label>Name</label> -->
-                <a href="/bank_sampah" class="btn btn-primary text-uppercase" id="sendMessageButton"
+                <a href="/create_bank_sampah" class="btn btn-primary text-uppercase" id="sendMessageButton"
                     type="submit">Daftar Sebagai Bank Sampah</a>
             </div>
         </div>
