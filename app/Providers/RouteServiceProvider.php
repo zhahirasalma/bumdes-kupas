@@ -18,6 +18,8 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     public const HOME = '/home';
+    public const WARGA = '/home_warga';
+    public const BANKSAMPAH = '/home_bank_sampah';
 
     /**
      * The controller namespace for the application.
