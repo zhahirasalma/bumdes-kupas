@@ -16,7 +16,26 @@ use App\Http\Controllers\Auth\RegisterController;
 
 Auth::routes();
 Route::get('/', function () {
-    return view('home');
+    return view('auth.home');
+});
+
+Route::middleware(['auth'])->group(function(){
+    Route::middleware(['admin'])->group(function(){
+        Route::get('admin', [App\Http\Controllers\AdminController::class, 'index']);
+    });
+    Route::middleware(['educator'])->group(function(){
+        Route::get('educator', [App\Http\Controllers\EducatorController::class, 'index']);
+    });
+    Route::middleware(['warga'])->group(function(){
+        Route::get('warga', [App\Http\Controllers\WargaController::class, 'index']);
+    });
+    Route::middleware(['bank_sampah'])->group(function(){
+        Route::get('bank_sampah', [App\Http\Controllers\BankSampahController::class, 'index']);
+    });
+    Route::get('/logout', function() {
+        Auth::logout();
+        redirect('home');
+    });
 });
 
 Route::get('/homewarga', function () {
@@ -27,9 +46,11 @@ Route::get('/homebankSampah', function () {
     return view('bankSampah.index');
 });
 
+Route::get('/create_bank_sampah', [App\Http\Controllers\Auth\RegisterController::class, 'create_bank_sampah'])->name('create_bank_sampah');
 Route::post('/store_bank_sampah', [App\Http\Controllers\Auth\RegisterController::class, 'store_bank_sampah'])->name('store_bank_sampah');
 Route::post('/store_warga', [App\Http\Controllers\Auth\RegisterController::class, 'store_warga'])->name('store_warga');
-Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
+Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'authenticated']);
+Route::post('login_user', [App\Http\Controllers\Auth\LoginController::class, 'login_user'])->name('login_user');
 Route::get('/transaksi_warga', [App\Http\Controllers\HistoryTransaksiController::class, 'transaksi_warga'])->name('transaksi_warga');
 
 Route::get('/historyTransaksi', function () {
@@ -46,7 +67,6 @@ Route::resources([
     'login' => App\Http\Controllers\Auth\LoginController::class
     ]);
 // Route::get('/registrasi/warga', [App\Http\Controllers\RegisterController::class, 'warga'])->name('warga');
-Route::get('/bank_sampah', [App\Http\Controllers\Auth\RegisterController::class, 'create_bank_sampah'])->name('create_bank_sampah');
 
 Auth::routes();
 

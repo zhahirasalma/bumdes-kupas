@@ -134,7 +134,7 @@ class RegisterController extends Controller
        $user = new User;
        $user->nama = $request->input('nama');
        $user->email = $request->input('email');
-       $user->password = $request->input('password');
+       $user->password = bcrypt($request->input('password'));
        $user->role="bank_sampah";
        if($user){
            $user->save();
@@ -182,7 +182,8 @@ class RegisterController extends Controller
        $user = new User;
        $user->nama = $request->input('nama');
        $user->email = $request->input('email');
-       $user->password = $request->input('password');
+       $user->password = bcrypt($request->input('password'));
+       $user->role = "warga";
        if($user){
            $user->save();
        }
