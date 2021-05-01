@@ -20,6 +20,15 @@
     <!-- Select2 -->
     <link href="{{asset('select2/dist/css/select2.min.css')}}" rel="stylesheet" />
     <link rel="stylesheet" href="{{asset('select2/dist/css/select2-bootstrap4.min.css')}}">
+    <!--Swal2-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
+    <!--leaflet-->
+    <link rel="stylesheet" href="{{('https://unpkg.com/leaflet@1.7.1/dist/leaflet.css')}}"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <!--toggle switch-->
+    <link href="{{('https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css')}}" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -50,9 +59,12 @@
     <script src="{{asset('template/js/scripts.js')}}"></script>
     <!-- Select2 -->
     <script src="{{asset('select2/dist/js/select2.min.js')}}"></script>
-
-    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet"/>
-    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <!--leafletjs-->
+    <script src="{{('https://unpkg.com/leaflet@1.7.1/dist/leaflet.j')}}s"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+    <!--toggle switch-->
+    <script src="{{('https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js')}}"></script>
 
     @stack('script')
 </body>
