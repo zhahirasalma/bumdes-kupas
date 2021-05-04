@@ -331,7 +331,31 @@ Edit Data Warga
                     var msg3 = ' '
                     var msg4 = ' '
 
-                    console.log(err)
+                    if (text.NIK) {
+                        msg0 = text.NIK[0] + '<br>';
+                    }
+
+                    if (text.nama) {
+                        msg1 = text.nama[0] + '<br>';
+                    }
+
+                    if (text.email) {
+                        msg2 = text.email[0] + '<br>';
+                    }
+
+                    if (text.password) {
+                        msg3 = text.password[0] + '<br>';
+                    }
+
+                    if (text.no_telp) {
+                        msg4 = text.no_telp[0] + '<br>';
+                    }
+
+                    Swal.fire({
+                        title: 'Gagal!',
+                        html: msg0  + msg1 + msg2+ msg3 + msg4,
+                        icon: 'warning',
+                    });
                 }
             })
         }

@@ -33,6 +33,7 @@ Daftar Pengambilan Sampah
                             <th scope="col">No</th>
                             <th scope="col">Nama Warga</th>
                             <th scope="col">Alamat</th>
+                            <th scope="col">Lokasi</th>
                             <th scope="col">Tanggal Pengambilan</th>
                             <th scope="col">Status</th>
                             <th scope="col">Aksi</th>
@@ -48,10 +49,17 @@ Daftar Pengambilan Sampah
                                 {{$p->user->nama != 'null' ? $p->user->nama : ''}}
                             </td>
                             <td>
+                                {{ $p->warga->detail_alamat != 'null' ? $p->warga->detail_alamat : ''  }},
+                                {{ $p->warga->dukuh != 'null' ? $p->warga->dukuh : ''  }},<br>
+                                {{ $p->warga->desa->desa != 'null' ? $p->warga->desa->desa : ''  }},
+                                {{ $p->warga->kecamatan->kecamatan != 'null' ? $p->warga->kecamatan->kecamatan : ''  }},
+                                {{ $p->warga->kota->kota != 'null' ? $p->warga->kota->kota : ''  }}
+                            </td>
+                            <td>
                                 @if ($p->warga->latitude != null || $p->warga->longitude != null)
                                 <a target="_blank"
-                                    href="https://maps.google.com/?q={{$p->warga->latitude}},{{$p->warga->longitude}}">Klik
-                                    alamat</a>
+                                    href="https://maps.google.com/?q={{$p->warga->latitude}},{{$p->warga->longitude}}">Menuju 
+                                    Peta</a>
                                 @else
                                 @endif
                             </td>
