@@ -84,7 +84,7 @@ Tambah Data Transaksi Bank Sampah
                                 <input type="number" name="berat" id="berat_0"
                                     class="form-control form-control-alternative" placeholder="Berat Sampah" value="1"
                                     onChange="updateHarga(0)">
-                                <span class="text-danger error-berat">Harus diisi</span>
+                                <span class="text-danger error-berat">Harus berupa angka</span>
                             </div>
                         </div>
                         <div class="col-lg-3">
@@ -177,6 +177,8 @@ Tambah Data Transaksi Bank Sampah
         var user = $('#id_users').val()
         var tanggal = $('#tanggal_transaksi').val()
         var keterangan = $('#keterangan').val()
+        var konversi = $('#id_konversi_0').val()
+        var berat = $('#berat_0').val()
 
         var error = false;
 
@@ -188,6 +190,16 @@ Tambah Data Transaksi Bank Sampah
         if (tanggal === '') {
             error = true;
             $('.error-tanggal').show()
+        }
+
+        if (konversi === '') {
+            error = true;
+            $('.error-konversi').show()
+        }
+
+        if (berat === '') {
+            error = true;
+            $('.error-berat').show()
         }
 
         if (!error) {
@@ -234,6 +246,7 @@ Tambah Data Transaksi Bank Sampah
                 error: function (xhr, status, error) {
                     var err = eval("(" + xhr.responseText + ")");
                     var text = err.message;
+                    
                     Swal.fire({
                         title: 'Gagal!',
                         text: text,
@@ -262,5 +275,6 @@ Tambah Data Transaksi Bank Sampah
         placeholder: "Pilih nama...",
         theme: 'bootstrap4',
     });
+
 </script>
 @endpush
