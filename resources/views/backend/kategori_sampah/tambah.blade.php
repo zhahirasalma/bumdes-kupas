@@ -1,6 +1,6 @@
 @extends('backend.layout.master')
 @section('title')
-Tambah Kategori Sampah
+Tambah Kategori Warga
 @endsection
 
 <head>
@@ -25,10 +25,10 @@ Tambah Kategori Sampah
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-control-label">Jenis Sampah</label>
+                                <label class="form-control-label">Kategori</label>
                                 <input type="text" id="jenis_sampah" class="form-control form-control-alternative"
-                                    placeholder="Jenis Sampah" value="{{old('jenis_sampah')}}">
-                                <span class="text-danger error-jenis">Jenis sampah harus diisi</span>
+                                    placeholder="Kategori warga" value="{{old('jenis_sampah')}}">
+                                <span class="text-danger error-jenis">Kategori warga harus diisi</span>
                             </div>
                         </div>
                     </div>

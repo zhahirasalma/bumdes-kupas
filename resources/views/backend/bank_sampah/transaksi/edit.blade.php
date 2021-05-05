@@ -187,10 +187,6 @@ Edit Data Transaksi Bank Sampah
                         title: 'Gagal!',
                         text: text,
                         icon: 'warning',
-                    }).then((result) => {
-                        if (result.value) {
-                            window.location.href = "/admin/detail-transaksi/" + id_bank
-                        }
                     });
                 }
             })

@@ -13,7 +13,7 @@
             </div>
         </a>
         <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
-            <a href="#!" class="dropdown-item">
+            <a href="/" class="dropdown-item">
                 <i class="ni ni-user-run"></i>
                 <span>Logout</span>
             </a>

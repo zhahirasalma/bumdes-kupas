@@ -46,7 +46,7 @@
         </li>
         <li class="nav-item">
             <a class="nav-link " href="{{route('kategori_sampah.index')}}">
-                <i class="ni ni-paper-diploma text-green"></i> Kategori sampah
+                <i class="ni ni-paper-diploma text-green"></i> Kategori warga
             </a>
         </li>
     </div>

@@ -1,6 +1,6 @@
 @extends('backend.layout.master')
 @section('title')
-Kategori Sampah
+Kategori Warga
 @endsection
 
 <head>
@@ -30,7 +30,7 @@ Kategori Sampah
                     <thead class="thead-light">
                         <tr>
                             <th scope="col">No</th>
-                            <th scope="col">Jenis Sampah</th>
+                            <th scope="col">Kategori</th>
                             <th scope="col">Harga Retribusi</th>
                             <th scope="col">Aksi</th>
                         </tr>
@@ -83,7 +83,7 @@ Kategori Sampah
                 {{csrf_field()}}
                 <div class="row">
                     <div class="col-md-12">
-                        <p>Import data kategori sampah sesuai format contoh berikut.<br /><a
+                        <p>Import data kategori warga sesuai format contoh berikut.<br /><a
                                 href="{{url('')}}/excel-kategori.xlsx"><i class="fas fa-download"></i> File Contoh Excel
                                 Kategori</a></p>
                     </div>

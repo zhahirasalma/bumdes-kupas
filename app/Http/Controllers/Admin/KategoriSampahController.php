@@ -43,8 +43,8 @@ class KategoriSampahController extends Controller
     public function store(Request $request)
     {
         $messages = [
-            'jenis_sampah.required' => 'Jenis sampah wajib diisi.',
-            'jenis_sampah.unique' => 'Jenis sampah sudah ada.',
+            'jenis_sampah.required' => 'Kategori wajib diisi.',
+            'jenis_sampah.unique' => 'Kategori sudah ada.',
             'harga_retribusi.required' => 'Harga retribusi wajib diisi.',
             'harga_retribusi.numeric' => 'Harga retribusi harus berupa angka.',
         ];
@@ -93,8 +93,8 @@ class KategoriSampahController extends Controller
     public function update(Request $request, $id)
     {
         $messages = [
-            'jenis_sampah.required' => 'Jenis sampah wajib diisi.',
-            'jenis_sampah.unique' => 'Jenis sampah sudah ada.',
+            'jenis_sampah.required' => 'Kategori wajib diisi.',
+            'jenis_sampah.unique' => 'Kategori sudah ada.',
             'harga_retribusi.required' => 'Harga retribusi wajib diisi.',
             'harga_retribusi.numeric' => 'Harga retribusi harus berupa angka.',
         ];
