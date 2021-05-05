@@ -72,7 +72,7 @@ Daftar Warga
                             <td>
                                 @if ($w->latitude != null && $w->longitude != null)
                                 <a target="_blank"
-                                    href="https://maps.google.com/?q={{$w->latitude}},{{$w->longitude}}">Klik alamat</a>
+                                    href="https://maps.google.com/?q={{$w->latitude}},{{$w->longitude}}">Menuju peta</a>
                                 @endif
                             </td>
                             <td>
