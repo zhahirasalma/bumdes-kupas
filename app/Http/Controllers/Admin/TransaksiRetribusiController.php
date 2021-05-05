@@ -45,13 +45,14 @@ class TransaksiRetribusiController extends Controller
         $messages = [
             'id_users.required' => 'Nama wajib diisi.',
             'nama_kolektor.required' => 'Nama kolektor wajib diisi.',
+            'nama_kolektor.regex' => 'Nama kolektor harus berupa huruf.',
             'bulan_tagihan.required' => 'Bulan Tagihan wajib diisi.',
             'keterangan.required' => 'Keterangan wajib diisi.',
             'tanggal_transaksi.required' => 'Tanggal transaksi wajib diisi.',
         ];
         
         $request->validate([
-            'nama_kolektor' => 'required',
+            'nama_kolektor' => 'required|regex:/^[a-zA-Z]+$/',
             'bulan_tagihan' => 'required',
             'keterangan' => 'required',
             'tanggal_transaksi' => 'required',
@@ -105,13 +106,14 @@ class TransaksiRetribusiController extends Controller
         $messages = [
             'id_users.required' => 'Nama wajib diisi.',
             'nama_kolektor.required' => 'Nama kolektor wajib diisi.',
+            'nama_kolektor.regex' => 'Nama kolektor harus berupa huruf.',
             'bulan_tagihan.required' => 'Bulan Tagihan wajib diisi.',
             'keterangan.required' => 'Keterangan wajib diisi.',
             'tanggal_transaksi.required' => 'Tanggal transaksi wajib diisi.',
         ];
         
         $request->validate([
-            'nama_kolektor' => 'required',
+            'nama_kolektor' => 'required|regex:/^[a-zA-Z]+$/',
             'bulan_tagihan' => 'required',
             'keterangan' => 'required',
             'tanggal_transaksi' => 'required',

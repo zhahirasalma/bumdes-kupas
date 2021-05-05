@@ -216,11 +216,16 @@ Tambah Data Transaksi Retribusi
                 },
                 error: function (xhr, status, error) {
                     var err = eval("(" + xhr.responseText + ")");
-                    var text = err.message;
+                    var text = err.errors;
+                    var msg0 = ' ';
+
+                    if (text.nama_kolektor) {
+                        msg0 = text.nama_kolektor[0];
+                    }
 
                     Swal.fire({
                         title: 'Gagal!',
-                        text: text,
+                        text: msg0,
                         icon: 'warning',
                     });
                 }
