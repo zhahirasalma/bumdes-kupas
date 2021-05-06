@@ -49,6 +49,11 @@
                 <i class="ni ni-paper-diploma text-green"></i> Kategori warga
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link " href="/">
+                <i class="ni ni-key-25 text-red"></i> Logout
+            </a>
+        </li>
     </div>
     <div class="mobile-menu" style="position: fixed; top: 20px; z-index:100; right:0px">
         <a href="javascript:void(0);" class="icon" onclick="myFunction()">
