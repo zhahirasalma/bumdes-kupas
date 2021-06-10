@@ -16,9 +16,10 @@ class EducatorMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::user()->role != "educator"){
-            return redirect()->to('home');
+        if($request->user()->role != "educator"){
+            return redirect()->to('/');
         }
         return $next($request);
+    }
     }
 }

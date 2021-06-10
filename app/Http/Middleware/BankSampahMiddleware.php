@@ -16,8 +16,8 @@ class BankSampahMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::user()->role != "bank_sampah"){
-            return redirect()->to('home');
+        if($request->user()->role != "bank_sampah"){
+            return redirect()->to('/');
         }
         return $next($request);
     }

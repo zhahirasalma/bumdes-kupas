@@ -16,9 +16,10 @@ class WargaMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::user()->role != "warga"){
-            return redirect()->to('home');
+        if($request->user()->role != "warga"){
+            return redirect()->to('/');
         }
         return $next($request);
+    }
     }
 }
