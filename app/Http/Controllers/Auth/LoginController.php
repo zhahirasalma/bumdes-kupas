@@ -24,25 +24,43 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
+    
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'logout']);
     }
 
-    public function P(\Illuminate\Http\Request $request, $user){
-        $role = Auth::user()->role;
-        dd($role);
-    //     if($role == 'admin'){
-    //         return redirect('/admin');
-    //     }else if($role == 'educator'){
-    //         return redirect('/educator');
-    //     }else if($role == 'warga'){
-    //         return redirect('/warga');
-    //     }else if($role == 'bank_sampah'){
-    //         return redirect('/bank_sampah');
-    //     }else{
-    //         return redirect('/');
-    //     }
+    // public function index()
+    // {
+    //     return view('auth.home');
+    // }
+
+    public function login(\Illuminate\Http\Request $request){
+        //echo($user);
+        
+        $validationData = $request->validate([
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+
+        if (!auth()->attempt($validationData)) {
+            return redirect('/');
+        }
+        $user = auth()->user();
+        $role = $user->role;
+
+
+        if($role == 'admin'){
+            return redirect('/admin');
+        }else if($role == 'educator'){
+            return redirect('/educator');
+        }else if($role == 'warga'){
+            return redirect('/warga');
+        }else if($role == 'bank_sampah'){
+            return redirect('/bank_sampah');
+        }else{
+            return redirect('/');
+        } 
     }
 
     // public function logout(Request $request)
@@ -103,7 +121,7 @@ class LoginController extends Controller
     //         session([
     //             'error'  => [('Email atau password salah')],
     //         ]);
-    //         return redirect()->route('home');
+    //         return redirect()->route('');
     //     }
  
     // }
