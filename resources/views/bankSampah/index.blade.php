@@ -8,9 +8,9 @@ Bank Sampah
 <header class="masthead bg-primary text-secondary text-center">
     <div class="container d-flex align-items-center flex-column">
         <!-- Masthead Avatar Image-->
-        <img class="masthead-avatar mb-5" src="{{asset('template/assets/img/avataaars.svg')}}" alt="" />
+        <img class="masthead-avatar mb-5" src="{{asset('template/assets/img/logo_kupas.png')}}" alt="" />
         <!-- Masthead Heading-->
-        <h1 class="masthead-heading text-uppercase mb-0">HALO BANK SAMPAH</h1>
+        <h1 class="masthead-heading text-uppercase mb-0">HALO</h1>
         <!-- Icon Divider-->
         <div class="divider-custom divider-light">
             <div class="divider-custom-line"></div>
@@ -22,6 +22,11 @@ Bank Sampah
 <!-- Portfolio Section-->
 <section class="page-section portfolio" id="portfolio">
     <div class="container">
+                @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
         <!-- Portfolio Section Heading-->
         <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Layanan</h2>
         <!-- Icon Divider-->

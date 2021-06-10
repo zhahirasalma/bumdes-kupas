@@ -8,7 +8,7 @@ Warga
 <header class="masthead bg-primary text-secondary text-center">
     <div class="container d-flex align-items-center flex-column">
         <!-- Masthead Avatar Image-->
-        <img class="masthead-avatar mb-5" src="{{asset('template/assets/img/avataaars.svg')}}" alt="" />
+        <img class="masthead-avatar mb-5" src="{{asset('template/assets/img/logo_kupas.png')}}" alt="" />
         <!-- Masthead Heading-->
         <h1 class="masthead-heading text-uppercase mb-0">HALO Warga</h1>
         <!-- Icon Divider-->
@@ -48,25 +48,19 @@ Warga
             </div>
             <!-- Portfolio Item 2-->
             <div class="col-md-6 col-lg-4 mb-5 align-items-center justify-content-center h-100 w-100">
-                <!-- <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal2"> -->
-                <!-- <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100"> -->
-                <!-- <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i>
-                    </div>
-                </div> -->
-                <!-- <img class="img-fluid" src="{{asset('template/assets/img/portfolio/cake.png')}}" alt="" /> -->
-                <!-- Default switch -->
-                <!-- <input class="toggle-class d-flex align-items-center justify-content-center" type="checkbox"
-                    data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Terambil"
-                    data-off="Belum"> -->
-                <!-- <div class="custom-control custom-switch"> -->
-                <div class="text-center align-items-center justify-content-center">
-                    <input type="checkbox" class="custom-control-input text-center" id="customSwitches"
+                <!-- <div class="text-center align-items-center justify-content-center"> -->
+                <!-- <input type="checkbox" class="custom-control-input text-center" id="customSwitches"
                         data-onstyle="primary" data-offstyle="danger" data-toggle="toggle" data-on="Terambil"
-                        data-off="Belum"></input>
-                    <label class="text-center">Geser ke kanan bila hari ini sampah belum
-                        terambil.</label>
-                </div>
-                
+                        data-off="Belum"></input> -->
+                <!-- <button class="btn btn-danger h-100 w-100">Klik tombol ini apabila sampah belum
+                        diambil oleh Educator.</button> -->
+                <input type="checkbox" class="toggle-switch" checked data-toggle="toggle" data-width="307"
+                    data-height="240" data-onstyle="success" data-offstyle="danger" data-on="Terambil"
+                    data-off="Belum Terambil"></input>
+                <label class="text-center">Geser ke kanan bila hari ini sampah belum
+                    terambil.</label>
+                <!-- </div> -->
+
                 <!-- </div> -->
                 <h3 class="portfolio-modal-subtitle text-center text-secondary text-uppercase mb-0">Tombol Pengambilan
                 </h3>
@@ -114,27 +108,17 @@ Warga
                                                             <th>Tanggal Transaksi</th>
                                                             <th>Jumlah Transaksi</th>
                                                             <th>Keterangan</th>
-                                                            <th>4</th>
-                                                            <th>5</th>
-                                                            <th>6</th>
-                                                            <th>7</th>
-                                                            <th>8</th>
-
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>2</td>
-                                                            <td>3</td>
-                                                            <td>4</td>
-                                                            <td>5</td>
-                                                            <td>6</td>
-                                                            <td>7</td>
-                                                            <td>8</td>
-                                                            <td>9</td>
 
+                                                        <tr>
+                                                            <!-- <th scope="row"></th>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td> -->
                                                         </tr>
+
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -143,9 +127,7 @@ Warga
                                 </div>
                             </div>
                             <!-- Portfolio Modal - Text-->
-                            <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque
-                                assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam
-                                velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.
+                            <p class="mb-5">History transaksi retribusi warga
                             </p>
                             <button class="btn btn-primary" data-dismiss="modal">
                                 <i class="fas fa-times fa-fw"></i>
@@ -158,44 +140,5 @@ Warga
         </div>
     </div>
 </div>
-<!-- Portfolio Modal 2-->
-<div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog"
-    aria-labelledby="portfolioModal2Label" aria-hidden="true">
-    <div class="modal-dialog modal-xl" role="document">
-        <div class="modal-content">
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true"><i class="fas fa-times"></i></span>
-            </button>
-            <div class="modal-body text-center">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8">
-                            <!-- Portfolio Modal - Title-->
-                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0"
-                                id="portfolioModal2Label">Tasty Cake</h2>
-                            <!-- Icon Divider-->
-                            <div class="divider-custom">
-                                <div class="divider-custom-line"></div>
-                                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                                <div class="divider-custom-line"></div>
-                            </div>
-                            <!-- Portfolio Modal - Image-->
-                            <img class="img-fluid rounded mb-5"
-                                src="{{asset('template/assets/img/portfolio/cake.png')}}" alt="" />
-                            <!-- Portfolio Modal - Text-->
-                            <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque
-                                assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam
-                                velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.
-                            </p>
-                            <button class="btn btn-primary" data-dismiss="modal">
-                                <i class="fas fa-times fa-fw"></i>
-                                Close Window
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 @endsection
