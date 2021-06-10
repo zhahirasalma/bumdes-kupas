@@ -38,7 +38,7 @@ Home
                     <div class="col-lg-4 mx-auto">
                         <div class="form-group">
                             <!-- <label>Name</label> -->
-                            <input class="form-control" for="email" id="email" type="email" placeholder="Email"
+                            <input class="form-control" name="email" for="email" id="email" type="email" placeholder="Email"
                                 class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}"
                                 required autocomplete="email" autofocus>
                             @error('email')
@@ -52,7 +52,7 @@ Home
                     <div class="col-lg-4 mx-auto">
                         <div class="form-group">
                             <!-- <label>Name</label> -->
-                            <input class="form-control" id="password" type="password" placeholder="Kata Sandi"
+                            <input class="form-control" name="password" id="password" type="password" placeholder="Kata Sandi"
                                 class="form-control @error('password') is-invalid @enderror" required
                                 autocomplete="current-password">
 
