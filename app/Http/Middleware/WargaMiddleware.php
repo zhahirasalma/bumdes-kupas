@@ -21,5 +21,4 @@ class WargaMiddleware
         }
         return $next($request);
     }
-    }
 }

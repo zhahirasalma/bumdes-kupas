@@ -10,33 +10,13 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-            
+            @guest
+            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                        href="#"></a></li>
+            @else
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
                         href="/logout">KELUAR</a></li>
-                <!-- <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a></li> -->
-                <!-- <li class="nav-item mx-0 mx-lg-1">
-                    <div class="nav-item dropdown">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger dropdown-toggle"
-                            href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Registrasi <i data-feather="chevron-down" class="svg-icon"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
-                            <a class="dropdown-item" href="/registerwarga"><i data-feather="user"></i>
-                                DAFTAR SEBAGAI WARGA</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/registerBankSampah"><i data-feather="settings"></i>
-                                DAFTAR SEBAGAI BANK SAMPAH</a>
-                            <div class="dropdown-divider"></div>
-                            <div class="pl-8 p-3"><a href="/homewarga" class="btn btn-sm btn-info">MASUK SEBAGAI
-                                    WARGA</a>
-                                <div class="dropdown-divider"></div>
-                                <div class="pl-8 p-6"><a href="/homebankSampah" class="btn btn-sm btn-info">MASUK
-                                        SEBAGAI BANK SAMPAH</a>
-                                    <div class="pl-4 p-3"><a href="javascript:void(0)" class="btn btn-sm btn-danger">KELUAR</a> -->
-                                <!-- </div>
-                            </div>
-                            <div>
-                </li> -->
+            @endguest
             </ul>
         </div>
     </div>
