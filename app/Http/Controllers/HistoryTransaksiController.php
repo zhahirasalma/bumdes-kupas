@@ -2,7 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\TransaksiBankSampah;
+use App\Models\User;
+use App\Models\BankSampah;
+use App\Models\KonversiBankSampah;
+use App\Models\RetribusiWarga;
+use Auth;
 
 class HistoryTransaksiController extends Controller
 {
@@ -13,7 +20,12 @@ class HistoryTransaksiController extends Controller
      */
     public function index()
     {
-        return view('bankSampah.layanan.history_transaksi');
+        $user = Auth::user();
+        $transaksi = TransaksiBankSampah::groupBy('id_bank_sampah')
+                        ->selectRaw('*, sum(harga_total) as jumlah')
+                        ->with('bankSampah', 'user', 'konversi')
+                        ->get();
+        return view('bankSampah.layanan.history_transaksi', compact('user', 'transaksi'));
     }
 
     /**

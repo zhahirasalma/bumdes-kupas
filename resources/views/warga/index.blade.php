@@ -137,14 +137,20 @@ Warga
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-
+                                                    @foreach($retribusi as $r)
+                                                    @if($r->user->id==Auth::user()->id)
                                                         <tr>
-                                                            <!-- <th scope="row"></th>
-                                                            <td></td>
-                                                            <td></td>
-                                                            <td></td> -->
+                                                        <th scope="row">
+                                                            {{$loop->iteration}}
+                                                        </th>
+                                                            <td>{{ $r->tanggal_transaksi != 'null' ? $r->tanggal_transaksi : ''  }}</td>
+                                                            <td>@if ($r->jumlah_tagihan != 'null') @currency($r->jumlah_tagihan)
+                                                                @else 
+                                                                @endif</td>
+                                                            <td>{{ $r->keterangan != 'null' ? $r->keterangan : ''  }}</td>
                                                         </tr>
-
+                                                    @endif
+                                                    @endforeach
                                                     </tbody>
                                                 </table>
                                             </div>
