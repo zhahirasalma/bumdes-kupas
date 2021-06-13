@@ -4,19 +4,31 @@ Warga
 @endsection
 @section('content')
 
+<head>
+    <link rel=”stylesheet” href="{{asset('swal/sweetalert.css')}}">
+    <script src="{{asset('swal/sweetalert.js')}}"></script>
+</head>
+
 <!-- Masthead-->
 <header class="masthead bg-primary text-secondary text-center">
     <div class="container d-flex align-items-center flex-column">
         <!-- Masthead Avatar Image-->
         <img class="masthead-avatar mb-5" src="{{asset('template/assets/img/logo_kupas.png')}}" alt="" />
         <!-- Masthead Heading-->
-        <h1 class="masthead-heading text-uppercase mb-0">HALO Warga</h1>
+        <h1 class="masthead-heading text-uppercase mb-0"><span>HALO {{ Auth::user()->nama }}</span></h1>
         <!-- Icon Divider-->
         <div class="divider-custom divider-light">
             <div class="divider-custom-line"></div>
         </div>
         <!-- Masthead Subheading-->
-        <p class="masthead-subheading font-weight-light mb-0">Alamat</p>
+        @foreach($warga as $b)
+        @if($b->user->id==Auth::user()->id)
+        <p class="masthead-subheading font-weight-light mb-0">{{ $b->dukuh != 'null' ? $b->dukuh : ''  }},
+                                {{ $b->desa->desa != 'null' ? $b->desa->desa : ''  }},
+                                {{ $b->kecamatan->kecamatan != 'null' ? $b->kecamatan->kecamatan : ''  }},
+                                {{ $b->kota->kota != 'null' ? $b->kota->kota : ''  }}</p>
+        @endif
+        @endforeach
     </div>
 </header>
 <!-- Portfolio Section-->
@@ -40,32 +52,46 @@ Warga
                     </div>
                     <img class="img-fluid" src="{{asset('template/assets/img/portfolio/retribusi.png')}}" alt="" />
                     <h3 class="portfolio-modal-subtitle text-center text-secondary text-uppercase mb-0">Jumlah Tagihan
+                    @foreach($retribusi as $r)
+                    @if($r->user->id==Auth::user()->id)
+                        {{ $r->jumlah_tagihan != 'null' ? $r->jumlah_tagihan : ''  }}</p>
+                    @endif
+                    @endforeach
                     </h3>
-                    <h3 class="portfolio-modal-subtitle text-center text-secondary mb-0">Rp 20.000
+                    <h3 class="portfolio-modal-subtitle text-center text-secondary mb-0">
                     </h3>
 
                 </div>
             </div>
             <!-- Portfolio Item 2-->
-            <div class="col-md-6 col-lg-4 mb-5 align-items-center justify-content-center h-100 w-100">
-                <!-- <div class="text-center align-items-center justify-content-center"> -->
-                <!-- <input type="checkbox" class="custom-control-input text-center" id="customSwitches"
-                        data-onstyle="primary" data-offstyle="danger" data-toggle="toggle" data-on="Terambil"
-                        data-off="Belum"></input> -->
-                <!-- <button class="btn btn-danger h-100 w-100">Klik tombol ini apabila sampah belum
-                        diambil oleh Educator.</button> -->
-                <input type="checkbox" class="toggle-switch" checked data-toggle="toggle" data-width="307"
-                    data-height="240" data-onstyle="success" data-offstyle="danger" data-on="Terambil"
-                    data-off="Belum Terambil"></input>
-                <label class="text-center">Geser ke kanan bila hari ini sampah belum
-                    terambil.</label>
-                <!-- </div> -->
-
-                <!-- </div> -->
-                <h3 class="portfolio-modal-subtitle text-center text-secondary text-uppercase mb-0">Tombol Pengambilan
-                </h3>
-
-            </div>
+            @foreach($pengambilan as $pengambilan)
+                <!-- <p action="/konfirmasistatus" method="post" id="statusForm{{$pengambilan->id}}">
+                @csrf -->
+                <div class="col-md-6 col-lg-4 mb-5 align-items-center justify-content-center h-100 w-100">
+                    <input type="checkbox" data-id="{{$pengambilan->id}}" class="toggle-switch" checked data-toggle="toggle"
+                        data-width="307" data-height="240" data-onstyle="danger" data-offstyle="success"
+                        data-on="Belum Terambil" data-off="Terambil" {{$pengambilan->status ? 'checked' : ''}}></input>
+                    <label class="text-center">Geser ke kanan bila hari ini sampah belum
+                        terambil.</label>
+                    <h3 class="portfolio-modal-subtitle text-center text-secondary text-uppercase mb-0">Tombol
+                        Pengambilan
+                    </h3>
+                </div>
+                <!-- <div class="col-md-6 col-lg-4 mb-5 align-items-center justify-content-center h-100 w-100">
+                    <input name="id" type="hidden" value="{{$pengambilan->id}}">
+                    <input name="status" type="checkbox" class="toggle-switch" checked data-toggle="toggle"
+                        data-width="307" data-height="240" data-onstyle="danger" data-offstyle="success"
+                        data-on="Belum Terambil" data-off="Terambil"
+                        onchange="document.getElementById('statusForm{{$pengambilan->id}}').submit()"
+                        {{isset($project['status']) && $project['status'] == '1' ? 'checked' : ''}} ></input>
+                    <label class="text-center">Geser ke kanan bila hari ini sampah belum
+                        terambil.</label>
+                    <h3 class="portfolio-modal-subtitle text-center text-secondary text-uppercase mb-0">Tombol
+                        Pengambilan
+                    </h3>
+                </div> -->
+            
+            @endforeach
         </div>
     </div>
     </div>
@@ -142,3 +168,40 @@ Warga
 </div>
 
 @endsection
+
+@push('script')
+<script>
+    $(function () {
+        $('.toggle-switch').change(function () {
+            var status = $(this).prop('checked') == true ? 1 : 0;
+            var id = $(this).data('id');
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: '{{route('konfirmasistatus')}}',
+                data: {
+                    'status': status,
+                    'id': id
+                },
+                success: function (data) {
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        text: 'Status berhasil diubah!',
+                        icon: 'success',
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK",
+                    })
+                },
+                error: function (error) {
+                    Swal.fire({
+                        title: 'Gagal!',
+                        text: 'Tidak dapat mengubah status',
+                        icon: 'warning',
+                    });
+                }
+            });
+        });
+    });
+
+</script>
+@endpush

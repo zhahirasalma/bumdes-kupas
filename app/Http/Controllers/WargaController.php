@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DaftarSetor;
+use App\Models\Pengambilan;
+use App\Models\User;
+use App\Models\Warga;
+use App\Models\KategoriSampah;
+use App\Models\RetribusiWarga;
 use Auth;
 
 class WargaController extends Controller
@@ -16,9 +21,28 @@ class WargaController extends Controller
     public function index()
     {
         $user = Auth::user();
+        $warga= Warga::all();
         $daftar_setor = DaftarSetor::all();
-        return view('warga.index', compact('daftar_setor', 'user'));
+        $pengambilan= Pengambilan::all();
+        $retribusi= RetribusiWarga::all();
+        return view('warga.index', compact('warga', 'pengambilan', 'daftar_setor', 'user', 'retribusi'));
     }
+
+    public function konfirmasistatus(Request $request)
+    {
+        $pengambilan = Pengambilan::find($request->id);
+        $pengambilan->status = $request->status;
+        $pengambilan->save();
+
+        return response()->json($pengambilan);
+    }
+
+    // public function konfirmasistatus(Request $request)
+    // {
+    //     $status = $request->input('status', Pengambilan::STATUS_pending);
+    //     Pengambilan::find($request->id)->updateStatus();
+    //     return Pengambilan::STATUS_terambil;
+    // }
 
     /**
      * Show the form for creating a new resource.
