@@ -31,8 +31,10 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/homewarga', function () {
             return view('warga.index');
         });
+        Route::get('/transaksi_warga', [App\Http\Controllers\HistoryTransaksiController::class, 'transaksi_warga'])
+            ->name('transaksi_warga');
         Route::get('/konfirmasistatus', [App\Http\Controllers\WargaController::class, 'konfirmasistatus'])
-        ->name('konfirmasistatus');
+            ->name('konfirmasistatus');
     });
     Route::middleware(['bank_sampah'])->group(function(){
         Route::get('bank_sampah', [App\Http\Controllers\BankSampahController::class, 'index']);
@@ -42,6 +44,10 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/historyTransaksi', function () {
             return view('bankSampah.layanan.history_transaksi');
         });
+        Route::resources([
+            'bankSampah' => App\Http\Controllers\BankSampahController::class,
+            'daftar_setor' => App\Http\Controllers\DaftarSetorController::class,
+        ]);
     });
     Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])
     ->name('logout');
@@ -50,15 +56,11 @@ Route::middleware(['auth'])->group(function(){
 Route::get('/create_bank_sampah', [App\Http\Controllers\Auth\RegisterController::class, 'create_bank_sampah'])->name('create_bank_sampah');
 Route::post('/store_bank_sampah', [App\Http\Controllers\Auth\RegisterController::class, 'store_bank_sampah'])->name('store_bank_sampah');
 Route::post('/store_warga', [App\Http\Controllers\Auth\RegisterController::class, 'store_warga'])->name('store_warga');
-Route::get('/transaksi_warga', [App\Http\Controllers\HistoryTransaksiController::class, 'transaksi_warga'])->name('transaksi_warga');
-
 
 Route::resources([
-    'daftar_setor' => App\Http\Controllers\DaftarSetorController::class,
     'warga' => App\Http\Controllers\WargaController::class,
     'registrasi' => App\Http\Controllers\Auth\RegisterController::class,
     'history_transaksi' => App\Http\Controllers\HistoryTransaksiController::class,
-    'bankSampah' => App\Http\Controllers\BankSampahController::class,
     'nasabah_warga' => App\Http\Controllers\WargaController::class,
     'login' => App\Http\Controllers\Auth\LoginController::class
     ]);
