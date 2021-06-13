@@ -7,17 +7,26 @@
     <!-- Collapse -->
     <div class="collapse navbar-collapse" id="sidenav-collapse-main">
         <!-- Navigation -->
+        @if(Auth::user()->role=='admin')
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class=" nav-link " href="{{route('dashboard.index')}}"> 
                     <i class="ni ni-sound-wave text-grey"></i> Dashboard
                 </a>
             </li>
+        </ul>
+        @endif
+        @if(Auth::user()->role=='educator' || Auth::user()->role=='admin')
+        <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link " href="{{route('pengambilan.index')}}">
                     <i class="ni ni-delivery-fast text-orange"></i> Pengambilan Sampah
                 </a>
             </li>
+        </ul>
+        @endif
+        @if(Auth::user()->role=='admin') 
+        <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link " href="{{route('users.index')}}">
                     <i class="ni ni-single-02 text-orange"></i> Users
@@ -54,5 +63,6 @@
                 </a>
             </li>
         </ul>
+        @endif
     </div>
 </div>
