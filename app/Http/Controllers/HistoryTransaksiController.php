@@ -21,10 +21,7 @@ class HistoryTransaksiController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $transaksi = TransaksiBankSampah::groupBy('id_bank_sampah')
-                        ->selectRaw('*, sum(harga_total) as jumlah')
-                        ->with('bankSampah', 'user', 'konversi')
-                        ->get();
+        $transaksi = TransaksiBankSampah::all();
         return view('bankSampah.layanan.history_transaksi', compact('user', 'transaksi'));
     }
 

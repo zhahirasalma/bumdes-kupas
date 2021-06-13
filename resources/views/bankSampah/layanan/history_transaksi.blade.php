@@ -30,17 +30,23 @@ History Transaksi Bank Sampah
                                                 <th>Tanggal Transaksi</th>
                                                 <th>Berat Total Sampah</th>
                                                 <th>Harga Total</th>
-                                                <th>Keterangan</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                        @foreach($transaksi as $tr)
+                                        @if($tr->user->id==Auth::user()->id)
                                             <tr>
-                                                <td>1</td>
-                                                <td>2 Desember 2020</td>
-                                                <td>0.75 kg</td>
-                                                <td>10.000</td>
-                                                <td>Tidak ada</td>
+                                                <th scope="row">{{$loop->iteration}}</th>
+                                                <td>{{$tr->tanggal_transaksi}}</td>
+                                                <td>{{$tr->berat}}</td>
+                                                <td>@if ($tr->harga_total != null)
+                                                        @currency($tr->harga_total)
+                                                    @else
+                                                        
+                                                    @endif</td>
                                             </tr>
+                                        @endif
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </div>

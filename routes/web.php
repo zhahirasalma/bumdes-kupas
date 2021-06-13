@@ -31,9 +31,11 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/homewarga', function () {
             return view('warga.index');
         });
-        Route::get('/transaksi_warga', [App\Http\Controllers\HistoryTransaksiController::class, 'transaksi_warga'])
+        Route::get('/transaksi_warga', [App\Http\Controllers\WargaController::class, 'transaksi_warga'])
             ->name('transaksi_warga');
         Route::get('/konfirmasistatus', [App\Http\Controllers\WargaController::class, 'konfirmasistatus'])
+            ->name('konfirmasistatus');
+        Route::post('/konfirmasistatus', [App\Http\Controllers\WargaController::class, 'konfirmasistatus'])
             ->name('konfirmasistatus');
     });
     Route::middleware(['bank_sampah'])->group(function(){
