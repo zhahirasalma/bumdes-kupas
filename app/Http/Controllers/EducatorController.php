@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\Models\Pengambilan;
 
 class EducatorController extends Controller
 {
     public function index(){
         $user = Auth::user();
-        return view('backend.pengambilan.index', compact('user'));
+        $pengambilan = Pengambilan::with('user', 'warga')->get();  
+        return view('backend.pengambilan.index', compact('user', 'pengambilan'));
     }
 
     public function __construct(){
