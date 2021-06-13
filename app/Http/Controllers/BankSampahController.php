@@ -16,7 +16,8 @@ class BankSampahController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('bankSampah.index', compact('user'));
+        $bank_sampah = BankSampah::all();
+        return view('bankSampah.index', compact('user', 'bank_sampah'));
     }
 
     /**

@@ -10,13 +10,20 @@ Bank Sampah
         <!-- Masthead Avatar Image-->
         <img class="masthead-avatar mb-5" src="{{asset('template/assets/img/logo_kupas.png')}}" alt="" />
         <!-- Masthead Heading-->
-        <h1 class="masthead-heading text-uppercase mb-0">HALO</h1>
+        <h1 class="masthead-heading text-uppercase mb-0">HALO {{ Auth::user()->nama }}</h1>
         <!-- Icon Divider-->
         <div class="divider-custom divider-light">
             <div class="divider-custom-line"></div>
         </div>
         <!-- Masthead Subheading-->
-        <p class="masthead-subheading font-weight-light mb-0">Alamat</p>
+        @foreach($bank_sampah as $b)
+        @if($b->user->id==Auth::user()->id)
+        <p class="masthead-subheading font-weight-light mb-0">{{ $b->dukuh != 'null' ? $b->dukuh : ''  }},
+                                {{ $b->desa->desa != 'null' ? $b->desa->desa : ''  }},
+                                {{ $b->kecamatan->kecamatan != 'null' ? $b->kecamatan->kecamatan : ''  }},
+                                {{ $b->kota->kota != 'null' ? $b->kota->kota : ''  }}</p>
+        @endif
+        @endforeach
     </div>
 </header>
 <!-- Portfolio Section-->
