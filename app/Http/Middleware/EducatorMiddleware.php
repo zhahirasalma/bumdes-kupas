@@ -21,5 +21,4 @@ class EducatorMiddleware
         }
         return $next($request);
     }
-    }
 }
