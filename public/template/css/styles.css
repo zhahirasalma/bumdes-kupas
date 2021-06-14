@@ -2507,29 +2507,29 @@ fieldset:disabled a.btn {
 
 .btn-success {
   color: #fff;
-  background-color: #28a745;
-  border-color: #28a745;
+  background-color: #04E762;
+  border-color: #04E762;
 }
 .btn-success:hover {
   color: #fff;
-  background-color: #218838;
-  border-color: #1e7e34;
+  background-color: #04E762;
+  border-color: #04E762;
 }
 .btn-success:focus, .btn-success.focus {
   color: #fff;
-  background-color: #218838;
-  border-color: #1e7e34;
+  background-color: #04E762;
+  border-color: #04E762;
   box-shadow: 0 0 0 0.2rem rgba(72, 180, 97, 0.5);
 }
 .btn-success.disabled, .btn-success:disabled {
   color: #fff;
-  background-color: #28a745;
-  border-color: #28a745;
+  background-color: #04E762;
+  border-color: #04E762;
 }
 .btn-success:not(:disabled):not(.disabled):active, .btn-success:not(:disabled):not(.disabled).active, .show > .btn-success.dropdown-toggle {
   color: #fff;
-  background-color: #1e7e34;
-  border-color: #1c7430;
+  background-color: #04E762;
+  border-color: #04E762;
 }
 .btn-success:not(:disabled):not(.disabled):active:focus, .btn-success:not(:disabled):not(.disabled).active:focus, .show > .btn-success.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.2rem rgba(72, 180, 97, 0.5);
@@ -2597,29 +2597,29 @@ fieldset:disabled a.btn {
 
 .btn-danger {
   color: #fff;
-  background-color: #dc3545;
-  border-color: #dc3545;
+  background-color: #771704;
+  border-color: #771704;
 }
 .btn-danger:hover {
   color: #fff;
   background-color: #c82333;
-  border-color: #bd2130;
+  border-color: #771704;
 }
 .btn-danger:focus, .btn-danger.focus {
   color: #fff;
   background-color: #c82333;
-  border-color: #bd2130;
+  border-color: #771704;
   box-shadow: 0 0 0 0.2rem rgba(225, 83, 97, 0.5);
 }
 .btn-danger.disabled, .btn-danger:disabled {
   color: #fff;
   background-color: #dc3545;
-  border-color: #dc3545;
+  border-color: #771704;
 }
 .btn-danger:not(:disabled):not(.disabled):active, .btn-danger:not(:disabled):not(.disabled).active, .show > .btn-danger.dropdown-toggle {
   color: #fff;
   background-color: #bd2130;
-  border-color: #b21f2d;
+  border-color: #771704;
 }
 .btn-danger:not(:disabled):not(.disabled):active:focus, .btn-danger:not(:disabled):not(.disabled).active:focus, .show > .btn-danger.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.2rem rgba(225, 83, 97, 0.5);
@@ -4330,7 +4330,7 @@ input[type=button].btn-block {
   word-wrap: break-word;
   background-color: #fff;
   background-clip: border-box;
-  border: 0.125rem solid rgba(0, 0, 0, 0.125);
+  border: 0.125rem solid rgba(0, 0, 0, 0);
   border-radius: 0.5rem;
 }
 .card > hr {
@@ -10288,4 +10288,150 @@ form .row:first-child .floating-label-form-group {
     padding-left: 10px;
     padding-right: 10px;
   }
+
+  .switch {
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    position: relative;
+  }
+
+  .btn.btn-danger.toggle-on{
+    height:240px;
+    width: 307px;
+    background-color: #771704;
+    text-align: center;
+    align-self: center;
+    margin: center;
+    justify-content: center;
+    justify-items: center;
+    justify-self: center;
+  }
+
+  .toggle-handle.btn.btn-default{
+    height:240px;
+    width: 10px;
+    background-color: #F4D35E;
+    align-self: center;
+    margin: center;
+    justify-content: center;
+    justify-items: center;
+    justify-self: center;
+  }
+
+  .toggle-group{
+    height:240px;
+    width: 307px;
+    align-self: center;
+    text-align: center;
+    margin: center;
+    justify-content: center;
+    justify-items: center;
+    justify-self: center;
+  }
+
+  .toggle.btn.btn-danger{
+    min-height:240px;
+    min-width: 307px;
+    background-color: #771704;
+    align-self: center;
+    text-align: center;
+    margin: center;
+    justify-content: center;
+    justify-items: center;
+    justify-self: center;
+  }
+
+  .toggle.btn.btn-success.off{
+    min-height:240px;
+    min-width: 307px;
+    background-color: #03B54D;
+    align-self: center;
+    text-align: center;
+    margin: center;
+    justify-content: center;
+    justify-items: center;
+    justify-self: center;
+  }
+
+  @media (max-width: 575.98px) {  
+    .btn.btn-danger.toggle-on{
+      height:240px;
+      width: 307px;
+      background-color: #771704;
+      text-align: center;
+      align-self: center;
+      margin: center;
+      justify-content: center;
+      justify-items: center;
+      justify-self: center;
+    }
+  
+    .toggle-handle.btn.btn-default{
+      height:240px;
+      width: 10px;
+      background-color: #F4D35E;
+      align-self: center;
+      margin: center;
+      justify-content: center;
+      justify-items: center;
+      justify-self: center;
+    }
+  
+    .toggle-group{
+      height:240px;
+      width: 307px;
+      align-self: center;
+      text-align: center;
+      margin: center;
+      justify-content: center;
+      justify-items: center;
+      justify-self: center;
+    }
+  
+    .toggle.btn.btn-danger{
+      min-height:240px;
+      min-width: 307px;
+      background-color: #771704;
+      align-self: center;
+      text-align: center;
+      margin: center;
+      justify-content: center;
+      justify-items: center;
+      justify-self: center;
+    }
+  
+    .toggle.btn.btn-success.off{
+      min-height:240px;
+      min-width: 307px;
+      background-color: #03B54D;
+      align-self: center;
+      text-align: center;
+      margin: center;
+      justify-content: center;
+      justify-items: center;
+      justify-self: center;
+    }
+  }
+
+  @media (max-width: 767.98px) { 
+
+  }
+
+   @media (max-width: 991.98px) { 
+
+  }
+
+  @media (max-width: 1199.98px) { 
+
+  }
+
+  @media (max-width: 1399.98px) { 
+
+  }
+
+  .btn.btn-success.active.toggle-off{
+    background-color: #03B54D;
+  }
+
 

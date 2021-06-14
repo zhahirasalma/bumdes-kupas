@@ -24,9 +24,9 @@ Warga
         @foreach($warga as $b)
         @if($b->user->id==Auth::user()->id)
         <p class="masthead-subheading font-weight-light mb-0">{{ $b->dukuh != 'null' ? $b->dukuh : ''  }},
-                                {{ $b->desa->desa != 'null' ? $b->desa->desa : ''  }},
-                                {{ $b->kecamatan->kecamatan != 'null' ? $b->kecamatan->kecamatan : ''  }},
-                                {{ $b->kota->kota != 'null' ? $b->kota->kota : ''  }}</p>
+            {{ $b->desa->desa != 'null' ? $b->desa->desa : ''  }},
+            {{ $b->kecamatan->kecamatan != 'null' ? $b->kecamatan->kecamatan : ''  }},
+            {{ $b->kota->kota != 'null' ? $b->kota->kota : ''  }}</p>
         @endif
         @endforeach
     </div>
@@ -52,11 +52,11 @@ Warga
                     </div>
                     <img class="img-fluid" src="{{asset('template/assets/img/portfolio/retribusi.png')}}" alt="" />
                     <h3 class="portfolio-modal-subtitle text-center text-secondary text-uppercase mb-0">Jumlah Tagihan
-                    @foreach($retribusi as $r)
-                    @if($r->user->id==Auth::user()->id)
+                        @foreach($retribusi as $r)
+                        @if($r->user->id==Auth::user()->id)
                         {{ $r->jumlah_tagihan != 'null' ? $r->jumlah_tagihan : ''  }}</p>
-                    @endif
-                    @endforeach
+                        @endif
+                        @endforeach
                     </h3>
                     <h3 class="portfolio-modal-subtitle text-center text-secondary mb-0">
                     </h3>
@@ -65,19 +65,23 @@ Warga
             </div>
             <!-- Portfolio Item 2-->
             @foreach($pengambilan as $pengambilan)
-                <!-- <p action="/konfirmasistatus" method="post" id="statusForm{{$pengambilan->id}}">
+            <!-- <p action="/konfirmasistatus" method="post" id="statusForm{{$pengambilan->id}}">
                 @csrf -->
-                <div class="col-md-6 col-lg-4 mb-5 align-items-center justify-content-center h-100 w-100">
+            <style>
+            </style>
+            <div class="col-md-6 col-lg-4 mb-5">
+                <div class="card portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                     <input type="checkbox" data-id="{{$pengambilan->id}}" class="toggle-switch" checked data-toggle="toggle"
-                        data-width="307" data-height="240" data-onstyle="danger" data-offstyle="success"
+                    data-onstyle="danger" data-offstyle="success"
                         data-on="Belum Terambil" data-off="Terambil" {{$pengambilan->status ? 'checked' : ''}}></input>
-                    <label class="text-center">Geser ke kanan bila hari ini sampah belum
-                        terambil.</label>
+                    <p class="portfolio-modal-subtitle text-center text-secondary text-uppercase mb-0">Geser ke kanan bila hari ini sampah belum
+                        terambil.</p>
                     <h3 class="portfolio-modal-subtitle text-center text-secondary text-uppercase mb-0">Tombol
                         Pengambilan
                     </h3>
                 </div>
-                <!-- <div class="col-md-6 col-lg-4 mb-5 align-items-center justify-content-center h-100 w-100">
+            </div>
+            <!-- <div class="col-md-6 col-lg-4 mb-5 align-items-center justify-content-center h-100 w-100">
                     <input name="id" type="hidden" value="{{$pengambilan->id}}">
                     <input name="status" type="checkbox" class="toggle-switch" checked data-toggle="toggle"
                         data-width="307" data-height="240" data-onstyle="danger" data-offstyle="success"
@@ -90,7 +94,7 @@ Warga
                         Pengambilan
                     </h3>
                 </div> -->
-            
+
             @endforeach
         </div>
     </div>
@@ -118,8 +122,6 @@ Warga
                                 <div class="divider-custom-line"></div>
                             </div>
                             <!-- Portfolio Modal - Table-->
-                            <!-- <img class="img-fluid rounded mb-5"
-                                    src="{{asset('template/assets/img/portfolio/cabin.png')}}" alt="" /> -->
                             <div class="row">
                                 <div class="col-12">
                                     <div class="card">
@@ -137,20 +139,23 @@ Warga
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                    @foreach($retribusi as $r)
-                                                    @if($r->user->id==Auth::user()->id)
+                                                        @foreach($retribusi as $r)
+                                                        @if($r->user->id==Auth::user()->id)
                                                         <tr>
-                                                        <th scope="row">
-                                                            {{$loop->iteration}}
-                                                        </th>
-                                                            <td>{{ $r->tanggal_transaksi != 'null' ? $r->tanggal_transaksi : ''  }}</td>
-                                                            <td>@if ($r->jumlah_tagihan != 'null') @currency($r->jumlah_tagihan)
-                                                                @else 
+                                                            <th scope="row">
+                                                                {{$loop->iteration}}
+                                                            </th>
+                                                            <td>{{ $r->tanggal_transaksi != 'null' ? $r->tanggal_transaksi : ''  }}
+                                                            </td>
+                                                            <td>@if ($r->jumlah_tagihan != 'null')
+                                                                @currency($r->jumlah_tagihan)
+                                                                @else
                                                                 @endif</td>
-                                                            <td>{{ $r->keterangan != 'null' ? $r->keterangan : ''  }}</td>
+                                                            <td>{{ $r->keterangan != 'null' ? $r->keterangan : ''  }}
+                                                            </td>
                                                         </tr>
-                                                    @endif
-                                                    @endforeach
+                                                        @endif
+                                                        @endforeach
                                                     </tbody>
                                                 </table>
                                             </div>
