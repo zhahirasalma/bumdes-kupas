@@ -40,9 +40,6 @@ Route::middleware(['auth'])->group(function(){
     });
     Route::middleware(['bank_sampah'])->group(function(){
         Route::get('bank_sampah', [App\Http\Controllers\BankSampahController::class, 'index']);
-        Route::get('/homebankSampah', function () {
-            return view('bankSampah.index');
-        });
         Route::get('/historyTransaksi', function () {
             return view('bankSampah.layanan.history_transaksi');
         });

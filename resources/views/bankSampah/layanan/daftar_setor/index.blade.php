@@ -39,6 +39,7 @@ Setor Anggota Bank Sampah
                                         </thead>
                                         <tbody>
                                         @foreach($daftar_setor as $daftar_setor)
+                                        
                                             <tr>
                                             <th scope="row">
                                                 {{$loop->iteration}}
@@ -58,6 +59,7 @@ Setor Anggota Bank Sampah
                                                     </form>
                                                 </td>
                                             </tr>
+                                        
                                         @endforeach
                                         </tbody>
                                     </table>
@@ -69,7 +71,7 @@ Setor Anggota Bank Sampah
                 <div class="divider-custom"></div>
                 <!-- Portfolio Modal - Text-->
                 <p class="mb-5">Catatan setoran sampah anggota bank sampah ke bank sampah</p>
-                <a class="btn btn-primary" href="/homebankSampah">
+                <a class="btn btn-primary" href="{{route('bankSampah.index')}}">
                     <i class="fas fa-times fa-fw"></i>
                     Tutup Halaman
                 </a>

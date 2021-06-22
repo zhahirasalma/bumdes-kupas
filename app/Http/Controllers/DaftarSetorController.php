@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\DaftarSetor;
 use App\Models\BankSampah;
+use Auth;
 
 class DaftarSetorController extends Controller
 {
@@ -15,8 +16,15 @@ class DaftarSetorController extends Controller
      */
     public function index()
     {
-        $daftar_setor = DaftarSetor::all();
-        return view('bankSampah.layanan.daftar_setor.index', compact('daftar_setor'));
+        $user = Auth::user();
+        $daftar_setor = DaftarSetor::select('setoran_anggota_bank_sampah.id', 'setoran_anggota_bank_sampah.nama', 'setoran_anggota_bank_sampah.tanggal_transaksi', 
+                            'setoran_anggota_bank_sampah.uraian')
+                        ->LEFTJOIN('bank_sampah', 'bank_sampah.id', '=', 'setoran_anggota_bank_sampah.id_bank_sampah')
+                        ->JOIN('users', 'users.id', '=', 'bank_sampah.id_users')
+                        ->where('users.id', Auth::user()->id)
+                        ->get();
+        // return response()->json($daftar_setor);
+        return view('bankSampah.layanan.daftar_setor.index', compact('user', 'daftar_setor'));
     }
 
     /**
@@ -38,6 +46,8 @@ class DaftarSetorController extends Controller
      */
     public function store(Request $request)
     {
+        $user = Auth::user();
+
         $messages = [
             'nama.required' => 'Nama penyetor wajib diisi.',
             'tanggal_transaksi.required' => 'Tanggal setor wajib diisi.',
@@ -49,8 +59,10 @@ class DaftarSetorController extends Controller
             'tanggal_transaksi' => 'required',
             'uraian' => 'required',
         ], $messages);
-
-        DaftarSetor::create($request->all());
+        
+        $daftar_setor = $request->all();
+        $daftar_setor['id_bank_sampah']=BankSampah::where('id_users', Auth::user()->id)->value('id');
+        DaftarSetor::create($daftar_setor);
         return redirect()->route('daftar_setor.index')
                         ->with('success','Data berhasil ditambahkan');
     }
@@ -118,4 +130,30 @@ class DaftarSetorController extends Controller
         return redirect()->route('daftar_setor.index')
                         ->with('success','Data berhasil dihapus'); 
     }
+
+    // public function getHistori(){
+    //     // $datenow = Carbon::now(); 
+
+    //     $auth = Auth::user();
+    //     $id = $auth->id_user;
+
+    //     $histori = Order::where('id_user',$id)
+    //                     ->get();
+
+    //     return response()->json([
+    //         'status' => 'Success',
+    //         'size'  => sizeof($histori),
+    //         'data' => [
+    //             'histori' => $histori
+    //         ],
+    //     ]);
+    // }
 }
+
+//tampilin histori transaksi warga minus id login
+//tampilin histori transaksi bank sampah minus id login
+//openstreetmap
+//button pengambilan connect db
+//login logout
+//registrasi OKE
+//daftar setor per id login minus id login

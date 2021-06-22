@@ -15,7 +15,12 @@ class DaftarSetor extends Model
 
     protected $fillable=[
         'nama',
+        'id_bank_sampah',
         'tanggal_transaksi',
         'uraian',
     ];
+
+    public function bank_sampah(){
+        return $this->belongsTo('App\Models\BankSampah', 'id_bank_sampah');
+    }
 }
