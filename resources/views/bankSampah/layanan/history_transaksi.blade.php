@@ -15,9 +15,6 @@ History Transaksi Bank Sampah
                 <div class="divider-custom">
                     <div class="divider-custom-line"></div>
                 </div>
-                <!-- Portfolio Modal - Table-->
-                <!-- <img class="img-fluid rounded mb-5"
-                    src="{{asset('template/assets/img/portfolio/cabin.png')}}" alt="" /> -->
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="card shadow">

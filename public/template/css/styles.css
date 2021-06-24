@@ -10310,13 +10310,20 @@ form .row:first-child .floating-label-form-group {
 
   .toggle-handle.btn.btn-default{
     height:240px;
-    width: 10px;
+    width: 200px;
+    top: 0.5rem ;
+    left: 0.5rem;
+    right: 0.5rem;
+    bottom: 0.5rem;
+    cursor: pointer;
     background-color: #F4D35E;
     align-self: center;
     margin: center;
     justify-content: center;
     justify-items: center;
     justify-self: center;
+    -webkit-transition: .4s;
+    transition: .4s;
   }
 
   .toggle-group{
@@ -10369,7 +10376,7 @@ form .row:first-child .floating-label-form-group {
   
     .toggle-handle.btn.btn-default{
       height:240px;
-      width: 10px;
+      width: 100px;
       background-color: #F4D35E;
       align-self: center;
       margin: center;

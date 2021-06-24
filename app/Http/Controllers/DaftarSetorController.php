@@ -17,7 +17,8 @@ class DaftarSetorController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $daftar_setor = DaftarSetor::select('setoran_anggota_bank_sampah.id', 'setoran_anggota_bank_sampah.nama', 'setoran_anggota_bank_sampah.tanggal_transaksi', 
+        $daftar_setor = DaftarSetor::select('setoran_anggota_bank_sampah.id', 'setoran_anggota_bank_sampah.nama', 
+                            'setoran_anggota_bank_sampah.tanggal_transaksi', 
                             'setoran_anggota_bank_sampah.uraian')
                         ->LEFTJOIN('bank_sampah', 'bank_sampah.id', '=', 'setoran_anggota_bank_sampah.id_bank_sampah')
                         ->JOIN('users', 'users.id', '=', 'bank_sampah.id_users')

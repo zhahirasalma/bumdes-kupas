@@ -16,9 +16,6 @@ Tambah Setor Anggota Bank Sampah
                 <div class="divider-custom">
                     <div class="divider-custom-line"></div>
                 </div>
-                <!-- Portfolio Modal - Table-->
-                <!-- <img class="img-fluid rounded mb-5"
-                    src="{{asset('template/assets/img/portfolio/cabin.png')}}" alt="" /> -->
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="card shadow">
@@ -44,7 +41,8 @@ Tambah Setor Anggota Bank Sampah
                                                     <div class="col-lg-6">
                                                         <div class="form-group">
                                                             <label class="form-control-label" for="input-tanggal">Tanggal Setor</label>
-                                                            <input type="date" name="tanggal_transaksi" id="tanggal_transaksi" class="form-control form-control-alternative"
+                                                            <input type="date" name="tanggal_transaksi" id="tanggal_transaksi" 
+                                                            class="form-control form-control-alternative"
                                                                 placeholder="Tanggal" value="">
                                                             @if ($errors->has('tanggal_transaksi'))
                                                             <span

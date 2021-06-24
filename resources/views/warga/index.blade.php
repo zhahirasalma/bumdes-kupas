@@ -65,8 +65,6 @@ Warga
             </div>
             <!-- Portfolio Item 2-->
             @foreach($pengambilan as $pengambilan)
-            <!-- <p action="/konfirmasistatus" method="post" id="statusForm{{$pengambilan->id}}">
-                @csrf -->
             <style>
             </style>
             <div class="col-md-6 col-lg-4 mb-5">
@@ -81,20 +79,6 @@ Warga
                     </h3>
                 </div>
             </div>
-            <!-- <div class="col-md-6 col-lg-4 mb-5 align-items-center justify-content-center h-100 w-100">
-                    <input name="id" type="hidden" value="{{$pengambilan->id}}">
-                    <input name="status" type="checkbox" class="toggle-switch" checked data-toggle="toggle"
-                        data-width="307" data-height="240" data-onstyle="danger" data-offstyle="success"
-                        data-on="Belum Terambil" data-off="Terambil"
-                        onchange="document.getElementById('statusForm{{$pengambilan->id}}').submit()"
-                        {{isset($project['status']) && $project['status'] == '1' ? 'checked' : ''}} ></input>
-                    <label class="text-center">Geser ke kanan bila hari ini sampah belum
-                        terambil.</label>
-                    <h3 class="portfolio-modal-subtitle text-center text-secondary text-uppercase mb-0">Tombol
-                        Pengambilan
-                    </h3>
-                </div> -->
-
             @endforeach
         </div>
     </div>
@@ -102,7 +86,6 @@ Warga
 </section>
 
 <!-- Portfolio Modals-->
-<!-- Portfolio Modal 1-->
 <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog"
     aria-labelledby="portfolioModal1Label" aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
@@ -163,7 +146,6 @@ Warga
                                     </div>
                                 </div>
                             </div>
-                            <!-- Portfolio Modal - Text-->
                             <p class="mb-5">History transaksi retribusi warga
                             </p>
                             <button class="btn btn-primary" data-dismiss="modal">

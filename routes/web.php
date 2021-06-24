@@ -52,9 +52,12 @@ Route::middleware(['auth'])->group(function(){
     ->name('logout');
 });
 
-Route::get('/create_bank_sampah', [App\Http\Controllers\Auth\RegisterController::class, 'create_bank_sampah'])->name('create_bank_sampah');
-Route::post('/store_bank_sampah', [App\Http\Controllers\Auth\RegisterController::class, 'store_bank_sampah'])->name('store_bank_sampah');
-Route::post('/store_warga', [App\Http\Controllers\Auth\RegisterController::class, 'store_warga'])->name('store_warga');
+Route::get('/create_bank_sampah', [App\Http\Controllers\Auth\RegisterController::class, 'create_bank_sampah'])
+    ->name('create_bank_sampah');
+Route::post('/store_bank_sampah', [App\Http\Controllers\Auth\RegisterController::class, 'store_bank_sampah'])
+    ->name('store_bank_sampah');
+Route::post('/store_warga', [App\Http\Controllers\Auth\RegisterController::class, 'store_warga'])
+    ->name('store_warga');
 Route::get('/pesan', [App\Http\Controllers\FlashMessageController::class, 'index']);
 
 Route::resources([

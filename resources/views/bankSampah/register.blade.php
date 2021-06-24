@@ -18,7 +18,6 @@ Registrasi Bank Sampah
             <div class="col-lg-8 mx-auto">
                 <form method="POST" action="{{route('store_bank_sampah')}}">
                     @csrf
-                    <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19.-->
                     <form id="contactForm" name="sentMessage" novalidate="novalidate">
                         <div class="col-lg-16">
                             <div class="form-group">
@@ -45,7 +44,6 @@ Registrasi Bank Sampah
                         </div>
                         <div class="col-lg-16">
                             <div class="form-group">
-                                <!-- <label>Email Address</label> -->
                                 <input class="form-control" name="email" id="email" type="email" placeholder="Email"
                                     required="required" data-validation-required-message="Masukkan alamat email" />
                                 <p class="help-block text-danger"></p>
@@ -53,7 +51,6 @@ Registrasi Bank Sampah
                         </div>
                         <div class="col-lg-16">
                             <div class="form-group">
-                                <!-- <label>Email Address</label> -->
                                 <input class="form-control" name="password" id="password" type="password"
                                     placeholder="Kata Sandi" required="required"
                                     data-validation-required-message="Masukkan kata sandi" />
@@ -62,7 +59,6 @@ Registrasi Bank Sampah
                         </div>
                         <div class="col-lg-16">
                             <div class="form-group">
-                                <!-- <label>Name</label> -->
                                 <select class="form-control" name="id_kota" onChange="updateKecamatan()" id="id_kota"
                                     required="required" data-validation-required-message="Pilih kota">
                                     <option value="">Pilih kota...</option>
@@ -79,7 +75,6 @@ Registrasi Bank Sampah
                         </div>
                         <div class="col-lg-16">
                             <div class="form-group">
-                                <!-- <label>Name</label> -->
                                 <select class="form-control" onChange="updateDesa()" name="id_kecamatan"
                                     id="id_kecamatan" required="required"
                                     data-validation-required-message="Pilih kecamatan">
@@ -92,7 +87,6 @@ Registrasi Bank Sampah
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6 sol-sm-12">
-                                <!-- <label>Name</label> -->
                                 <select class="form-control" name="id_desa" id="id_desa"
                                     data-validation-required-message="Pilih desa">
                                     <option value="">Pilih desa...</option>
@@ -110,7 +104,6 @@ Registrasi Bank Sampah
                         </div>
                         <div class="col-lg-16">
                             <div class="form-group">
-                                <!-- <label>Detail Alamat</label> -->
                                 <textarea class="form-control" name="detail_alamat" id="message" rows="3"
                                     placeholder="Masukkan Detail Alamat" required="required"
                                     data-validation-required-message="Please enter a message."></textarea>

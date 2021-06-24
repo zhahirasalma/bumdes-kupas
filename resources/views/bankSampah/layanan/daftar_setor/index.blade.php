@@ -15,9 +15,6 @@ Setor Anggota Bank Sampah
                 <div class="divider-custom">
                     <div class="divider-custom-line"></div>
                 </div>
-                <!-- Portfolio Modal - Table-->
-                <!-- <img class="img-fluid rounded mb-5"
-                    src="{{asset('template/assets/img/portfolio/cabin.png')}}" alt="" /> -->
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="card shadow">
@@ -55,7 +52,8 @@ Setor Anggota Bank Sampah
                                                         @csrf
                                                         @method('DELETE')
                                                         <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
-                                                            data-original-title="Delete" type="submit"><i class="far fa-trash-alt"></i></button>
+                                                            data-original-title="Delete" type="submit"><i class="far fa-trash-alt"></i>
+                                                        </button>
                                                     </form>
                                                 </td>
                                             </tr>
