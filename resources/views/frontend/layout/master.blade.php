@@ -29,6 +29,7 @@
         crossorigin="" />
     <!--toggle switch-->
     <link href="{{('https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css')}}" rel="stylesheet">
+    
 </head>
 
 <body id="page-top">
@@ -65,6 +66,7 @@
         crossorigin=""></script>
     <!--toggle switch-->
     <script src="{{('https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js')}}"></script>
+    <script src="{{('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')}}"></script>
 
     @stack('script')
 </body>

@@ -26,6 +26,12 @@ Home
 <section class=" container-color page-section portfolio" id="portfolio">
     <div class="container-color">
         <!-- Portfolio Section Heading-->
+        @if ($message = Session::get('success'))
+        <div class="alert alert-success alert-block">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>{{ $message }}</strong>
+        </div>
+        @endif
         <h2 class="page-section-heading2 text-center text-uppercase text-secondary mb-0">MASUK</h2>
         <h2 class="page-section-sub-heading text-center font-weight-light mb-0">Untuk yang telah memiliki akun</h2>
         <!-- Icon Divider-->
@@ -38,9 +44,9 @@ Home
                     <div class="col-lg-4 mx-auto">
                         <div class="form-group">
                             <!-- <label>Name</label> -->
-                            <input class="form-control" name="email" for="email" id="email" type="email" placeholder="Email"
-                                class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}"
-                                required autocomplete="email" autofocus>
+                            <input class="form-control" name="email" for="email" id="email" type="email"
+                                placeholder="Email" class="form-control @error('email') is-invalid @enderror"
+                                value="{{ old('email') }}" required autocomplete="email" autofocus>
                             @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -52,21 +58,19 @@ Home
                     <div class="col-lg-4 mx-auto">
                         <div class="form-group">
                             <!-- <label>Name</label> -->
-                            <input class="form-control" name="password" id="password" type="password" placeholder="Kata Sandi"
-                                class="form-control @error('password') is-invalid @enderror" required
-                                autocomplete="current-password">
-
+                            <input class="form-control" name="password" id="password" type="password"
+                                placeholder="Kata Sandi" class="form-control @error('password') is-invalid @enderror"
+                                required autocomplete="current-password">
                             @error('password')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
-
                             <p class="help-block text-danger"></p>
                         </div>
                         <div class="form-group text-center">
                             <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
+                                {{ __('Login') }}
                             </button>
                         </div>
                     </div>
