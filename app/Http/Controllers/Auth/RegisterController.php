@@ -15,6 +15,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Auth;
+use Alert;
 
 class RegisterController extends Controller
 {
@@ -45,7 +47,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $user = Auth::user();    
     }
 
     /**
@@ -109,28 +111,35 @@ class RegisterController extends Controller
 
     public function store_bank_sampah (Request $request)
     {
-        $this->validate($request,[
+        $messages=[
+            'nama.required' => 'Nama tidak boleh kosong.',
+            'nama.min' => 'Nama minimal terdiri dari 3 huruf.',
+            'nama.string' => 'Nama harus berupa huruf.',
+            'email.required' => 'Email tidak boleh kosong.',
+            'email.email' => 'Email tidak valid.',
+            'email.unique' => 'Email telah digunakan.',
+            'password.min' => 'Kata sandi tidak boleh kurang dari 5 karakter',
+            'password.required' => 'Kata sandi tidak boleh kosong',
+            'no_telp.required' => 'Nomor telepon tidak boleh kosong.',
+            'no_telp.min' => 'Nomor telepon minimal terdiri dari 11 angka',
+            'no_telp.numeric' => 'Nomor telepon harus berupa angka',
+            'id_kota.required' => 'Kota tidak boleh kosong',
+            'id_kecamatan.required' => 'Kecamatan tidak boleh kosong',
+            'id_desa.required' => 'Desa tidak boleh kosong',
+            'dukuh.required' => 'Dukuh tidak boleh kosong'
+        ];
+        
+        $request->validate([
             'nama' => 'required|min:3|string',
-            'email' => 'required|min:11|email|unique:users',
+            'email' => 'required|min:10|email|unique:users',
             'password' => 'required|min:5',
             'no_telp' => 'required|min:11|numeric',
+            'id_kota' => 'required',
+            'id_kecamatan' => 'required',
+            'id_desa' => 'required',
             'dukuh' => 'required',
-            
-       ],
-       [
-           'nama.required' => 'Nama tidak boleh kosong.',
-           'nama.min' => 'Nama minimal terdiri dari 3 huruf.',
-           'nama.string' => 'Nama harus berupa huruf.',
-           'email.required' => 'Email tidak boleh kosong.',
-           'email.email' => 'Email tidak valid.',
-           'email.unique' => 'Email telah digunakan.',
-           'password.min' => 'Kata sandi tidak boleh kurang dari 5 karakter',
-           'password.required' => 'Kata sandi tidak boleh kosong',
-           'no_telp.required' => 'Nomor telepon tidak boleh kosong.',
-           'no_telp.min' => 'Nomor telepon minimal terdiri dari 11 angka',
-           'no_telp.numeric' => 'Nomor telepon harus berupa angka',
-           'dukuh.required' => 'Dukuh tidak boleh kosong'
-       ]);
+       ],$messages
+       );
        $user = new User;
        $user->nama = $request->input('nama');
        $user->email = $request->input('email');
@@ -152,33 +161,46 @@ class RegisterController extends Controller
             $bank_sampah->save();
         }
 
-        return redirect()->route('bankSampah.index');
+        return redirect('/')->with(['success' => 'Masukkan email dan kata sandi di form masuk untuk menuju halaman bank sampah.']);
 
     }
     public function store_warga(Request $request){
+        $messages = [
+            'NIK.required' => 'NIK tidak boleh kosong.',
+            'NIK.numeric' => 'NIK harus berupa angka.',
+            'NIK.min' => 'NIK harus 16 angka.',
+            'nama.required' => 'Nama tidak boleh kosong.',
+            'nama.min' => 'Nama minimal terdiri dari 3 huruf.',
+            'nama.string' => 'Nama harus berupa huruf.',
+            'email.required' => 'Email tidak boleh kosong.',
+            'email.email' => 'Email tidak valid.',
+            'email.unique' => 'Email telah digunakan.',
+            'password.min' => 'Kata sandi tidak boleh kurang dari 5 karakter',
+            'password.required' => 'Kata sandi tidak boleh kosong',
+            'no_telp.required' => 'Nomor telepon tidak boleh kosong.',
+            'no_telp.min' => 'Nomor telepon minimal terdiri dari 11 angka',
+            'no_telp.numeric' => 'Nomor telepon harus berupa angka',
+            'id_kategori_sampah.required' => 'Kategori sampah harus dipilih terlebih dahulu',
+            'id_kota.required' => 'Kota tidak boleh kosong',
+            'id_kecamatan.required' => 'Kecamatan tidak boleh kosong',
+            'id_desa.required' => 'Desa tidak boleh kosong',
+            'dukuh.required' => 'Dukuh tidak boleh kosong'
+        ]; 
         $this->validate($request,[
+            'NIK' => 'required|min:16|numeric',
             'nama' => 'required|min:3|string',
             'email' => 'required|min:11|email|unique:users',
             'password' => 'required|min:5',
-            'NIK' => 'required|numeric',
             'no_telp' => 'required|min:11|numeric',
-            
-       ],
-       [
-           'nama.required' => 'Nama tidak boleh kosong.',
-           'nama.min' => 'Nama minimal terdiri dari 3 huruf.',
-           'nama.string' => 'Nama harus berupa huruf.',
-           'email.required' => 'Email tidak boleh kosong.',
-           'email.email' => 'Email tidak valid.',
-           'email.unique' => 'Email telah digunakan.',
-           'password.min' => 'Kata sandi tidak boleh kurang dari 5 karakter',
-           'password.required' => 'Kata sandi tidak boleh kosong',
-           'NIK.required' => 'NIK tidak boleh kosong.',
-           'NIK.numeric' => 'NIK harus berupa angka.',
-           'no_telp.required' => 'Nomor telepon tidak boleh kosong.',
-           'no_telp.min' => 'Nomor telepon minimal terdiri dari 11 angka',
-           'no_telp.numeric' => 'Nomor telepon harus berupa angka'
-       ]);
+            'id_kategori_sampah' => 'required',
+            'id_kota' => 'required',
+            'id_kecamatan' => 'required',
+            'id_desa' => 'required',
+            'dukuh' => 'required',
+            'latitude' => 'nullable',
+            'longitude' => 'nullable',
+       ],$messages
+       );
        $user = new User;
        $user->nama = $request->input('nama');
        $user->email = $request->input('email');
@@ -194,7 +216,7 @@ class RegisterController extends Controller
        $warga->no_telp = $request->input('no_telp');
        $warga->id_kota = $request->input('id_kota');
        $warga->id_kecamatan = $request->input('id_kecamatan');
-       $warga->desa = $request->input('id_desa');
+       $warga->id_desa = $request->input('id_desa');
        $warga->dukuh = $request->input('dukuh');
        $warga->detail_alamat = $request->input('detail_alamat');
        $warga->latitude = $request->input('latitude');
@@ -204,7 +226,7 @@ class RegisterController extends Controller
         $warga->save();
         }
 
-        return redirect('nasabah_warga.index');
+        return redirect('/')->with(['success' => 'Masukkan email dan kata sandi di form masuk untuk menuju halaman warga.']);
     }
     
 }
