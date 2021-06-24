@@ -1,6 +1,6 @@
 @extends('frontend.layout.master')
 @section('title')
-Tambah Setor Anggota Bank Sampah
+Ubah Setor Anggota Bank Sampah
 @endsection
 @section('content')
 
@@ -9,9 +9,9 @@ Tambah Setor Anggota Bank Sampah
         <div class="row justify-content-center">
             <div class="col-xl-12">
                 <!-- Portfolio Modal - Title-->
-                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0" id="portfolioModal1Label">Tambah
+                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0" id="portfolioModal1Label">Ubah
                     Data Setoran
-                    Anggota</h2>
+                    Bank Sampah</h2>
                 <!-- Icon Divider-->
                 <div class="divider-custom">
                     <div class="divider-custom-line"></div>

@@ -11,7 +11,7 @@ Tambah Setor Anggota Bank Sampah
                 <!-- Portfolio Modal - Title-->
                 <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0" id="portfolioModal1Label">Tambah
                     Data Setoran
-                    Anggota</h2>
+                    Bank Sampah</h2>
                 <!-- Icon Divider-->
                 <div class="divider-custom">
                     <div class="divider-custom-line"></div>

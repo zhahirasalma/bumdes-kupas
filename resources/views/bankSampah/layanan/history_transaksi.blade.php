@@ -58,7 +58,7 @@ History Transaksi Bank Sampah
                 <!-- Portfolio Modal - Text-->
                 <p class="mb-5">History transaksi adalah data transaksi pengumpulan sampah oleh bank sampah
                     yang telah dilaksanakan selama menjadi anggota bank sampah KUPAS</p>
-                <a class="btn btn-primary" href="/homebankSampah">
+                <a class="btn btn-primary" href="{{route('bankSampah.index')}}">
                     <i class="fas fa-times fa-fw"></i>
                     Tutup Halaman
                 </a>

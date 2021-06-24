@@ -22,7 +22,8 @@ class HistoryTransaksiController extends Controller
     {
         $user = Auth::user();
         $transaksi = TransaksiBankSampah::all();
-        return view('bankSampah.layanan.history_transaksi', compact('user', 'transaksi'));
+        $bank_sampah = BankSampah::all();
+        return view('bankSampah.layanan.history_transaksi', compact('user', 'transaksi', 'bank_sampah'));
     }
 
     /**
