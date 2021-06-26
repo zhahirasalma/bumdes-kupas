@@ -36,7 +36,10 @@ class TransaksiBankSampahController extends Controller
      */
     public function create()
     {
-        $user = User::select('id', 'nama')->where('role', 'bank_sampah')->get();
+        $user = User::select('users.id', 'users.nama', 'bank_sampah.dukuh')
+                ->join('bank_sampah', 'bank_sampah.id_users', '=', 'users.id')
+                ->where('role', 'bank_sampah')
+                ->get();
         $konversi = KonversiSampah::all();
         return view('backend.bank_sampah.transaksi.tambah', compact('user', 'konversi'));
     }

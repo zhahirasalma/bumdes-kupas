@@ -35,7 +35,7 @@ Tambah Data Transaksi Bank Sampah
                                 <option value="{{$u->id}}" @if (old('id_users')==$u->id )
                                     selected="selected"
                                     @endif>
-                                    {{$u->nama}}</option>
+                                    {{$u->nama}} - {{$u->dukuh}}</option>
                                 @endforeach
                             </select>
                             <span class="text-danger error-users">Pilih salah satu</span>

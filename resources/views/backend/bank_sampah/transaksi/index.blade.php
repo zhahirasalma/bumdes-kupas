@@ -41,7 +41,7 @@ Daftar Transaksi Bank Sampah
                                 {{$loop->iteration}}
                             </th>
                             <td>
-                                {{$tr->user->nama != null ? $tr->user->nama : ''}}
+                                {{$tr->user->nama != null ? $tr->user->nama : ''}} - {{$tr->bankSampah->dukuh}}
                             </td>
                             <td>
                                 {{$tr->tanggal_transaksi != null ? $tr->tanggal_transaksi : ''}}

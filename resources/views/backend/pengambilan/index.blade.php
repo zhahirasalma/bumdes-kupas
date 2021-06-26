@@ -59,7 +59,7 @@ Daftar Pengambilan Sampah
                                 @if ($p->warga->latitude != null || $p->warga->longitude != null)
                                 <a target="_blank"
                                     href="https://maps.google.com/?q={{$p->warga->latitude}},{{$p->warga->longitude}}">Menuju 
-                                    Peta</a>
+                                    Peta Lokasi</a>
                                 @else
                                 @endif
                             </td>

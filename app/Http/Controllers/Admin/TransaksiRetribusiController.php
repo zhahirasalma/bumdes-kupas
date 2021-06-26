@@ -30,7 +30,10 @@ class TransaksiRetribusiController extends Controller
      */
     public function create()
     {
-        $user = User::select('id', 'nama')->where('role', 'warga')->get();
+        $user = User::select('users.id', 'users.nama', 'warga.nik')
+                ->join('warga', 'warga.id_users', '=', 'users.id')
+                ->where('role', 'warga')
+                ->get();
         return view('backend.warga.retribusi.tambah', compact('user'));
     }
 
@@ -54,7 +57,6 @@ class TransaksiRetribusiController extends Controller
         $request->validate([
             'nama_kolektor' => 'required|regex:/^[a-zA-Z]+$/',
             'bulan_tagihan' => 'required',
-            'keterangan' => 'required',
             'tanggal_transaksi' => 'required',
             'id_users' => 'required'
         ], $messages);

@@ -45,7 +45,7 @@ Daftar Transaksi Retribusi
                                 {{$loop->iteration}}
                             </th>
                             <td>
-                                {{ $r->user->nama != 'null' ? $r->user->nama : ''  }}
+                                {{ $r->user->nama != 'null' ? $r->user->nama : ''  }} - {{ $r->warga->NIK}}
                             </td>
                             <td>
                                 {{ $r->nama_kolektor != 'null' ? $r->nama_kolektor : ''  }}

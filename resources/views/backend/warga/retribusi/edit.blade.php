@@ -105,23 +105,6 @@ Edit Data Transaksi Retribusi
                             <span class="text-danger error-tanggal_transaksi">Tanggal harus diisi</span>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label class="form-control-label" for="input-first-name">Keterangan</label>
-                            <select id="keterangan" class="form-control form-control-alternative"
-                                placeholder="Keterangan pembayaran">
-                                <option value="">Pilih...</option>
-                                <option value="sudah_bayar"
-                                    {{ $retribusi->keterangan == 'sudah_bayar' ? 'selected' : '' }}>
-                                    sudah bayar</option>
-                                <option value="belum_bayar"
-                                    {{ $retribusi->keterangan == 'belum_bayar' ? 'selected' : '' }}>belum
-                                    bayar
-                                </option>
-                            </select>
-                            <span class="text-danger error-keterangan">Keterangan harus diisi</span>
-                        </div>
-                    </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-6">
@@ -193,11 +176,6 @@ Edit Data Transaksi Retribusi
             $('.error-tanggal_transaksi').show()
         }
 
-        if (keterangan === '') {
-            error = true;
-            $('.error-keterangan').show()
-        }
-
         if (alamat === '') {
             error = true;
             $('.error-alamat').show()
@@ -215,7 +193,7 @@ Edit Data Transaksi Retribusi
                     jumlah_tagihan: jumlah_tagihan,
                     bulan_tagihan: bulan_tagihan,
                     tanggal_transaksi: tanggal_transaksi,
-                    keterangan: keterangan,
+                    keterangan: "sudah bayar",
                     alamat: alamat
                 },
                 success: function (res) {
