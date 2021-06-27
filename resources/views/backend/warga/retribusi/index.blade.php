@@ -23,6 +23,50 @@ Daftar Transaksi Retribusi
                     </div>
                 </div>
             </div>
+            <div class="pl-lg-4">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label class="form-control-label" for="input-nama">Tampilkan berdasarkan bulan
+                                tagihan</label>
+                            <select name="filter_tagihan" id="filter_tagihan" class="form-control filter">
+                                <option value="all">Semua transaksi</option>
+                                <option value="Januari" @if (old('filter_tagihan') !='' ) selected="selected" @endif>
+                                    Januari</option>
+                                <option value="Februari" @if (old('filter_tagihan') !='' ) selected="selected" @endif>
+                                    Februari</option>
+                                <option value="Maret" @if (old('filter_tagihan') !='' ) selected="selected" @endif>
+                                    Maret</option>
+                                <option value="April" @if (old('filter_tagihan') !='' ) selected="selected" @endif>
+                                    April</option>
+                                <option value="Mei" @if (old('filter_tagihan') !='' ) selected="selected" @endif>
+                                    Mei</option>
+                                <option value="Juni" @if (old('filter_tagihan') !='' ) selected="selected" @endif>
+                                    Juni</option>
+                                <option value="Juli" @if (old('filter_tagihan') !='' ) selected="selected" @endif>
+                                    Juli</option>
+                                <option value="Agustus" @if (old('filter_tagihan') !='' ) selected="selected" @endif>
+                                    Agustus</option>
+                                <option value="September" @if (old('filter_tagihan') !='' ) selected="selected" @endif>
+                                    September</option>
+                                <option value="Oktober" @if (old('filter_tagihan') !='' ) selected="selected" @endif>
+                                    Oktober</option>
+                                <option value="November" @if (old('filter_tagihan') !='' ) selected="selected" @endif>
+                                    November</option>
+                                <option value="Desember" @if (old('filter_tagihan') !='' ) selected="selected" @endif>
+                                    Desember</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label class="form-control-label" for="input-nama">Total Tagihan</label>
+                            <input type="text" id="total_tagihan" class="form-control form-control-alternative"
+                                placeholder="Total Tagihan" value="{{$retribusi}}" disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="table-responsive">
                 <!-- Projects table -->
                 <table class="table align-items-center table-flush" id="tabel">
@@ -39,43 +83,7 @@ Daftar Transaksi Retribusi
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($retribusi as $r)
-                        <tr>
-                            <th scope="row">
-                                {{$loop->iteration}}
-                            </th>
-                            <td>
-                                {{ $r->user->nama != 'null' ? $r->user->nama : ''  }} - {{ $r->warga->NIK}}
-                            </td>
-                            <td>
-                                {{ $r->nama_kolektor != 'null' ? $r->nama_kolektor : ''  }}
-                            </td>
-                            <td>
-                                @if ($r->jumlah_tagihan != 'null') @currency($r->jumlah_tagihan)
-                                @else 
-                                @endif
-                            </td>
-                            <td>
-                                {{ $r->bulan_tagihan != 'null' ? $r->bulan_tagihan : ''  }}
-                            </td>
-                            <td>
-                                {{ $r->tanggal_transaksi != 'null' ? $r->tanggal_transaksi : ''  }}
-                            </td>
-                            <td>
-                                {{ $r->keterangan != 'null' ? $r->keterangan : ''  }}
-                            </td>
-                            <td>
-                                <form action="{{ route('retribusi.destroy', $r->id) }}" method="POST">
-                                    <a href="{{ route('retribusi.edit', $r->id) }}" class="btn btn-success btn-sm"
-                                        data-toggle="tooltip" data-placement="top" data-original-title="Edit"><i
-                                            class="far fa-edit"></i></a>
-                                    <a class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
-                                        data-original-title="Delete" onClick="deleteConfirm({{$r->id}})">
-                                        <i class="far fa-trash-alt" style="color: white;"></i></a>
-                                </form>
-                            </td>
-                        </tr>
-                        @endforeach
+
                     </tbody>
                 </table>
             </div>
@@ -86,10 +94,104 @@ Daftar Transaksi Retribusi
 
 @push('script')
 <script>
-    $(document).ready(function () {
-        var table = $('#tabel').DataTable({
-
-        });
+    let filter = $("#filter_tagihan").val()
+    const tabel = $('#tabel').DataTable({
+        "pageLength": 10,
+        "lengthMenu": [
+            [10, 25, 50, 100, -1],
+            [10, 25, 50, 100, 'semua']
+        ],
+        "bLengthChange": true,
+        "bFilter": true,
+        "bInfo": true,
+        "processing": true,
+        "bServerSide": true,
+        "order": [
+            [1, "asc"]
+        ],
+        "autoWidth": false,
+        "ajax": {
+            url: "{{route('data-retribusi')}}",
+            type: "POST",
+            data: function (d) {
+                d.filter = filter;
+                return d
+            }
+        },
+        columnDefs: [{
+                "targets": 0,
+                "class": "text-nowrap",
+                "sortable": true,
+                "render": function (data, type, row, meta) {
+                    return meta.row + meta.settings._iDisplayStart + 1;
+                }
+            },
+            {
+                "targets": 1,
+                "class": "text-nowrap",
+                "sortable": true,
+                "render": function (data, type, row, meta) {
+                    return row.nama + " - " + row.nik;
+                }
+            },
+            {
+                "targets": 2,
+                "class": "text-nowrap",
+                "sortable": false,
+                "render": function (data, type, row, meta) {
+                    return row.nama_kolektor;
+                }
+            },
+            {
+                "targets": 3,
+                "class": "text-nowrap",
+                "sortable": true,
+                "render": function (data, type, row, meta) {
+                    return row.jumlah_tagihan;
+                }
+            },
+            {
+                "targets": 4,
+                "class": "text-nowrap",
+                "sortable": true,
+                "render": function (data, type, row, meta) {
+                    return row.bulan_tagihan;
+                }
+            },
+            {
+                "targets": 5,
+                "class": "text-nowrap",
+                "sortable": true,
+                "render": function (data, type, row, meta) {
+                    return row.tanggal_transaksi;
+                }
+            },
+            {
+                "targets": 6,
+                "class": "text-nowrap",
+                "sortable": false,
+                "render": function (data, type, row, meta) {
+                    return row.keterangan;
+                }
+            },
+            {
+                "targets": 7,
+                "class": "text-nowrap",
+                "sortable": false,
+                "render": function (data, type, row, meta) {
+                    return `<td>
+                                <form action="{{url('')}}/admin/retribusi/${row.id}" method="POST">
+                                    <a href="{{url('')}}/admin/retribusi/${row.id}/edit" class="btn btn-success btn-sm"
+                                        data-toggle="tooltip" data-placement="top" data-original-title="Edit"><i
+                                            class="far fa-edit"></i></a>
+                                    <a class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
+                                        data-original-title="Delete" onClick="deleteConfirm('${row.id}')">
+                                        <i class="far fa-trash-alt" style="color: white;"></i></a>
+                                </form>
+                            </td>`;
+                }
+            }
+        ]
     });
 
     function deleteConfirm(id) {
@@ -134,6 +236,27 @@ Daftar Transaksi Retribusi
             }
         })
     }
+
+    $('#filter_tagihan').select2({
+        allowClear: true,
+        theme: 'bootstrap4',
+    });
+
+    $(".filter").on('change', function () {
+        filter = $("#filter_tagihan").val()
+        tabel.ajax.reload()
+
+        $.ajax({
+                url: "{{url('')}}/admin/total-retribusi/" + filter,
+                success: function (res) {
+                    if(res != ''){
+                        $('#total_tagihan').val(res[0].total)
+                    }else{
+                        $('#total_tagihan').val(0)
+                    }
+                },
+            });
+    });
 
 </script>
 @endpush

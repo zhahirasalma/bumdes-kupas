@@ -32,7 +32,7 @@ Edit Data Transaksi Bank Sampah
                                 <option value="">Pilih nama bank sampah...</option>
                                 @foreach($user as $u)
                                 <option value="{{$u->id}}" {{ $u->id == $transaksi->id_users ? 'selected' : '' }}>
-                                    {{$u->nama}}</option>
+                                    {{$u->nama}} - {{$u->dukuh}}</option>
                                 @endforeach
                             </select>
                             <span class="text-danger error-users">Pilih salah satu</span>

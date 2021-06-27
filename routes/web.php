@@ -101,6 +101,11 @@ Route::group(['prefix'=>'admin'], function(){
     Route::get('/get-konversi/{konversi}', [App\Http\Controllers\Admin\TransaksiBankSampahController::class, 'getKonversi'])
     ->name('get-konversi');
 
+    Route::any('/data-retribusi', [App\Http\Controllers\Admin\TransaksiRetribusiController::class, 'data'])
+    ->name('data-retribusi');
+    Route::get('/total-retribusi/{filter}', [App\Http\Controllers\Admin\TransaksiRetribusiController::class, 'totalRetribusi'])
+    ->name('total-retribusi');
+
     Route::resources([
         'pengambilan' => App\Http\Controllers\Admin\PengambilanController::class,
         'users' => App\Http\Controllers\Admin\UsersController::class,

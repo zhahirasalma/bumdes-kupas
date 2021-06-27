@@ -19,7 +19,7 @@ class TransaksiRetribusiController extends Controller
      */
     public function index()
     {
-        $retribusi = RetribusiWarga::with('warga', 'user')->get();
+        $retribusi = RetribusiWarga::sum('jumlah_tagihan');
         return view('backend.warga.retribusi.index', compact('retribusi'));
     }
 
@@ -92,7 +92,10 @@ class TransaksiRetribusiController extends Controller
     public function edit($id)
     {
         $retribusi = RetribusiWarga::find($id);
-        $user = User::select('id', 'nama')->where('role', 'warga')->get();
+        $user = User::select('users.id', 'users.nama', 'warga.nik')
+                ->join('warga', 'warga.id_users', '=', 'users.id')
+                ->where('role', 'warga')
+                ->get();
         return view('backend.warga.retribusi.edit', compact('retribusi', 'user'));
     }
 
@@ -155,5 +158,79 @@ class TransaksiRetribusiController extends Controller
                     ->join('users', 'users.id', '=', 'warga.id_users')
                     ->where('users.id', $user_id)->get();
         return response()->json($tagihan);
+    }
+
+    public function data(Request $request)
+    {
+    	$orderBy = 'retribusi_warga.id_warga';
+        switch($request->input('order.0.column')){
+            case "1":
+                $orderBy = 'users.nama';
+                break;
+            case "2":
+                $orderBy = 'retribusi_warga.nama_kolektor';
+                break;
+            case "3":
+                $orderBy = 'retribusi_warga.jumlah_tagihan';
+                break;
+            case "4":
+                $orderBy = 'retribusi_warga.bulan_tagihan';
+                break;
+            case "5":
+                $orderBy = 'retribusi_warga.tanggal_transaksi';
+                break;
+            case "6":
+                $orderBy = 'retribusi_warga.keterangan';
+                break;
+        }
+
+        $data = RetribusiWarga::select('retribusi_warga.*', 'users.nama', 'warga.nik')
+                    ->join('warga', 'warga.id', '=', 'retribusi_warga.id_warga')
+                    ->join('users', 'users.id', '=', 'warga.id_users');
+
+        //filter by kategory
+        if($request->input('filter') != "all"){
+            $data = $data->where('retribusi_warga.bulan_tagihan', $request->filter);
+        }else{
+            $data;
+        }
+
+        //menjalankan search
+        if($request->input('search.value')!=null){
+            $data = $data->where(function($q)use($request){
+                $q->whereRaw('LOWER(users.nama) like ? ',['%'.strtolower($request->input('search.value')).'%'])
+                ->orWhereRaw('LOWER(retribusi_warga.nama_kolektor) like ? ',['%'.strtolower($request->input('search.value')).'%'])
+                ->orWhereRaw('LOWER(retribusi_warga.jumlah_tagihan) like ? ',['%'.strtolower($request->input('search.value')).'%'])
+                ->orWhereRaw('LOWER(retribusi_warga.bulan_tagihan) like ? ',['%'.strtolower($request->input('search.value')).'%'])
+                ->orWhereRaw('LOWER(retribusi_warga.tanggal_transaksi) like ? ',['%'.strtolower($request->input('search.value')).'%'])
+                ->orWhereRaw('LOWER(retribusi_warga.keterangan) like ? ',['%'.strtolower($request->input('search.value')).'%'])
+                ;
+            });
+        }
+        
+        $recordsFiltered = $data->get()->count();
+        if($request->input('length')!=-1) $data = $data->skip($request->input('start'))->take($request->input('length'));
+        $data = $data->orderBy($orderBy,$request->input('order.0.dir'))->get();
+        $recordsTotal = $data->count();
+        return response()->json([
+            'draw'=>$request->input('draw'),
+            'recordsTotal'=>$recordsTotal,
+            'recordsFiltered'=>$recordsFiltered,
+            'data'=>$data
+        ]);
+    }
+
+    public function totalRetribusi($filter)
+    {
+        $total = RetribusiWarga::selectRaw('SUM(jumlah_tagihan) as total')
+                ->get();
+        
+        if($filter != "all"){
+            $total = RetribusiWarga::groupBy('bulan_tagihan')
+                        ->where('bulan_tagihan', $filter)
+                        ->selectRaw('*, sum(jumlah_tagihan) as total')
+                        ->get();
+        }
+        return $total;
     }
 }

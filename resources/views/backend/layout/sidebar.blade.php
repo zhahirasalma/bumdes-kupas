@@ -7,7 +7,7 @@
     <!-- Collapse -->
     <div class="collapse navbar-collapse" id="sidenav-collapse-main">
         <!-- Navigation -->
-        @if(Auth::user()->role=='admin')
+        
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class=" nav-link " href="{{route('dashboard.index')}}"> 
@@ -15,8 +15,8 @@
                 </a>
             </li>
         </ul>
-        @endif
-        @if(Auth::user()->role=='educator' || Auth::user()->role=='admin')
+        
+        
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link " href="{{route('pengambilan.index')}}">
@@ -24,8 +24,8 @@
                 </a>
             </li>
         </ul>
-        @endif
-        @if(Auth::user()->role=='admin') 
+        
+        
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link " href="{{route('users.index')}}">
@@ -63,6 +63,6 @@
                 </a>
             </li>
         </ul>
-        @endif
+        
     </div>
 </div>

@@ -31,7 +31,7 @@ Edit Data Transaksi Retribusi
                                 <option value="">Pilih nama warga...</option>
                                 @foreach($user as $u)
                                 <option value="{{$u->id}}" {{ $u->id == $retribusi->id_users ? 'selected' : '' }}>
-                                    {{$u->nama}}</option>
+                                    {{$u->nama}} - {{$u->nik}}</option>
                                 @endforeach
                             </select>
                             <span class="text-danger error-id_users">Nama harus dipilih</span>
