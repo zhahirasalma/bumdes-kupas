@@ -4,21 +4,21 @@
 <div class="topnav">
     <a href="#home" class="active"></a>
     <div id="myLinks">
-    
+        @if(Auth::user()->role=='admin')
         <li class="nav-item  class=" active" ">
             <a class=" nav-link " href=" {{route('dashboard.index')}}">
             <i class="ni ni-sound-wave text-grey"></i> Dashboard
             </a>
         </li>
-    
-    
+        @endif
+        @if(Auth::user()->role=='educator' || Auth::user()->role=='admin')
         <li class="nav-item">
             <a class="nav-link " href="{{route('pengambilan.index')}}">
                 <i class="ni ni-delivery-fast text-orange"></i> Pengambilan Sampah
             </a>
         </li>
-    
-    
+        @endif
+        @if(Auth::user()->role=='admin')    
         <li class="nav-item">
             <a class="nav-link " href="{{route('users.index')}}">
                 <i class="ni ni-single-02 text-orange"></i> Users
@@ -59,7 +59,7 @@
                 <i class="ni ni-key-25 text-red"></i> Logout
             </a>
         </li>
-    
+        @endif
     </div>
     <div class="mobile-menu" style="position: fixed; top: 20px; z-index:100; right:0px">
         <a href="javascript:void(0);" class="icon" onclick="myFunction()">

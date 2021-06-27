@@ -8,7 +8,7 @@
                     <img alt="" src="{{asset('/assets/img/brand/favicon.png')}}">
                 </span>
                 <div class="media-body ml-2 d-none d-lg-block">
-                    <span class="mb-0 text-sm  font-weight-bold">//////////</span>
+                    <span class="mb-0 text-sm  font-weight-bold">{{ Auth::user()->nama }}</span>
                 </div>
             </div>
         </a>
