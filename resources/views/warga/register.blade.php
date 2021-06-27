@@ -1,6 +1,6 @@
 @extends('frontend.layout.master')
 @section('title')
-Registrasi Bank Sampah
+Registrasi Warga
 @endsection
 @section('content')
 
@@ -18,11 +18,9 @@ Registrasi Bank Sampah
             <div class="col-lg-8 mx-auto">
                 <form method="POST" action="{{route('store_warga')}}">
                     @csrf
-                    <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19.-->
                     <form id="contactForm" name="sentMessage" novalidate="novalidate">
                         <div class="col-lg-16">
                             <div class="form-group">
-                                <!-- <label>Name</label> -->
                                 <input class="form-control" name="nama" id="nama" type="text" placeholder="Nama"
                                     required="required" data-validation-required-message="Masukkan nama" />
                                 <p class="help-block text-danger"></p>
@@ -34,7 +32,6 @@ Registrasi Bank Sampah
 
                         <div class="col-lg-16">
                             <div class="form-group">
-                                <!-- <label>Name</label> -->
                                 <input class="form-control" name="NIK" id="NIK" type="text" placeholder="NIK"
                                     required="required" data-validation-required-message="Masukkan NIK" />
                                 <p class="help-block text-danger"></p>
@@ -46,7 +43,6 @@ Registrasi Bank Sampah
 
                         <div class="col-lg-16">
                             <div class="form-group">
-                                <!-- <label>Nomor Telepon</label> -->
                                 <input class="form-control" name="no_telp" id="no_telp" type="tel"
                                     placeholder="Nomor Telepon Warga" required="required"
                                     data-validation-required-message="Masukkan nomor telepon warga" />
@@ -59,7 +55,6 @@ Registrasi Bank Sampah
 
                         <div class="col-lg-16">
                             <div class="form-group">
-                                <!-- <label>Email Address</label> -->
                                 <input class="form-control" name="email" id="email" type="email" placeholder="Email"
                                     required="required" data-validation-required-message="Masukkan alamat email" />
                                 <p class="help-block text-danger"></p>
@@ -68,7 +63,6 @@ Registrasi Bank Sampah
 
                         <div class="col-lg-16">
                             <div class="form-group">
-                                <!-- <label>Email Address</label> -->
                                 <input class="form-control" name="password" id="password" type="password"
                                     placeholder="Kata Sandi" required="required"
                                     data-validation-required-message="Masukkan kata sandi" />
@@ -78,7 +72,6 @@ Registrasi Bank Sampah
 
                         <div class="col-lg-16">
                             <div class="form-group">
-                                <!-- <label>Name</label> -->
                                 <select class="form-control" name="id_kota" id="id_kota" onChange="updateKecamatan()"
                                     required="required" data-validation-required-message="Pilih kota">
                                     <option value="">Pilih kota...</option>
@@ -96,7 +89,6 @@ Registrasi Bank Sampah
 
                         <div class="col-lg-16">
                             <div class="form-group">
-                                <!-- <label>Name</label> -->
                                 <select class="form-control" onChange="updateDesa()" name="id_kecamatan"
                                     id="id_kecamatan" required="required"
                                     data-validation-required-message="Pilih kecamatan">
@@ -110,7 +102,6 @@ Registrasi Bank Sampah
 
                         <div class="form-row">
                             <div class="form-group col-md-6 sol-sm-12">
-                                <!-- <label>Name</label> -->
                                 <select class="form-control" name="id_desa" id="id_desa" required="required"
                                     data-validation-required-message="Pilih desa">
                                     <option value="">Pilih desa...</option>
@@ -128,7 +119,6 @@ Registrasi Bank Sampah
                         </div>
                         <div class="col-lg-16">
                             <div class="form-group">
-                                <!-- <label>Detail Alamat</label> -->
                                 <textarea class="form-control" name="detail_alamat" id="message" rows="3"
                                     placeholder="Masukkan Detail Alamat" required="required"
                                     data-validation-required-message="Please enter a message."></textarea>
@@ -137,7 +127,6 @@ Registrasi Bank Sampah
                         </div>
                         <div class="col-lg-16">
                             <div class="form-group">
-                                <!-- <label>Name</label> -->
                                 <select class="form-control" name="id_kategori_sampah" id="id_kategori_sampah"
                                     required="required" data-validation-required-message="Pilih kategori sampah">
                                     <option value="">Pilih kategori sampah...</option>
@@ -158,14 +147,12 @@ Registrasi Bank Sampah
                         <div class="row" style="display: none;">
                             <div class="col-lg-16">
                                 <div class="form-group">
-                                    <!-- <label>Name</label> -->
                                     <input class="form-control" name="latitude" id="latitude" type="text"
                                         placeholder="Masukkan lokasi" />
                                 </div>
                             </div>
                             <div class="col-lg-16">
                                 <div class="form-group">
-                                    <!-- <label>Name</label> -->
                                     <input class="form-control" name="longitude" id="longitude" type="text"
                                         placeholder="Masukkan lokasi" />
                                 </div>
@@ -175,7 +162,6 @@ Registrasi Bank Sampah
                         <div>
                             <div class="form-row">
                                 <div class="form-group col-md-6 sol-sm-12">
-                                    <!-- <label>Name</label> -->
                                     <div id="search">
                                         <input class="form-control" name="addr" id="addr" type="text"
                                             placeholder="Pilih lokasi pada peta" required="required"
@@ -191,12 +177,10 @@ Registrasi Bank Sampah
                         <br />
                         <div class="form-group">
                             <div id="mapid" style="height: 500px;"></div>
-                            <span class="text">Pilih pada peta untuk memilih</span>
+                            <h5 class="text">Pilih pada peta untuk memilih</h5>
                         </div>
                         <br/>
                         <div id="success"></div>
-                        <!-- <div class="form-group"><a href="/homewarga" class="btn btn-primary btn-xl"
-                                id="sendMessageButton" type="submit">Send</a></div> -->
                         <button type="submit" class="btn btn-primary btn-xl">
                             {{ __('Register') }}
                         </button>
@@ -220,41 +204,74 @@ Registrasi Bank Sampah
         }
     }
 
-    var latitude = "-2.9547949";
-    var longitude = "104.6929233";
-    var mymap = L.map('mapid').setView([latitude, longitude], 13);
+    var lat = "-7.857762";
+    var long = "110.341055";
+    var mymap = L.map('mapid').setView([lat, long], 13);
+    var popup = L.popup();
 
-    function showPosition(position) {
-       var latitude = position.coords.latitude;
-       var longitude = position.coords.longitude;
 
-       L.tileLayer(
-            'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibmFiaWxjaGVuIiwiYSI6ImNrOWZzeXh5bzA1eTQzZGxpZTQ0cjIxZ2UifQ.1YMI-9pZhxALpQ_7x2MxHw', {
-                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-                maxZoom: 20,
-                id: 'mapbox/streets-v11', //menggunakan peta model streets-v11 kalian bisa melihat jenis-jenis peta lainnnya di web resmi mapbox
-                tileSize: 512,
-                zoomOffset: -1,
-                accessToken: 'your.mapbox.access.token'
-            }).addTo(mymap);
-        
-           // buat variabel berisi fugnsi L.popup 
-           var popup = L.popup();
+    L.tileLayer(
+        'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibmFiaWxjaGVuIiwiYSI6ImNrOWZzeXh5bzA1eTQzZGxpZTQ0cjIxZ2UifQ.1YMI-9pZhxALpQ_7x2MxHw', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 20,
+            id: 'mapbox/streets-v11', //menggunakan peta model streets-v11 kalian bisa melihat jenis-jenis peta lainnnya di web resmi mapbox
+            tileSize: 512,
+            zoomOffset: -1,
+            accessToken: 'your.mapbox.access.token'
+        }).addTo(mymap);
+    
 
-            // buat fungsi popup saat map diklik
-            function onMapClick(e) {
-                popup
-                    .setLatLng(e.latlng)
-                    .setContent("koordinatnya adalah " + e.latlng
-                        .toString()
-                        ) //set isi konten yang ingin ditampilkan, kali ini kita akan menampilkan latitude dan longitude
-                    .openOn(mymap);
+        // buat fungsi popup saat map diklik
+    function onMapClick(e) {
+        popup
+            .setLatLng(e.latlng)
+            .setContent("koordinatnya adalah " + e.latlng
+                .toString()
+                ) //set isi konten yang ingin ditampilkan, kali ini kita akan menampilkan latitude dan longitude
+            .openOn(mymap);
 
-                 //value pada form latitude, longitude akan berganti secara otomatis
-                 document.getElementById('latitude').value = latitude;
-                 document.getElementById('longitude').value = longitude;
+            var reg = /[^a-zA-Z0-9\!\@\#\$\%\^\*\_\|]+/;
+            var latlong = e.latlng.toString();
+            var replace = latlong.replace(/[^\d.,-]/g, '');
+            var lat = replace.split(",")[0]
+            var long = replace.split(",")[1]
+            //value pada form latitude, longitude akan berganti secara otomatis
+            document.getElementById('lat').value = lat;
+            document.getElementById('long').value = long;
+    }
+        mymap.on('click', onMapClick); //jalankan fungsi
+
+    function myFunction(arr) {
+        var out = "<br />";
+        var i;
+        if (arr.length > 0) {
+            mymap.setView([arr[0].lat, arr[0].lon], 18);
+            popup
+                .setLatLng([arr[0].lat, arr[0].lon])
+                .setContent("koordinatnya adalah " + [arr[0].lat, arr[0].lon]
+                    .toString()
+                ) //set isi konten yang ingin ditampilkan, kali ini kita akan menampilkan latitude dan longitude
+                .openOn(mymap);
+            document.getElementById('lat').value = arr[0].lat;
+            document.getElementById('long').value = arr[0].lon;
+        } else {
+            alert("Alamat tidak ditemukan");
+        }
+    }
+
+    function addr_search() {
+        $('#results').remove();
+        var inp = document.getElementById("addr");
+        var xmlhttp = new XMLHttpRequest();
+        var url = "https://nominatim.openstreetmap.org/search?format=json&limit=3&q=" + inp.value;
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var myArr = JSON.parse(this.responseText);
+                myFunction(myArr);
             }
-            mymap.on('click', onMapClick); //jalankan fungsi
+        };
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
     }
 
     function updateKecamatan() {

@@ -8,7 +8,15 @@ Warga
     <link rel=”stylesheet” href="{{asset('swal/sweetalert.css')}}">
     <script src="{{asset('swal/sweetalert.js')}}"></script>
 </head>
+@if (isset($errors) && count($errors))
 
+<ul>
+    @foreach($errors->all() as $error)
+    <li>{{ $error }} </li>
+    @endforeach
+</ul>
+
+@endif
 <!-- Masthead-->
 <header class="masthead bg-primary text-secondary text-center">
     <div class="container d-flex align-items-center flex-column">
@@ -69,10 +77,11 @@ Warga
             </style>
             <div class="col-md-6 col-lg-4 mb-5">
                 <div class="card portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                    <input type="checkbox" data-id="{{$pengambilan->id}}" class="toggle-switch" checked data-toggle="toggle"
-                    data-onstyle="danger" data-offstyle="success"
-                        data-on="Belum Terambil" data-off="Terambil" {{$pengambilan->status ? 'checked' : ''}}></input>
-                    <p class="portfolio-modal-subtitle text-center text-secondary text-uppercase mb-0">Geser ke kanan bila hari ini sampah belum
+                    <input type="checkbox" data-id="{{$pengambilan->id}}" class="toggle-switch" checked
+                        data-toggle="toggle" data-onstyle="danger" data-offstyle="success" data-on="Belum Terambil"
+                        data-off="Terambil" {{$pengambilan->status ? 'checked' : ''}}></input>
+                    <p class="portfolio-modal-subtitle text-center text-secondary text-uppercase mb-0">Geser ke kanan
+                        bila hari ini sampah belum
                         terambil.</p>
                     <h3 class="portfolio-modal-subtitle text-center text-secondary text-uppercase mb-0">Tombol
                         Pengambilan
