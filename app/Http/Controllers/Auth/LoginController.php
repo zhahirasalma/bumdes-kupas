@@ -45,7 +45,7 @@ class LoginController extends Controller
         ],$messages);
 
         if (!auth()->attempt($validationData)) {
-            return redirect('/');
+            return redirect()->back()->with('error', 'Email atau kata sandi salah!');  
         }
         $user = auth()->user();
         $role = $user->role;

@@ -21,7 +21,7 @@ Warga
 <header class="masthead bg-primary text-secondary text-center">
     <div class="container d-flex align-items-center flex-column">
         <!-- Masthead Avatar Image-->
-        <img class="masthead-avatar-warga mb-0" src="{{asset('template/assets/img/logo_kupas.png')}}" alt="" />
+        <img class="masthead-avatar mb-0" src="{{asset('template/assets/img/logo_kupas.png')}}" alt="" />
         <!-- Masthead Heading-->
         <h1 class="masthead-heading text-uppercase mb-0"><span>HALO {{ Auth::user()->nama }}</span></h1>
         <!-- Icon Divider-->

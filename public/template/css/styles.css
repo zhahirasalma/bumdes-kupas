@@ -10141,16 +10141,23 @@ h3 {
 .masthead .masthead-subheading {
   font-size: 1.25rem;
 }
+
 .masthead .masthead-avatar {
   width: 30rem;
 }
 
-.masthead .masthead-avatar-warga {
-  width: 20rem;
+.masthead-avatar-warga {
+  width: 25rem;
 }
 
 .masthead .masthead-avatar-2 {
   width: 30rem;
+}
+
+@media (max-width: 575.98px) {
+  .masthead .masthead-avatar {
+    width: 20rem;
+  }
 }
 
 @media (min-width: 992px) {

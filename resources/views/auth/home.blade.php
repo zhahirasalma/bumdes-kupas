@@ -36,7 +36,6 @@ Home
         <h2 class="page-section-sub-heading text-center font-weight-light mb-0">Untuk yang telah memiliki akun</h2>
         <!-- Icon Divider-->
         <br>
-
         <div class="row justify-content-center">
             <div class="col-lg-8 mx-auto">
                 <form method="POST" action="{{ route('login') }}">
@@ -68,6 +67,11 @@ Home
                             @enderror
                             <p class="help-block text-danger"></p>
                         </div>
+                        @if (\Session::has('error'))
+                            <div class="alert alert-error text-danger text-center">
+                                <strong>{!! \Session::get('error') !!}</strong>
+                            </div>
+                        @endif
                         <div class="form-group text-center">
                             <button type="submit" class="btn btn-primary">
                                 {{ __('Login') }}
