@@ -33,10 +33,16 @@ class LoginController extends Controller
     public function login(\Illuminate\Http\Request $request){
         //echo($user);
         
+        $messages=[
+            'email.required' => 'Email tidak boleh kosong.',
+            'email.email' => 'Email tidak valid.',
+            'password.min' => 'Kata sandi tidak boleh kurang dari 5 karakter',
+            'password.required' => 'Kata sandi tidak boleh kosong.',
+        ];
         $validationData = $request->validate([
-            'email' => 'required',
-            'password' => 'required'
-        ]);
+            'email' => 'required|email',
+            'password' => 'required|min:5'
+        ],$messages);
 
         if (!auth()->attempt($validationData)) {
             return redirect('/');

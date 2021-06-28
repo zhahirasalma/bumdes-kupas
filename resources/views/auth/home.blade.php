@@ -46,9 +46,9 @@ Home
                             <!-- <label>Name</label> -->
                             <input class="form-control" name="email" for="email" id="email" type="email"
                                 placeholder="Email" class="form-control @error('email') is-invalid @enderror"
-                                value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                value="{{ old('email') }}"  autocomplete="email" autofocus>
                             @error('email')
-                            <span class="invalid-feedback" role="alert">
+                            <span class="text-danger">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
@@ -60,9 +60,9 @@ Home
                             <!-- <label>Name</label> -->
                             <input class="form-control" name="password" id="password" type="password"
                                 placeholder="Kata Sandi" class="form-control @error('password') is-invalid @enderror"
-                                required autocomplete="current-password">
+                                autocomplete="current-password">
                             @error('password')
-                            <span class="invalid-feedback" role="alert">
+                            <span class="text-danger">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror

@@ -13,8 +13,8 @@ use App\Models\Desa;
 use App\Models\KategoriSampah;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Validator;
 use Auth;
 use Alert;
 
@@ -123,13 +123,13 @@ class RegisterController extends Controller
             'no_telp.required' => 'Nomor telepon tidak boleh kosong.',
             'no_telp.min' => 'Nomor telepon minimal terdiri dari 11 angka',
             'no_telp.numeric' => 'Nomor telepon harus berupa angka',
-            'id_kota.required' => 'Kota tidak boleh kosong',
-            'id_kecamatan.required' => 'Kecamatan tidak boleh kosong',
-            'id_desa.required' => 'Desa tidak boleh kosong',
+            'id_kota.required' => 'Pilih kota sesuai alamat',
+            'id_kecamatan.required' => 'Pilih kecamatan sesuai alamat',
+            'id_desa.required' => 'Pilih desa sesuai alamat',
             'dukuh.required' => 'Dukuh tidak boleh kosong'
         ];
         
-        $request->validate([
+        $validationData = $request->validate([
             'nama' => 'required|min:3|string',
             'email' => 'required|min:10|email|unique:users',
             'password' => 'required|min:5',
@@ -137,17 +137,17 @@ class RegisterController extends Controller
             'id_kota' => 'required',
             'id_kecamatan' => 'required',
             'id_desa' => 'required',
-            'dukuh' => 'required',
-       ],$messages
-       );
-       $user = new User;
-       $user->nama = $request->input('nama');
-       $user->email = $request->input('email');
-       $user->password = bcrypt($request->input('password'));
-       $user->role="bank_sampah";
-       if($user){
-           $user->save();
-       }
+            'dukuh' => 'required'
+       ],$messages);
+
+        $user = new User;
+        $user->nama = $request->input('nama');
+        $user->email = $request->input('email');
+        $user->password = bcrypt($request->input('password'));
+        $user->role="bank_sampah";
+        if($user){
+            $user->save();
+        }
 
         $bank_sampah = new BankSampah;
         $bank_sampah->id_users=$user->id;
@@ -180,13 +180,13 @@ class RegisterController extends Controller
             'no_telp.required' => 'Nomor telepon tidak boleh kosong.',
             'no_telp.min' => 'Nomor telepon minimal terdiri dari 11 angka',
             'no_telp.numeric' => 'Nomor telepon harus berupa angka',
-            'id_kategori_sampah.required' => 'Kategori sampah harus dipilih terlebih dahulu',
+            'id_kategori_sampah.required' => 'Pilih salah satu kategori sampah',
             'id_kota.required' => 'Kota tidak boleh kosong',
             'id_kecamatan.required' => 'Kecamatan tidak boleh kosong',
             'id_desa.required' => 'Desa tidak boleh kosong',
             'dukuh.required' => 'Dukuh tidak boleh kosong'
         ]; 
-        $this->validate($request,[
+        $validationData = $request->validate([
             'NIK' => 'required|min:16|numeric',
             'nama' => 'required|min:3|string',
             'email' => 'required|min:11|email|unique:users',
@@ -201,6 +201,7 @@ class RegisterController extends Controller
             'longitude' => 'nullable',
        ],$messages
        );
+
        $user = new User;
        $user->nama = $request->input('nama');
        $user->email = $request->input('email');

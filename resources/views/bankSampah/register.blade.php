@@ -22,45 +22,55 @@ Registrasi Bank Sampah
                         <div class="col-lg-16">
                             <div class="form-group">
                                 <!-- <label>Name</label> -->
-                                <input class="form-control" name="nama" id="nama" type="text" placeholder="Nama"
-                                    required="required" data-validation-required-message="Masukkan nama" />
-                                <p class="help-block text-danger"></p>
-                                @if ($errors->has('nama'))
-                                <span class="text-danger">{{ $errors->first('nama') }}</span>
-                                @endif
+                                <input class="form-control @error('nama') is-invalid @enderror" name="nama" id="nama" 
+                                    type="text" placeholder="Nama"/>
+                                @error('nama')
+                                <span class="text-danger">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-lg-16">
                             <div class="form-group">
                                 <!-- <label>Nomor Telepon</label> -->
                                 <input class="form-control" name="no_telp" id="no_telp" type="tel"
-                                    placeholder="Nomor Telepon Warga" required="required"
+                                    placeholder="Nomor Telepon Warga"
                                     data-validation-required-message="Masukkan nomor telepon warga" />
                                 <p class="help-block text-danger"></p>
-                                @if ($errors->has('no_telp'))
-                                <span class="text-danger">{{ $errors->first('no_telp') }}</span>
-                                @endif
+                                @error('no_telp')
+                                <span class="text-danger">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-lg-16">
                             <div class="form-group">
-                                <input class="form-control" name="email" id="email" type="email" placeholder="Email"
-                                    required="required" data-validation-required-message="Masukkan alamat email" />
+                                <input class="form-control" name="email" id="email" type="email" placeholder="Email"/>
                                 <p class="help-block text-danger"></p>
+                                @error('email')
+                                <span class="text-danger">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-lg-16">
                             <div class="form-group">
                                 <input class="form-control" name="password" id="password" type="password"
-                                    placeholder="Kata Sandi" required="required"
-                                    data-validation-required-message="Masukkan kata sandi" />
+                                    placeholder="Kata Sandi"/>
                                 <p class="help-block text-danger"></p>
+                                @error('password')
+                                <span class="text-danger">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-lg-16">
                             <div class="form-group">
-                                <select class="form-control" name="id_kota" onChange="updateKecamatan()" id="id_kota"
-                                    required="required" data-validation-required-message="Pilih kota">
+                                <select class="form-control" name="id_kota" onChange="updateKecamatan()" id="id_kota">
                                     <option value="">Pilih kota...</option>
                                     @foreach($kota as $kota)
                                     <option value="{{$kota->id}}" @if (old('id_kota')==$kota->id ) selected="selected"
@@ -68,46 +78,58 @@ Registrasi Bank Sampah
                                         {{$kota->kota}}</option>
                                     @endforeach
                                 </select>
-                                @if ($errors->has('id_kota'))
-                                <span class="text-danger">{{ $errors->first('id_kota') }}</span>
-                                @endif
+                                @error('id_kota')
+                                <span class="text-danger">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-lg-16">
                             <div class="form-group">
                                 <select class="form-control" onChange="updateDesa()" name="id_kecamatan"
-                                    id="id_kecamatan" required="required"
-                                    data-validation-required-message="Pilih kecamatan">
+                                    id="id_kecamatan">
                                     <option value="">Pilih kecamatan...</option>
                                 </select>
-                                @if ($errors->has('id_kecamatan'))
-                                <span class="text-danger">{{ $errors->first('id_kecamatan') }}</span>
-                                @endif
+                                @error('id_kecamatan')
+                                <span class="text-danger">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6 sol-sm-12">
-                                <select class="form-control" name="id_desa" id="id_desa"
-                                    data-validation-required-message="Pilih desa">
+                                <select class="form-control" name="id_desa" id="id_desa">
                                     <option value="">Pilih desa...</option>
                                 </select>
-                                @if ($errors->has('id_desa'))
-                                <span class="text-danger">{{ $errors->first('id_desa') }}</span>
-                                @endif
+                                @error('id_desa')
+                                <span class="text-danger">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
 
                             <div class="form-group col-md-6 sol-sm-12">
-                                <input class="form-control" name="dukuh" id="dukuh" type="text" placeholder="Dukuh"
-                                    required="required" data-validation-required-message="Masukkan dukuh" />
+                                <input class="form-control" name="dukuh" id="dukuh" type="text" placeholder="Dukuh" />
                                 <p class="help-block text-danger"></p>
+                                @error('dukuh')
+                                <span class="text-danger">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-lg-16">
                             <div class="form-group">
                                 <textarea class="form-control" name="detail_alamat" id="message" rows="3"
-                                    placeholder="Masukkan Detail Alamat" required="required"
-                                    data-validation-required-message="Please enter a message."></textarea>
+                                    placeholder="Masukkan Detail Alamat"></textarea>
                                 <p class="help-block text-danger"></p>
+                                @error('detail_alamat')
+                                <span class="text-danger">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
                         <br />
