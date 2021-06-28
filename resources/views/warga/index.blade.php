@@ -21,7 +21,7 @@ Warga
 <header class="masthead bg-primary text-secondary text-center">
     <div class="container d-flex align-items-center flex-column">
         <!-- Masthead Avatar Image-->
-        <img class="masthead-avatar mb-5" src="{{asset('template/assets/img/logo_kupas.png')}}" alt="" />
+        <img class="masthead-avatar-warga mb-0" src="{{asset('template/assets/img/logo_kupas.png')}}" alt="" />
         <!-- Masthead Heading-->
         <h1 class="masthead-heading text-uppercase mb-0"><span>HALO {{ Auth::user()->nama }}</span></h1>
         <!-- Icon Divider-->
@@ -73,21 +73,41 @@ Warga
             </div>
             <!-- Portfolio Item 2-->
             @foreach($pengambilan as $pengambilan)
-            <style>
-            </style>
-            <div class="col-md-6 col-lg-4 mb-5">
-                <div class="card portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                    <input type="checkbox" data-id="{{$pengambilan->id}}" class="toggle-switch" checked
-                        data-toggle="toggle" data-onstyle="danger" data-offstyle="success" data-on="Belum Terambil"
-                        data-off="Terambil" {{$pengambilan->status ? 'checked' : ''}}></input>
-                    <p class="portfolio-modal-subtitle text-center text-secondary text-uppercase mb-0">Geser ke kanan
-                        bila hari ini sampah belum
-                        terambil.</p>
-                    <h3 class="portfolio-modal-subtitle text-center text-secondary text-uppercase mb-0">Tombol
-                        Pengambilan
-                    </h3>
+            <div class="col-md-6 col-lg-4 mb-5 justify-content-center">
+                <div class="card portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100 py-auto ">
+                    <div class="row justify-content-center">
+                        <input 
+                            type="checkbox" data-id="{{$pengambilan->id}}" class="toggle-switch py-auto justify-content-center" checked
+                            data-toggle="toggle" data-onstyle="danger" data-offstyle="success" data-on="Belum Terambil"
+                            data-off="Terambil" {{$pengambilan->status ? 'checked' : ''}}></input>
+                        <p class="portfolio-modal-subtitle text-center text-secondary text-uppercase mb-0">Geser ke kanan
+                            bila hari ini sampah belum
+                            terambil.</p>
+                        <h3 class="portfolio-modal-subtitle text-center text-secondary text-uppercase mb-0">Tombol
+                            Pengambilan
+                        </h3>
+                    </div>
                 </div>
             </div>
+           
+            <!-- <div class="col-md-6 col-lg-4 mb-5 justify-content-center">
+                <div class="containerbutton">
+                    <p class="portfolio-modal-subsubtitle text-center text-secondary text-uppercase mb-0">Geser ke kanan
+                                bila hari ini sampah belum
+                                terambil.</p>
+                    <div class="checkbox-containerbutton yellow">
+                        <input type="checkbox" id="toggle-btn-switch" data-id="{{$pengambilan->id}}" 
+                            class="switch-button" data-on="Belum Terambil" data-off="Terambil"checked
+                        />
+                        <label for="toggle-btn-switch" data-toggle="toggle-btn-switch"  
+                            {{$pengambilan->status ? 'checked' : ''}}></label>
+                        <div class="active-circle"></div>
+                    </div>
+                </div>
+                <h3 class="portfolio-modal-subtitle text-center text-secondary text-uppercase mb-0">Tombol
+                        Pengambilan
+                </h3>
+            </div> -->
             @endforeach
         </div>
     </div>
