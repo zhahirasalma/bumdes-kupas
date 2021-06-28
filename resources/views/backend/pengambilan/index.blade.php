@@ -21,7 +21,9 @@ Daftar Pengambilan Sampah
                     <div class="col text-right">
                         <button onClick="reset()" type="button" id="button-reset" class="btn btn-danger">Reset
                             data</button>
+                        @if(Auth::user()->role=='admin')
                         <a href="{{route('pengambilan.create')}}" class="btn btn-success">Tambah</a>
+                        @endif
                     </div>
                 </div>
             </div>

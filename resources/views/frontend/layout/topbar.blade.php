@@ -1,6 +1,10 @@
 <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
     <div class="container">
+        @guest
         <a class="navbar-brand js-scroll-trigger" href="/">KUPAS</a>
+        @else
+        <a class="navbar-brand js-scroll-trigger" href="#">KUPAS</a>
+        @endguest
         @guest
         @else
         <button
