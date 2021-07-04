@@ -100,6 +100,21 @@ Tambah Data Transaksi Retribusi
                             <span class="text-danger error-tanggal_transaksi">Tanggal harus diisi</span>
                         </div>
                     </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="form-control-label" for="input-first-name">Keterangan</label>
+                            <select name="keterangan" id="keterangan" class="form-control form-control-alternative"
+                                placeholder="Keterangan pembayaran">
+                                <option value="">Pilih...</option>
+                                <option value="sudah_bayar" @if (old('keterangan')=='sudah_bayar' ) selected="selected"
+                                    @endif>
+                                    sudah bayar</option>
+                                <option value="belum_bayar" @if (old('keterangan')=='belum_bayar' ) selected="selected"
+                                    @endif>belum bayar</option>
+                            </select>
+                            <span class="text-danger error-keterangan">Keterangan harus diisi</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-6">
@@ -116,7 +131,7 @@ Tambah Data Transaksi Retribusi
     .error-nama_kolektor,
     .error-bulan_tagihan,
     .error-tanggal_transaksi,
-    .error-keterangan{
+    .error-keterangan {
         display: none;
     }
 
@@ -169,6 +184,10 @@ Tambah Data Transaksi Retribusi
             $('.error-tanggal_transaksi').show()
         }
 
+        if (keterangan === '') {
+            error = true;
+            $('.error-keterangan').show()
+        }
 
         if (!error) {
             $.ajax({
@@ -181,7 +200,7 @@ Tambah Data Transaksi Retribusi
                     jumlah_tagihan: jumlah_tagihan,
                     bulan_tagihan: bulan_tagihan,
                     tanggal_transaksi: tanggal_transaksi,
-                    keterangan: "sudah bayar",
+                    keterangan: keterangan,
                     alamat: alamat
                 },
                 success: function (res) {

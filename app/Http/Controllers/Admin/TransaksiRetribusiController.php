@@ -57,6 +57,7 @@ class TransaksiRetribusiController extends Controller
         $request->validate([
             'nama_kolektor' => 'required|regex:/^[a-zA-Z]+$/',
             'bulan_tagihan' => 'required',
+            'keterangan' => 'required',
             'tanggal_transaksi' => 'required',
             'id_users' => 'required'
         ], $messages);

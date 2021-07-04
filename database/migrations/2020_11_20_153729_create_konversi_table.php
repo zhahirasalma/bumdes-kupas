@@ -18,7 +18,6 @@ class CreateKonversiTable extends Migration
             $table->string('jenis_sampah');
             $table->integer('harga_konversi');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

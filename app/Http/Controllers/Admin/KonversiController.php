@@ -52,7 +52,7 @@ class KonversiController extends Controller
         $validator = $request->validate([
             'jenis_sampah' => [
                 'required', 
-                Rule::unique('konversi', 'jenis_sampah')->whereNull('deleted_at')
+                Rule::unique('konversi', 'jenis_sampah')
             ],
             'harga_konversi' => 'required|numeric',
         ], $messages);
@@ -102,7 +102,7 @@ class KonversiController extends Controller
         $validator = $request->validate([
             'jenis_sampah' => [
                 'required', 
-                Rule::unique('konversi', 'jenis_sampah')->ignore($id)->whereNull('deleted_at')
+                Rule::unique('konversi', 'jenis_sampah')->ignore($id)
             ],
             'harga_konversi' => 'required|numeric',
         ], $messages);
