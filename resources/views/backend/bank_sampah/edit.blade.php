@@ -54,7 +54,7 @@ Edit Data Bank Sampah
                             <div class="form-group">
                                 <label class="form-control-label" for="input-first-name">Password</label>
                                 <input type="password" id="password" class="form-control form-control-alternative"
-                                    placeholder="Password" value="{{ old('password')}}">
+                                    placeholder="Password" value="{{$data->user->password}}">
                                     <span class="text-danger error-password">Password harus diisi</span>
                             </div>
                         </div>

@@ -63,7 +63,7 @@ Edit Data Warga
                         <div class="form-group">
                             <label class="form-control-label" for="input-first-name">Password</label>
                             <input type="password" id="password" class="form-control form-control-alternative"
-                                placeholder="Password" value="{{ $w->password}}">
+                                placeholder="Password" value="{{ $w->user->password}}">
                             <span class="text-danger error-password">Password harus diisi</span>
                         </div>
                     </div>
