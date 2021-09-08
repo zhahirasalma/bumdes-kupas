@@ -18,11 +18,14 @@ class CreateSetoranAnggotaBankSampahTable extends Migration
             $table->string('nama');
             $table->date('tanggal_transaksi')->nullable();
             $table->unsignedBigInteger('id_bank_sampah')->nullable();
-            $table->string('uraian');
+            $table->unsignedBigInteger('id_konversi')->nullable();
+            $table->string('berat');
+            $table->integer('harga_total');
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('id_bank_sampah')->references('id')->on('bank_sampah')->onDelete('cascade');
+            $table->foreign('id_konversi')->references('id')->on('konversi')->onDelete('cascade');
         });
     }
 

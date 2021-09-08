@@ -21,7 +21,7 @@ Warga
 <header class="masthead bg-primary text-secondary text-center">
     <div class="container d-flex align-items-center flex-column">
         <!-- Masthead Avatar Image-->
-        <img class="masthead-avatar mb-0" src="{{asset('template/assets/img/logo_kupas.png')}}" alt="" />
+        <!-- <img class="masthead-avatar mb-0" src="{{asset('template/assets/img/logo_kupas.png')}}" alt="" /> -->
         <!-- Masthead Heading-->
         <h1 class="masthead-heading text-uppercase mb-0"><span>HALO {{ Auth::user()->nama }}</span></h1>
         <!-- Icon Divider-->
@@ -59,7 +59,7 @@ Warga
                                 class="fas fa-plus fa-3x"></i></div>
                     </div>
                     <img class="img-fluid" src="{{asset('template/assets/img/portfolio/retribusi.png')}}" alt="" />
-                    <h3 class="portfolio-modal-subtitle text-center text-secondary text-uppercase mb-0">Jumlah Tagihan
+                    <h3 class="portfolio-modal-subtitle text-center text-secondary text-uppercase mb-0">Jumlah Tagihan<br>Rp
                         @foreach($retribusi as $r)
                         @if($r->user->id==Auth::user()->id)
                         {{ $r->jumlah_tagihan != 'null' ? $r->jumlah_tagihan : ''  }}</p>
@@ -76,38 +76,23 @@ Warga
             <div class="col-md-6 col-lg-4 mb-5 justify-content-center">
                 <div class="card portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100 py-auto ">
                     <div class="row justify-content-center">
+                        <h6 class="portfolio-modal-subtitle text-center text-secondary text-uppercase mb-0">Sampah Akan Diambil Pada
+                            @if($pengambilan->user->id==Auth::user()->id)
+                            {{ $pengambilan->waktu_pengambilan != 'null' ? $pengambilan->waktu_pengambilan: ''  }}</p>
+                            @endif
+                        </h6>
                         <input 
                             type="checkbox" data-id="{{$pengambilan->id}}" class="toggle-switch py-auto justify-content-center" checked
                             data-toggle="toggle" data-onstyle="danger" data-offstyle="success" data-on="Belum Terambil"
                             data-off="Terambil" {{$pengambilan->status ? 'checked' : ''}}></input>
-                        <p class="portfolio-modal-subtitle text-center text-secondary text-uppercase mb-0">Geser ke kanan
-                            bila hari ini sampah belum
-                            terambil.</p>
+                        <p class="portfolio-modal-subtitle text-center text-secondary text-uppercase mb-0">Geser tombol kuning ke kanan
+                            bila sudah ada sampah baru yang harus diambil.</p>
                         <h3 class="portfolio-modal-subtitle text-center text-secondary text-uppercase mb-0">Tombol
                             Pengambilan
                         </h3>
                     </div>
                 </div>
             </div>
-           
-            <!-- <div class="col-md-6 col-lg-4 mb-5 justify-content-center">
-                <div class="containerbutton">
-                    <p class="portfolio-modal-subsubtitle text-center text-secondary text-uppercase mb-0">Geser ke kanan
-                                bila hari ini sampah belum
-                                terambil.</p>
-                    <div class="checkbox-containerbutton yellow">
-                        <input type="checkbox" id="toggle-btn-switch" data-id="{{$pengambilan->id}}" 
-                            class="switch-button" data-on="Belum Terambil" data-off="Terambil"checked
-                        />
-                        <label for="toggle-btn-switch" data-toggle="toggle-btn-switch"  
-                            {{$pengambilan->status ? 'checked' : ''}}></label>
-                        <div class="active-circle"></div>
-                    </div>
-                </div>
-                <h3 class="portfolio-modal-subtitle text-center text-secondary text-uppercase mb-0">Tombol
-                        Pengambilan
-                </h3>
-            </div> -->
             @endforeach
         </div>
     </div>
@@ -128,17 +113,21 @@ Warga
                         <div class="col-lg-8">
                             <!-- Portfolio Modal - Title-->
                             <h4 class="portfolio-modal-title text-secondary text-uppercase mb-0"
-                                id="portfolioModal1Label">Jumlah Tagihan</h4>
+                                id="portfolioModal1Label">History Transaksi Retribusi</h4>
                             <!-- Icon Divider-->
                             <div class="divider-custom">
                                 <div class="divider-custom-line"></div>
                             </div>
-                            <!-- Portfolio Modal - Table-->
+                            @foreach($retribusi as $p)
+                                @if($p->user->id==Auth::user()->id && $p->keterangan=="belum_bayar")
+                                <h5 class="portfolio-modal-subtitle text-center text-warga text-uppercase mb-0">
+                                    Tagihan bulan {{ $p->bulan_tagihan != 'null' ? $p->bulan_tagihan: ''}} harus dibayar!</h5>
+                                @endif
+                            @endforeach
                             <div class="row">
                                 <div class="col-12">
                                     <div class="card">
                                         <div class="card-body">
-
                                             <div class="table-responsive">
                                                 <table id="default_table"
                                                     class="table table-striped table-bordered no-wrap">
@@ -146,6 +135,7 @@ Warga
                                                         <tr>
                                                             <th>No</th>
                                                             <th>Tanggal Transaksi</th>
+                                                            <th>Bulan Transaksi</th>
                                                             <th>Jumlah Transaksi</th>
                                                             <th>Keterangan</th>
                                                         </tr>
@@ -158,6 +148,8 @@ Warga
                                                                 {{$loop->iteration}}
                                                             </th>
                                                             <td>{{ $r->tanggal_transaksi != 'null' ? $r->tanggal_transaksi : ''  }}
+                                                            </td>
+                                                            <td>{{ $r->bulan_tagihan != 'null' ? $r->bulan_tagihan : ''  }}
                                                             </td>
                                                             <td>@if ($r->jumlah_tagihan != 'null')
                                                                 @currency($r->jumlah_tagihan)

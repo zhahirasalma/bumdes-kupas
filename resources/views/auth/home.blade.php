@@ -95,7 +95,7 @@ Home
                 <!-- <label>Name</label> -->
                 <a href="{{route('registrasi.create')}}" class="btn btn-primary text-uppercase" id="sendMessageButton"
                     type="submit">Daftar Sebagai
-                    Warga</a>
+                    Pelanggan</a>
             </div>
             <div class="form-group col-md-2.5">
                 <!-- <label>Name</label> -->

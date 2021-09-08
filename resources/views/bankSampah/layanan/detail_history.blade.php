@@ -1,6 +1,6 @@
 @extends('frontend.layout.master')
 @section('title')
-History Transaksi Bank Sampah
+Detail History Transaksi Bank Sampah
 @endsection
 @section('content')
 
@@ -9,7 +9,7 @@ History Transaksi Bank Sampah
         <div class="row justify-content-center">
             <div class="col-xl-12">
                 <!-- Portfolio Modal - Title-->
-                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0" id="portfolioModal1Label">History
+                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0" id="portfolioModal1Label"> Detail History
                     Transaksi</h2>
                 <!-- Icon Divider-->
                 <div class="divider-custom">
@@ -25,26 +25,32 @@ History Transaksi Bank Sampah
                                             <tr>
                                                 <th>No</th>
                                                 <th>Tanggal Transaksi</th>
-                                                <!-- <th>Berat Total Sampah (Kg)</th> -->
+                                                <th>Jenis Sampah</th>
+                                                <th>Harga Konversi (per kg)</th>
+                                                <th>Berat Sampah (Kg)</th>
                                                 <th>Harga Total</th>
-                                                <th>Detail Transaksi</th>
+                                                <th>Keterangan</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($transaksi as $tr)
-                                        @if($tr->user->id==Auth::user()->id)
+                                        @foreach($detail as $dt)
+                                        @if($dt->user->id==Auth::user()->id)
                                             <tr>
                                                 <th scope="row">{{$loop->iteration}}</th>
-                                                <td>{{$tr->tanggal_transaksi}}</td>
-                                                <!-- <td>{{$tr->jumlah}} Kg</td> -->
-                                                <td>@if ($tr->harga != null)
-                                                    @currency($tr->harga)
+                                                <td>{{$dt->tanggal_transaksi}}</td>
+                                                <td>{{$dt->konversi->jenis_sampah}} </td>
+                                                <td>@if ($dt->konversi->harga_konversi != null)
+                                                        @currency($dt->konversi->harga_konversi)
                                                     @else
-
+                                                        
                                                     @endif</td>
-                                                <td><a href="{{ route('detail-history', $tr->tanggal_transaksi) }}"
-                                                        class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top"
-                                                        data-original-title="Detail"><i class="fas fa-info-circle"></i></a></td>
+                                                <td>{{$dt->berat}}</td>
+                                                <td>@if ($dt->harga_total != null)
+                                                        @currency($dt->harga_total)
+                                                    @else
+                                                        
+                                                    @endif</td>
+                                                <td>{{$dt->keterangan}}</td>
                                             </tr>
                                         @endif
                                         @endforeach

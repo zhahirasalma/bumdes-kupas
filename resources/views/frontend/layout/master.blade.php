@@ -29,6 +29,7 @@
         crossorigin="" />
     <!--toggle switch-->
     <link href="{{('https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css')}}" rel="stylesheet">
+    <link href="{{asset('datatables/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
     
 </head>
 
@@ -67,6 +68,12 @@
     <!--toggle switch-->
     <script src="{{('https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js')}}"></script>
     <script src="{{('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')}}"></script>
+    <!-- Datatables -->
+    <script src="{{asset('datatables/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('datatables/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('datatables/js/dataTables.fixedHeader.min.js')}}"></script>
+    <script src="{{asset('datatables/js/dataTables.responsive.min.js')}}"></script>
+    <script src="{{asset('datatables/js/responsive.bootstrap.min.js')}}"></script>
 
     @stack('script')
 </body>

@@ -9,7 +9,8 @@ Setor Anggota Bank Sampah
         <div class="row justify-content-center">
             <div class="col-xl-12">
                 <!-- Portfolio Modal - Title-->
-                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0" id="portfolioModal1Label">Daftar Setoran
+                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0" id="portfolioModal1Label">Daftar
+                    Setoran
                     Bank Sampah</h2>
                 <!-- Icon Divider-->
                 <div class="divider-custom">
@@ -20,45 +21,28 @@ Setor Anggota Bank Sampah
                         <div class="card shadow">
                             <div class="card-body">
                                 <div class="col text-right">
-                                    <a href="{{route('daftar_setor.create')}}" class="btn btn-sm btn-primary">Tambah Data</a>
+                                    <a href="{{route('daftar_setor.create')}}" class="btn btn-sm btn-primary">Tambah
+                                        Data</a>
+                                </div>
+                                <div class="col text-left">
                                 </div>
                                 <br>
                                 <div class="table-responsive">
-                                    <table id="default_table" class="table table-striped table-bordered no-wrap">
+                                    <table id="tabel_setor" class="table table-striped table-bordered no-wrap">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
                                                 <th>Nama Anggota</th>
                                                 <th>Tanggal Setor</th>
-                                                <th>Uraian</th>
+                                                <th>Jenis Sampah</th>
+                                                <th>Harga Konversi (per kg)</th>
+                                                <th>Berat (kg)</th>
+                                                <th>Harga Total</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($daftar_setor as $daftar_setor)
-                                        
-                                            <tr>
-                                            <th scope="row">
-                                                {{$loop->iteration}}
-                                            </th>
-                                                <td>{{$daftar_setor->nama}}</td>
-                                                <td>{{$daftar_setor->tanggal_transaksi}}</td>
-                                                <td>{{$daftar_setor->uraian}}</td>
-                                                <td>
-                                                    <form action="{{ route('daftar_setor.destroy', $daftar_setor->id) }}" method="POST">    
-                                                    <a href="{{ route('daftar_setor.edit', $daftar_setor->id) }}"
-                                                        class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top"
-                                                         data-original-title="Edit"><i class="far fa-edit"></i></a>
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
-                                                            data-original-title="Delete" type="submit"><i class="far fa-trash-alt"></i>
-                                                        </button>
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                        
-                                        @endforeach
+                                       
                                         </tbody>
                                     </table>
                                 </div>
@@ -77,5 +61,41 @@ Setor Anggota Bank Sampah
             <div class="divider-custom"></div>
         </div>
     </div>
-    </header>
+</header>
 @endsection
+
+@push('script')
+<script type="text/javascript">
+    let filter = $("#filter-nama").val();
+    var tabel;
+
+    $(document).ready(function () {
+     tabel = $('#tabel_setor').DataTable({
+        processing	: true,
+        language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Cari"
+                  },
+        // dom 		: "<fl<t>ip>",
+  			serverSide	: true,
+  			stateSave: true,
+        ajax		: {
+            url : "{{ url('list-data-setor') }}",
+            type: "GET",
+        },
+        columns: [
+            { data: 'id', name:'id', visible:false},
+            { data: 'nama', name:'nama', visible:true},
+            { data: 'tanggal_transaksi', name:'tanggal_transaksi', visible:true},
+            { data: 'jenis_sampah', name:'jenis_sampah', visible:true},
+            { data: 'harga_konversi', name:'harga_konversi', visible:true},
+            { data: 'berat', name:'berat', visible:true},
+            { data: 'harga_total', name:'harga_total', visible:true},
+            { data: 'action', name:'action', visible:true},
+        ],
+
+    });
+    });   
+
+</script>
+@endpush

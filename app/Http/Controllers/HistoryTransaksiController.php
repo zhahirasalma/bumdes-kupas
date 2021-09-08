@@ -10,6 +10,7 @@ use App\Models\BankSampah;
 use App\Models\KonversiBankSampah;
 use App\Models\RetribusiWarga;
 use Auth;
+use Carbon\Carbon;
 
 class HistoryTransaksiController extends Controller
 {
@@ -21,9 +22,26 @@ class HistoryTransaksiController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $transaksi = TransaksiBankSampah::all();
+        $transaksi = TransaksiBankSampah::groupBy('tanggal_transaksi')
+                        ->selectRaw('*, sum(harga_total) as harga')
+                        ->with('bankSampah', 'user', 'konversi')
+                        ->get();
+        // $tanggal_transaksi= TransaksiBankSampah::with('tanggal_transaksi');
+        // $tgl = \Carbon\Carbon::parse($tanggal_transaksi->tanggal_transaksi)->format('d/m/Y')->get();
         $bank_sampah = BankSampah::all();
+        // $tgl = TransaksiBankSampah::with('tanggal_transaksi')->isoFormat('dddd, D MMMM Y')->get();
         return view('bankSampah.layanan.history_transaksi', compact('user', 'transaksi', 'bank_sampah'));
+    }
+
+    public function detail(Request $request)
+    {
+        $user = Auth::user();
+        $tanggal_transaksi = $request->tanggal_transaksi;
+        // $tgl = \Carbon\Carbon::parse($tanggal_transaksi)->format('d/m/Y');
+        $detail = TransaksiBankSampah::with('bankSampah', 'user', 'konversi')
+                        ->where('tanggal_transaksi', $tanggal_transaksi)
+                        ->get();
+        return view('bankSampah.layanan.detail_history', compact('detail'));
     }
 
     /**

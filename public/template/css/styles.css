@@ -9796,6 +9796,10 @@ a.text-primary:hover, a.text-primary:focus {
   color: #2c3e50 !important;
 }
 
+.text-warga {
+  color: #990404 !important;
+}
+
 a.text-secondary:hover, a.text-secondary:focus {
   color: #11181f !important;
 }
@@ -10320,7 +10324,7 @@ form .row:first-child .floating-label-form-group {
   }
 
   .btn.btn-danger.toggle-on{
-    height:240px;
+    height:180px;
     width: 307px;
     background-color: #771704;
     align-content: center;
@@ -10329,7 +10333,7 @@ form .row:first-child .floating-label-form-group {
   }
 
   .toggle-handle.btn.btn-default{
-    height:240px;
+    height:180px;
     width: 200px;
     top: 0.5rem ;
     left: 0.5rem;
@@ -10347,7 +10351,7 @@ form .row:first-child .floating-label-form-group {
   }
 
   .toggle-group{
-    height:240px;
+    height:180px;
     width: 307px;
     align-self: center;
     text-align: center;
@@ -10358,7 +10362,7 @@ form .row:first-child .floating-label-form-group {
   }
 
   .toggle.btn.btn-danger{
-    min-height:240px;
+    min-height:180px;
     min-width: 307px;
     background-color: #771704;
     align-self: center;
@@ -10370,7 +10374,7 @@ form .row:first-child .floating-label-form-group {
   }
 
   .toggle.btn.btn-success.off{
-    min-height:240px;
+    min-height:180px;
     min-width: 307px;
     background-color: #03B54D;
     align-self: center;
@@ -10383,7 +10387,7 @@ form .row:first-child .floating-label-form-group {
 
   @media (max-width: 575.98px) {  
     .btn.btn-danger.toggle-on{
-      height:240px;
+      height:180px;
       width: 307px;
       background-color: #771704;
       text-align: center;
@@ -10395,7 +10399,7 @@ form .row:first-child .floating-label-form-group {
     }
   
     .toggle-handle.btn.btn-default{
-      height:240px;
+      height:180px;
       width: 100px;
       background-color: #F4D35E;
       align-self: center;
@@ -10406,7 +10410,7 @@ form .row:first-child .floating-label-form-group {
     }
   
     .toggle-group{
-      height:240px;
+      height:180px;
       width: 307px;
       align-self: center;
       text-align: center;
@@ -10417,7 +10421,7 @@ form .row:first-child .floating-label-form-group {
     }
   
     .toggle.btn.btn-danger{
-      min-height:240px;
+      min-height:180px;
       min-width: 307px;
       background-color: #771704;
       align-self: center;
@@ -10429,7 +10433,7 @@ form .row:first-child .floating-label-form-group {
     }
   
     .toggle.btn.btn-success.off{
-      min-height:240px;
+      min-height:180px;
       min-width: 307px;
       background-color: #03B54D;
       align-self: center;

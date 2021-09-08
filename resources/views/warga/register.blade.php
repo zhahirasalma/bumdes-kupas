@@ -22,7 +22,7 @@ Registrasi Warga
                         <div class="col-lg-16">
                             <div class="form-group">
                                 <input class="form-control @error('nama') is-invalid @enderror" name="nama" 
-                                    id="nama" type="text" placeholder="Nama"/>
+                                    id="nama" type="text" placeholder="Nama" value="{{ old('nama')}}"/>
                                 @error('nama')
                                 <span class="text-danger">
                                     <strong>{{ $message }}</strong>
@@ -34,7 +34,7 @@ Registrasi Warga
                         <div class="col-lg-16">
                             <div class="form-group">
                                 <input class="form-control @error('NIK') is-invalid @enderror" name="NIK" 
-                                    id="NIK" type="text" placeholder="NIK" />
+                                    id="NIK" type="text" placeholder="NIK" value="{{ old('NIK')}}" />
                                 <p class="help-block text-danger"></p>
                                 @error('NIK')
                                 <span class="text-danger">
@@ -47,7 +47,7 @@ Registrasi Warga
                         <div class="col-lg-16">
                             <div class="form-group">
                                 <input class="form-control" name="no_telp" id="no_telp" type="tel"
-                                    placeholder="Nomor Telepon Warga"/>
+                                    placeholder="Nomor Telepon Warga" value="{{ old('no_telp')}}"/>
                                 <p class="help-block text-danger"></p>
                                 @error('no_telp')
                                 <span class="text-danger">
@@ -59,7 +59,7 @@ Registrasi Warga
 
                         <div class="col-lg-16">
                             <div class="form-group">
-                                <input class="form-control" name="email" id="email" type="email" placeholder="Email"/>
+                                <input class="form-control" name="email" id="email" type="email" placeholder="Email" value="{{ old('email')}}"/>
                                 <p class="help-block text-danger"></p>
                                 @error('email')
                                 <span class="text-danger">
@@ -115,7 +115,7 @@ Registrasi Warga
                         </div>
 
                         <div class="form-row">
-                            <div class="form-group col-md-6 sol-sm-12">
+                            <div class="form-group col-md-6 sol-sm-8">
                                 <select class="form-control" name="id_desa" id="id_desa">
                                     <option value="">Pilih desa...</option>
                                 </select>
@@ -126,8 +126,8 @@ Registrasi Warga
                                 @enderror
                             </div>
 
-                            <div class="form-group col-md-6 sol-sm-12">
-                                <input class="form-control" name="dukuh" id="dukuh" type="text" placeholder="Dukuh"/>
+                            <div class="form-group col-md-6 sol-sm-8">
+                                <input class="form-control" name="dukuh" id="dukuh" type="text" placeholder="Dukuh" value="{{ old('dukuh')}}"/>
                                 <p class="help-block text-danger"></p>
                                 @error('dukuh')
                                 <span class="text-danger">
@@ -139,7 +139,7 @@ Registrasi Warga
                         <div class="col-lg-16">
                             <div class="form-group">
                                 <textarea class="form-control" name="detail_alamat" id="message" rows="3"
-                                    placeholder="Masukkan Detail Alamat"></textarea>
+                                    placeholder="Masukkan Detail Alamat" value="{{ old('detail_alamat')}}"></textarea>
                                 <p class="help-block text-danger"></p>
                                 @error('detail_alamat')
                                 <span class="text-danger">
@@ -149,7 +149,7 @@ Registrasi Warga
                             </div>
                         </div>
                         <div class="col-lg-16">
-                            <div class="form-group">
+                            <d  iv class="form-group">
                                 <select class="form-control" name="id_kategori_sampah" id="id_kategori_sampah">
                                     <option value="">Pilih kategori sampah...</option>
                                     @foreach($kategori as $kategori)
@@ -171,13 +171,13 @@ Registrasi Warga
                         <div class="row" style="display: none;">
                             <div class="col-lg-16">
                                 <div class="form-group">
-                                    <input class="form-control" name="lat" id="lat" type="text"
+                                    <input class="form-control" name="latitude" id="latitude" type="text"
                                         placeholder="Masukkan lokasi" />
                                 </div>
                             </div>
                             <div class="col-lg-16">
                                 <div class="form-group">
-                                    <input class="form-control" name="long" id="long" type="text"
+                                    <input class="form-control" name="longitude" id="longitude" type="text"
                                         placeholder="Masukkan lokasi" />
                                 </div>
                             </div>
@@ -260,8 +260,8 @@ Registrasi Warga
             var lat = replace.split(",")[0]
             var long = replace.split(",")[1]
             //value pada form latitude, longitude akan berganti secara otomatis
-            document.getElementById('lat').value = lat;
-            document.getElementById('long').value = long;
+            document.getElementById('latitude').value = lat;
+            document.getElementById('longitude').value = long;
     }
         mymap.on('click', onMapClick); //jalankan fungsi
 
@@ -276,8 +276,8 @@ Registrasi Warga
                     .toString()
                 ) //set isi konten yang ingin ditampilkan, kali ini kita akan menampilkan latitude dan longitude
                 .openOn(mymap);
-            document.getElementById('lat').value = arr[0].lat;
-            document.getElementById('long').value = arr[0].lon;
+            document.getElementById('latitude').value = arr[0].lat;
+            document.getElementById('longitude').value = arr[0].lon;
         } else {
             alert("Alamat tidak ditemukan");
         }

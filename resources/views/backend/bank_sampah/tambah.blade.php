@@ -114,6 +114,23 @@ Tambah Bank Sampah
                 </div>
                 <div class="row">
                     <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="form-control-label">Jenis Transaksi</label>
+                            <select id="jenis_transaksi" name="jenis_transaksi" class="form-control form-control-alternative" 
+                                placeholder="Pilih jenis transaksi">
+                                <option value="">Pilih jenis transaksi...</option>
+                                <option value="tabungan_emas" @if (old('jenis_transaksi')=='tabungan_emas' ) selected="selected" @endif>
+                                    Tabungan Emas</option>
+                                <option value="sedekah_sampah" @if (old('jenis_transaksi')=='sedekah_sampah' ) selected="selected" @endif>
+                                    Sedekah Sampah
+                                </option>
+                            </select>
+                            <span class="text-danger error-alamat">Jenis transaksi harus diisi</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
                         <button class="btn btn-success" onClick="tambah()" type="submit">Tambah</button>
                     </div>
                 </div>

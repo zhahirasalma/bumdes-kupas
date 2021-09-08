@@ -10,7 +10,7 @@ Bank Sampah
         <!-- Masthead Avatar Image-->
         <img class="masthead-avatar mb-0" src="{{asset('template/assets/img/logo_kupas.png')}}" alt="" />
         <!-- Masthead Heading-->
-        <h1 class="masthead-heading text-uppercase mb-0">HALO {{ Auth::user()->nama }}</h1>
+        <h1 class="masthead-heading text-uppercase mb-0">HALO, {{ Auth::user()->nama }}</h1>
         <!-- Icon Divider-->
         <div class="divider-custom divider-light">
             <div class="divider-custom-line"></div>

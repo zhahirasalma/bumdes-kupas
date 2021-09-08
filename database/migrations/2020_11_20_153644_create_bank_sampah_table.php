@@ -22,6 +22,7 @@ class CreateBankSampahTable extends Migration
             $table->unsignedBigInteger('id_desa')->nullable();
             $table->string('dukuh');
             $table->string('detail_alamat');
+            $table->enum('jenis_transaksi', ['tabungan_emas', 'sedekah_sampah']);
             $table->timestamps();
             $table->softDeletes();
 

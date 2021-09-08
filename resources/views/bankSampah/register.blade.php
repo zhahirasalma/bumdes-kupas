@@ -23,7 +23,7 @@ Registrasi Bank Sampah
                             <div class="form-group">
                                 <!-- <label>Name</label> -->
                                 <input class="form-control @error('nama') is-invalid @enderror" name="nama" id="nama" 
-                                    type="text" placeholder="Nama"/>
+                                    type="text" placeholder="Nama" value="{{ old('nama')}}"/>
                                 @error('nama')
                                 <span class="text-danger">
                                     <strong>{{ $message }}</strong>
@@ -35,36 +35,31 @@ Registrasi Bank Sampah
                             <div class="form-group">
                                 <!-- <label>Nomor Telepon</label> -->
                                 <input class="form-control" name="no_telp" id="no_telp" type="tel"
-                                    placeholder="Nomor Telepon Warga"
-                                    data-validation-required-message="Masukkan nomor telepon warga" />
+                                    placeholder="Nomor Telepon Warga" value="{{ old('no_telp')}}" />
                                 <p class="help-block text-danger"></p>
                                 @error('no_telp')
                                 <span class="text-danger">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                    <strong>{{ $message }}</strong></span>
                                 @enderror
                             </div>
                         </div>
                         <div class="col-lg-16">
                             <div class="form-group">
-                                <input class="form-control" name="email" id="email" type="email" placeholder="Email"/>
+                                <input class="form-control" name="email" id="email" type="email" placeholder="Email" value="{{ old('email')}}"/>
                                 <p class="help-block text-danger"></p>
                                 @error('email')
                                 <span class="text-danger">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                    <strong>{{ $message }}</strong></span>
                                 @enderror
                             </div>
                         </div>
                         <div class="col-lg-16">
                             <div class="form-group">
-                                <input class="form-control" name="password" id="password" type="password"
-                                    placeholder="Kata Sandi"/>
+                                <input class="form-control" name="password" id="password" type="password" placeholder="Kata Sandi"/>
                                 <p class="help-block text-danger"></p>
                                 @error('password')
                                 <span class="text-danger">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                    <strong>{{ $message }}</strong></span>
                                 @enderror
                             </div>
                         </div>
@@ -87,14 +82,12 @@ Registrasi Bank Sampah
                         </div>
                         <div class="col-lg-16">
                             <div class="form-group">
-                                <select class="form-control" onChange="updateDesa()" name="id_kecamatan"
-                                    id="id_kecamatan">
+                                <select class="form-control" onChange="updateDesa()" name="id_kecamatan" id="id_kecamatan">
                                     <option value="">Pilih kecamatan...</option>
                                 </select>
                                 @error('id_kecamatan')
                                 <span class="text-danger">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                    <strong>{{ $message }}</strong></span>
                                 @enderror
                             </div>
                         </div>
@@ -111,7 +104,7 @@ Registrasi Bank Sampah
                             </div>
 
                             <div class="form-group col-md-6 sol-sm-12">
-                                <input class="form-control" name="dukuh" id="dukuh" type="text" placeholder="Dukuh" />
+                                <input class="form-control" name="dukuh" id="dukuh" type="text" placeholder="Dukuh" value="{{ old('dukuh')}}" />
                                 <p class="help-block text-danger"></p>
                                 @error('dukuh')
                                 <span class="text-danger">
@@ -123,12 +116,29 @@ Registrasi Bank Sampah
                         <div class="col-lg-16">
                             <div class="form-group">
                                 <textarea class="form-control" name="detail_alamat" id="message" rows="3"
-                                    placeholder="Masukkan Detail Alamat"></textarea>
+                                    placeholder="Masukkan Detail Alamat" value="{{ old('detail_alamat')}}"></textarea>
                                 <p class="help-block text-danger"></p>
                                 @error('detail_alamat')
                                 <span class="text-danger">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                    <strong>{{ $message }}</strong></span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-lg-16">
+                            <div class="form-group">
+                            <select id="jenis_transaksi" name="jenis_transaksi" class="form-control form-control-alternative" 
+                                placeholder="Pilih jenis transaksi">
+                                <option value="">Pilih jenis transaksi...</option>
+                                <option value="tabungan_emas" @if (old('jenis_transaksi')=='tabungan_emas' ) selected="selected" @endif>
+                                    Tabungan Emas</option>
+                                <option value="sedekah_sampah" @if (old('jenis_transaksi')=='sedekah_sampah' ) selected="selected" @endif>
+                                    Sedekah Sampah
+                                </option>
+                            </select>
+                                <p class="help-block text-danger"></p>
+                                @error('jenis_transaksi')
+                                <span class="text-danger">
+                                    <strong>{{ $message }}</strong></span>
                                 @enderror
                             </div>
                         </div>

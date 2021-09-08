@@ -35,8 +35,6 @@ Route::middleware(['auth'])->group(function(){
             ->name('transaksi_warga');
         Route::get('/konfirmasistatus', [App\Http\Controllers\WargaController::class, 'konfirmasistatus'])
             ->name('konfirmasistatus');
-        Route::post('/konfirmasistatus', [App\Http\Controllers\WargaController::class, 'konfirmasistatus'])
-            ->name('konfirmasistatus');
     });
     Route::middleware(['bank_sampah'])->group(function(){
         Route::get('bank_sampah', [App\Http\Controllers\BankSampahController::class, 'index']);
@@ -47,11 +45,18 @@ Route::middleware(['auth'])->group(function(){
             'bankSampah' => App\Http\Controllers\BankSampahController::class,
             'daftar_setor' => App\Http\Controllers\DaftarSetorController::class,
         ]);
+        Route::get('/list-data-setor', [App\Http\Controllers\DaftarSetorController::class, 'getData']);
+        
+        Route::get('/history_transaksi/detail-history/{tanggal_transaksi}', 
+            [App\Http\Controllers\HistoryTransaksiController::class, 'detail'])->name('detail-history');
     });
     Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])
     ->name('logout');
 });
 
+Route::get('/lihatdata', [App\Http\Controllers\DaftarSetorController::class, 'lihatdata']);
+Route::any('/data-setor', [App\Http\Controllers\DaftarSetorController::class, 'data'])
+    ->name('data-setor');
 Route::get('/create_bank_sampah', [App\Http\Controllers\Auth\RegisterController::class, 'create_bank_sampah'])
     ->name('create_bank_sampah');
 Route::post('/store_bank_sampah', [App\Http\Controllers\Auth\RegisterController::class, 'store_bank_sampah'])
